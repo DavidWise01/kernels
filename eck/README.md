@@ -1,34 +1,28 @@
-# ECK-011 — Chrome-wheel evidence kernel
+# ECK-012 — Four Chrome Wheels / Calibrations as Evidence
 
-A four-wheel, chrome/neon interactive evidence visualization with append-only local demonstration.
+One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
-## Invariant
+## New invariant
 
-If an inventory of length `m` is extended to `n >= m`, the old committed sequence must equal the first `m` records of the new sequence. The browser demonstration computes RFC 6962-style domain-separated Merkle roots but does **not** implement the compact RFC 6962 consistency-proof verification protocol. Its Verify Prefix control compares the recomputed SHA-256 Merkle root of the previously pinned in-memory prefix against the old checkpoint before advancing the head. This is a **linear-size local recomputation**, not a compact cryptographic consistency proof that can be independently checked from two signed roots alone. For production, pin the old authenticated root and verify a consistency proof against the new root, with independently operated witness receipt signatures.
+Every observation **and every calibration** is appended as a typed leaf in the same domain-separated SHA-256 Merkle tree. After pinning a head in memory, the prefix through its recorded leaf count must still rehash to that root before another event or checkpoint can be accepted.
 
-## Wheel mappings
+`event_root(N)` binds the complete sequence of typed records. The raw observation contains the four wheel positions and its own SHA-256 leaf digest. A calibration leaf binds the original observation index and parent digest, the wheel name/key, original value, signed offset and derived result. It never changes the raw sample.
 
-1. Position: 0-359 degrees (illustrative spatial phase)
-2. Chroma: 0-359 degrees (hue)
-3. Wavelength: 380-750 nm (illustrative visible light)
-4. Chronos: 0-999 ms (illustrative sample interval)
+### Four wheels
 
-The raw record is hashed before the calibration event; calibration is appended separately.
+- POSITION, degrees: spatial-phase illustrative calibration
+- CHROMA, degrees: hue illustrative calibration
+- WAVELENGTH, nm: illustrative wavelength offset (not hardware spectroscopy)
+- CHRONOS, ms: illustrative sample-time offset (not a clock synchronization standard)
 
-## Limitations
+### Test coverage
 
-Three witness panels are labels; no real network witness or Ed25519 signing service is wired. Browser state is volatile. The displayed digest binds to local records but is not an external trusted checkpoint.
+`python eck/test_eck012.py`: authenticated current prefix, append extension, mutation of all four calibration offsets, deletion of each calibration, substitution of derived values, raw mutation, event reorder, truncation, stale head, unchanged raw and permitted append.
 
-## Run
+## Security boundary
 
-Open `index.html` from a secure HTTPS GitHub Pages origin. The cryptographic Web Crypto API requires a secure context.
+The demo's checkpoint and data coexist inside one volatile browser tab; a hostile actor controlling *both* can replace both. This is **not independent custody**. The browser recomputes the old prefix (linear-size); it does **not** implement RFC 6962 compact consistency proofs. The three witness labels are not actual key-bearing witnesses. Browser controls demonstrate continuity without claiming trusted sensor measurements.
 
-## ECK-011: Chromatic Evidence Continuity
+## Next invariant — ECK-013
 
-The wavelength wheel now has an independent calibration offset slider (-60 to +60 nm). Every calibration event references its parent sealed sample SHA-256 leaf, stores the exact offset and interpreted wavelength, and is appended without rewriting the original wavelength, hue, position or chronos sample. A calibration is rejected if it fails the pinned in-memory prefix check. The original measurements in this page are simulated slider inputs, not hardware spectroscopy or a metrologically calibrated sensor.
-
-`python eck/test_eck011.py` runs the standard-library regression suite: two divergent calibrations from one root, mutation of time/hue/wavelength, spoofed parent, derived-value modification, out-of-range calibration, and raw reading range validation.
-
-## Next bound — ECK-012
-
-Commit and verify calibration *records themselves* in an append-only authenticated tree (not just raw observations); then add a compact RFC 6962 consistency verifier and independently operated witness receipts. The page's in-memory head is not external custody.
+Bind the entire event history to externally signed 2-of-3 custody receipts and a compact append-only consistency proof. Check each calibration's semantic parent linkage during verification, in addition to its Merkle membership.
