@@ -1,4 +1,4 @@
-# ECK-020 — Return Fold / Recurrent Hamilton Cycle
+# ECK-021 — Phase Memory Across Hamilton Returns
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -179,3 +179,19 @@ The separately provided standard-library reference test `python eck/test_eck020.
 **Scope:** the generation archive is only JavaScript memory. Browser reload can erase it. This is a demonstrative recurrence and history model, not durable immutable custody or proof of a Hamiltonian tour of the full unenumerated lattice. Completed round records are frozen shallow JS objects with a frozen route array, not an external audit record.
 
 **ECK-021 next invariant:** make each cycle carry a reproducible phase signature across the four Chrome lobes and the 9-address frame. The singlet identity remains unchanged; state changes are described as a distinct, replayable phase record.
+
+## ECK-021 — Cycle phase memory
+
+A valid completed fold records a generation-indexed, frozen snapshot of:
+
+- four wheel readings `[position, chroma, wavelength, chronos]`;
+- four lobe strength units and their sum;
+- all nine named Quantum Chrome addresses, selected address and symbolic `n`;
+- eleven nested pyramid layers `[27,24,21,17.5,13,8,5,3,2,1,1]`;
+- the distinct 12-vertex Hamilton cycle route and its closing edge to origin `(0=-.)`.
+
+The singlet identity is invariant. Subsequent changes to wheel sliders, field strengths, symbolic nesting, or selected address do not alter completed-generation snapshots. The browser adds an export button that produces `eck021-phase-memory.json` containing the complete in-memory archive.
+
+**Security limits:** the archive is volatile; export is manual; JavaScript `Object.freeze` is a programming guard, not durable or cryptographic immutability. The browser page was syntax checked but not end-to-end browser tested. The reference model was exercised locally across 100 generations, and the GitHub test source supplies reproducible assertions.
+
+**ECK-022 natural bound:** the same origin plus distinct phase signatures must permit exact replay and measurable comparison between two generations, with the choice of coupling model stored explicitly.
