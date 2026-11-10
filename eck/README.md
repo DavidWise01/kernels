@@ -1,4 +1,4 @@
-# ECK-016 — Conserved Cloverleaf Fields Around One Singlet
+# ECK-017 — Quantum Chrome: Nine Addresses + Singlet
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -82,3 +82,31 @@ The singlet remains geometrically centered. The reference suite `python eck/test
 ### ECK-017 next natural invariant
 
 For a closed system, does a complete cycle of reversible transfers return to its initial distribution? Distinguish invertible phase paths from saturated/clipped paths, which can lose information.
+
+## ECK-017 canonical Quantum Chrome address frame
+
+The machine has **nine named directional positions plus one fixed singlet**, not merely four UI wheels. The nine addresses, in canonical supplied order, are:
+
+```text
+{{ upperleftback{{n}},
+   lowerleftback{{n}},
+   centerback{{n}},
+   centerupper{{n}},
+   center{{n}},
+   centerlower{{n}},
+   upperrightfront{{n}},
+   centerrightfront{{n}},
+   lowerrightfront{{n}} }}^{{n}}^{{n}} || repeat
+
+                         .  = singlet (10th)
+```
+
+The nine named positions and the singlet must remain distinct, even though `center{{n}}` is geometrically near the singlet. The page positions labels for legibility, not as authoritative 3D coordinates. `n` is a bounded UI symbolic parameter from 1 to 9. `|| repeat` records a symbolic iteration of the nine-position frame, **not** a direct materialization of a tower-sized state space, and the exponent grouping is not yet given numerical execution semantics.
+
+The cloverleaf's four fields are an outer visualization of this address frame; weak, medium and strong continue to mean illustrative intensity bands. Neither orbital electron probability density nor force strength is asserted to be physically derived from the symbolic lattice.
+
+Test: `python eck/test_eck017.py` checks nine unique address labels, singlet as tenth, preserved appearance for each `n` from 1 to 9 and bounded repeat notation.
+
+### ECK-018 next natural question
+
+Determine a **single reversible address mapping** from the nine named positions to the four cloverleaf fields while leaving the tenth singlet invariant. A mapping that drops positions or treats the singlet as one of nine fails.
