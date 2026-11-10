@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-010 | Chrome Wheel Evidence Kernel</title>
+<title>ECK-011 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,17 +19,17 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 </style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-010</div><h1>CHROME // FOUR WHEELS</h1><p class="sub">ONE PRIMITIVE · THREE WITNESS ROOTS · APPEND-ONLY CONSISTENCY</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-011</div><h1>CHROME // FOUR WHEELS</h1><p class="sub">ONE PRIMITIVE · THREE WITNESS ROOTS · APPEND-ONLY CONSISTENCY</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="wheels" id="wheels"></section>
 <section class="lower">
 <div class="panel"><h2>01 / EVIDENCE ENGINE</h2><div class="big" id="count">0 committed observations</div>
 <p class="note">Freeze the four observed wheel values into canonical bytes. Calibration is a distinct derived record; changing sliders never edits sealed history.</p>
-<button id="seal">SEAL OBSERVATION</button><button id="cal">APPEND CALIBRATION</button><button id="verify">VERIFY PREFIX</button><button id="mutate">TEST TAMPER</button>
+<button id="seal">SEAL OBSERVATION</button><label for="shift">CALIBRATION OFFSET (nm): <span id="offsetVal">+5</span></label><input id="shift" type="range" min="-60" max="60" value="5"><div class="note" id="interpretation">Derived wavelength: seal evidence first</div><button id="cal">APPEND CALIBRATION</button><button id="verify">VERIFY PREFIX</button><button id="mutate">TEST TAMPER</button>
 <div class="witnesses"><div class="witness">AaaA<br>ROOT A</div><div class="witness">BbbB<br>ROOT B</div><div class="witness">CccC<br>ROOT C</div></div>
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">The local prefix verifier recomputes the old trusted root, then checks the new root; its proof is linear-size, not a compact consistency proof. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-011 adds offset-based derivations linked to immutable raw sample hashes. The local prefix verifier recomputes the old trusted root, then checks the new root; its proof is linear-size, not a compact consistency proof. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -45,7 +45,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 </main>
 <script>
 const defs=[{name:"POSITION",hint:"XYZ / spatial phase",color:"#ff8a1c",min:0,max:359,unit:"°"},{name:"CHROMA",hint:"HUE / visual phase",color:"#64f0af",min:0,max:359,unit:"°"},{name:"WAVELENGTH",hint:"VISIBLE / 380–750 nm",color:"#36d7fa",min:380,max:750,unit:" nm"},{name:"CHRONOS",hint:"TIME / sample interval",color:"#bc9aff",min:0,max:999,unit:" ms"}];
-const values=[180,28,590,250], observations=[], events=[];let trustedHead=null, trustedCount=0;
+const values=[180,28,590,250], observations=[], events=[];let trustedHead=null, trustedCount=0;let sealedFingerprint=null;
 const $=x=>document.getElementById(x), encoder=new TextEncoder();
 const hex=bytes=>Array.from(bytes,b=>b.toString(16).padStart(2,"0")).join("");
 async function sha(data){return new Uint8Array(await crypto.subtle.digest("SHA-256",data))}
@@ -58,12 +58,15 @@ function drawWheel(canvas,def,v){const dpr=Math.min(devicePixelRatio||1,2),width
 defs.forEach((d,i)=>{let el=document.createElement("div");el.className="panel";el.innerHTML='<div class="caption">'+d.name+'</div><canvas class="wheel"></canvas><div class="detail">'+d.hint+'</div><label>PHASE / '+d.min+'–'+d.max+'</label><input type="range" min="'+d.min+'" max="'+d.max+'" value="'+values[i]+'">';$("wheels").appendChild(el);let slider=el.querySelector("input"),canvas=el.querySelector("canvas");slider.addEventListener("input",()=>{values[i]=+slider.value;drawWheel(canvas,d,values[i])});new ResizeObserver(()=>drawWheel(canvas,d,values[i])).observe(canvas)});
 function log(s){$("ledger").textContent="["+new Date().toISOString().slice(11,19)+"] "+s+"\n"+$("ledger").textContent}
 function sample(){return {primitive:"observed-chrome-v1",position_deg:values[0],hue_deg:values[1],wavelength_nm:values[2],chronos_ms:values[3]}}
+function calibrationPreview(){const base=observations.at(-1);const offset=Number($("shift").value);$("offsetVal").textContent=(offset>=0?"+":"")+offset;$("interpretation").textContent=base?"SEALED "+base.wavelength_nm+" nm → DERIVED "+(base.wavelength_nm+offset)+" nm · original unchanged":"Derived wavelength: seal evidence first"}
+$("shift").addEventListener("input",calibrationPreview);
 async function verifyPrefix(){if(trustedHead===null)return {ok:true,reason:"genesis"};if(observations.length<trustedCount)return {ok:false,reason:"truncated below trusted count"};const observedOld=hex(await root(observations.slice(0,trustedCount)));return {ok:observedOld===trustedHead,reason:observedOld===trustedHead?"trusted prefix unchanged":"trusted prefix digest mismatch"}}
 async function refresh(){let r=await root(observations);$("head").textContent=hex(r).slice(0,20)+"…";$("count").textContent=observations.length+" committed observations";$("state").textContent=observations.length?"SEALED / HEAD "+observations.length:"UNSEALED · OBSERVATION MODE";return hex(r)}
-$("seal").onclick=async()=>{let s=sample();const status=await verifyPrefix();if(!status.ok){log("HALT: "+status.reason);return}observations.push(s);let h=await refresh();events.push({type:"seal",index:observations.length-1,head:h,previous_head:trustedHead});log("SEALED "+(observations.length-1)+" / "+h.slice(0,24));};
-$("cal").onclick=async()=>{if(!observations.length){log("HALT: seal raw evidence before calibration");return}let i=observations.length-1,base=await hex(await leaf(observations[i]));events.push({type:"calibration",parent_leaf:base,interpretation:{wavelength_shift_nm:5},recorded_at:new Date().toISOString()});log("CALIBRATION APPENDED separately / parent "+base.slice(0,20));};
+$("seal").onclick=async()=>{let s=sample();const status=await verifyPrefix();if(!status.ok){log("HALT: "+status.reason);return}observations.push(s);let h=await refresh();events.push({type:"seal",index:observations.length-1,head:h,previous_head:trustedHead});calibrationPreview();log("SEALED "+(observations.length-1)+" / "+h.slice(0,24));};
+$("cal").onclick=async()=>{if(!observations.length){log("HALT: seal raw evidence before calibration");return}const i=observations.length-1,raw=observations[i],before=hex(await leaf(raw)),offset=Number($("shift").value),result=raw.wavelength_nm+offset;events.push({type:"calibration",parent_index:i,parent_leaf:before,calibration_id:"wavelength-offset-v1",wavelength_offset_nm:offset,interpreted_wavelength_nm:result,recorded_at:new Date().toISOString()});const after=hex(await leaf(observations[i]));if(before!==after){log("HALT: raw evidence changed during calibration");return}calibrationPreview();log("CALIBRATION APPENDED / RAW "+raw.wavelength_nm+"nm → DERIVED "+result+"nm / parent "+before.slice(0,20));};
 $("verify").onclick=async()=>{if(!observations.length){log("HALT: no evidence");return}const result=await verifyPrefix();if(!result.ok){log("FAIL: "+result.reason);return}const priorCount=trustedCount,priorRoot=trustedHead;const newRoot=hex(await root(observations));trustedCount=observations.length;trustedHead=newRoot;events.push({type:"trusted_checkpoint",count:trustedCount,root:newRoot,previous_root:priorRoot});log("PASS: recomputed prefix "+priorCount+" -> "+trustedCount+" / checkpoint "+newRoot.slice(0,20))};
 $("mutate").onclick=async()=>{if(!observations.length){log("HALT: nothing to mutate");return}let before=hex(await root(observations));let altered=observations.map(x=>({...x}));altered[0].position_deg=(altered[0].position_deg+1)%360;let after=hex(await root(altered));log(before===after?"FAIL: mutation went undetected":"PASS: tampered copy rejected / digest mismatch");};
-$("export").onclick=async()=>{const blob=new Blob([JSON.stringify({schema:"eck010-demo-v1",observations,events,trusted_head:trustedHead,trusted_count:trustedCount,head:await refresh()},null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="eck010-evidence.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),500);};
-$("reset").onclick=async()=>{observations.length=0;events.length=0;trustedHead=null;trustedCount=0;await refresh();log("DEMO RESET (not production custody)")};refresh();
+$("export").onclick=async()=>{const blob=new Blob([JSON.stringify({schema:"eck011-demo-v1",observations,events,trusted_head:trustedHead,trusted_count:trustedCount,head:await refresh()},null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="eck011-evidence.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),500);};
+$("reset").onclick=async()=>{observations.length=0;events.length=0;trustedHead=null;trustedCount=0;sealedFingerprint=null;calibrationPreview();await refresh();log("DEMO RESET (not production custody)")};refresh();
+calibrationPreview();
 </script></html>
