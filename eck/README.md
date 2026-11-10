@@ -1,4 +1,4 @@
-# ECK-015 — Four Cloverleaf Fields Around One Singlet
+# ECK-016 — Conserved Cloverleaf Fields Around One Singlet
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -68,3 +68,17 @@ Each wheel's glow and border reflect its field strength; the central dot stays a
 ## Next natural invariant — ECK-016
 
 Conserve total normalized field intensity as the four lobes exchange weight around the singlet, while permitting an explicitly tagged external excitation event to add or remove intensity.
+
+## ECK-016 — Closed-field transfer and explicit excitation
+
+- Four integer lobe-strength controls are constrained to 0..100, starting at [35,35,35,35], sum 140.
+- **CLOSED / CONSERVED:** increasing a chosen lobe draws integer units from other lobes in a fixed rotational order; decreasing distributes them to neighbors in the same order. If neighboring lobes lack capacity, the requested change is partially fulfilled, not silently created/destroyed. The total is preserved exactly.
+- **EXCITATION:** turning a slider changes the total explicitly; this models an *open* system, not a conserved transfer.
+- **BALANCE FIELD:** distributes the existing total across four lobes using quotient/remainder, leaving the total unchanged.
+- Visual weak/medium/strong bands remain display categories only; their names are not claims about the physics of weak and strong interactions.
+
+The singlet remains geometrically centered. The reference suite `python eck/test_eck016.py` checks 6,450 assertions across ordinary transfers, saturation, requested overflows and rebalancing. The in-browser implementation is an illustrative user interface, not a validated physical simulation.
+
+### ECK-017 next natural invariant
+
+For a closed system, does a complete cycle of reversible transfers return to its initial distribution? Distinguish invertible phase paths from saturated/clipped paths, which can lose information.
