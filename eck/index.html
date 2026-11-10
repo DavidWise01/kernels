@@ -29,7 +29,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">The local prefix verifier recomputes the old trusted root, then checks the new root; its proof is linear-size, not a compact consistency proof. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -45,7 +45,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 </main>
 <script>
 const defs=[{name:"POSITION",hint:"XYZ / spatial phase",color:"#ff8a1c",min:0,max:359,unit:"°"},{name:"CHROMA",hint:"HUE / visual phase",color:"#64f0af",min:0,max:359,unit:"°"},{name:"WAVELENGTH",hint:"VISIBLE / 380–750 nm",color:"#36d7fa",min:380,max:750,unit:" nm"},{name:"CHRONOS",hint:"TIME / sample interval",color:"#bc9aff",min:0,max:999,unit:" ms"}];
-const values=[180,28,590,250], observations=[], events=[];let lastVerified=0;
+const values=[180,28,590,250], observations=[], events=[];let trustedHead=null, trustedCount=0;
 const $=x=>document.getElementById(x), encoder=new TextEncoder();
 const hex=bytes=>Array.from(bytes,b=>b.toString(16).padStart(2,"0")).join("");
 async function sha(data){return new Uint8Array(await crypto.subtle.digest("SHA-256",data))}
@@ -58,11 +58,12 @@ function drawWheel(canvas,def,v){const dpr=Math.min(devicePixelRatio||1,2),width
 defs.forEach((d,i)=>{let el=document.createElement("div");el.className="panel";el.innerHTML='<div class="caption">'+d.name+'</div><canvas class="wheel"></canvas><div class="detail">'+d.hint+'</div><label>PHASE / '+d.min+'–'+d.max+'</label><input type="range" min="'+d.min+'" max="'+d.max+'" value="'+values[i]+'">';$("wheels").appendChild(el);let slider=el.querySelector("input"),canvas=el.querySelector("canvas");slider.addEventListener("input",()=>{values[i]=+slider.value;drawWheel(canvas,d,values[i])});new ResizeObserver(()=>drawWheel(canvas,d,values[i])).observe(canvas)});
 function log(s){$("ledger").textContent="["+new Date().toISOString().slice(11,19)+"] "+s+"\n"+$("ledger").textContent}
 function sample(){return {primitive:"observed-chrome-v1",position_deg:values[0],hue_deg:values[1],wavelength_nm:values[2],chronos_ms:values[3]}}
+async function verifyPrefix(){if(trustedHead===null)return {ok:true,reason:"genesis"};if(observations.length<trustedCount)return {ok:false,reason:"truncated below trusted count"};const observedOld=hex(await root(observations.slice(0,trustedCount)));return {ok:observedOld===trustedHead,reason:observedOld===trustedHead?"trusted prefix unchanged":"trusted prefix digest mismatch"}}
 async function refresh(){let r=await root(observations);$("head").textContent=hex(r).slice(0,20)+"…";$("count").textContent=observations.length+" committed observations";$("state").textContent=observations.length?"SEALED / HEAD "+observations.length:"UNSEALED · OBSERVATION MODE";return hex(r)}
-$("seal").onclick=async()=>{let s=sample();observations.push(s);let h=await refresh();events.push({type:"seal",index:observations.length-1,head:h});log("SEALED "+(observations.length-1)+" / "+h.slice(0,24));};
+$("seal").onclick=async()=>{let s=sample();const status=await verifyPrefix();if(!status.ok){log("HALT: "+status.reason);return}observations.push(s);let h=await refresh();events.push({type:"seal",index:observations.length-1,head:h,previous_head:trustedHead});log("SEALED "+(observations.length-1)+" / "+h.slice(0,24));};
 $("cal").onclick=async()=>{if(!observations.length){log("HALT: seal raw evidence before calibration");return}let i=observations.length-1,base=await hex(await leaf(observations[i]));events.push({type:"calibration",parent_leaf:base,interpretation:{wavelength_shift_nm:5},recorded_at:new Date().toISOString()});log("CALIBRATION APPENDED separately / parent "+base.slice(0,20));};
-$("verify").onclick=async()=>{if(!observations.length){log("HALT: no evidence");return}let old=observations.slice(0,lastVerified),oldRoot=hex(await root(old)),newRoot=hex(await root(observations));if(lastVerified>observations.length){log("FAIL: previously verified tree longer than current");return}lastVerified=observations.length;log("PASS: current prefix "+old.length+" -> "+observations.length+" / prior digest "+oldRoot.slice(0,16)+" / current "+newRoot.slice(0,16))};
+$("verify").onclick=async()=>{if(!observations.length){log("HALT: no evidence");return}const result=await verifyPrefix();if(!result.ok){log("FAIL: "+result.reason);return}const priorCount=trustedCount,priorRoot=trustedHead;const newRoot=hex(await root(observations));trustedCount=observations.length;trustedHead=newRoot;events.push({type:"trusted_checkpoint",count:trustedCount,root:newRoot,previous_root:priorRoot});log("PASS: recomputed prefix "+priorCount+" -> "+trustedCount+" / checkpoint "+newRoot.slice(0,20))};
 $("mutate").onclick=async()=>{if(!observations.length){log("HALT: nothing to mutate");return}let before=hex(await root(observations));let altered=observations.map(x=>({...x}));altered[0].position_deg=(altered[0].position_deg+1)%360;let after=hex(await root(altered));log(before===after?"FAIL: mutation went undetected":"PASS: tampered copy rejected / digest mismatch");};
-$("export").onclick=async()=>{const blob=new Blob([JSON.stringify({schema:"eck010-demo-v1",observations,events,head:await refresh()},null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="eck010-evidence.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),500);};
-$("reset").onclick=async()=>{observations.length=0;events.length=0;lastVerified=0;await refresh();log("DEMO RESET (not production custody)")};refresh();
+$("export").onclick=async()=>{const blob=new Blob([JSON.stringify({schema:"eck010-demo-v1",observations,events,trusted_head:trustedHead,trusted_count:trustedCount,head:await refresh()},null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="eck010-evidence.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),500);};
+$("reset").onclick=async()=>{observations.length=0;events.length=0;trustedHead=null;trustedCount=0;await refresh();log("DEMO RESET (not production custody)")};refresh();
 </script></html>
