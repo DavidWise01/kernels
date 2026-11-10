@@ -42,5 +42,5 @@ def test():
     assert not consistent(4,old_root,samples)
     assert not consistent(-1,old_root,samples)
     assert root(samples)==root(copy.deepcopy(samples))
-    print("ECK-010: 10/10 deterministic prefix checks PASS")
+    print("ECK-010: 11/11 deterministic prefix checks PASS")
 if __name__=='__main__':test()
