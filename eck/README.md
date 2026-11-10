@@ -1,4 +1,4 @@
-# ECK-019 — Living Quantum Chrome: Mito, Emergence and Hamilton Return
+# ECK-020 — Return Fold / Recurrent Hamilton Cycle
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -163,3 +163,19 @@ The ECK console adds a progression diagram with NEXT VERTEX, FULL HAMILTON CYCLE
 Test: \`python eck/test_eck019.py\` checks unique identities, decimal division, \`21=13+8\`, valid tour, invalid repeated vertices, incomplete route, and broken edges.
 
 **Next natural invariant — ECK-020:** distinguish a **Hamilton path** from a **Hamilton cycle**, and specify the return edge \`27→0\` as a reversible fold/unbind operation, then test whether the singlet and state ancestry survive repeated rounds.
+
+## ECK-020 — `27 → }{ → (0=-.)` and generation ancestry
+
+The existing 12-identity mitochondrial transition graph has an explicit return-fold operation. The user can advance from the origin through 27, then invoke `}{ FOLD / BEGIN NEXT CYCLE`. A fold before the terminal 27 state is rejected. On a valid fold:
+
+1. The completed route `0 → 1a → 1b → 2 → 3 → 5 → 8 → 13 → 17.5 → 21 → 24 → 27 → 0` is saved in the in-memory generation archive.
+2. The invariant singlet identifier remains `(0=-.)`.
+3. The generation counter increments by exactly one.
+4. The next cycle starts at step zero; prior completed cycles remain accessible in the UI.
+5. The UI's `RESTART DISPLAY` control resets the current traversal position only, rather than deleting the completed-round archive.
+
+The separately provided standard-library reference test `python eck/test_eck020.py` ran locally and passed **1005 of 1005 assertions over 100 completed rounds**. JavaScript syntax on the committed HTML was also verified. The browser itself has not been end-to-end tested.
+
+**Scope:** the generation archive is only JavaScript memory. Browser reload can erase it. This is a demonstrative recurrence and history model, not durable immutable custody or proof of a Hamiltonian tour of the full unenumerated lattice. Completed round records are frozen shallow JS objects with a frozen route array, not an external audit record.
+
+**ECK-021 next invariant:** make each cycle carry a reproducible phase signature across the four Chrome lobes and the 9-address frame. The singlet identity remains unchanged; state changes are described as a distinct, replayable phase record.
