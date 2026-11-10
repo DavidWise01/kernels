@@ -1,4 +1,4 @@
-# ECK-014 — Four Chrome Wheels Around One Singlet
+# ECK-015 — Four Cloverleaf Fields Around One Singlet
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -58,3 +58,13 @@ Make coupling user-selectable, with independent, derived and latched modes. Reco
 ```
 
 The browser visualization now places Position north, Chroma east, Wavelength south, Chronos west around a chrome-lit central dot. Updating the wheels updates central glow and derived display phase. This is graphical coupling, not evidence of physical causation or numerical identity between hue and wavelength. Earlier evidence event structures are retained.
+
+## ECK-015: Three visual field-strength bands
+
+Four independently adjustable **lobe intensity** controls surround the invariant central singlet. Each lobe receives a qualitative band: weak (< 1/3; cyan), medium (1/3 to < 2/3; amber), strong (>= 2/3; magenta). This is a user-defined field-intensity visualization, **not** a mapping of physical weak/strong nuclear interactions or a scientifically derived medium fundamental force.
+
+Each wheel's glow and border reflect its field strength; the central dot stays at the same location and changes visual emphasis as aggregate intensity changes. Balanced means max-minus-min intensity below 0.08. Polarized means a larger spread. The existing evidence ledger remains below.
+
+## Next natural invariant — ECK-016
+
+Conserve total normalized field intensity as the four lobes exchange weight around the singlet, while permitting an explicitly tagged external excitation event to add or remove intensity.
