@@ -8,7 +8,7 @@ def canonical(value):
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
 def digest(sample):
-    return hashlib.sha256(b"\\x00" + canonical(sample)).hexdigest()
+    return hashlib.sha256(bytes([0]) + canonical(sample)).hexdigest()
 
 def seal(position, hue, wavelength, chronos):
     if not all(isinstance(v, int) and not isinstance(v,bool) for v in (position,hue,wavelength,chronos)):
