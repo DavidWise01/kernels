@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-021 | Chromatic Evidence Continuity</title>
+<title>ECK-022 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-021: a single central primitive, not four independent panels in a row. */
+/* ECK-022: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -37,8 +37,8 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-phase{font-size:12px;color:#ffb86d;margin-top:9px}
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
-.force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-021</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+.force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}</style>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-022</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -55,6 +55,14 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
   <button id="lifeNext" type="button">NEXT VERTEX</button>
   <button id="lifeComplete" type="button">FULL HAMILTON CYCLE</button>
   <button id="lifeReset" type="button">RESTART DISPLAY</button><button id="lifeFold" type="button">}{ FOLD / BEGIN NEXT CYCLE</button><div class="note" id="lifeHistoryCount">0 completed cycles · origin invariant</div><pre id="lifeHistory">[ARCHIVE] empty</pre><button id="lifeExport" type="button">EXPORT PHASE MEMORY</button><pre id="phaseMemory">[PHASE] waiting for first return fold</pre>
+<div class="phase-replay" id="phaseReplay">
+ <div class="caption">GENERATION COMPARISON / REPLAY</div>
+ <div class="replay-selects"><label>GEN A<select id="replayA" aria-label="Compare generation A"></select></label><label>GEN B<select id="replayB" aria-label="Compare generation B"></select></label></div>
+ <button id="comparePhase" type="button">COMPARE PHASES</button>
+ <button id="restoreA" type="button">REPLAY GEN A</button>
+ <button id="restoreB" type="button">REPLAY GEN B</button>
+ <pre id="phaseComparison">[REPLAY] Complete and fold one circuit to capture a generation.</pre>
+</div>
   <pre id="lifeTrace">[READY] 0 → 1a → 1b → 2 → 3 → 5 → 8 → 13 → 17.5 → 21 → 24 → 27 → 0</pre>
  </div>
 </div></section>
@@ -121,7 +129,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-021 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-022 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -290,9 +298,9 @@ $("export").onclick=async()=>{
 $("reset").onclick=async()=>{
  observations.length=0;eventLedger.length=0;trustedEventHead=null;trustedEventCount=0;preview();await refresh();log("RESET volatile demo state");
 };
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();
 
-// ECK-021 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-022 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -431,7 +439,7 @@ function lifeFold(){
   field_total:fieldSum(forces)
  });
  const record=Object.freeze({generation:lifeGeneration,origin:lifeOrigin,route:Object.freeze([...route,"0"]),fold:"}{",closed:true,phase:snapshot});
- lifeCompleted.push(record);lifeGeneration++;lifeStep=0;renderLifeHistory();drawLife();return true;
+ lifeCompleted.push(record);lifeGeneration++;lifeStep=0;renderLifeHistory();updateReplayChoices();drawLife();return true;
 }
 function renderLifeHistory(){
  document.getElementById("lifeHistoryCount").textContent=lifeCompleted.length+" completed cycles · same origin "+lifeOrigin;
@@ -439,6 +447,80 @@ function renderLifeHistory(){
  const latest=lifeCompleted.at(-1);
  document.getElementById("phaseMemory").textContent=latest?"GEN "+latest.generation+" / FIELDS "+latest.phase.four_lobe_units.join(" · ")+"\nWHEELS "+latest.phase.four_wheel_values.join(" · ")+"\nADDRESS "+latest.phase.selected_address+"{{"+latest.phase.address_n+"}}"+"\nNESTED "+latest.phase.nested_pyramid.join(" > "):"[PHASE] waiting for first return fold";
 }
+
+function phaseDifference(a,b){
+ const aP=a.phase,bP=b.phase;
+ const wheels=aP.four_wheel_values.map((x,i)=>bP.four_wheel_values[i]-x);
+ const lobes=aP.four_lobe_units.map((x,i)=>bP.four_lobe_units[i]-x);
+ const addressChanged=aP.selected_address!==bP.selected_address;
+ return {wheel_deltas:wheels,field_deltas:lobes,total_delta:bP.field_total-aP.field_total,
+         address_changed:addressChanged,address_n_delta:bP.address_n-aP.address_n,
+         same_origin:a.origin===b.origin,same_route:JSON.stringify(a.route)===JSON.stringify(b.route),
+         same_address_frame:JSON.stringify(aP.address_frame)===JSON.stringify(bP.address_frame),
+         same_pyramid:JSON.stringify(aP.nested_pyramid)===JSON.stringify(bP.nested_pyramid)};
+}
+function getReplayPair(){
+ const ai=Number(document.getElementById("replayA").value),bi=Number(document.getElementById("replayB").value);
+ if(!lifeCompleted[ai]||!lifeCompleted[bi])return null;
+ return [lifeCompleted[ai],lifeCompleted[bi]];
+}
+function updateReplayChoices(){
+ const a=document.getElementById("replayA"),b=document.getElementById("replayB");
+ const oldA=a.value,oldB=b.value;
+ for(const sel of [a,b]){
+  sel.replaceChildren();
+  lifeCompleted.forEach((r,i)=>{const o=document.createElement("option");o.value=i;o.textContent="GEN "+r.generation;sel.appendChild(o)});
+ }
+ if(lifeCompleted.length){a.value=oldA!==""&&lifeCompleted[Number(oldA)]?oldA:"0";b.value=oldB!==""&&lifeCompleted[Number(oldB)]?oldB:String(lifeCompleted.length-1)}
+ document.getElementById("phaseComparison").textContent=lifeCompleted.length?"[REPLAY] Select two generations to compare.":"[REPLAY] Complete and fold one circuit to capture a generation.";
+}
+function compareReplay(){
+ const pair=getReplayPair();if(!pair){document.getElementById("phaseComparison").textContent="[HALT] no completed generation";return}
+ const [a,b]=pair,d=phaseDifference(a,b);
+ document.getElementById("phaseComparison").textContent=
+  "GEN "+a.generation+" → "+b.generation+"\n"+
+  "WHEEL DELTAS [POSITION, CHROMA, WAVELENGTH, CHRONOS]: "+d.wheel_deltas.join(", ")+"\n"+
+  "FIELD DELTAS [N, E, S, W]: "+d.field_deltas.join(", ")+"\n"+
+  "TOTAL FIELD DELTA: "+d.total_delta+"\n"+
+  "ADDRESS: "+a.phase.selected_address+"{{"+a.phase.address_n+"}} → "+b.phase.selected_address+"{{"+b.phase.address_n+"}}\n"+
+  "SAME ORIGIN: "+d.same_origin+" / SAME ROUTE: "+d.same_route+
+  "\nSAME 9-ADDRESS FRAME: "+d.same_address_frame+" / SAME 11-LEVEL PYRAMID: "+d.same_pyramid+
+  "\n[MODEL] Signed numeric deltas; display hue is not a physical wavelength.";
+}
+function restorePhase(record){
+ if(!record||record.origin!==lifeOrigin||record.phase.four_wheel_values.length!==4||record.phase.four_lobe_units.length!==4)return false;
+ // Replays into live controls only. Snapshot and completion archive never change.
+ for(let i=0;i<4;i++){
+  const v=record.phase.four_wheel_values[i];
+  if(!Number.isFinite(v)||v<defs[i].min||v>defs[i].max)return false;
+  if(!Number.isInteger(record.phase.four_lobe_units[i])||record.phase.four_lobe_units[i]<0||record.phase.four_lobe_units[i]>100)return false;
+ }
+ if(record.phase.address_frame.join("|")!==chromeAddresses.map(q=>q.name).join("|"))return false;
+ if(record.phase.nested_pyramid.join("|")!==pyramidLevels.join("|"))return false;
+ if(record.phase.address_n<1||record.phase.address_n>9)return false;
+ const j=chromeAddresses.findIndex(q=>q.name===record.phase.selected_address);if(j<0)return false;
+ values.splice(0,4,...record.phase.four_wheel_values);
+ forces.splice(0,4,...record.phase.four_lobe_units);
+ chromeN=record.phase.address_n;chromeSelected=j;
+ document.querySelectorAll("#wheels>.panel").forEach((p,i)=>{
+  p.querySelector("input[type=range]").value=values[i];
+  drawWheel(p.querySelector("canvas"),defs[i],values[i]);
+ });
+ drawCoupling();updateForces();renderQuantumChrome();
+ document.getElementById("phaseComparison").textContent="[REPLAY] GEN "+record.generation+" loaded into live instrument. Archive unchanged.";
+ return true;
+}
+function initReplay(){
+ document.getElementById("comparePhase").addEventListener("click",compareReplay);
+ for(const [button,selector] of [["restoreA","replayA"],["restoreB","replayB"]]){
+  document.getElementById(button).addEventListener("click",()=>{
+   const record=lifeCompleted[Number(document.getElementById(selector).value)];
+   if(!restorePhase(record))document.getElementById("phaseComparison").textContent="[HALT] no valid saved phase for replay";
+  });
+ }
+ updateReplayChoices();
+}
+
 function initLife(){
  document.getElementById("lifeNext").addEventListener("click",()=>{lifeStep=Math.min(lifeVertices.length,lifeStep+1);drawLife()});
  document.getElementById("lifeComplete").addEventListener("click",()=>{lifeStep=lifeVertices.length;drawLife()});
