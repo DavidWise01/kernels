@@ -4,7 +4,7 @@ A four-wheel, chrome/neon interactive evidence visualization with append-only lo
 
 ## Invariant
 
-If an inventory of length `m` is extended to `n >= m`, the old committed sequence must equal the first `m` records of the new sequence. The browser demonstration computes RFC 6962-style domain-separated Merkle roots but does **not** implement the compact RFC 6962 consistency-proof verification protocol. Its Verify Prefix control only checks the length progression of the current in-memory array, so it is **not** a cryptographic proof of prefix consistency. For production, pin the old authenticated root and verify a consistency proof against the new root, with independently operated witness receipt signatures.
+If an inventory of length `m` is extended to `n >= m`, the old committed sequence must equal the first `m` records of the new sequence. The browser demonstration computes RFC 6962-style domain-separated Merkle roots but does **not** implement the compact RFC 6962 consistency-proof verification protocol. Its Verify Prefix control compares the recomputed SHA-256 Merkle root of the previously pinned in-memory prefix against the old checkpoint before advancing the head. This is a **linear-size local recomputation**, not a compact cryptographic consistency proof that can be independently checked from two signed roots alone. For production, pin the old authenticated root and verify a consistency proof against the new root, with independently operated witness receipt signatures.
 
 ## Wheel mappings
 
