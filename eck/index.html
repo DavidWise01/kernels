@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-013 | Chromatic Evidence Continuity</title>
+<title>ECK-014 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -18,9 +18,30 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .witness{border:1px solid #356b70;padding:12px;border-radius:10px;text-align:center;color:#74d6dd}
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
+
+/* ECK-014: a single central primitive, not four independent panels in a row. */
+.wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
+.wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
+.wheels>.panel:nth-child(2){grid-area:north}
+.wheels>.panel:nth-child(3){grid-area:east}
+.wheels>.panel:nth-child(4){grid-area:south}
+.wheels>.panel:nth-child(5){grid-area:west}
+.wheels>.panel{width:100%;padding:10px}
+.wheels .wheel{max-height:210px}
+.singlet-orbit{position:absolute;inset:5%;border:1px solid #70c7cd55;border-radius:50%;box-shadow:0 0 25px #27d2e31e,inset 0 0 24px #ff9a3d18}
+.singlet-orbit:before,.singlet-orbit:after{content:"";position:absolute;inset:11%;border-radius:50%;border:1px dashed #a0bac855}
+.singlet-orbit:after{inset:26%;border-style:solid;border-color:#ff8a1c66}
+.singlet-core{position:relative;z-index:1;width:68%;aspect-ratio:1;border:2px solid #b8e3e7;border-radius:50%;background:radial-gradient(circle,#efffff1b,#1a2d3a 44%,#08121b 72%);box-shadow:inset 0 0 32px #89ffff33,0 0 32px #ff9e223a;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+.singlet-dot{font-size:76px;line-height:.45;color:#fff;text-shadow:0 0 20px #fff,0 0 40px #36d7fa}
+.singlet-label{font-size:12px;letter-spacing:.2em;color:#eaf5f9;margin-top:18px}
+.singlet-phase{font-size:12px;color:#ffb86d;margin-top:9px}
+.singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
+@media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 </style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-013</div><h1>CHROME // FOUR WHEELS</h1><p class="sub">ONE PRIMITIVE · FOUR WHEELS · CHROMATIC COUPLING</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
-<section class="wheels" id="wheels"></section>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-014</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">ONE SINGLET · FOUR CHROME WHEELS · SHARED CENTER</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<section class="wheels" id="wheels">
+<div class="singlet"><div class="singlet-orbit"></div><div class="singlet-core" id="singletCore"><div class="singlet-dot">·</div><div class="singlet-label">SINGLET</div><div class="singlet-phase" id="singletPhase">000°</div></div><div class="singlet-foot">ONE CENTER / FOUR COORDINATES</div></div>
+</section>
 <section class="coupling panel" style="margin-top:16px;border-color:#5c7785">
 <h2>00 / CHROMATIC COUPLING ENGINE</h2>
 <p class="note">Explore four independent controls. The spectral swatch approximates monochromatic visible light; the chroma wheel is a separate display hue, not a physical wavelength measurement.</p>
@@ -39,7 +60,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-013 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-014 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -91,7 +112,7 @@ function drawCoupling(){
  // Position and Chronos combine only in a demonstration phase composition.
  const phase=(pos+(t%360))%360;
  $("phaseNeedle").setAttribute("transform","rotate("+phase+" 100 55)");
- $("phaseText").textContent=pos+"° + "+t+" ms / display phase "+phase+"°";
+ $("phaseText").textContent=pos+"° + "+t+" ms / display phase "+phase+"°";$("singletPhase").textContent=String(phase).padStart(3,"0")+"°";$("singletCore").style.boxShadow="inset 0 0 32px hsl("+hue+" 100% 65% / .30),0 0 35px rgb("+rgb.join(",")+" / .32)";
  $("couplingTrace").textContent=
    "RAW  [position="+pos+"°, chroma="+hue+"°, wavelength="+nm+"nm, chronos="+t+"ms]\\n"+
    "VIEW [spectral_rgb=("+rgb.join(",")+"), hue=hsl("+hue+"), phase="+phase+"°]\\n"+
