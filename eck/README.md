@@ -1,4 +1,4 @@
-# ECK-021 — Phase Memory Across Hamilton Returns
+# ECK-022 — Replayable Quantum Chrome Phase Memory
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -195,3 +195,23 @@ The singlet identity is invariant. Subsequent changes to wheel sliders, field st
 **Security limits:** the archive is volatile; export is manual; JavaScript `Object.freeze` is a programming guard, not durable or cryptographic immutability. The browser page was syntax checked but not end-to-end browser tested. The reference model was exercised locally across 100 generations, and the GitHub test source supplies reproducible assertions.
 
 **ECK-022 natural bound:** the same origin plus distinct phase signatures must permit exact replay and measurable comparison between two generations, with the choice of coupling model stored explicitly.
+
+## ECK-022 — Replay and compare completed generations
+
+The living-cycle panel now has two generation selectors, **Compare Phases**, **Replay Gen A**, and **Replay Gen B**.
+
+Comparisons are computed from saved snapshots, not from live slider values. They report:
+- signed numeric deltas for all four wheel readings, in their original display units;
+- signed field-unit deltas for four cloverleaf lobes and the field-total change;
+- changes to the selected Quantum Chrome address and symbolic `n`;
+- identity checks for singlet origin, Hamilton route, nine-address frame and eleven-tier nested pyramid.
+
+Replay validates the snapshot's origin, physical slider bounds, integer field units, selected address, address frame and nested pyramid before copying values into the **live instrument only**. The saved archive is not rewritten by replay; replay does not create an observation/seal, does not change the generation counter, and does not advance the Hamilton cycle.
+
+The comparison uses signed numeric differences, including hue differences; these are **not** modular angular shortest-path distances or claims of experimentally coupled wavelengths/hue. ECK-022 has no literal numerical exponent semantics for symbolic `n`.
+
+**Verification:** HTML JavaScript parsed successfully. A reference JavaScript model completed 10,000 pairwise generation comparisons, and replay-copy immutability was checked. A Python standard-library regression suite is committed at `test_eck022.py` but was not executed in this run. Browser end-to-end integration and live Pages publication have not been verified.
+
+### Next natural bound — ECK-023
+
+Define a versioned transport model mapping a completed generation's nine addresses to four cloverleaf lobes *without discarding address identities*, then replay the complete derived color/phase projection deterministically.
