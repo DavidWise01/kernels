@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-012 | Chromatic Evidence Continuity</title>
+<title>ECK-013 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -14,13 +14,23 @@ h1{font-size:clamp(24px,4vw,46px);margin:0;letter-spacing:.07em;color:#fff;text-
 input[type=range]{width:100%;accent-color:#ff8519}label{display:block;color:#90a8b5;font-size:11px;margin-top:8px}
 .lower{display:grid;grid-template-columns:1.1fr 1fr;gap:15px;margin-top:15px}button{background:#152d36;color:#c9f8f6;border:1px solid #4b9c9d;border-radius:8px;padding:11px 17px;font:inherit;cursor:pointer;margin:4px 5px 4px 0}button:hover{border-color:#ff8519;color:#fff}button:disabled{opacity:.35;cursor:not-allowed}
 pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max-height:325px;overflow:auto}
-.big{font-size:20px;color:var(--orange)}.witnesses{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}
+.big{font-size:20px;color:var(--orange)}.coupling-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.swatch{height:110px;border:1px solid #9fc5d1;border-radius:13px;box-shadow:0 0 25px #ffffff11,inset 0 3px 8px #fff2}.phase-screen{height:110px;display:grid;place-items:center;background:#0c1720;border-radius:13px}@media(max-width:620px){.coupling-grid{grid-template-columns:1fr}}.witnesses{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}
 .witness{border:1px solid #356b70;padding:12px;border-radius:10px;text-align:center;color:#74d6dd}
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 </style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-012</div><h1>CHROME // FOUR WHEELS</h1><p class="sub">ONE PRIMITIVE · THREE WITNESS ROOTS · APPEND-ONLY CONSISTENCY</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-013</div><h1>CHROME // FOUR WHEELS</h1><p class="sub">ONE PRIMITIVE · FOUR WHEELS · CHROMATIC COUPLING</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="wheels" id="wheels"></section>
+<section class="coupling panel" style="margin-top:16px;border-color:#5c7785">
+<h2>00 / CHROMATIC COUPLING ENGINE</h2>
+<p class="note">Explore four independent controls. The spectral swatch approximates monochromatic visible light; the chroma wheel is a separate display hue, not a physical wavelength measurement.</p>
+<div class="coupling-grid">
+ <div><div class="swatch" id="spectralSwatch"></div><div class="caption">SPECTRAL ESTIMATE</div><p class="detail" id="spectralText"></p></div>
+ <div><div class="swatch" id="hueSwatch"></div><div class="caption">CHROMA / DISPLAY HUE</div><p class="detail" id="hueText"></p></div>
+ <div><div class="phase-screen"><svg viewBox="0 0 200 110" width="100%"><circle cx="100" cy="55" r="37" fill="none" stroke="#365c67" stroke-width="9"/><line x1="100" y1="55" x2="100" y2="18" stroke="#ff8a1c" stroke-width="3" id="phaseNeedle"/><circle cx="100" cy="55" r="5" fill="#dfedf2"/></svg></div><div class="caption">SPATIOTEMPORAL PHASE</div><p class="detail" id="phaseText"></p></div>
+</div>
+<pre id="couplingTrace">MOVE A WHEEL TO EXPLORE</pre>
+</section>
 <section class="lower">
 <div class="panel"><h2>01 / EVIDENCE ENGINE</h2><div class="big" id="count">0 committed observations</div>
 <p class="note">Freeze the four observed wheel values into canonical bytes. Calibration is a distinct derived record; changing sliders never edits sealed history.</p>
@@ -29,7 +39,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-012 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-013 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -55,9 +65,39 @@ async function node(a,b){return sha(concat(new Uint8Array([1]),a,b))}
 function split(n){let p=1;while((p<<1)<n)p<<=1;return p}
 async function root(items){if(!items.length)return sha(new Uint8Array());if(items.length===1)return leaf(items[0]);let k=split(items.length);return node(await root(items.slice(0,k)),await root(items.slice(k)))}
 function drawWheel(canvas,def,v){const dpr=Math.min(devicePixelRatio||1,2),width=canvas.getBoundingClientRect().width||230;canvas.width=width*dpr;canvas.height=width*dpr;const ctx=canvas.getContext("2d");ctx.scale(dpr,dpr);let cx=width/2,cy=width/2,r=width*.42,rot=-Math.PI/2+2*Math.PI*(v-def.min)/(def.max-def.min);ctx.clearRect(0,0,width,width);let shine=ctx.createRadialGradient(cx,cy,6,cx,cy,r);shine.addColorStop(0,"#1b303e");shine.addColorStop(.72,"#101922");shine.addColorStop(1,"#071015");ctx.fillStyle=shine;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();for(let i=0;i<360;i++){ctx.beginPath();ctx.strokeStyle=def.name==="CHROMA"?"hsl("+i+" 95% 61%)":def.name==="WAVELENGTH"?"hsl("+(270-i*.75)+" 95% 65%)":def.color;ctx.globalAlpha=i%15===0?1:.25;ctx.lineWidth=i%30===0?2:1;let a=-Math.PI/2+i*Math.PI/180;ctx.moveTo(cx+Math.cos(a)*r*.78,cy+Math.sin(a)*r*.78);ctx.lineTo(cx+Math.cos(a)*r*.94,cy+Math.sin(a)*r*.94);ctx.stroke()}ctx.globalAlpha=1;ctx.strokeStyle="#c0d2db";ctx.lineWidth=2;[.67,.76,.97].forEach(k=>{ctx.beginPath();ctx.arc(cx,cy,r*k,0,Math.PI*2);ctx.stroke()});ctx.shadowColor=def.color;ctx.shadowBlur=22;ctx.strokeStyle=def.color;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(rot)*r*.72,cy+Math.sin(rot)*r*.72);ctx.stroke();ctx.shadowBlur=0;ctx.beginPath();ctx.fillStyle="#e6f4f8";ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fill();ctx.textAlign="center";ctx.font="bold "+Math.max(14,width*.075)+"px ui-monospace,monospace";ctx.fillStyle="#eaf5fa";ctx.fillText(v+def.unit,cx,cy+r*.38)}
-defs.forEach((d,i)=>{let el=document.createElement("div");el.className="panel";el.innerHTML='<div class="caption">'+d.name+'</div><canvas class="wheel"></canvas><div class="detail">'+d.hint+'</div><label>PHASE / '+d.min+'–'+d.max+'</label><input type="range" min="'+d.min+'" max="'+d.max+'" value="'+values[i]+'">';$("wheels").appendChild(el);let slider=el.querySelector("input"),canvas=el.querySelector("canvas");slider.addEventListener("input",()=>{values[i]=+slider.value;drawWheel(canvas,d,values[i])});new ResizeObserver(()=>drawWheel(canvas,d,values[i])).observe(canvas)});
+defs.forEach((d,i)=>{let el=document.createElement("div");el.className="panel";el.innerHTML='<div class="caption">'+d.name+'</div><canvas class="wheel"></canvas><div class="detail">'+d.hint+'</div><label>PHASE / '+d.min+'–'+d.max+'</label><input type="range" min="'+d.min+'" max="'+d.max+'" value="'+values[i]+'">';$("wheels").appendChild(el);let slider=el.querySelector("input"),canvas=el.querySelector("canvas");slider.addEventListener("input",()=>{values[i]=+slider.value;drawWheel(canvas,d,values[i]);drawCoupling()});new ResizeObserver(()=>drawWheel(canvas,d,values[i])).observe(canvas)});
 
 const eventLedger=[], observations=[];let trustedEventHead=null,trustedEventCount=0;
+// An approximate visible-spectrum visualization, not a photometric conversion.
+// Based on conventional piecewise display RGB approximations; monitor gamut varies.
+function spectrumRGB(nm){
+ if(nm<380||nm>750)return [0,0,0];
+ let r=0,g=0,b=0;
+ if(nm<440){r=(440-nm)/60;b=1}
+ else if(nm<490){g=(nm-440)/50;b=1}
+ else if(nm<510){g=1;b=(510-nm)/20}
+ else if(nm<580){r=(nm-510)/70;g=1}
+ else if(nm<645){r=1;g=(645-nm)/65}
+ else {r=1}
+ let intensity=nm<420?0.3+0.7*(nm-380)/40:nm>700?0.3+0.7*(750-nm)/50:1;
+ return [r,g,b].map(v=>Math.round(255*Math.pow(Math.max(0,v*intensity),0.8)));
+}
+function drawCoupling(){
+ const nm=values[2],hue=values[1],pos=values[0],t=values[3],rgb=spectrumRGB(nm);
+ $("spectralSwatch").style.background="rgb("+rgb.join(",")+")";
+ $("hueSwatch").style.background="hsl("+hue+" 100% 50%)";
+ $("spectralText").textContent=nm+" nm / RGB "+rgb.join(",");
+ $("hueText").textContent=hue+"° / independent display hue";
+ // Position and Chronos combine only in a demonstration phase composition.
+ const phase=(pos+(t%360))%360;
+ $("phaseNeedle").setAttribute("transform","rotate("+phase+" 100 55)");
+ $("phaseText").textContent=pos+"° + "+t+" ms / display phase "+phase+"°";
+ $("couplingTrace").textContent=
+   "RAW  [position="+pos+"°, chroma="+hue+"°, wavelength="+nm+"nm, chronos="+t+"ms]\\n"+
+   "VIEW [spectral_rgb=("+rgb.join(",")+"), hue=hsl("+hue+"), phase="+phase+"°]\\n"+
+   "BOUNDARY: spectral color is approximate; phase composition is illustrative, not a calibrated physical coupling.";
+}
+drawCoupling();
 function log(s){$("ledger").textContent="["+new Date().toISOString().slice(11,19)+"] "+s+"\n"+$("ledger").textContent}
 function sample(){return {primitive:"observed-chrome-v1",position_deg:values[0],hue_deg:values[1],wavelength_nm:values[2],chronos_ms:values[3]}}
 const keys=["position_deg","hue_deg","wavelength_nm","chronos_ms"];
