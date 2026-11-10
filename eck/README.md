@@ -1,4 +1,4 @@
-# ECK-010 — Chrome-wheel evidence kernel
+# ECK-011 — Chrome-wheel evidence kernel
 
 A four-wheel, chrome/neon interactive evidence visualization with append-only local demonstration.
 
@@ -23,6 +23,12 @@ Three witness panels are labels; no real network witness or Ed25519 signing serv
 
 Open `index.html` from a secure HTTPS GitHub Pages origin. The cryptographic Web Crypto API requires a secure context.
 
-## Planned ECK-011
+## ECK-011: Chromatic Evidence Continuity
 
-Implement compact RFC 6962 consistency proofs, independent receipt custody, persistent verification and two-of-three witnessed append certification.
+The wavelength wheel now has an independent calibration offset slider (-60 to +60 nm). Every calibration event references its parent sealed sample SHA-256 leaf, stores the exact offset and interpreted wavelength, and is appended without rewriting the original wavelength, hue, position or chronos sample. A calibration is rejected if it fails the pinned in-memory prefix check. The original measurements in this page are simulated slider inputs, not hardware spectroscopy or a metrologically calibrated sensor.
+
+`python eck/test_eck011.py` runs the standard-library regression suite: two divergent calibrations from one root, mutation of time/hue/wavelength, spoofed parent, derived-value modification, out-of-range calibration, and raw reading range validation.
+
+## Next bound — ECK-012
+
+Commit and verify calibration *records themselves* in an append-only authenticated tree (not just raw observations); then add a compact RFC 6962 consistency verifier and independently operated witness receipts. The page's in-memory head is not external custody.
