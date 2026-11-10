@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-017 | Chromatic Evidence Continuity</title>
+<title>ECK-018 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-017: a single central primitive, not four independent panels in a row. */
+/* ECK-018: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -37,8 +37,24 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-phase{font-size:12px;color:#ffb86d;margin-top:9px}
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
-.force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-017</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / NINE ADDRESSES + ONE SINGLET / NESTED REPEAT</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+.force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}</style>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-018</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / NINE ADDRESSES + ONE SINGLET / NESTED REPEAT</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<section class="panel" id="pyramidSection" style="margin-top:18px">
+<h2>00 / M-11 NESTED PYRAMID FOUNDATION</h2>
+<p class="note">Nine nested foundation/body parameters plus the two {{1}} unit caps. Ordered containment, not a literal exponentiation of dimensions. Fractional 17.5 retained without rounding.</p>
+<div class="pyramid-layout">
+ <div><svg id="pyramidSvg" viewBox="0 0 600 470" width="100%" aria-label="Eleven nested pyramid levels from 27 to 1">
+ <defs><linearGradient id="pyramidStroke" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4be2ed"/><stop offset=".5" stop-color="#ffb347"/><stop offset="1" stop-color="#f762c8"/></linearGradient></defs>
+ <g id="pyramidLayers"></g><circle cx="300" cy="238" r="9" fill="#fff" stroke="#34dced" stroke-width="5"/><text x="300" y="257" fill="#e5fcff" text-anchor="middle" font-size="10">SINGLET · FIXED</text>
+ </svg></div>
+ <div><div class="caption">CANONICAL FOUNDATION → CAP</div><pre id="pyramidNumbers">[[ {{27}}^{{24}}^{{21}}^{{17.5))^{{13}}^{{8}}^{{5}}^{{3}}^{{2}} ]]^[[ {{1}}^{{1}} ]]</pre>
+ <div class="note">The original user-supplied `17.5))` spelling is preserved above. The numerical layer model uses 17.5.</div>
+ <label for="pyramidTier">INSPECT NESTED LEVEL <span id="pyramidTierNum">1</span> / 11</label>
+ <input type="range" id="pyramidTier" min="1" max="11" step="1" value="1">
+ <div class="big" id="pyramidCurrent">27 · FOUNDATION</div>
+ <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
+ </div>
+</div></section>
 <section class="panel quantum-panel" id="quantumChrome" style="margin-top:18px">
 <h2>00 / QUANTUM CHROME · NINE + SINGLET = TEN</h2>
 <p class="note">Nine distinct directional address slots, each parameterized by {{n}}, plus the invariant central singlet. The three exponent levels are symbolic recursion depth, not allocated electron states.</p>
@@ -86,7 +102,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-017 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-018 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -255,9 +271,9 @@ $("export").onclick=async()=>{
 $("reset").onclick=async()=>{
  observations.length=0;eventLedger.length=0;trustedEventHead=null;trustedEventCount=0;preview();await refresh();log("RESET volatile demo state");
 };
-preview();refresh();initForceControls();initQuantumChrome();
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();
 
-// ECK-017 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-018 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -303,5 +319,38 @@ function initQuantumChrome(){
   document.getElementById("quantumTrace").textContent="[CHROME] 9 directional slots + 1 singlet.";
  });
  renderQuantumChrome();
+}
+
+const pyramidLevels=[27,24,21,17.5,13,8,5,3,2,1,1];
+function renderPyramid(index=0){
+ const container=document.getElementById("pyramidLayers");
+ container.replaceChildren();
+ const ns="http://www.w3.org/2000/svg";
+ // Narrower layers sit deeper into the same centered pyramid; no level is discarded.
+ pyramidLevels.forEach((v,i)=>{
+  const width=55+v/27*475, yTop=36+i*17, height=390-i*32;
+  const polygon=document.createElementNS(ns,"polygon");
+  const left=300-width/2,right=300+width/2,top=yTop,bottom=Math.min(453,top+Math.max(16,height));
+  polygon.setAttribute("points",`300,${top} ${right},${bottom} ${left},${bottom}`);
+  polygon.setAttribute("fill",i===index?"#ffae3324":"none");
+  polygon.setAttribute("stroke",i===index?"#ffad4d":"url(#pyramidStroke)");
+  polygon.setAttribute("stroke-width",i===index?"3":"1.1");
+  polygon.setAttribute("opacity",i===index?"1":String(.72-i*.04));
+  container.appendChild(polygon);
+  const textNode=document.createElementNS(ns,"text");
+  textNode.setAttribute("x",String(300));textNode.setAttribute("y",String(Math.max(22,Math.min(460,bottom-5))));
+  textNode.setAttribute("text-anchor","middle");textNode.setAttribute("fill",i===index?"#ffffff":"#a9bfd0");
+  textNode.setAttribute("font-size","10");textNode.textContent="L"+(i+1)+" / {{"+v+"}}";
+  container.appendChild(textNode);
+ });
+ const label=index<9?"NESTED BODY":"UNIT CAP";
+ document.getElementById("pyramidTierNum").textContent=index+1;
+ document.getElementById("pyramidCurrent").textContent=pyramidLevels[index]+" · "+(index===0?"FOUNDATION":label);
+ document.getElementById("pyramidTrace").textContent="[LAYER "+(index+1)+"/11] "+pyramidLevels[index]+"; previous levels retained; singlet fixed; 9+2=11";
+}
+function initPyramid(){
+ const slider=document.getElementById("pyramidTier");
+ slider.addEventListener("input",()=>renderPyramid(Number(slider.value)-1));
+ renderPyramid(0);
 }
 </script></html>
