@@ -1,4 +1,4 @@
-# ECK-012 — Four Chrome Wheels / Calibrations as Evidence
+# ECK-013 — Four Chrome Wheels / Chromatic Coupling
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -26,3 +26,17 @@ The demo's checkpoint and data coexist inside one volatile browser tab; a hostil
 ## Next invariant — ECK-013
 
 Bind the entire event history to externally signed 2-of-3 custody receipts and a compact append-only consistency proof. Check each calibration's semantic parent linkage during verification, in addition to its Merkle membership.
+
+## ECK-013: Wheels before witnesses
+
+The centerpiece is now a live 3-panel coupling instrument:
+
+- **Spectral estimate:** approximate RGB representation of the wavelength wheel (380–750 nm), with visible-band intensity taper. This is screen RGB, not a spectrometer, and not guaranteed to reproduce a physically accurate perceived color.
+- **Chroma:** independent HSL hue wheel. The same hue can correspond to many spectra; a monochromatic wavelength is not interchangeable with a display hue.
+- **Position × Chronos:** explicit illustrative phase composition `(position_degrees + (chronos_ms mod 360)) mod 360`. This is a demo visualization convention, not a physical conversion of milliseconds to angles.
+
+All four wheel sliders update these views immediately; the prior authenticated event ledger remains below the instrument.
+
+## Next natural invariant — ECK-014
+
+Make coupling user-selectable, with independent, derived and latched modes. Record coupling model/version alongside derived state so an observer can reproduce exactly how a visual was produced. No silent physical assumptions.
