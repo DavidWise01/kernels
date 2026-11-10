@@ -1,4 +1,4 @@
-# ECK-013 — Four Chrome Wheels / Chromatic Coupling
+# ECK-014 — Four Chrome Wheels Around One Singlet
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -40,3 +40,21 @@ All four wheel sliders update these views immediately; the prior authenticated e
 ## Next natural invariant — ECK-014
 
 Make coupling user-selectable, with independent, derived and latched modes. Record coupling model/version alongside derived state so an observer can reproduce exactly how a visual was produced. No silent physical assumptions.
+
+## ECK-014 geometry correction
+
+**Canonical layout:** four Chrome wheels orbit a single central singlet. The singlet is the shared reference point; the wheels are coordinates/dimensions of one observation, not four separate instruments or four separate evidence roots.
+
+```text
+                    POSITION
+                       O
+                       |
+           CHRONOS O-- . --O CHROMA
+                       |
+                       O
+                   WAVELENGTH
+
+                   . = SINGLET
+```
+
+The browser visualization now places Position north, Chroma east, Wavelength south, Chronos west around a chrome-lit central dot. Updating the wheels updates central glow and derived display phase. This is graphical coupling, not evidence of physical causation or numerical identity between hue and wavelength. Earlier evidence event structures are retained.
