@@ -1,4 +1,4 @@
-# ECK-017 — Quantum Chrome: Nine Addresses + Singlet
+# ECK-018 — Nested Quantum Chrome M-11 Pyramid
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -110,3 +110,19 @@ Test: `python eck/test_eck017.py` checks nine unique address labels, singlet as 
 ### ECK-018 next natural question
 
 Determine a **single reversible address mapping** from the nine named positions to the four cloverleaf fields while leaving the tenth singlet invariant. A mapping that drops positions or treats the singlet as one of nine fails.
+
+## ECK-018 — Canonical nested pyramid foundation
+
+Original notation, deliberately preserved verbatim including the nonstandard 17.5 closing delimiter:
+
+```text
+[[ {{27}}^{{24}}^{{21}}^{{17.5))^{{13}}^{{8}}^{{5}}^{{3}}^{{2}} ]]^[[ {{1}}^{{1}} ]]
+```
+
+Interpretation for this release: eleven **ordered nested levels** (nine body/foundation values `[27,24,21,17.5,13,8,5,3,2]` followed by two unit caps `[1,1]`). They have **no assumed numerical exponent semantics**; the markup is a nesting/address language and the caret is a symbolic layering operator. The suffix `17.5))` is retained as textual evidence; the numeric model uses decimal 17.5. Every level has a distinct index, including the two equal-valued caps.
+
+The browser now offers a layered pyramid SVG with an eleven-step slider, a preserved original expression, and one fixed central singlet. Layers are not eleven experimentally discovered physical dimensions, nor evidence of M-theory; the correspondence to the 11-dimensional concept is only an inspiration.
+
+Invariant: `length(levels)==11`, `levels[0]==27`, `levels[8]==2`, `levels[9:]==[1,1]`, and each displayed level remains a member of the same ordered nested frame.
+
+Next natural test: define an invertible, layer-indexed transport between `{{n}}^{{n}}^{{n}}` and this eleven-level frame, including how the fractional 17.5 level acts as a boundary.
