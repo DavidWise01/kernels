@@ -1,4 +1,4 @@
-# ECK-018 — Nested Quantum Chrome M-11 Pyramid
+# ECK-019 — Living Quantum Chrome: Mito, Emergence and Hamilton Return
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -126,3 +126,40 @@ The browser now offers a layered pyramid SVG with an eleven-step slider, a prese
 Invariant: `length(levels)==11`, `levels[0]==27`, `levels[8]==2`, `levels[9:]==[1,1]`, and each displayed level remains a member of the same ordered nested frame.
 
 Next natural test: define an invertible, layer-indexed transport between `{{n}}^{{n}}^{{n}}` and this eleven-level frame, including how the fractional 17.5 level acts as a boundary.
+
+## ECK-019 — Living pyramid / Hamilton cycle
+
+The nested pyramid is now interpreted as a biological-inspired **ordered cycle of transitions**, not merely eleven exponents.
+
+Original state marks (preserved as notation):
+
+\`\`\`text
+(0=-.)
+[1+1, single cell mito]
+[2 || 3 || 5 || 8, mito complete]
+[ \\\13//, emergence ]
+[ ||\\\17//.5||, division ]
+[ || 21 ||, re-emergence {{13+8}}, diatom ]
+[ ||| 24 |||, start walking Hamilton ]
+[ ||\\\\\`27\`//||, one full Hamilton, return to (0=-.) ]
+\`\`\`
+
+There are 8 semantic macro-stages, expanded for the walk to **12 vertex IDs**:
+\`0, 1a, 1b, 2, 3, 5, 8, 13, 17.5, 21, 24, 27\`, then return to \`0\`.
+The two one-cells have equal numeric values but *different IDs*. The 9 non-unit numerical stages are kept distinct; origin 0 is not silently identified with the 1 levels. The defining edge set is the cyclic adjacency of this route.
+
+### Invariants
+- Singlet at origin \`(0=-.)\`; return to the same origin at completion.
+- Identity matters even when values match: \`1a != 1b\`.
+- Division at \`17.5\` is a decimal-valued boundary, not an integer.
+- Re-emergence uses \`13 + 8 = 21\`.
+- On the specified 12-vertex **cycle graph**, the route visits each vertex exactly once before returning, hence is a Hamiltonian cycle *on this graph*. It does not establish any Hamiltonian traversal of an unenumerated full spatial or Quantum Chrome address lattice.
+- The biological terms are model metaphors, not mitochondrial/cell-division experimental findings.
+
+### Controls
+
+The ECK console adds a progression diagram with NEXT VERTEX, FULL HAMILTON CYCLE, and RETURN TO ORIGIN; ECK-018 nested levels remain visible below it.
+
+Test: \`python eck/test_eck019.py\` checks unique identities, decimal division, \`21=13+8\`, valid tour, invalid repeated vertices, incomplete route, and broken edges.
+
+**Next natural invariant — ECK-020:** distinguish a **Hamilton path** from a **Hamilton cycle**, and specify the return edge \`27→0\` as a reversible fold/unbind operation, then test whether the singlet and state ancestry survive repeated rounds.
