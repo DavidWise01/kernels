@@ -1,4 +1,4 @@
-# ECK-026 — Coupled Reversible Quantum Chrome Transforms
+# ECK-027 — Canvas2D Quantum Chrome Neural Mesh
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -315,3 +315,25 @@ The UI **NEXT LAYER** applies the forward transform, **REVERSE** checks the exac
 ### ECK-027 — Next natural bound
 
 An interactive **coupling graph** should show which nine addresses exchange phase at each of the ten transitions. Test whether all nine addresses participate as both source and target over a complete traversal, and whether an explicit per-edge schedule and phase-history replay remain lossless.
+
+## ECK-027 — Live Canvas2D neural-style mesh
+
+A new Canvas2D instrument displays the nine Quantum Chrome address nodes in a directed coupling graph centered on the fixed singlet. Four overlapping colored elliptical fields visualize the Chrome carriers. **Next Edge**, **Reverse Edge**, **Show Full Ring**, and **Reset Mesh** update the drawn edge history and current highlighted pair.
+
+This is a visual **graph/neural-style connection topology**, *not* a trained neural network: no learned weights, gradients, activations, backpropagation, or statistical claims are implemented. The underlying reversible mod-nine phase transport from ECK-026 remains active in the nested transport section.
+
+### Important mathematical boundary
+
+For transitions `k=1..10`, the selected source and target are `(k-1) mod 9` and `k mod 9`. The first **nine** transitions form the directed 9-cycle:
+
+```text
+0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 0
+```
+
+All nine nodes are sources and all nine are targets. **Transition 10 repeats edge `0→1`**; there are ten transition events but only nine distinct edges. This follows directly from the period-nine coupling schedule and has an explicit regression test in `eck/test_eck027.py`.
+
+Browser JavaScript parsing passed. The node/edge cardinalities were evaluated independently. Full canvas rendering and live Pages deployment remain unverified. The user-defined weak/medium/strong color bands are abstract display-intensity states, not a scientifically established mapping to fundamental forces.
+
+### ECK-028 natural boundary
+
+Replace visual-only edge lights with a truly **operational neural-like update layer**: nine phase activations, a sparse directed adjacency matrix, optional learnable-but-versioned edge weights, and exact reversible transport as the baseline. Keep learned updates separate from reversible transforms because generic learning is not invertible.
