@@ -1,4 +1,4 @@
-# ECK-022 — Replayable Quantum Chrome Phase Memory
+# ECK-023 — Lossless Nine-to-Four Chrome Transport
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -215,3 +215,26 @@ The comparison uses signed numeric differences, including hue differences; these
 ### Next natural bound — ECK-023
 
 Define a versioned transport model mapping a completed generation's nine addresses to four cloverleaf lobes *without discarding address identities*, then replay the complete derived color/phase projection deterministically.
+
+## ECK-023 — Nine addresses in four cloverleaf transport channels
+
+The console now implements a reversible packetization of the **nine distinct Quantum Chrome addresses** into four named Chrome channels, without identifying any address with the fixed singlet:
+
+```text
+POSITION    <- address indices 0,4,8
+CHROMA      <- address indices 1,5
+WAVELENGTH  <- address indices 2,6
+CHRONOS     <- address indices 3,7
+
+SINGLET = (0=-.) remains distinct.
+```
+
+The deterministic transport convention for this release is `channel = address_index % 4`. Each packet retains `{index, name, n}`, and each channel retains its own field identity. Reverse transport validates packet indices, channel assignment, uniqueness, complete coverage, identical symbolic nesting parameter, and the original canonical address names/order.
+
+The UI includes **PACK 9 → 4**, **UNPACK 4 → 9**, and **TEST DROPPED PACKET**, making reversibility visible. The round trip and dropped-packet rejection have been executed in a JavaScript reference harness; full browser rendering is not yet verified. The Python regression suite `test_eck023.py` was committed; run it in a local environment with `python eck/test_eck023.py`.
+
+**Boundary:** this is a lossless routing schema, not a claim that four real electromagnetic/nuclear physical fields encode nine quantum states. Numeric output phases and force labels remain illustrative. Unlike aggregating to four scalar strengths, four channels keep their packet contents for exact recovery.
+
+### ECK-024 — Natural next bound
+
+Add cyclic **transport through the eleven nested pyramid levels**. Verify that the nine address identities and their `n` values survive every level, including the two distinguishable `1` caps, before `27 → }{ → (0=-.)`.
