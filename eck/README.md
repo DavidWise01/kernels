@@ -1,4 +1,4 @@
-# ECK-028 — Three-Generation 3×3×3 Quantum Chrome Mesh
+# ECK-029 — Weighted Generational Quantum Chrome Activation
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -357,3 +357,29 @@ A direct exercise of the committed JavaScript verifies **27 distinct nodes, 9 pe
 ### ECK-029 — Next natural boundary
 
 Turn the current visual pulse into a deterministic **activation propagation** across the 27-node graph, using a sparse adjacency list and versioned weight update. Keep reversible address-phase transport separate from any dissipative neural activation/learning, and preserve the 3×3×3 generation identities.
+
+## ECK-029 — Weighted synchronous propagation on 3×3×3
+
+The Canvas2D generational mesh now implements an explicit, deterministic activation update for its **27 separately indexed nodes**, while retaining the fixed external singlet `(0=-.)` and the complete `3×3×3` graph.
+
+For node `(g,r,c)` at tick `t`, the model computes:
+
+```text
+next[g,r,c] = clamp_0_1(
+   0.35 * previous[g,r,c]
+ + localWeight * sum(previous[g, neighboring_r, neighboring_c])
+ + interWeight * previous[g-1,r,c]   [only if g>0]
+)
+```
+
+The update is synchronous (all nodes read the same old tick), uses four orthogonal in-generation neighbors (when in bounds), and directed forward propagation from generation `g-1` to `g` at the same grid coordinate. The displayed wireframe retains 54 **undirected geometric links** from ECK-028 (36 intrageneration, 18 between generations); neural propagation treats each planar link as two directed inputs and each intergeneration link as one forward input.
+
+The default weights are `localWeight=0.12`, `interWeight=0.72`, and retained activation `0.35`. Nodes clip into `[0,1]`, so this neural activation update is **not invertible** and must not be confused with the separate reversible mod-nine Quantum Chrome address-phase transforms.
+
+The UI includes **SEED GEN 0 CENTER**, **PROPAGATE ONE TICK**, local/intergeneration weight sliders, per-node intensity glow, and aggregate activation sums per generation. A center seed begins at generation 0; one tick reaches generation 1, and two ticks reach generation 2. Full Canvas2D browser behavior is not independently verified.
+
+**Checks:** the HTML JavaScript passed syntax validation, and its activation function passed nine focused reference assertions including propagation timing, bounds, zero input, and unchanged source array. Standalone regression `eck/test_eck029.py` is committed for repeatable multi-weight 30-tick tests; that Python file was not executed in this turn.
+
+### ECK-030 next natural bound
+
+Introduce generational memory and **weight adaptation** through an explicit reward/error signal, while preserving a frozen baseline and append-only snapshots. This would make the system capable of learning from pulses rather than only applying fixed weighted propagation. Keep such learning separate from the exact reversible symbolic transport.
