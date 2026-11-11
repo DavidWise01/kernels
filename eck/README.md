@@ -1,4 +1,4 @@
-# ECK-027 — Canvas2D Quantum Chrome Neural Mesh
+# ECK-028 — Three-Generation 3×3×3 Quantum Chrome Mesh
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -337,3 +337,23 @@ Browser JavaScript parsing passed. The node/edge cardinalities were evaluated in
 ### ECK-028 natural boundary
 
 Replace visual-only edge lights with a truly **operational neural-like update layer**: nine phase activations, a sparse directed adjacency matrix, optional learnable-but-versioned edge weights, and exact reversible transport as the baseline. Keep learned updates separate from reversible transforms because generic learning is not invertible.
+
+## ECK-028 — Generational nodes
+
+Canonical supplied notation:
+
+```text
+[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]]
+```
+
+The implemented meaning is **three separately indexed generations**, each containing a `3×3` plane of the **nine existing named Quantum Chrome addresses**. Each node has an unambiguous identity `(g,r,c)` with `g,r,c∈{0,1,2}`; its address name is `names[3*r+c]`. There are 27 unique nodes, and **one separate invariant singlet `(0=-.)`**, not a 28th neuron of the generation lattice.
+
+The Canvas2D display projects the three grids in perspective, colors them by generation, shows a fixed central singlet, and supports Previous Generation, Next Generation, Pulse Forward, Show All 27, and Reset Mesh. The pulse traverses graph edges visually; it is not yet a learned neural activation.
+
+The sparse orthogonal grid topology has 54 undirected links: `3×12 = 36` within generation planes, plus `2×9 = 18` between consecutive generations. No diagonals, no jumps across an intermediate generation, and no conflation of same-named nodes in different generations.
+
+A direct exercise of the committed JavaScript verifies **27 distinct nodes, 9 per generation, 54 links, 36 intra-plane links, 18 intergeneration links**, and separate singlet identity. Page JavaScript syntax passed. Source `test_eck028.py` provides a standalone regression check. Full browser rendering and GitHub Pages deployment remain unverified.
+
+### ECK-029 — Next natural boundary
+
+Turn the current visual pulse into a deterministic **activation propagation** across the 27-node graph, using a sparse adjacency list and versioned weight update. Keep reversible address-phase transport separate from any dissipative neural activation/learning, and preserve the 3×3×3 generation identities.
