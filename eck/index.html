@@ -825,7 +825,7 @@ function initNeuralMesh(){
 }
 
 // ECK-028: a 3×3 address plane carried by three explicitly indexed generations.
-const generationCells=Array.from({length:3},(_,g)=>Array.from({length:3},(_,r)=>Array.from({length:3},(_,c)=>Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4}))).flat()).flat());
+const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0};
 function genProjection(node){
