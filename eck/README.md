@@ -1,4 +1,4 @@
-# ECK-024 — Eleven-Level Quantum Chrome Transport
+# ECK-025 — Reversible Nested Quantum Chrome Transforms
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -261,3 +261,28 @@ The page adds **Load 9 into Foundation**, **Next Layer**, **Reverse**, **Fold to
 ### ECK-025 — Next natural bound
 
 Define an **invertible level-specific transform** `T_k` at each nested level rather than merely carrying the same packet unchanged. Test the inverse `T_k^{-1}`, retaining all nine address identities, distinct unit-cap indices, and the unchanged singlet at the return fold.
+
+## ECK-025 — Level-specific reversible phase rotation
+
+Each of the nine named address packets carries an integer phase in `Z/9Z`. At the foundation `L1={{27}}`, the phase of address `i` is `i`. The directed transition from nested level `Lk` to `L(k+1)`, for `k=1..10`, applies:
+
+```text
+T_k:      phase_i -> (phase_i + k) mod 9
+T_k^-1:   phase_i -> (phase_i - k) mod 9
+
+ID, original address index, channel index, nesting n, and singlet remain unchanged.
+```
+
+**What changes:** all nine phases rotate at every hop; each hop uses a distinct *layer index*, including transitions into `L10={{1}}` and `L11={{1}}`. **What does not change:** which of the nine address identities and which of four channels carry each packet.
+
+The new nested-transport console performs actual reversible transformations rather than cloning an unchanged packet. Its **NEXT LAYER** button applies `T_k`; **REVERSE** independently computes the inverse before moving the cursor back; **}{ FOLD** computes all ten inverse transformations from the final layer and refuses closure unless the original foundation packets are recovered exactly. **TEST MISSING PACKET** in this version mutates a phase (not a packet count) and verifies rejection.
+
+Every nested layer validates the entire chain, including each intervening transform, complete nine-address coverage, independent L10/L11 identities and fixed singlet. The first level is initialized from the canonical indexed phases.
+
+**Verification:** the GitHub HTML's JavaScript passed syntax validation. A reference execution of its committed transport functions passed **207 assertions**, covering nine symbolic `n` settings, ten forward transformations and corresponding inverses, complete return to foundation and mutation rejection. `test_eck025.py` was committed but has not been executed as a separate Python suite in this turn. Browser end-to-end rendering and live GitHub Pages publication are unverified.
+
+This is reversible **modular address-phase arithmetic**, not evidence that real electron orbital phases or physical forces follow this operation. Values are exact integers, so the inverse requires no floating-point approximation. As before, the archive is volatile and is not independent custody.
+
+### ECK-026 — Natural bound
+
+Allow an explicit phase coupling at each level that transfers phase between **different address packets** while remaining invertible, and test the inverse of the full 11-level stack. The current `T_k` shifts every phase by the same amount independently and does not model packet-to-packet interaction.
