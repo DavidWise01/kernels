@@ -1,4 +1,4 @@
-# ECK-023 — Lossless Nine-to-Four Chrome Transport
+# ECK-024 — Eleven-Level Quantum Chrome Transport
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -238,3 +238,26 @@ The UI includes **PACK 9 → 4**, **UNPACK 4 → 9**, and **TEST DROPPED PACKET*
 ### ECK-024 — Natural next bound
 
 Add cyclic **transport through the eleven nested pyramid levels**. Verify that the nine address identities and their `n` values survive every level, including the two distinguishable `1` caps, before `27 → }{ → (0=-.)`.
+
+## ECK-024 — Reversible transport through eleven nested layers
+
+The nine named address packets are preserved in four indexed Chrome channels through exactly eleven indexed layers:
+
+```text
+L01 {{27}} → L02 {{24}} → L03 {{21}} → L04 {{17.5}}
+    → L05 {{13}} → L06 {{8}} → L07 {{5}} → L08 {{3}}
+    → L09 {{2}} → L10 {{1}} → L11 {{1}}
+                                        → }{ → (0=-.)
+```
+
+The two unit caps `L10={{1}}` and `L11={{1}}` have **equal values but unequal layer identities**. Every hop copies the packet envelope and confirms exact recovery of nine identities and the symbolic `n`. The reverse control walks stored levels back toward the foundation; the fold control is enabled logically only at the last cap with a full eleven-level history. A fold archives a summary of level indices, values and packet fingerprints in volatile browser memory, then returns to the fixed origin without modifying the archived circuit.
+
+The page adds **Load 9 into Foundation**, **Next Layer**, **Reverse**, **Fold to Origin**, and **Test Missing Packet** controls. A tampered packet is rejected. Loading a new foundation replaces only the active transport session, not previously archived completed circuits.
+
+**Verification:** page JavaScript syntax passed; a direct reference exercise of the committed transport functions passed 414 assertions for `n=1..9`, including forward/reverse identity, skipped/reordered layer rejection, unique cap indices, and dropped packet detection. `test_eck024.py` is committed as a standalone Python regression; browser end-to-end interactions and live Pages publication were not verified.
+
+**Scope:** level nesting is a symbolic address model, not established 11-dimensional M-theory physics. Current routing clones transport packets identically across layers: the layer label changes but the data payload does not undergo a physical transformation. Fingerprints here are serialized comparison strings, not cryptographic hashes. The archive is not durable across reload.
+
+### ECK-025 — Next natural bound
+
+Define an **invertible level-specific transform** `T_k` at each nested level rather than merely carrying the same packet unchanged. Test the inverse `T_k^{-1}`, retaining all nine address identities, distinct unit-cap indices, and the unchanged singlet at the return fold.
