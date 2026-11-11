@@ -1,4 +1,4 @@
-# ECK-025 — Reversible Nested Quantum Chrome Transforms
+# ECK-026 — Coupled Reversible Quantum Chrome Transforms
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -286,3 +286,32 @@ This is reversible **modular address-phase arithmetic**, not evidence that real 
 ### ECK-026 — Natural bound
 
 Allow an explicit phase coupling at each level that transfers phase between **different address packets** while remaining invertible, and test the inverse of the full 11-level stack. The current `T_k` shifts every phase by the same amount independently and does not model packet-to-packet interaction.
+
+## ECK-026 — Invertible address-to-address coupling
+
+Each of the nine indexed Quantum Chrome addresses carries an integer phase in `Z/9Z`; all four Chrome transport channels preserve address indices and identities. At the boundary between level `Lk` and `L(k+1)` for `k = 1..10`, define distinct packet indices:
+
+```text
+source = (k-1) mod 9
+target = k mod 9
+
+FORWARD:
+  all phases p_i <- (p_i + k) mod 9
+  p_target <- (p_target + p_source) mod 9
+
+REVERSE:
+  p_target <- (p_target - p_source) mod 9
+  all phases p_i <- (p_i - k) mod 9
+```
+
+The reverse order is essential. The shear is invertible over modulus nine even though nine is composite, because its matrix has determinant one. Each nested transition therefore couples two distinct packet identities instead of merely applying independent uniform rotation.
+
+The UI **NEXT LAYER** applies the forward transform, **REVERSE** checks the exact inverse, and **}{ FOLD** composes all ten inverses from the final unit cap. `L10={{1}}` and `L11={{1}}` remain separate indexed states. No numeric or identity information is lost; the singlet remains `(0=-.)`.
+
+**Verification:** the committed HTML JavaScript passed syntax validation, and a direct harness exercising its actual transform code passed **297 assertions** across nine symbolic `n` settings (ten forward transforms, inverses, completeness checks, level-index checks and phase-mutation rejection). `test_eck026.py` was committed as a Python reference suite; full browser tests, Pages publication and separate Python execution remain unverified.
+
+**Scope:** this is a chosen mathematical phase-coupling operator, not a validated model of measured electron orbitals, the Standard Model weak/strong forces or M-theory. The in-browser circuit archive is volatile.
+
+### ECK-027 — Next natural bound
+
+An interactive **coupling graph** should show which nine addresses exchange phase at each of the ten transitions. Test whether all nine addresses participate as both source and target over a complete traversal, and whether an explicit per-edge schedule and phase-history replay remain lossless.
