@@ -1,4 +1,4 @@
-# ECK-036 — Cubed Neural Tensor and Recursive Four-Carrier Ablation
+# ECK-037 — Ordered Cubed Inputs in the Four-Carrier Neural Network
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -583,3 +583,53 @@ The UI initializer is now placed after every script-level constant and model dec
 ### ECK-037 — Next natural bound
 
 Let the 729 ordered-address configurations become **genuinely evaluated multi-address training cases**, rather than merely a lossless index space. Preserve node ancestry and the nine-address coverage invariant. Compare all four carrier ablations on a newly defined held-out task family before claiming that any one symbolic carrier is causally specialized.
+
+## ECK-037 — All 729 ordered triples become trainable neural examples
+
+Retain the full notation `[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]]` and distinguish the two spaces: 27 physical neural nodes (three layers of 9), and 729 possible **ordered triples** `(a,b,c)` of addresses from each nine-address plane.
+
+This release promotes the 729 configurations from encoding/decoding metadata to **actual training/validation/final-test examples** in a separately initialized, 9→9→9 neural learner. To retain order without adding neurons, the nine-dimensional input assigns positional binary weights:
+
+```text
+input[0..8] = 0
+input[a] += 1/7
+input[b] += 2/7
+input[c] += 4/7
+target = input    // nine-channel positional-code reconstruction
+```
+
+The bits `1,2,4` distinguish all three *ordered positions*, including repeated addresses. Consequently **all 729 triples produce unique neural inputs**. Encoding `id=81a+9b+c` and its inverse remain exact.
+
+### Real neural iteration
+
+The 27-node network retains 66 sparse directed synapses per four-carrier matrix set (264 carrier weights total). Both generational transitions compute real-valued forward activations through ReLU, and the new learner calculates mean squared error and backpropagates through input, hidden and output layers. Every epoch computes gradients over the **training subset of 729 examples**, then evaluates a candidate against a fixed, precommitted validation ceiling (`initial validation MSE+0.002`). An accepted candidate is saved as a frozen parent-linked snapshot of all 264 weights and its measured losses; rejected trials are logged separately. The singlet remains `(0=-.)` outside the trainable tensor.
+
+A **RECURSE 24 STAGES** control walks the 24 orderings of the four spinor stages; one carrier-specific gradient update is made per slot, with learning rate `0.24×stageResolution`. This remains a symbolic computational search protocol, not evidence of quantum spin hardware.
+
+### Permutation-safe partitions
+
+Triples with the same **sorted multiset** are held in one partition, preventing e.g. `(a,b,c)` from training while `(c,b,a)` is withheld. There are `165` unordered multisets `C(11,3)=165` across the 729 ordered input configurations.
+
+| Partition | Number of ordered inputs |
+|---|---:|
+| Train | 438 |
+| Validation | 146 |
+| Final test | 145 |
+| Total | 729 |
+
+The deterministic split is computed from sorted positions using `(7a+11b+13c) mod 5`. The final-test subset does **not** enter gradient updates or candidate acceptance; its aggregate loss is calculated only when the user selects **SEAL + FINAL TEST**, which permanently locks the current experiment against further training. The UI also prevents inspection of final-test examples until sealing. Because the split and synthetic task are fixed and visible in source, this provides within-run separation, not a guarantee of generalization to newly conceived external tasks.
+
+### Verified source-level measurements
+
+The committed HTML JavaScript passed syntax validation; the dataset code passed checks for all **729 unique positional-code input vectors, 165 distinct permutation families and zero family-level split crossings**. A direct execution of the extracted committed training routines over 24 ordered carrier-specific iterations produced **24 accepted iterations**, frozen ancestry versions `0…24`, and:
+
+| Objective | Frozen initialization | After 24 stages |
+|---|---:|---:|
+| Training MSE | 0.01604025 | 0.01597371 |
+| Validation MSE | 0.01606241 | 0.01599598 |
+
+The independent Python reference suite is committed as `eck/test_eck037.py`, but has not been separately executed. Full browser/Canvas rendering and live GitHub Pages deployment remain unverified.
+
+### ECK-038 — Next natural bound
+
+Evaluate whether positional reconstruction actually uses **ordering information**, not merely address occupancy, through controlled permutation-pair tests and distinct output-target tasks. Compare all four carrier ablations on an entirely new task family, with per-carrier grad norms, accepted version ancestry, and explicit failure preservation. Only then distinguish structurally helpful channels from redundant parameterizations.
