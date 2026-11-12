@@ -1,4 +1,4 @@
-# ECK-029 — Weighted Generational Quantum Chrome Activation
+# ECK-030 — Recursive Self-Improving Generational Iteration
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -383,3 +383,39 @@ The UI includes **SEED GEN 0 CENTER**, **PROPAGATE ONE TICK**, local/intergenera
 ### ECK-030 next natural bound
 
 Introduce generational memory and **weight adaptation** through an explicit reward/error signal, while preserving a frozen baseline and append-only snapshots. This would make the system capable of learning from pulses rather than only applying fixed weighted propagation. Keep such learning separate from the exact reversible symbolic transport.
+
+## ECK-030 — Iteration, not propagation
+
+The operation is explicitly **recursive self-improved iteration** on the `[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]]` mesh. The 27-node activation dynamics from ECK-029 remain an *internal evaluator*; their output is not the primary invariant. The primary algorithm evolves its own parameters, tests the resulting proposal from the same seed, accepts only measured improvement, and uses the accepted parameters to generate the **next** candidate iteration.
+
+```text
+generation (g,r,c) / 27 unique nodes
+    ↓
+versioned current weights (inter, local)
+    ↓
+seed gen0 center → run exactly two synchronous internal steps
+    ↓
+score = gen2-center activation - .02 × (total activation - target activation)
+    ↓
+candidate variants: (+.05,0), (-.05,0), (0,+.05), (0,-.05),
+                    (+.05,-.05), (-.05,+.05)
+    ↓
+choose best: accept strictly improving candidate only
+    ↓
+append attempt including rejected candidates, score and version
+    ↓
+new accepted parameters become input to next iteration
+    ↺ RECURSE
+```
+
+Bounds: `0≤interWeight≤1`, `0≤localWeight≤0.4`; updates quantized to .01. Exactly six bounded candidates are evaluated per iteration. Each score always uses a fresh two-tick run seeded at the center of generation 0, making candidates comparable.
+
+The Canvas console has **SELF-IMPROVE ONE ITERATION** and **RECURSE ×10** controls, version/attempt counters, baseline/current scores, and acceptance/rejection status. The current result's activation state is displayed in the 27-node mesh. The fixed singlet `(0=-.)` and the separate reversible symbolic Chrome transport are unchanged.
+
+**Observed test:** direct execution of the page's committed JavaScript candidate algorithm over 30 recursive iterations produced **6 accepted weight versions**, preserving **30 append-only in-memory attempt records**, with monotonically nondecreasing scores. The baseline score was `0.48187`; final score `0.98355`, with weights `inter=1.0`, `local=0.0`. The remaining trials were rejected once no improving local proposal existed. The page JavaScript parsed successfully. A standalone Python regression source is committed at `eck/test_eck030.py`, not independently run here.
+
+**Scope:** this is deterministic bounded, objective-specific recursive parameter search (self-improvement within fixed weights and candidate rules). It is *not* unrestricted recursive self-modification, autonomous architecture discovery, general intelligence or proof of global optimality. This objective rewards rapid center-to-center transfer and penalizes spill, so it naturally favors maximal forward weight; other task objectives may require different parameter choices. History is volatile browser memory, not durable custody. Live browser rendering and Pages publication are not yet verified.
+
+### ECK-031 — Next natural boundary
+
+Let recursion improve not only the weight values but also **which generational links are active**, while retaining the exact `3×3×3` node ancestry and adding complexity penalties and independent holdout seed/target tests to avoid learning a single seeded path.
