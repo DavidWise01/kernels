@@ -1,4 +1,4 @@
-# ECK-034 — Recursive Structural Iteration with Generational Coverage
+# ECK-035 — Neural Network with Four Trainable Force-Carrier Channels
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -530,3 +530,32 @@ The Canvas2D panel displays all 27 nodes, active/pruned links, accepted versions
 ### ECK-035 — Next natural bound
 
 Extend from fixed Boolean edge masks to **reversible structural transactions** with explicit forward/backward operations and topology migration across the 12-step boomerang / 24-slot spinor schedule. Preserve version ancestry and obtain a new, never-consulted task family for truly independent evaluation.
+
+## ECK-035 — Actual sparse neural network, four symbolic force carriers
+
+**Correction to earlier builds:** the old ECK-015/016 `WEAK / MEDIUM / STRONG` labels were **intensity bins** applied to four Chrome-wheel field strengths. They were not learnable neural carriers. ECK-034 had a geometric 27-node graph and a structurally optimized activation model, but no complete trainable connection-level carrier architecture. **FUSION did not exist as a carrier in that implementation.**
+
+ECK-035 adds an explicit **3-layer, 9→9→9 neural network** (`[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]]`) with a total of 27 neuron identities. Each of the two generational transitions uses the matching `3×3` position plus its orthogonally adjacent positions, for **33 directed connections per transition, 66 total sparse directed synapses**.
+
+Each of those 66 synapses has four **separate trainable weights**, one per named carrier:
+
+| Carrier | Color | Mixing gain |
+|---|---|---:|
+| WEAK | Cyan | 0.20 |
+| MEDIUM | Orange | 0.25 |
+| STRONG | Pink | 0.30 |
+| FUSION | Violet | 0.25 |
+
+Consequently there are **264 carrier-specific trainable parameters**. The carrier outputs combine additively before ReLU activation. The implementation has actual input, hidden and output neuron activations, one-hot inputs, target outputs, mean-squared-error loss, synchronous forward inference, and **gradient backpropagation through both generational transitions**. Training changes individual carrier weights; this is not an animation of static geometry. Each carrier can also be enabled/disabled in the Canvas2D panel to inspect its contribution.
+
+The deterministic synthetic task is to reconstruct a one-hot input address from generation 0 at the corresponding generation-2 output. Inputs `0,1,3,4,5,7` are training cases; `2,6` form a validation set; `8` is withheld until the **SEAL + TEST** control. A training update is accepted only if training MSE strictly decreases and validation MSE stays within a predeclared ceiling equal to initial validation MSE plus `0.001`. Thus validation *may increase slightly*; the result must not be described as strict validation improvement. Sealing the final test prevents further epochs on that run; reset begins a new run.
+
+A direct harness evaluating the actual committed JavaScript produced 66 sparse links, 264 weights and **50 accepted epochs**. Training MSE decreased `0.0340141036 → 0.0275178723`; validation MSE rose slightly `0.0339683052 → 0.0340264572`, inside its `0.0349683052` ceiling. The separate final-case MSE was evaluated by the development harness; because that result was viewed during development, it is **not genuinely untouched development-level evidence**. The final-test button only preserves within-run withholding.
+
+**Important model boundary:** the four force-carrier names are internal symbolic network channels, not measured physical weak, strong, medium or fusion fundamental forces. “Medium” and “fusion” here do not designate recognized fundamental force carriers in particle physics. The singlet `(0=-.)` remains outside the trainable node set. Neural gradient training is not reversible; the earlier mod-nine symbolic address transport remains separate.
+
+The Canvas page JavaScript passed syntax validation and its training routine was directly tested. Standalone regression `eck/test_eck035.py` is committed but not separately executed. Live GitHub Pages deployment and browser rendering remain unverified.
+
+### ECK-036 — Next natural boundary
+
+Use recursive iteration to tune **carrier-specific trainable synapses** while preserving a frozen reference version of the network, then test channel ablation (`WEAK`, `MEDIUM`, `STRONG`, `FUSION` disabled one at a time). Ensure that learned differences between carriers are identifiable beyond their arbitrary initial gains and weights, and use a newly defined test task rather than repeatedly observing existing holdouts.
