@@ -86,7 +86,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <h2>00 / 729-STATE CUBED NEURAL ITERATOR · {{3×3}}³</h2>
 <p class="note">Every ordered triple (a,b,c) now becomes a real nine-channel neural input. The target is its order-preserving nine-channel positional code: a contributes 1/7, b contributes 2/7, c contributes 4/7. Thus all 729 ordered triples yield distinct neural inputs. Permutations of the same triple are kept together in train, validation or final-test partitions. Four named carrier matrices train on the 27-neuron network; the singlet stays outside the trainable tensor.</p>
 <canvas id="tripleCanvas" width="1000" height="460" style="display:block;width:100%;height:auto;background:#081620;border:1px solid #4c6f80;border-radius:15px"></canvas>
-<div class="rowlike"><label>Cube ID (0–728): <input type="number" min="0" max="728" id="tripleId" value="364" style="width:100px"></label><button id="tripleView" type="button">INFER TRIPLE</button><button id="tripleIter" type="button">ITERATE TRAINING EPOCH</button><button id="tripleSpinor" type="button">RECURSE 24 STAGES</button><button id="tripleSeal" type="button">SEAL + FINAL TEST</button><button id="tripleReset" type="button">RESET CUBE</button></div>
+<div class="rowlike"><label>Cube ID (0–728): <input type="number" min="0" max="728" id="tripleId" value="0" style="width:100px"></label><button id="tripleView" type="button">INFER TRIPLE</button><button id="tripleIter" type="button">ITERATE TRAINING EPOCH</button><button id="tripleSpinor" type="button">RECURSE 24 STAGES</button><button id="tripleSeal" type="button">SEAL + FINAL TEST</button><button id="tripleReset" type="button">RESET CUBE</button></div>
 <pre id="tripleReadout">[CUBE] 729 real ordered-input cases / three generational planes / four trainable carriers</pre>
 </section>
 <section class="panel" id="carrierNeural" style="margin-top:18px">
@@ -1580,7 +1580,7 @@ const tripleCases=Object.freeze(Array.from({length:729},(_,id)=>{
 const tripleTrain=Object.freeze(tripleCases.filter(c=>c.partition<=2));
 const tripleValid=Object.freeze(tripleCases.filter(c=>c.partition===3));
 const tripleTest=Object.freeze(tripleCases.filter(c=>c.partition===4));
-const tripleNet={weights:null,attempts:[],versions:[],selectedId:364,locked:false,final:null,budget:null,phase:0};
+const tripleNet={weights:null,attempts:[],versions:[],selectedId:0,locked:false,final:null,budget:null,phase:0};
 function tripleForward(input,weights=tripleNet.weights,enabled=[true,true,true,true]){
  if(!Array.isArray(input)&&!ArrayBuffer.isView(input))throw Error("triple input vector required");
  if(input.length!==9||input.some(v=>!Number.isFinite(v)||v<0))throw Error("invalid occupancy vector");
@@ -1696,6 +1696,7 @@ function initTripleNet(){
  document.getElementById("tripleView").addEventListener("click",()=>{
   const id=Number(document.getElementById("tripleId").value);
   if(!Number.isInteger(id)||id<0||id>728){document.getElementById("tripleReadout").textContent="[HALT] cube ID must be 0..728";return}
+  if(tripleCases[id].partition===4&&!tripleNet.locked){document.getElementById("tripleReadout").textContent="[WITHHELD] final-test inputs stay hidden until SEAL + FINAL TEST";return}
   tripleNet.selectedId=id;drawTripleNet();
  });
  document.getElementById("tripleIter").addEventListener("click",()=>{if(!tripleNet.locked)tripleEpoch();drawTripleNet()});
