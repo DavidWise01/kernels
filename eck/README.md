@@ -1,4 +1,4 @@
-# ECK-032 — Nested Spinor Resolution and Recursive Self-Improvement
+# ECK-033 — Recursive Multi-Strategy Iteration with Holdout Gates
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -478,3 +478,24 @@ This double-cover sign is a standard feature of a mathematical spin-1/2 represen
 ### ECK-033 — Next natural bound
 
 Make the nested stage permutation change the **candidate-generation strategy itself**, not merely the scalar proposal radius, while testing genuine out-of-sample input/target combinations. Preserve the frozen singlet, distinct three-generation grid addresses, reversible address transport, and immutable snapshots of accepted learner generations. Avoid interpreting in-sample hill-climbing as proven general self-improvement.
+
+## ECK-033 — Four ordered strategies and out-of-sample checks
+
+The `{{ 1 , 1/2 , 1/3 , 1/4×4×3×2×1 }}` system now uses the **entire permutation of four stages** at each spinor slot, not only the first stage to choose a scalar radius. Every one of the 24 distinct orderings executes four strategy passes, each starting from the currently best result of the previous pass:
+
+- `1` → AXIAL: the four `±inter` or `±local` coordinate directions.
+- `1/2` → DIAGONAL: four coordinated `(±inter, ±local)` changes.
+- `1/3` → ASYMMETRIC: four `(±2,∓1)` or `(±1,∓2)` directional proposals.
+- `1/4` → LATTICE: all eight axial and diagonal search directions.
+
+Candidate changes are versioned, bounded by `0≤inter≤1` and `0≤local≤.4`, and quantized to .01. The four resolutions determine proposal step sizes, while each stage now chooses a *genuinely different set of directions*. Each slot tests 20 proposals across its four stages.
+
+Two independent `(r,c)` training seed/target pairs at `(1,1)` and `(0,0)` are averaged; two withheld seed/target pairs at `(0,1)` and `(2,2)` gate acceptance. For each pair, an activation seed starts at the given coordinate in generation 0, runs two synchronous mesh iterations, and evaluates the corresponding generation-2 coordinate with spill penalty. A candidate must *strictly improve training* and *not reduce either the prior winning holdout aggregate or the slot-entry holdout aggregate*. The test is independent in seed locations, but all positions belong to the same fixed deterministic 3×3×3 mesh, so it is not a claim of transfer to unrelated tasks.
+
+The full spinor slot record now includes strategy order, accepted/rejected outcome, learner version, training and holdout scores, symbolic signed spin, and unchanged origin. The original ECK-030 controls and fixed objective evaluator remain usable separately.
+
+**Verification:** the committed HTML JavaScript parses successfully. A direct harness executing the committed search code completed **24 spinor slots, 480 evaluated candidates, 3 accepted improvements**, and verified no training or holdout regression at each accepted state. Training score improved `0.48787 → 0.98355`, and holdout score improved `0.491014 → 0.98355`; final weights were `inter=1.00`, `local=0.00`. `test_eck033.py` is committed as a reproducible Python suite. Full browser/end-to-end testing and live GitHub Pages publication remain unverified.
+
+### ECK-034 — Next natural bound
+
+Introduce **frozen, versioned train/validation/test splits** with untouched final-test cases and adapt either sparse topology or a limited edge-weight vector (instead of only two global weights). Require explicit complexity penalties and immutable ancestral snapshots so recursive improvement cannot simply exploit one uniform 3×3×3 transport architecture.
