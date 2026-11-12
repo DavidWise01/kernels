@@ -1,4 +1,4 @@
-# ECK-041 — Exact Boomerang Teacher and Dense Neural Student
+# ECK-042 — Time-Unrolled Four-Carrier Bit-Plane Neural Reversal
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -735,3 +735,38 @@ The Canvas2D panel explicitly distinguishes **INPUT**, **EXACT TEACHER**, and **
 ### ECK-042 — Next natural bound
 
 Improve the **representation**, not just the training duration: add a time-unrolled iterative recurrent computation or a positional-factorized set of carrier functions while preserving the 27-node physical mesh. Evaluate exact reversed-triple success, not just MSE; require generalization across disjoint permutation families, and preserve counterexamples and ancestry for each accepted structural revision.
+
+## ECK-042 — Three temporal phases on the 27-node cube
+
+**Preserved:** `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`; 27 address nodes, 729 unique ordered triple configurations, WEAK/MEDIUM/STRONG/FUSION symbolic carriers and the external fixed singlet `(0=-.)`.
+
+**Failure-to-design transition:** ECK-041's dense 9→9→9 raw-input student had 648 carrier weights and 18 biases but decoded **0/146 validation reversals** after 400 attempts, although MSE decreased. ECK-042 retains that learner unchanged and adds a *separate time-unrolled bit-plane model* in Canvas2D.
+
+For each triple, the nine-element encoded address input is first decomposed **exactly** into its three positional bit planes (1,2,4). Each bit plane is a 3×3 grid of nine addresses. These three planes are visited in three symbolic temporal stages, using the same 27 indexed generation/address cells. They are not an additional set of neurons. A shared, trainable 3×3 routing matrix maps *source bit phase* to *output bit phase*. Four independent carrier matrices (WEAK/MEDIUM/STRONG/FUSION) provide `4×9=36` trainable scalar weights; their gain-weighted sum drives the output.
+
+The exact bit extraction is **supplied as an engineered feature transform**, not a discovered representation or independently trained neural operation. The routing matrix is learned by gradient descent using 438 train cases. Checkpoint acceptance requires strictly lower training MSE and no increase of validation MSE over the 146 validation cases. Accepted matrices are archived as frozen parent-linked versions, with rejected attempts separately recorded. The exact teacher supplies labels only. The 145 final-test cases are never consulted until the explicit seal action in the browser.
+
+**ASCII mesh:**
+
+```text
+           [[ 3×3×3 ]] / 27 address cells
+
+       GEN 0             GEN 1             GEN 2
+       phase 1           phase 2           phase 4
+      00 01 02          09 10 11          18 19 20
+      03 04 05  ---->   12 13 14  ---->   21 22 23
+      06 07 08          15 16 17          24 25 26
+                             |
+                   4 × (3×3) ROUTING
+              WEAK MEDIUM STRONG FUSION
+                             |
+                      BACKPROP + TEST
+                             |
+                     (0=-.) fixed
+```
+
+**Direct executed committed-JavaScript result:** JavaScript parses; the precommitted split remains 438/146/145; 63 gradient updates accepted (64 attempted, final rejected at the improvement threshold); validation error `0.03634330444506584 → 1.687751753299286×10^-15`; **exact decoded reversal 146/146 validation examples**. All accepted ancestral records preserve singlet `(0=-.)`. This is a major synthetic-task improvement for the new **feature-engineered** model and not evidence that the original raw-input dense student learned the general reversal rule. A standalone reference regression was committed as `eck/test_eck042.py`; execution outside the JS harness and live Pages deployment were not independently confirmed. The final-test split remains unopened in the source-level run.
+
+### ECK-043 — Next natural boundary
+
+Measure out-of-distribution generalization to a fresh transformation family that does **not** reuse the engineered bit-plane reversal feature assumption. Audit carrier redundancy by ablating individually learned matrices after convergence, and test whether the four channels remain individually meaningful under the shared linear sum. Do not interpret exact reversal on a hand-designed bit representation as spontaneous general intelligence or quantum force physics.
