@@ -1173,7 +1173,7 @@ function drawSpinor(){
  document.getElementById("spinorReadout").textContent=
   "[SLOT] "+step+"/24 / "+Math.round(phase.angle*180/Math.PI)+"° / SU(2) sign: "+phase.real.toFixed(4)+" + "+phase.imag.toFixed(4)+"i"+
   "\n[STAGE ORDER] "+current.map(i=>"1/"+(i+1)).join(" → ")+
-  "\n[LAST ITERATION] "+(latest?"stage 1/"+latest.stage+" / "+(latest.accepted?"ACCEPTED":"REJECTED")+" / score "+latest.score.toFixed(5):"none")+
+  "\n[LAST ITERATION] "+(latest?"strategies "+latest.strategyOrder.join("→")+" / "+(latest.accepted?"ACCEPTED":"REJECTED")+" / train "+latest.score.toFixed(5)+" / holdout "+latest.holdoutScore.toFixed(5):"none")+
   "\n[LEARNER] accepted version "+learner.version+" / total trials "+learner.history.length+
   "\n[INVARIANTS] 24 distinct slot orders, 12-step reflected spin, 720° state return, origin fixed";
 }
