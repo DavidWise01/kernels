@@ -86,7 +86,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <h2>00 / EXACT TEACHER × NEURAL STUDENT · BOOMERANG</h2>
 <p class="note">The exact reversible address operator is the fixed reference, never counted as neural success. A separate dense 9→9→9 trainable student, with four independent force-carrier channels, learns the target using training cases only. Validation reports error and exact decoded-triple success; final test stays sealed until explicitly requested.</p>
 <canvas id="teacherCanvas" width="1000" height="450" style="display:block;width:100%;height:auto;background:#081621;border:1px solid #4d7280;border-radius:14px"></canvas>
-<div class="rowlike"><button id="teacherTrain" type="button">ITERATE 1</button><button id="teacherTrain50" type="button">RECURSE ×50</button><button id="teacherTrain200" type="button">RECURSE ×200</button><button id="teacherValidate" type="button">VALIDATE + WITNESSES</button><button id="teacherSeal" type="button">SEAL + FINAL TEST</button><button id="teacherReset" type="button">RESET STUDENT</button></div>
+<div class="rowlike"><label>Address ID <input id="teacherViewId" type="number" min="0" max="728" value="0" style="width:100px"/></label><button id="teacherView" type="button">VIEW WITNESS</button><button id="teacherTrain" type="button">ITERATE 1</button><button id="teacherTrain50" type="button">RECURSE ×50</button><button id="teacherTrain200" type="button">RECURSE ×200</button><button id="teacherValidate" type="button">VALIDATE + WITNESSES</button><button id="teacherSeal" type="button">SEAL + FINAL TEST</button><button id="teacherReset" type="button">RESET STUDENT</button></div>
 <pre id="teacherStatus">[EXACT TEACHER] (a,b,c) → (c,b,a) → (a,b,c). [STUDENT] 27 neurons × 4 carriers.</pre>
 </section>
 <section class="panel" id="reverseLearning" style="margin-top:18px">
@@ -2083,6 +2083,12 @@ function renderTeacher(){
 }
 function initTeacher(){
  resetTeacherStudent();
+ document.getElementById("teacherView").addEventListener("click",()=>{
+  const id=Number(document.getElementById("teacherViewId").value);
+  if(!Number.isInteger(id)||id<0||id>=729){document.getElementById("teacherStatus").textContent="[HALT] address ID must be 0..728";return}
+  if(tripleCases[id].partition===4&&!teacherStudent.locked){document.getElementById("teacherStatus").textContent="[WITHHELD] final-test example cannot be inspected before sealing";return}
+  teacherStudent.viewId=id;renderTeacher();
+ });
  document.getElementById("teacherTrain").addEventListener("click",()=>{if(!teacherStudent.locked)teacherEpoch();renderTeacher()});
  document.getElementById("teacherTrain50").addEventListener("click",()=>{if(!teacherStudent.locked)for(let i=0;i<50;i++)if(!teacherEpoch())break;renderTeacher()});
  document.getElementById("teacherTrain200").addEventListener("click",()=>{if(!teacherStudent.locked)for(let i=0;i<200;i++)if(!teacherEpoch())break;renderTeacher()});
