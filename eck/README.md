@@ -1,4 +1,4 @@
-# ECK-030 — Recursive Self-Improving Generational Iteration
+# ECK-031 — Boomerang Spin and Recursive Generational Iteration
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -419,3 +419,24 @@ The Canvas console has **SELF-IMPROVE ONE ITERATION** and **RECURSE ×10** contr
 ### ECK-031 — Next natural boundary
 
 Let recursion improve not only the weight values but also **which generational links are active**, while retaining the exact `3×3×3` node ancestry and adding complexity penalties and independent holdout seed/target tests to avoid learning a single seeded path.
+
+## ECK-031 — Reflected boomerang signed-spin iteration
+
+The user-defined symbolic schedule is preserved as:
+
+```text
+{{ --- +++ }} /-boomerang-\\ {{ +++ --- }}
+spin (-1/3 × 3) → (+1/3 × 3) / (+1/3 × 3) → (-1/3 × 3)
+```
+
+The four triplets define **twelve discrete iteration steps**. To avoid floating-point ambiguity, the implementation stores integer numerators `[-1,-1,-1,+1,+1,+1,+1,+1,+1,-1,-1,-1]` with fixed denominator `3`. The signed cumulative numerators are `0,-1,-2,-3,-2,-1,0,+1,+2,+3,+2,+1,0`, so the return is exactly zero. The first six signed steps are the reversal of the last six, and the cumulative trajectory is antisymmetric under reflection: `S(k)=-S(12-k)`.
+
+The four sequential triplets are assigned to generation planes `G0 → G1 → G2 → G1`, with the **G0 singlet anchor** serving as the fixed return point. This path visits the three generation planes without making the singlet one of the 27 mesh nodes. A Canvas2D instrument shows four adjacent 3×3 generational panels, the current signed triplet step and return state, and controls **Iterate +1**, **Inverse −1**, **Full Boomerang**, and **New Cycle**. A completed, explicitly reset cycle is recorded in a volatile append-only list.
+
+**Tests:** actual committed JavaScript parsed and its full twelve-step schedule was evaluated: signed total `0`, exact expected cumulative states, and reflected schedule check. A standalone regression `eck/test_eck031.py` is committed. Full browser testing and live Pages deployment are unverified.
+
+**Interpretation boundary:** `±1/3` here is a symbolic fractional iteration/spin label defined by the user; it is **not an assertion that ordinary electron intrinsic spin is ±1/3**. The boomerang schedule organizes iterations and their return symmetry. It does not by itself prove improved learner performance or couple a complete recursive weight search to the spin schedule.
+
+### ECK-032 — Next natural bound
+
+Connect each of the four spin triplets to concrete recursive **propose → test → compare → accept/reject** passes, and verify that the return journey retains accepted improvements without changing the frozen origin or falsifying the zero-spin trajectory.
