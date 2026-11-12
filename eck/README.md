@@ -1,4 +1,4 @@
-# ECK-031 — Boomerang Spin and Recursive Generational Iteration
+# ECK-032 — Nested Spinor Resolution and Recursive Self-Improvement
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -440,3 +440,41 @@ The four sequential triplets are assigned to generation planes `G0 → G1 → G2
 ### ECK-032 — Next natural bound
 
 Connect each of the four spin triplets to concrete recursive **propose → test → compare → accept/reject** passes, and verify that the return journey retains accepted improvements without changing the frozen origin or falsifying the zero-spin trajectory.
+
+## ECK-032 — Spinor per stage, with twenty-four recursive iteration slots
+
+The user's notation is kept verbatim:
+
+```text
+{{ 1 , 1/2 , 1/3 , 1/4x4x3x2x1 }}
+```
+
+**Chosen operational interpretation:** four nested symbolic resolution stages `1, 1/2, 1/3, 1/4`. The suffix `4×3×2×1` enumerates the factorial `4! = 24` **distinct permutations** of stage order, grouped by their first stage into four six-slot blocks. An identity such as `[0,2,1,3]` is not equivalent to `[2,0,1,3]` even though they contain the same resolutions.
+
+At slot `s` (0–23), the first item in the permutation determines an improvement search step:
+
+```text
+resolution = 1/(firstStage+1)
+candidateStep = max(0.01, round(5*resolution)/100)
+```
+
+Each of the 24 slots runs **one genuine recursive self-improvement trial** on the existing 27-node mesh: propose six nearby bounded candidate weight settings, evaluate them from an identical seed, accept only a strictly better objective score, append the accepted/rejected result, and use the currently accepted parameters for the next slot. The underlying ECK-030 optimizer now takes a parameterized candidate step (the default remains 0.05 for its original controls). This does not rewrite the optimizer itself.
+
+The Canvas2D widget draws a 24-spoke stage ring. A **double-turn spinor analogue** is shown separately via
+
+```text
+theta(s) = 4π·s/24
+spinor phase = cos(theta/2) + i sin(theta/2)
+s=12 → theta=2π → -1
+s=24 → theta=4π → +1
+```
+
+This double-cover sign is a standard feature of a mathematical spin-1/2 representation under rotations; it is a *visual analogue*, not a quantum hardware measurement or a physical claim that the symbolic `1/3` and `1/4` stage labels are observed intrinsic spins. The existing 12-step boomerang sequence remains a distinct signed-step schedule that repeats over the second turn; its accumulated sum remains zero each turn.
+
+**Implementation:** `ITERATE SLOT +1`, `RECURSE FULL 24`, and `NEW DOUBLE TURN` control iteration. Resetting the display starts a new spinor slot sequence without discarding the learner's accumulated accepted parameter values. Completed slot records contain the stage order, chosen resolution, learner version, acceptance result and score. They are in-browser memory only.
+
+**Reference verification:** the committed JavaScript parses, exactly 24 unique permutations exist (six for each first-stage resolution), and the spinor reaches `-1` at 360° and `+1` at 720° up to floating-point tolerance. The extracted actual learning algorithm completed 24 slots: **six accepted, eighteen rejected; score 0.48187→0.98355; final inter/local weights 1.00/0.00**, with nondecreasing accepted objective and origin fixed `(0=-.)`. A Python regression suite is committed as `eck/test_eck032.py`; full browser end-to-end testing and live Pages deployment have not been verified.
+
+### ECK-033 — Next natural bound
+
+Make the nested stage permutation change the **candidate-generation strategy itself**, not merely the scalar proposal radius, while testing genuine out-of-sample input/target combinations. Preserve the frozen singlet, distinct three-generation grid addresses, reversible address transport, and immutable snapshots of accepted learner generations. Avoid interpreting in-sample hill-climbing as proven general self-improvement.
