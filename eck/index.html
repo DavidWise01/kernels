@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-033 | Chromatic Evidence Continuity</title>
+<title>ECK-034 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-033: a single central primitive, not four independent panels in a row. */
+/* ECK-034: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-033</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-034</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,6 +82,13 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
+<section class="panel" id="structuralIteration" style="margin-top:18px">
+<h2>00 / RECURSIVE STRUCTURAL ITERATION · 54 LINKS / 27 NODES</h2>
+<p class="note">The exact 3×3×3 addresses and fixed singlet are preserved. This experiment proposes one connection removal at a time, scores training plus a link-count penalty, and refuses candidates that reduce a separate validation score. The five final-test locations are withheld until you explicitly seal the search and test. Accepted masks form versioned ancestry in browser memory.</p>
+<canvas id="structureCanvas" width="1000" height="470" style="display:block;width:100%;height:auto;background:#07131f;border:1px solid #587782;border-radius:15px"></canvas>
+<div class="rowlike"><button id="structStart" type="button">FREEZE BASELINE</button><button id="structIter" type="button">ITERATE TOPOLOGY +1</button><button id="structFull" type="button">RECURSE ×54</button><button id="structFinal" type="button">SEAL + RUN FINAL TEST</button><button id="structReset" type="button">NEW EXPERIMENT</button></div>
+<pre id="structStatus">[TOPOLOGY] Click FREEZE BASELINE to begin a versioned recursive experiment.</pre>
+</section>
 <section class="panel" id="spinorIteration" style="margin-top:18px">
 <h2>00 / NESTED SPINOR ITERATOR · 1, ½, ⅓, ¼ · 4×3×2×1</h2>
 <p class="note">{{ 1 , 1/2 , 1/3 , 1/4x4x3x2x1 }} · 24 uniquely ordered stage permutations, grouped into four blocks of six. Each slot tries four ordered search strategies and accepts a candidate only if training improves and independent holdout seeds do not regress. The 12-step boomerang repeats for a two-turn spinor demonstration: state -1 after 360° and +1 after 720°. This is a symbolic spinor analogue, not a quantum simulation.</p>
@@ -175,7 +182,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-033 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-034 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -344,9 +351,9 @@ $("export").onclick=async()=>{
 $("reset").onclick=async()=>{
  observations.length=0;eventLedger.length=0;trustedEventHead=null;trustedEventCount=0;preview();await refresh();log("RESET volatile demo state");
 };
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();
 
-// ECK-033 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-034 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -638,7 +645,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-033: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-034: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -838,7 +845,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-033: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-034: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -860,7 +867,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-033: deterministic recursive candidate selection, with bounded tests.
+// ECK-034: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -1183,5 +1190,138 @@ function initSpinor(){
  document.getElementById("spinorFull").addEventListener("click",()=>{while(spinorState.slot<24)iterateSpinorSlot()});
  document.getElementById("spinorReset").addEventListener("click",()=>{spinorState.slot=0;spinorState.history=[];drawSpinor()});
  drawSpinor();
+}
+
+// ECK-034: a separate, frozen-weight structural experiment.
+// Training, validation and final-test coordinate sets are disjoint.
+const structuralSplit=Object.freeze({
+ train:Object.freeze([[1,1],[0,0]].map(p=>Object.freeze(p))),
+ validation:Object.freeze([[0,1],[2,2]].map(p=>Object.freeze(p))),
+ test:Object.freeze([[0,2],[1,0],[1,2],[2,0],[2,1]].map(p=>Object.freeze(p)))
+});
+const STRUCT_PENALTY=.004;
+let structuralRun=null;
+function structuralEdges(){
+ const nodes=new Map(generationCells.map((n,i)=>[n.id,i]));
+ return Object.freeze(genConnections().map(e=>Object.freeze({
+  a:nodes.get(e.a),b:nodes.get(e.b),generationLink:e.generationLink
+ })));
+}
+const structureEdges=structuralEdges();
+function structuralEval(mask,interWeight,localWeight,cases){
+ if(!Array.isArray(mask)||mask.length!==54||mask.some(v=>typeof v!=="boolean"))throw Error("bad edge mask");
+ let score=0;
+ for(const [r,c] of cases){
+  let activation=Array(27).fill(0);activation[genIndex(0,r,c)]=1;
+  for(let step=0;step<2;step++){
+   const next=activation.map(x=>x*.35);
+   structureEdges.forEach((e,i)=>{
+    if(!mask[i])return;
+    const w=e.generationLink?interWeight:localWeight;
+    next[e.b]+=w*activation[e.a];
+    if(!e.generationLink)next[e.a]+=w*activation[e.b];
+   });
+   activation=next.map(x=>Math.min(1,Math.max(0,x)));
+  }
+  const target=activation[genIndex(2,r,c)];
+  score+=target-.02*(activation.reduce((a,b)=>a+b,0)-target);
+ }
+ return score/cases.length;
+}
+function structuralPerformance(mask,weights){
+ const train=structuralEval(mask,weights.inter,weights.local,structuralSplit.train);
+ const val=structuralEval(mask,weights.inter,weights.local,structuralSplit.validation);
+ const active=mask.filter(Boolean).length;
+ return {train,val,active,fitness:train-STRUCT_PENALTY*active};
+}
+function structuralVersion(run,mask,reason,metrics){
+ return Object.freeze({version:run.versions.length,parent:run.versions.length?run.versions.at(-1).version:null,
+  mask:Object.freeze(mask.slice()),metrics:Object.freeze({...metrics}),reason,origin:"(0=-.)"});
+}
+function beginStructuralRun(){
+ const weights=Object.freeze({inter:genState.interWeight,local:genState.localWeight}),mask=Array(54).fill(true);
+ structuralRun={weights,mask,attempts:[],versions:[],sealed:false,final:null};
+ const baseline=structuralPerformance(mask,weights);
+ structuralRun.versions.push(structuralVersion(structuralRun,mask,"frozen baseline",baseline));
+ renderStructural();
+}
+function structuralIteration(){
+ const run=structuralRun;if(!run||run.sealed)return false;
+ const base=structuralPerformance(run.mask,run.weights);
+ let best=null,inspected=0;
+ // Candidate order is canonical index order, determined before final-test evaluation.
+ for(let i=0;i<run.mask.length;i++){
+  if(!run.mask[i])continue;
+  const candidate=run.mask.slice();candidate[i]=false;
+  const p=structuralPerformance(candidate,run.weights);inspected++;
+  if(p.fitness>base.fitness+1e-10&&p.val+1e-10>=base.val&&(!best||p.fitness>best.metrics.fitness+1e-10)){
+   best={index:i,mask:candidate,metrics:p};
+  }
+ }
+ const attempt={iteration:run.attempts.length+1,from:run.versions.at(-1).version,proposals:inspected,
+  accepted:!!best,removed:best?best.index:null,before:Object.freeze({...base}),
+  after:Object.freeze({...(best?best.metrics:base)})};
+ if(best){
+  run.mask=best.mask;
+  run.versions.push(structuralVersion(run,run.mask,"removed edge "+best.index,best.metrics));
+ }
+ run.attempts.push(Object.freeze(attempt));
+ renderStructural();
+ return !!best;
+}
+function finalStructuralTest(){
+ const run=structuralRun;if(!run)return;
+ if(!run.sealed){
+  run.sealed=true;
+  run.final=Object.freeze({
+   baseline:structuralEval(run.versions[0].mask,run.weights,structuralSplit.test),
+   evolved:structuralEval(run.mask,run.weights,structuralSplit.test),
+   train:structuralPerformance(run.mask,run.weights).train,
+   validation:structuralPerformance(run.mask,run.weights).val
+  });
+ }
+ renderStructural();
+}
+function renderStructural(){
+ const c=document.getElementById("structureCanvas");if(!c)return;const ctx=c.getContext("2d"),W=c.width,H=c.height;
+ ctx.clearRect(0,0,W,H);ctx.fillStyle="#07131f";ctx.fillRect(0,0,W,H);
+ const run=structuralRun,mask=run?run.mask:Array(54).fill(true);
+ const xy=node=>{const n=generationCells[node];return {x:205+n.c*130+n.g*133-n.r*38,y:144+n.r*103-n.g*45+n.c*17}};
+ structureEdges.forEach((edge,i)=>{
+  const a=xy(edge.a),b=xy(edge.b),enabled=mask[i];
+  ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+  ctx.strokeStyle=enabled?(edge.generationLink?"#ffad62b0":"#5fdfc2a0"):"#3b455155";
+  ctx.lineWidth=enabled?2.7:1;ctx.setLineDash(enabled?[]:[4,5]);ctx.stroke();ctx.setLineDash([]);
+ });
+ generationCells.forEach(n=>{
+  const p=xy(genIndex(n.g,n.r,n.c)),col=genColors[n.g];
+  ctx.beginPath();ctx.arc(p.x,p.y,12,0,Math.PI*2);ctx.fillStyle="#132b38";ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle="#efffff";ctx.textAlign="center";ctx.font="11px monospace";ctx.fillText(String(3*n.r+n.c),p.x,p.y+4);
+ });
+ ctx.fillStyle="#d7edfa";ctx.textAlign="left";ctx.font="14px monospace";ctx.fillText("RECURSIVE TOPOLOGY / 3×3×3 / ONE SINGLET",22,30);
+ for(let g=0;g<3;g++){ctx.fillStyle=genColors[g];ctx.fillText("GEN "+g,22,63+g*23)}
+ ctx.shadowColor="#66ebfc";ctx.shadowBlur=18;ctx.beginPath();ctx.arc(515,421,19,0,Math.PI*2);ctx.fillStyle="#17313d";ctx.fill();ctx.strokeStyle="#f1ffff";ctx.stroke();ctx.shadowBlur=0;
+ ctx.fillStyle="#fff";ctx.font="22px monospace";ctx.textAlign="center";ctx.fillText("·",515,428);
+ ctx.font="12px monospace";ctx.fillText("SINGLET (0=-.)",515,456);
+ if(!run){document.getElementById("structStatus").textContent="[READY] 54 edges, 27 nodes, 2 train / 2 validation / 5 untouched final-test coordinates";return}
+ const current=structuralPerformance(run.mask,run.weights),last=run.attempts.at(-1),t=run.final;
+ document.getElementById("structStatus").textContent=
+  "[STRUCTURAL ITERATION] attempts "+run.attempts.length+" / accepted versions "+(run.versions.length-1)+" / "+(run.sealed?"SEALED":"OPEN")+
+  "\n[CONNECTIONS] "+current.active+"/54 active / "+(54-current.active)+" pruned / fixed weights "+run.weights.inter.toFixed(2)+", "+run.weights.local.toFixed(2)+
+  "\n[TRAIN / VALIDATION] "+current.train.toFixed(5)+" / "+current.val.toFixed(5)+" / penalized fitness "+current.fitness.toFixed(5)+
+  "\n[LAST] "+(last?(last.accepted?"ACCEPT edge "+last.removed:"REJECT")+" / "+last.proposals+" proposals":"frozen baseline")+
+  "\n[FINAL TEST] "+(t?"baseline "+t.baseline.toFixed(5)+" → evolved "+t.evolved.toFixed(5)+" / gap "+(t.evolved-t.baseline).toFixed(5):"WITHHELD — only seal after searching")+
+  "\n[INVARIANTS] unchanged 27 identities, unchanged singlet, append-only accepted masks, no test-set selection";
+}
+function initStructural(){
+ document.getElementById("structStart").addEventListener("click",beginStructuralRun);
+ document.getElementById("structIter").addEventListener("click",()=>structuralIteration());
+ document.getElementById("structFull").addEventListener("click",()=>{
+  if(!structuralRun||structuralRun.sealed)return;
+  for(let i=0;i<54;i++)if(!structuralIteration())break;
+ });
+ document.getElementById("structFinal").addEventListener("click",finalStructuralTest);
+ document.getElementById("structReset").addEventListener("click",()=>{structuralRun=null;renderStructural()});
+ renderStructural();
 }
 </script></html>
