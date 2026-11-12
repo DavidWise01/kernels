@@ -86,7 +86,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <h2>00 / TRAINABLE 3×3×3 NEURAL NETWORK · FOUR FORCE CARRIERS</h2>
 <p class="note">WEAK / MEDIUM / STRONG / FUSION each has its own trainable weights on the 3×3-to-3×3 generational synapses. Forward inference and gradient backpropagation update the network. These are symbolic carrier names, not claims about fundamental physical forces. The singlet (0=-.) stays external.</p>
 <canvas id="carrierNeuralCanvas" width="1000" height="500" style="display:block;width:100%;height:auto;background:#07131d;border:1px solid #426c82;border-radius:14px"></canvas>
-<div class="rowlike"><button id="carrierNeuralTrain">TRAIN 1 EPOCH</button><button id="carrierNeuralTrain50">ITERATE 50 EPOCHS</button><button id="carrierNeuralInfer">INFER / VIEW</button><button id="carrierNeuralReset">RESET WEIGHTS</button></div>
+<div class="rowlike"><button id="carrierNeuralTrain">TRAIN 1 EPOCH</button><button id="carrierNeuralTrain50">ITERATE 50 EPOCHS</button><button id="carrierNeuralInfer">INFER / VIEW</button><button id="carrierNeuralSeal">SEAL + TEST</button><button id="carrierNeuralReset">RESET WEIGHTS</button></div>
 <div class="rowlike"><label>Input coordinate <select id="carrierNeuralInput"><option value="4">CENTER (1,1)</option><option value="0">TOP LEFT (0,0)</option><option value="1">TOP CENTER (0,1)</option><option value="2">TOP RIGHT (0,2)</option><option value="3">MID LEFT (1,0)</option><option value="5">MID RIGHT (1,2)</option><option value="6">BOTTOM LEFT (2,0)</option><option value="7">BOTTOM CENTER (2,1)</option><option value="8">BOTTOM RIGHT (2,2)</option></select></label></div>
 <div class="rowlike" id="carrierNeuralChannels"><label><input type="checkbox" data-carrier="0" checked> WEAK</label><label><input type="checkbox" data-carrier="1" checked> MEDIUM</label><label><input type="checkbox" data-carrier="2" checked> STRONG</label><label><input type="checkbox" data-carrier="3" checked> FUSION</label></div>
 <pre id="carrierNeuralReadout">[NEURAL] 27 neurons / 4 trainable carrier channels / backprop enabled</pre>
@@ -1365,10 +1365,11 @@ function makeNeuralEdges(){
  return Object.freeze(edges);
 }
 const neuralEdges=makeNeuralEdges();
-const neuralModel={epoch:0,weights:[],enabled:[true,true,true,true],viewInput:4,history:[],testSealed:false,finalTest:null,activations:null};
+const neuralModel={epoch:0,weights:[],enabled:[true,true,true,true],viewInput:4,history:[],testSealed:false,finalTest:null,validationBudget:0,activations:null};
 function resetNeuralModel(){
  neuralModel.epoch=0;neuralModel.history=[];neuralModel.testSealed=false;neuralModel.finalTest=null;
  neuralModel.weights=neuralCarrierNames.map((name,c)=>neuralEdges.map(e=>e.identity?.65+.012*c:.018+.004*c));
+ neuralModel.validationBudget=neuralMeanLoss(neuralValidationIds)+.001;
  neuralModel.activations=forwardNeural(neuralModel.viewInput).layers;
 }
 function forwardNeural(seed,weights=neuralModel.weights,enabled=neuralModel.enabled){
@@ -1414,7 +1415,7 @@ function trainNeuralEpoch(rate=.24){
  const proposed=neuralModel.weights.map((row,c)=>row.map((w,i)=>Math.max(-2,Math.min(2,w-rate*gradients[c][i]))));
  const after=neuralMeanLoss(neuralTrainIds,proposed);
  const validation=neuralMeanLoss(neuralValidationIds,proposed);
- const accepted=after<before-1e-12&&validation<=holdBefore+1e-12;
+ const accepted=after<before-1e-12&&validation<=neuralModel.validationBudget+1e-12;
  if(accepted){neuralModel.weights=proposed;neuralModel.epoch++}
  neuralModel.history.push(Object.freeze({attempt:neuralModel.history.length+1,accepted,
    before,after:accepted?after:before,validationBefore:holdBefore,validationAfter:accepted?validation:holdBefore,
@@ -1457,7 +1458,7 @@ function renderNeuralCarriers(){
   "[NETWORK] 3×9 nodes / "+neuralEdges.length+" directed sparse synapses / "+(neuralEdges.length*4)+" independently trainable carrier weights"+
   "\n[CARRIERS] "+neuralCarrierNames.map((n,c)=>n+" "+(neuralModel.enabled[c]?"ON":"OFF")).join(" | ")+
   "\n[RECURSION] accepted epochs "+neuralModel.epoch+" / attempts "+neuralModel.history.length+" / last "+(last?(last.accepted?"ACCEPT":"REJECT"):"none")+
-  "\n[TRAIN / VALIDATION MSE] "+neuralMeanLoss(neuralTrainIds).toFixed(6)+" / "+neuralMeanLoss(neuralValidationIds).toFixed(6)+
+  "\n[TRAIN / VALIDATION MSE] "+neuralMeanLoss(neuralTrainIds).toFixed(6)+" / "+neuralMeanLoss(neuralValidationIds).toFixed(6)+" (validation ceiling "+neuralModel.validationBudget.toFixed(6)+")"+
   "\n[FINAL TEST] "+(neuralModel.testSealed?neuralModel.finalTest.toFixed(6):"withheld — not read during training")+
   "\n[SEPARATION] Neural backprop is dissipative; symbolic mod-9 Chrome transport remains independently reversible.";
 }
@@ -1467,6 +1468,10 @@ function initNeuralCarriers(){
  document.getElementById("carrierNeuralTrain50").addEventListener("click",()=>{for(let k=0;k<50;k++)if(!trainNeuralEpoch())break;renderNeuralCarriers()});
  document.getElementById("carrierNeuralInfer").addEventListener("click",()=>{neuralModel.viewInput=+document.getElementById("carrierNeuralInput").value;neuralModel.activations=forwardNeural(neuralModel.viewInput).layers;renderNeuralCarriers()});
  document.getElementById("carrierNeuralReset").addEventListener("click",()=>{resetNeuralModel();renderNeuralCarriers()});
+ document.getElementById("carrierNeuralSeal").addEventListener("click",()=>{
+  if(!neuralModel.testSealed){neuralModel.finalTest=neuralMeanLoss(neuralTestIds);neuralModel.testSealed=true}
+  renderNeuralCarriers();
+ });
  document.querySelectorAll("#carrierNeuralChannels [data-carrier]").forEach(el=>el.addEventListener("change",()=>{
   neuralModel.enabled[+el.dataset.carrier]=el.checked;
   neuralModel.activations=forwardNeural(neuralModel.viewInput).layers;renderNeuralCarriers();
