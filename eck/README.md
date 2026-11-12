@@ -1,4 +1,4 @@
-# ECK-040 — Neural Boomerang Reversal on 729 Ordered Cubed Inputs
+# ECK-041 — Exact Boomerang Teacher and Dense Neural Student
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -708,3 +708,30 @@ The regression implementation is committed at `eck/test_eck040.py`; it has not b
 ### ECK-041 — Next natural bound
 
 Test order reversal under repeated, shuffled train/validation families and a stronger model representation, then evaluate checkpoint-matched carrier ablations and transformation accuracy. Track per-permutation error witnesses instead of relying only on averaged MSE. Require a genuine independent external task before making generalization claims.
+
+## ECK-041 — Separate exact teacher from neural approximation
+
+Retain the invariants `[[ 3×3×3 :: {[(3×3)3]} :: {{3×3}}³ ]]`, 27 indexed neurons, 729 unique address triples, four symbolic carriers (WEAK, MEDIUM, STRONG, FUSION), and the external fixed singlet `(0=-.)`.
+
+The exact symbolic reference is `T(id)=encode(c,b,a)` for `(a,b,c)=decode(id)`. The reference operator is an **involution**: `T(T(id))=id` for every one of the 729 IDs. That property is verified by direct enumeration and does not constitute neural learning.
+
+A **separate dense 9→9→9 neural student** now trains to approximate that teacher on only the established 438 training triples, using 146 validation cases to approve/reject checkpoint updates. There are two complete 9×9 directed transition layers (162 synapses), each with four independently trainable carrier weights: **648 carrier parameters plus 18 trainable biases**. These new weights belong to the dense student; the original ECK-040 66-synapse / 264-parameter sparse learner remains intact. Dense forward inference uses ReLU, backprop computes error derivatives through both layers, and accepted versions freeze complete weights and biases with a parent identifier. Validation must **not increase** when an update is accepted. The 145 final-test triples remain withheld until the explicit **SEAL + FINAL TEST** action.
+
+The Canvas2D panel explicitly distinguishes **INPUT**, **EXACT TEACHER**, and **NEURAL STUDENT**. It shows the exact symbolic return alongside the imperfect learned output, allows user-triggered training (one, 50, or 200 steps), and reports **exact decoded-triple success** by nearest positional-code match to the 729 possible codes. This decoding accuracy is distinct from continuous mean-squared error. It captures a model's ability to output the precise ordered triple, not merely approximate the correct nine-dimensional numerical vector. The teacher lookup/codebook is accessible for decoding, but final-test *examples and results* are not consulted before sealing.
+
+### Direct reference tests and a preserved failure witness
+
+- HTML JavaScript syntax: **PASS**.
+- `T(T(id))=id` over 729 ID codes: **PASS**.
+- Dense student: 27 neurons, 162 directed cross-generation synapses, 648 carrier-specific weights + 18 biases: **PASS**.
+- Fixed 438 / 146 / 145 train-validation-final split: **PASS**.
+- 50 accepted gradient iterations: train reversal MSE **0.0293856602→0.0292354433**; validation reversal MSE **0.0293856602→0.0292551311**.
+- Under the same deterministic settings, 400 accepted iterations: train reversal MSE **0.0293856602→0.0286855820**; validation MSE **0.0293856602→0.0288018574**.
+- **Exact validation reversal success after 400 iterations: 0 / 146.** This is a genuine failure against the stated strict success criterion despite improving MSE.
+- Preserved sample validation errors after 400 iterations: `id=1→expected 81, predicted 325`; `id=6→expected 486, predicted 168`; `id=9→expected 9, predicted 252`. These are nearest-code predictions, not the exact teacher outputs.
+
+**Limitations:** the dense 9-unit hidden layer remains a representational bottleneck for the per-address nonlinear bit-reversal mapping induced by the `1:2:4` positional code; no claim is made that a 27-neuron network can realize the exact mapping under the present model constraints. The model has been tested on synthetic validation configurations and not on unseen external transformation tasks. The deterministic 400-iteration result uses validation for checkpoint selection, so it must not be called independent final-test performance. Live GitHub Pages rendering and the separately committed Python regression `eck/test_eck041.py` remain unverified.
+
+### ECK-042 — Next natural bound
+
+Improve the **representation**, not just the training duration: add a time-unrolled iterative recurrent computation or a positional-factorized set of carrier functions while preserving the 27-node physical mesh. Evaluate exact reversed-triple success, not just MSE; require generalization across disjoint permutation families, and preserve counterexamples and ancestry for each accepted structural revision.
