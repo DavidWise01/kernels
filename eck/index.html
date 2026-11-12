@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-034 | Chromatic Evidence Continuity</title>
+<title>ECK-035 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-034: a single central primitive, not four independent panels in a row. */
+/* ECK-035: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-034</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-035</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,6 +82,15 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
+<section class="panel" id="carrierNeural" style="margin-top:18px">
+<h2>00 / TRAINABLE 3×3×3 NEURAL NETWORK · FOUR FORCE CARRIERS</h2>
+<p class="note">WEAK / MEDIUM / STRONG / FUSION each has its own trainable weights on the 3×3-to-3×3 generational synapses. Forward inference and gradient backpropagation update the network. These are symbolic carrier names, not claims about fundamental physical forces. The singlet (0=-.) stays external.</p>
+<canvas id="carrierNeuralCanvas" width="1000" height="500" style="display:block;width:100%;height:auto;background:#07131d;border:1px solid #426c82;border-radius:14px"></canvas>
+<div class="rowlike"><button id="carrierNeuralTrain">TRAIN 1 EPOCH</button><button id="carrierNeuralTrain50">ITERATE 50 EPOCHS</button><button id="carrierNeuralInfer">INFER / VIEW</button><button id="carrierNeuralReset">RESET WEIGHTS</button></div>
+<div class="rowlike"><label>Input coordinate <select id="carrierNeuralInput"><option value="4">CENTER (1,1)</option><option value="0">TOP LEFT (0,0)</option><option value="1">TOP CENTER (0,1)</option><option value="2">TOP RIGHT (0,2)</option><option value="3">MID LEFT (1,0)</option><option value="5">MID RIGHT (1,2)</option><option value="6">BOTTOM LEFT (2,0)</option><option value="7">BOTTOM CENTER (2,1)</option><option value="8">BOTTOM RIGHT (2,2)</option></select></label></div>
+<div class="rowlike" id="carrierNeuralChannels"><label><input type="checkbox" data-carrier="0" checked> WEAK</label><label><input type="checkbox" data-carrier="1" checked> MEDIUM</label><label><input type="checkbox" data-carrier="2" checked> STRONG</label><label><input type="checkbox" data-carrier="3" checked> FUSION</label></div>
+<pre id="carrierNeuralReadout">[NEURAL] 27 neurons / 4 trainable carrier channels / backprop enabled</pre>
+</section>
 <section class="panel" id="structuralIteration" style="margin-top:18px">
 <h2>00 / RECURSIVE STRUCTURAL ITERATION · 54 LINKS / 27 NODES</h2>
 <p class="note">The exact 3×3×3 addresses and fixed singlet are preserved. This experiment proposes one connection removal at a time, scores training plus a link-count penalty, and refuses candidates that reduce validation or break any of the nine independent two-hop generational address routes. The five final-test locations are withheld until you explicitly seal the search and test. Accepted masks form versioned ancestry in browser memory.</p>
@@ -182,7 +191,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-034 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-035 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -353,7 +362,7 @@ $("reset").onclick=async()=>{
 };
 // UI initialization deferred until all const models are defined.
 
-// ECK-034 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-035 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -645,7 +654,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-034: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-035: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -845,7 +854,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-034: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-035: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -867,7 +876,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-034: deterministic recursive candidate selection, with bounded tests.
+// ECK-035: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -1192,7 +1201,7 @@ function initSpinor(){
  drawSpinor();
 }
 
-// ECK-034: a separate, frozen-weight structural experiment.
+// ECK-035: a separate, frozen-weight structural experiment.
 // Training, validation and final-test coordinate sets are disjoint.
 const structuralSplit=Object.freeze({
  train:Object.freeze([[1,1],[0,0]].map(p=>Object.freeze(p))),
@@ -1336,5 +1345,132 @@ function initStructural(){
  document.getElementById("structReset").addEventListener("click",()=>{structuralRun=null;renderStructural()});
  renderStructural();
 }
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();
+
+// ECK-035: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
+// Training uses gradient backpropagation. This is a synthetic model, not physical force physics.
+const neuralCarrierNames=Object.freeze(["WEAK","MEDIUM","STRONG","FUSION"]);
+const neuralCarrierColors=Object.freeze(["#4ee8fa","#ffaf46","#fa548a","#ba9cff"]);
+const neuralCarrierGains=Object.freeze([.20,.25,.30,.25]);
+const neuralTrainIds=Object.freeze([0,1,3,4,5,7]);
+const neuralValidationIds=Object.freeze([2,6]);
+const neuralTestIds=Object.freeze([8]);
+function makeNeuralEdges(){
+ const edges=[];
+ for(let layer=0;layer<2;layer++)for(let to=0;to<9;to++)for(let from=0;from<9;from++){
+  const dr=Math.abs(Math.floor(from/3)-Math.floor(to/3));
+  const dc=Math.abs(from%3-to%3);
+  if(dr+dc<=1)edges.push(Object.freeze({layer,from,to,identity:from===to}));
+ }
+ return Object.freeze(edges);
+}
+const neuralEdges=makeNeuralEdges();
+const neuralModel={epoch:0,weights:[],enabled:[true,true,true,true],viewInput:4,history:[],testSealed:false,finalTest:null,activations:null};
+function resetNeuralModel(){
+ neuralModel.epoch=0;neuralModel.history=[];neuralModel.testSealed=false;neuralModel.finalTest=null;
+ neuralModel.weights=neuralCarrierNames.map((name,c)=>neuralEdges.map(e=>e.identity?.65+.012*c:.018+.004*c));
+ neuralModel.activations=forwardNeural(neuralModel.viewInput).layers;
+}
+function forwardNeural(seed,weights=neuralModel.weights,enabled=neuralModel.enabled){
+ if(!Number.isInteger(seed)||seed<0||seed>8)throw Error("input coordinate invalid");
+ let first=Array(9).fill(0);first[seed]=1;
+ const layers=[first];const pre=[];
+ for(let layer=0;layer<2;layer++){
+  const sums=Array(9).fill(0);
+  neuralEdges.forEach((edge,i)=>{
+   if(edge.layer!==layer)return;
+   for(let c=0;c<4;c++)if(enabled[c])sums[edge.to]+=neuralCarrierGains[c]*weights[c][i]*layers[layer][edge.from];
+  });
+  pre.push(sums);
+  layers.push(sums.map(x=>Math.max(0,x)));
+ }
+ return {layers,pre};
+}
+function neuralLoss(seed,weights=neuralModel.weights,enabled=neuralModel.enabled){
+ const output=forwardNeural(seed,weights,enabled).layers[2];
+ return output.reduce((sum,y,i)=>sum+(y-(seed===i?1:0))**2,0)/9;
+}
+function neuralMeanLoss(ids,weights=neuralModel.weights){
+ return ids.reduce((sum,id)=>sum+neuralLoss(id,weights),0)/ids.length;
+}
+function trainNeuralEpoch(rate=.24){
+ if(neuralModel.testSealed)throw Error("final test sealed: reset for a new training run");
+ const before=neuralMeanLoss(neuralTrainIds),holdBefore=neuralMeanLoss(neuralValidationIds);
+ const gradients=neuralModel.weights.map(w=>w.map(()=>0));
+ for(const seed of neuralTrainIds){
+  const {layers,pre}=forwardNeural(seed),output=layers[2];
+  const deltaOut=output.map((y,i)=>2*(y-(i===seed?1:0))/9*(pre[1][i]>0?1:0));
+  const deltaHidden=Array(9).fill(0);
+  neuralEdges.forEach((e,j)=>{if(e.layer!==1)return;
+   let combined=0;for(let c=0;c<4;c++)if(neuralModel.enabled[c])combined+=neuralCarrierGains[c]*neuralModel.weights[c][j];
+   deltaHidden[e.from]+=deltaOut[e.to]*combined;
+  });
+  for(let j=0;j<9;j++)deltaHidden[j]*=pre[0][j]>0?1:0;
+  neuralEdges.forEach((e,j)=>{
+   const delta=e.layer===0?deltaHidden[e.to]:deltaOut[e.to];
+   for(let c=0;c<4;c++)if(neuralModel.enabled[c])gradients[c][j]+=neuralCarrierGains[c]*delta*layers[e.layer][e.from]/neuralTrainIds.length;
+  });
+ }
+ const proposed=neuralModel.weights.map((row,c)=>row.map((w,i)=>Math.max(-2,Math.min(2,w-rate*gradients[c][i]))));
+ const after=neuralMeanLoss(neuralTrainIds,proposed);
+ const validation=neuralMeanLoss(neuralValidationIds,proposed);
+ const accepted=after<before-1e-12&&validation<=holdBefore+1e-12;
+ if(accepted){neuralModel.weights=proposed;neuralModel.epoch++}
+ neuralModel.history.push(Object.freeze({attempt:neuralModel.history.length+1,accepted,
+   before,after:accepted?after:before,validationBefore:holdBefore,validationAfter:accepted?validation:holdBefore,
+   epoch:neuralModel.epoch,origin:"(0=-.)"}));
+ neuralModel.activations=forwardNeural(neuralModel.viewInput).layers;
+ return accepted;
+}
+function renderNeuralCarriers(){
+ const cv=document.getElementById("carrierNeuralCanvas"),ctx=cv.getContext("2d");
+ if(!ctx)return;const W=cv.width,H=cv.height;
+ ctx.fillStyle="#07131d";ctx.fillRect(0,0,W,H);
+ const pos=(layer,i)=>({x:180+layer*318+(i%3)*76,y:113+Math.floor(i/3)*114+(i%3)*8});
+ const active=neuralModel.activations||forwardNeural(neuralModel.viewInput).layers;
+ for(const [i,e] of neuralEdges.entries()){
+  const a=pos(e.layer,e.from),b=pos(e.layer+1,e.to);
+  const isOn=neuralModel.enabled.some(x=>x);
+  ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+  ctx.lineWidth=e.identity?2.5:1;ctx.strokeStyle=!isOn?"#394851":e.identity?"#79e6d79a":"#50788655";ctx.stroke();
+ }
+ for(let layer=0;layer<3;layer++){
+  ctx.fillStyle=["#ffad48","#5beec2","#6bbdff"][layer];ctx.font="bold 14px monospace";
+  ctx.fillText("GEN "+layer,170+layer*318,51);
+  for(let i=0;i<9;i++){
+   const p=pos(layer,i),v=active[layer][i],radius=13+Math.min(1,v)*11;
+   ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);
+   ctx.fillStyle=v>.01?"rgba(255,171,74,"+Math.min(1,.18+.75*v)+")":"#132938";ctx.fill();
+   ctx.strokeStyle=["#ffad48","#5beec2","#6bbdff"][layer];ctx.lineWidth=2;ctx.stroke();
+   ctx.fillStyle="#fff";ctx.textAlign="center";ctx.font="bold 12px monospace";ctx.fillText(i,p.x,p.y+4);
+  }
+ }
+ ctx.fillStyle="#e5f8fc";ctx.textAlign="left";ctx.font="14px monospace";
+ ctx.fillText("TRAINABLE NEURAL NETWORK / 9 → 9 → 9",21,26);
+ neuralCarrierNames.forEach((name,c)=>{
+  ctx.fillStyle=neuralCarrierColors[c];ctx.font="bold 13px monospace";
+  ctx.fillText((neuralModel.enabled[c]?"● ":"○ ")+name,29,83+c*31);
+ });
+ ctx.fillStyle="#d7f7fa";ctx.font="13px monospace";ctx.fillText("SHARED SINGLET (0=-.) / OUTSIDE THE 27 NEURONS",230,477);
+ const last=neuralModel.history.at(-1);
+ document.getElementById("carrierNeuralReadout").textContent=
+  "[NETWORK] 3×9 nodes / "+neuralEdges.length+" directed sparse synapses / "+(neuralEdges.length*4)+" independently trainable carrier weights"+
+  "\n[CARRIERS] "+neuralCarrierNames.map((n,c)=>n+" "+(neuralModel.enabled[c]?"ON":"OFF")).join(" | ")+
+  "\n[RECURSION] accepted epochs "+neuralModel.epoch+" / attempts "+neuralModel.history.length+" / last "+(last?(last.accepted?"ACCEPT":"REJECT"):"none")+
+  "\n[TRAIN / VALIDATION MSE] "+neuralMeanLoss(neuralTrainIds).toFixed(6)+" / "+neuralMeanLoss(neuralValidationIds).toFixed(6)+
+  "\n[FINAL TEST] "+(neuralModel.testSealed?neuralModel.finalTest.toFixed(6):"withheld — not read during training")+
+  "\n[SEPARATION] Neural backprop is dissipative; symbolic mod-9 Chrome transport remains independently reversible.";
+}
+function initNeuralCarriers(){
+ resetNeuralModel();
+ document.getElementById("carrierNeuralTrain").addEventListener("click",()=>{trainNeuralEpoch();renderNeuralCarriers()});
+ document.getElementById("carrierNeuralTrain50").addEventListener("click",()=>{for(let k=0;k<50;k++)if(!trainNeuralEpoch())break;renderNeuralCarriers()});
+ document.getElementById("carrierNeuralInfer").addEventListener("click",()=>{neuralModel.viewInput=+document.getElementById("carrierNeuralInput").value;neuralModel.activations=forwardNeural(neuralModel.viewInput).layers;renderNeuralCarriers()});
+ document.getElementById("carrierNeuralReset").addEventListener("click",()=>{resetNeuralModel();renderNeuralCarriers()});
+ document.querySelectorAll("#carrierNeuralChannels [data-carrier]").forEach(el=>el.addEventListener("change",()=>{
+  neuralModel.enabled[+el.dataset.carrier]=el.checked;
+  neuralModel.activations=forwardNeural(neuralModel.viewInput).layers;renderNeuralCarriers();
+ }));
+ renderNeuralCarriers();
+}
 </script></html>
