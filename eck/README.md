@@ -1,4 +1,4 @@
-# ECK-035 — Neural Network with Four Trainable Force-Carrier Channels
+# ECK-036 — Cubed Neural Tensor and Recursive Four-Carrier Ablation
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -559,3 +559,27 @@ The Canvas page JavaScript passed syntax validation and its training routine was
 ### ECK-036 — Next natural boundary
 
 Use recursive iteration to tune **carrier-specific trainable synapses** while preserving a frozen reference version of the network, then test channel ablation (`WEAK`, `MEDIUM`, `STRONG`, `FUSION` disabled one at a time). Ensure that learned differences between carriers are identifiable beyond their arbitrary initial gains and weights, and use a newly defined test task rather than repeatedly observing existing holdouts.
+
+## ECK-036 — The cubed-number distinction
+
+Retain the full symbolic notation `[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]]`, but **do not conflate distinct numeric meanings**:
+
+- `3×3×3 = 27` physical indexed neural nodes: 3 generational planes, 3 rows, 3 columns. Their unique index is `9g+3r+c` for `g,r,c∈{0,1,2}`.
+- `(3×3)^3 = 9³ = 729` possible ordered **address triples**, each drawn from a nine-address plane. Their unique numeric index is `81a+9b+c` for `a,b,c∈{0,…,8}`, with an exact inverse decoder. This is a *combinatorial configuration space*, not another 729 trained neuron nodes.
+- `4×3×2×1=24` distinct orderings of the four symbolic resolution stages from the previously defined spinor iterator.
+
+ECK-036 adds `cubeTripleEncode`/`cubeTripleDecode`, validates all 729 unique round trips, and updates the Canvas2D cubed-neural diagram.
+
+### Four trainable carriers: ablation and recursive stage-specific iteration
+
+The **WEAK / MEDIUM / STRONG / FUSION** channels of the actual 9→9→9 neural network continue to store independently trainable parameters: `4×66=264` synaptic weights. The new **ABLATE FOUR CARRIERS** control measures training-independent *validation* loss with each carrier individually disabled while retaining the other three, without mutating trained weights. An ablation `ΔMSE` is measured relative to the current all-enabled configuration; this is an intervention metric, not proof of identifiable physical force factors. If any carrier was manually switched off, the baseline is the current enabled mask and ablation isolates the impact under that mask.
+
+The **RECURSE 24 SPINOR SLOTS** control now executes all four stage orders per slot; in each substage, only the selected carrier's 66 weights are eligible for backpropagation updates, with learning rate `0.24 × (1,1/2,1/3,1/4)` respectively. Thus there are 24 factorial slots and **96 carrier-specific update attempts**, one per stage of each slot. Each attempted update must reduce training MSE and keep validation MSE below its precommitted run-specific ceiling (baseline validation +0.001). Accepted and rejected updates remain in in-memory ancestry records; the network input, hidden and output layers still have 9 nodes each. The fixed singlet `(0=-.)` remains outside the trained node tensor. The symbolic boomerang spin and reversible mod-9 Chrome transport remain separate mathematical operations.
+
+**Direct verification of committed JavaScript:** parse passed; exactly 729 ordered-triple indices `0…728` round-trip correctly. The 24-slot recursive experiment yielded **96 accepted per-carrier epochs**, training MSE `0.03401410 → 0.03253422`, validation MSE `0.03396831 → 0.03398126` (slightly worse but inside the fixed ceiling). The validation loss increase and dependence on the deterministic one-hot task limit any claim of general self-improvement. The code reports four individual carrier-off ablation scores, and a separate regression `eck/test_eck036.py` is committed but has not been executed independently.
+
+The UI initializer is now placed after every script-level constant and model declaration, preventing the earlier temporal-dead-zone integration issue. Live Pages publication and browser rendering remain unverified.
+
+### ECK-037 — Next natural bound
+
+Let the 729 ordered-address configurations become **genuinely evaluated multi-address training cases**, rather than merely a lossless index space. Preserve node ancestry and the nine-address coverage invariant. Compare all four carrier ablations on a newly defined held-out task family before claiming that any one symbolic carrier is causally specialized.
