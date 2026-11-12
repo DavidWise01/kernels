@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-030 | Chromatic Evidence Continuity</title>
+<title>ECK-031 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-030: a single central primitive, not four independent panels in a row. */
+/* ECK-031: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-030</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-031</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,6 +82,13 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
+<section class="panel" id="boomerangSpin" style="margin-top:18px">
+<h2>00 / BOOMERANG SPIN · RECURSIVE GENERATIONAL ITERATION</h2>
+<p class="note">{{ --- +++ }} /-boomerang-\ {{ +++ --- }} · symbolic spin (-1/3)×3 → (+1/3)×3 → (+1/3)×3 → (-1/3)×3. Four triplets / twelve signed steps / exact zero return. A 3×3×3 mesh provides the three generation planes; (0=-.) remains outside the spin sequence.</p>
+<canvas id="spinCanvas" width="1000" height="480" style="display:block;width:100%;height:auto;background:#07131f;border:1px solid #557585;border-radius:15px"></canvas>
+<div class="rowlike"><button type="button" id="spinStep">ITERATE +1</button><button type="button" id="spinBack">INVERSE -1</button><button type="button" id="spinFull">FULL BOOMERANG</button><button type="button" id="spinReset">NEW CYCLE</button></div>
+<pre id="spinStatus">[SPIN] -1/3 ×3, +1/3 ×3, +1/3 ×3, -1/3 ×3 · net zero</pre>
+</section>
 <section class="panel" id="generationMesh" style="margin-top:18px">
 <h2>00 / GENERATIONAL QUANTUM CHROME · 3 × 3 × 3</h2>
 <p class="note">[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]] — three nested generations of nine nodes, not 27 separate nuclei. Nine addresses repeat with a generation coordinate (g,r,c); one singlet remains fixed. Seed a node in generation 0, then iterate weighted activations through all 27 nodes. Neural activation is separate from invertible address-phase transport.</p>
@@ -161,7 +168,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-030 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-031 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -330,9 +337,9 @@ $("export").onclick=async()=>{
 $("reset").onclick=async()=>{
  observations.length=0;eventLedger.length=0;trustedEventHead=null;trustedEventCount=0;preview();await refresh();log("RESET volatile demo state");
 };
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();
 
-// ECK-030 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-031 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -624,7 +631,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-030: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-031: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -824,7 +831,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-030: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-031: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -846,7 +853,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-030: deterministic recursive candidate selection, with bounded tests.
+// ECK-031: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -971,5 +978,66 @@ function initGenerationMesh(){
  document.getElementById("genAll").addEventListener("click",()=>{genState.showAll=true;drawGenerationMesh()});
  document.getElementById("genReset").addEventListener("click",()=>{genState.generation=0;genState.pulse=0;genState.step=0;genState.activations.fill(0);genState.showAll=true;drawGenerationMesh()});
  updateIterationPanel();drawGenerationMesh();
+}
+
+const spinSchedule=Object.freeze([-1,-1,-1,1,1,1,1,1,1,-1,-1,-1]); // integer numerators in thirds
+const spinGen=Object.freeze([0,1,2,1]); // forward to outer gen 2, then reflected return via gen 1
+const spinState={index:0,history:[]};
+function spinPosition(i){
+ if(!Number.isInteger(i)||i<0||i>12)throw Error("spin index 0..12");
+ return spinSchedule.slice(0,i).reduce((sum,v)=>sum+v,0);
+}
+function verifySpinBoomerang(){
+ if(spinSchedule.length!==12||spinGen.length!==4)throw Error("invalid 12-spin schema");
+ const f=spinSchedule.slice(0,6).join(","),rev=spinSchedule.slice(6).reverse().join(",");
+ if(f!==rev||spinPosition(12)!==0)throw Error("non-reversible or non-zero-return spin");
+ if(spinGen.join(",")!=="0,1,2,1")throw Error("invalid three-generation return path");
+ return true;
+}
+function renderSpinBoomerang(){
+ const cv=document.getElementById("spinCanvas"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;
+ ctx.clearRect(0,0,W,H);ctx.fillStyle="#07131f";ctx.fillRect(0,0,W,H);
+ ctx.fillStyle="#d7f4ff";ctx.font="17px monospace";ctx.textAlign="left";
+ ctx.fillText("{{ --- +++ }}  /-BOOMERANG-\\  {{ +++ --- }}",22,35);
+ const cols=["#f4913d","#47e1b0","#69b9ff","#bf9dff"];
+ const gridX=105,gridY=100,dx=78,dy=70;
+ for(let leg=0;leg<4;leg++){
+  const ox=gridX+leg*217,oy=gridY+(leg===2?-12:leg===3?10:0);
+  ctx.fillStyle=cols[leg];ctx.font="bold 12px monospace";
+  ctx.fillText("LEG "+leg+"  / GEN "+spinGen[leg],ox-10,oy-25);
+  for(let r=0;r<3;r++)for(let c=0;c<3;c++){
+   const x=ox+c*dx,y=oy+r*dy;
+   if(c<2){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+dx,y);ctx.strokeStyle=cols[leg]+"66";ctx.stroke()}
+   if(r<2){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+dy);ctx.stroke()}
+   const step=leg*3+c,active=step<spinState.index&&r===1,current=step===spinState.index-1&&r===1;
+   ctx.shadowColor=cols[leg];ctx.shadowBlur=active?18:3;ctx.beginPath();ctx.arc(x,y,current?19:active?15:10,0,Math.PI*2);
+   ctx.fillStyle=active?cols[leg]:"#102a39";ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=cols[leg];ctx.stroke();ctx.shadowBlur=0;
+  }
+  ctx.font="13px monospace";ctx.fillStyle="#c4d7dd";
+  ctx.fillText(leg<1?"−⅓ × 3":leg<3?"+⅓ × 3":"−⅓ × 3",ox+29,oy+240);
+  if(leg<3){
+   ctx.strokeStyle="#d4eafb";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(ox+158,oy+70);ctx.lineTo(ox+207,gridY+70);ctx.stroke();
+  }
+ }
+ const sx=500,sy=421;ctx.shadowColor="#6af3ff";ctx.shadowBlur=22;ctx.beginPath();ctx.arc(sx,sy,20,0,Math.PI*2);ctx.fillStyle="#173340";ctx.fill();ctx.strokeStyle="#efffff";ctx.lineWidth=2;ctx.stroke();ctx.shadowBlur=0;
+ ctx.fillStyle="#fff";ctx.font="26px monospace";ctx.textAlign="center";ctx.fillText("·",sx,sy+6);
+ ctx.font="12px monospace";ctx.fillText("SINGLET (0=-.)",sx,sy+38);
+ document.getElementById("spinStatus").textContent="[ITERATION] "+spinState.index+"/12 / signed spin "+spinPosition(spinState.index)+"/3"+
+  "\n[PATH] G0 (---) → G1 (+++) → G2 (+++) → G1 (---) → G0 origin"+
+  "\n[BOOMERANG] "+(spinState.index===12?"RETURN CLOSED / ZERO SPIN":"OPEN")+
+  " / 3 generations / 4 triplets / 12 iterations"+
+  "\n[CHECK] "+(verifySpinBoomerang()?"reversible schedule; singlet unchanged":"invalid")+
+  " / completed circuits retained "+spinState.history.length;
+}
+function initSpinBoomerang(){
+ verifySpinBoomerang();
+ document.getElementById("spinStep").addEventListener("click",()=>{spinState.index=Math.min(12,spinState.index+1);renderSpinBoomerang()});
+ document.getElementById("spinBack").addEventListener("click",()=>{spinState.index=Math.max(0,spinState.index-1);renderSpinBoomerang()});
+ document.getElementById("spinFull").addEventListener("click",()=>{spinState.index=12;renderSpinBoomerang()});
+ document.getElementById("spinReset").addEventListener("click",()=>{
+  if(spinState.index===12)spinState.history.push(Object.freeze({cycle:spinState.history.length,route:Object.freeze(spinSchedule.slice()),netThirds:spinPosition(12),origin:"(0=-.)"}));
+  spinState.index=0;renderSpinBoomerang();
+ });
+ renderSpinBoomerang();
 }
 </script></html>
