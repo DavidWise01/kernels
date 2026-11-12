@@ -1,4 +1,4 @@
-# ECK-033 — Recursive Multi-Strategy Iteration with Holdout Gates
+# ECK-034 — Recursive Structural Iteration with Generational Coverage
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -499,3 +499,34 @@ The full spinor slot record now includes strategy order, accepted/rejected outco
 ### ECK-034 — Next natural bound
 
 Introduce **frozen, versioned train/validation/test splits** with untouched final-test cases and adapt either sparse topology or a limited edge-weight vector (instead of only two global weights). Require explicit complexity penalties and immutable ancestral snapshots so recursive improvement cannot simply exploit one uniform 3×3×3 transport architecture.
+
+## ECK-034 — Bounded topology iteration, ancestry, and independent test split
+
+The 27 node identities `(g,r,c)` within `[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]]` remain fixed; the symbolic singlet `(0=-.)` remains distinct and unchanged. The learner now edits a **Boolean 54-link mask** over the existing 36 planar and 18 forward-generational mesh links. Its two global numerical weights are frozen at the start of each structural experiment. New candidate masks remove **exactly one active link**; no new nodes, shortcuts, or novel weight values are invented.
+
+At each recursive iteration, the learner evaluates all valid one-link removals, selecting the strictly best improvement to `fitness = training score − 0.004 × active links`, while refusing to reduce validation score. Accepted masks become a versioned ancestry chain `version, parent, mask, metrics, reason, origin`; rejected iterations are retained as separate attempt records. Mask arrays in accepted records are frozen, and the experiment archive remains volatile browser memory.
+
+**Splits:** Train seeds `(1,1),(0,0)`; validation seeds `(0,1),(2,2)`; final-test seeds `(0,2),(1,0),(1,2),(2,0),(2,1)`, all from generation 0 with matching generation-2 targets. The score is the two-tick target activation with an off-target activity penalty. Only the **Seal + Run Final Test** button computes the test score in the browser; sealing prevents further candidate search on that run.
+
+### Why a structural invariant was necessary
+
+The first direct test of a naive training/validation-only topology search accepted **46 removals**, retaining only 8 connections. It improved training/validation while crashing the unseen-case score from `0.4904428` to `−0.00245`. This exposed strong structural overfitting.
+
+The final ECK-034 adds a **split-independent geometric coverage rule**: *every one of the nine named addresses must retain its direct two-hop route `G0→G1→G2`*. Candidates breaking any of these paths are rejected without consulting final-test outcomes. This forces preservation of the 18 generational links; the optimizer may still prune the 36 within-plane links.
+
+With the coverage rule, the direct execution of the committed JavaScript completed **54 iteration attempts, 36 accepted versions, 18 active links**, and nondecreasing fitness and validation. The frozen baseline vs. evolved scores were:
+
+| Metric | Original (54 links) | Evolved (18 links) |
+|---|---:|---:|
+| Training | 0.48787 | 0.50587 |
+| Validation | 0.491014 | 0.50587 |
+| Penalized fitness | 0.27187 | 0.43387 |
+| Final five-case test | 0.4904428 | 0.50587 |
+
+**Evidence qualification:** while the final-test cases are excluded from the algorithm's *candidate selection*, their results were inspected during **development** of the coverage constraint after discovering overfitting. Hence the corrected score is **not an untouched independent evaluation of the entire model-development process**; it is held out only within the finalized search run. A genuinely untouched external or newly generated test suite is required for a stronger generalization claim.
+
+The Canvas2D panel displays all 27 nodes, active/pruned links, accepted versions, penalties, train/validation scores, and the final report. Full GitHub Pages browser rendering has not been independently verified. The HTML JavaScript passed syntax validation, and 166 direct reference assertions passed in the corrected 54-iteration run. The standalone Python suite `eck/test_eck034.py` has been committed but not separately executed.
+
+### ECK-035 — Next natural bound
+
+Extend from fixed Boolean edge masks to **reversible structural transactions** with explicit forward/backward operations and topology migration across the 12-step boomerang / 24-slot spinor schedule. Preserve version ancestry and obtain a new, never-consulted task family for truly independent evaluation.
