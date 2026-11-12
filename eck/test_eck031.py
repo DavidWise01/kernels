@@ -30,7 +30,7 @@ def test():
     ck(len(set(GENERATION_LEGS))==3)
     ck(ORIGIN not in GENERATION_LEGS)
     for k in range(13):
-        ck(spin_position(k)==spin_position(12-k))
+        ck(spin_position(k)==-spin_position(12-k))
         ck(-3<=spin_position(k)<=3)
     for k in range(12):
         ck(spin_position(k+1)-spin_position(k)==SCHEDULE[k])
