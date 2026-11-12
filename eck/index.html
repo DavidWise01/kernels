@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-029 | Chromatic Evidence Continuity</title>
+<title>ECK-030 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-029: a single central primitive, not four independent panels in a row. */
+/* ECK-030: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-029</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-030</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -84,10 +84,10 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 </div></section>
 <section class="panel" id="generationMesh" style="margin-top:18px">
 <h2>00 / GENERATIONAL QUANTUM CHROME · 3 × 3 × 3</h2>
-<p class="note">[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]] — three nested generations of nine nodes, not 27 separate nuclei. Nine addresses repeat with a generation coordinate (g,r,c); one singlet remains fixed. Seed a node in generation 0, then propagate weighted activations through all 27 nodes. Neural activation is separate from invertible address-phase transport.</p>
+<p class="note">[[ 3x3x3 :: {[(3x3)3]} :: {{3x3}}^3 ]] — three nested generations of nine nodes, not 27 separate nuclei. Nine addresses repeat with a generation coordinate (g,r,c); one singlet remains fixed. Seed a node in generation 0, then iterate weighted activations through all 27 nodes. Neural activation is separate from invertible address-phase transport.</p>
 <canvas id="genCanvas" width="1000" height="600" style="display:block;width:100%;height:auto;background:#07141d;border:1px solid #4c7280;border-radius:15px"></canvas>
-<div class="rowlike"><button id="genPrev" type="button">PREVIOUS GENERATION</button><button id="genNext" type="button">NEXT GENERATION</button><button id="genSeed" type="button">SEED GEN 0 CENTER</button><button id="genPulse" type="button">PROPAGATE ONE TICK</button><button id="genAll" type="button">SHOW ALL 27</button><button id="genReset" type="button">RESET MESH</button></div>
-<div style="display:flex;gap:20px;flex-wrap:wrap;margin:9px 0"><label>GENERATION WEIGHT: <span id="genWeightVal">0.72</span><input id="genWeight" type="range" min="0" max="100" value="72"></label><label>LOCAL WEIGHT: <span id="localWeightVal">0.12</span><input id="localWeight" type="range" min="0" max="40" value="12"></label></div><pre id="genReadout">[3×3×3] 27 unique generation addresses / 1 fixed singlet</pre>
+<div class="rowlike"><button id="genPrev" type="button">PREVIOUS GENERATION</button><button id="genNext" type="button">NEXT GENERATION</button><button id="genSeed" type="button">SEED GEN 0 CENTER</button><button id="genPulse" type="button">ITERATE ONE TICK</button><button id="genImprove" type="button">SELF-IMPROVE ONE ITERATION</button><button id="genImprove10" type="button">RECURSE ×10</button><button id="genAll" type="button">SHOW ALL 27</button><button id="genReset" type="button">RESET MESH</button></div>
+<div style="display:flex;gap:20px;flex-wrap:wrap;margin:9px 0"><label>GENERATION WEIGHT: <span id="genWeightVal">0.72</span><input id="genWeight" type="range" min="0" max="100" value="72"></label><label>LOCAL WEIGHT: <span id="localWeightVal">0.12</span><input id="localWeight" type="range" min="0" max="40" value="12"></label></div><pre id="genLearning">[SELF-IMPROVEMENT] frozen baseline · no iterations accepted yet</pre><pre id="genReadout">[3×3×3] 27 unique generation addresses / 1 fixed singlet</pre>
 </section>
 <section class="panel" id="neuralMesh" style="margin-top:18px">
 <h2>00 / QUANTUM CHROME · CANVAS2D NEURAL MESH</h2>
@@ -161,7 +161,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-029 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-030 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -332,7 +332,7 @@ $("reset").onclick=async()=>{
 };
 preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();
 
-// ECK-029 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-030 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -624,7 +624,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-029: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-030: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -824,7 +824,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-029: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-030: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -845,6 +845,67 @@ function activationTick(activations,interWeight,localWeight){
  return next;
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
+
+// ECK-030: deterministic recursive candidate selection, with bounded tests.
+// An iteration uses the previous accepted parameters to propose the next version.
+const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
+function evaluateIteration(interWeight,localWeight){
+ let state=Array(27).fill(0);state[genIndex(0,1,1)]=1;
+ for(let t=0;t<2;t++)state=activationTick(state,interWeight,localWeight);
+ const target=state[genIndex(2,1,1)];
+ const spill=state.reduce((a,b)=>a+b,0)-target;
+ const score=target-.02*spill;
+ return {target,spill,score,state};
+}
+function iterationCandidate(inter,local){
+ const clip=(x,lo,hi)=>Math.round(Math.max(lo,Math.min(hi,x))*100)/100;
+ return {inter:clip(inter,0,1),local:clip(local,0,.4)};
+}
+function selfImproveOnce(){
+ const before=iterationCandidate(genState.interWeight,genState.localWeight);
+ const initial=evaluateIteration(before.inter,before.local);
+ if(!learner.baseline)learner.baseline=Object.freeze({...before,score:initial.score});
+ const proposals=[];
+ for(const [di,dl] of [[.05,0],[-.05,0],[0,.05],[0,-.05],[.05,-.05],[-.05,.05]])proposals.push(iterationCandidate(before.inter+di,before.local+dl));
+ let chosen={...before,score:initial.score},evaluated=0;
+ for(const c of proposals){
+  const result=evaluateIteration(c.inter,c.local);evaluated++;
+  if(result.score>chosen.score+1e-10)chosen={...c,score:result.score};
+ }
+ const accepted=chosen.score>initial.score+1e-10;
+ if(accepted){genState.interWeight=chosen.inter;genState.localWeight=chosen.local;learner.version++}
+ const record=Object.freeze({
+  attempt:learner.history.length+1,
+  fromVersion:learner.version-(accepted?1:0),
+  toVersion:learner.version,
+  accepted,before:Object.freeze({...before,score:initial.score}),
+  after:Object.freeze({...chosen}),candidates:evaluated,
+  singlet:learner.origin,objective:"gen2-center-at-t2-minus-0.02-off-target"
+ });
+ learner.history.push(record);
+ return record;
+}
+function updateIterationPanel(){
+ const latest=learner.history.at(-1);
+ document.getElementById("genLearning").textContent="[RECURSIVE SELF-IMPROVEMENT] version "+learner.version+
+  " / attempts "+learner.history.length+
+  "\n[OBJECTIVE] gen2 center at t=2 minus 0.02 × off-target activation"+
+  "\n[BASELINE] "+(learner.baseline?learner.baseline.score.toFixed(5):"not evaluated")+
+  "\n[CURRENT] "+evaluateIteration(genState.interWeight,genState.localWeight).score.toFixed(5)+
+  "\n[LAST] "+(latest?(latest.accepted?"ACCEPT":"REJECT")+" / "+latest.before.score.toFixed(5)+" → "+latest.after.score.toFixed(5):"none")+
+  "\n[INVARIANTS] fixed singlet, bounded candidates, no acceptance without improvement, append-only trial history";
+ document.getElementById("genWeight").value=Math.round(genState.interWeight*100);
+ document.getElementById("localWeight").value=Math.round(genState.localWeight*100);
+ document.getElementById("genWeightVal").textContent=genState.interWeight.toFixed(2);
+ document.getElementById("localWeightVal").textContent=genState.localWeight.toFixed(2);
+}
+function recursiveImprove(iterations){
+ for(let i=0;i<iterations;i++)selfImproveOnce();
+ // Display the accepted parameter version's fresh two-tick evaluation, not a stale activation field.
+ genState.activations=evaluateIteration(genState.interWeight,genState.localWeight).state.slice();
+ genState.step=2;genState.showAll=true;updateIterationPanel();drawGenerationMesh();
+}
+
 function genProjection(node){
  return {x:252+node.c*146+node.g*114-node.r*43,y:163+node.r*110-node.g*55+node.c*18};
 }
@@ -903,10 +964,12 @@ function initGenerationMesh(){
  document.getElementById("genNext").addEventListener("click",()=>{genState.generation=(genState.generation+1)%3;genState.showAll=false;drawGenerationMesh()});
  document.getElementById("genPulse").addEventListener("click",()=>{genState.activations=activationTick(genState.activations,genState.interWeight,genState.localWeight);genState.step++;genState.showAll=true;drawGenerationMesh()});
  document.getElementById("genSeed").addEventListener("click",seedGeneration);
- document.getElementById("genWeight").addEventListener("input",e=>{genState.interWeight=+e.target.value/100;document.getElementById("genWeightVal").textContent=genState.interWeight.toFixed(2);drawGenerationMesh()});
- document.getElementById("localWeight").addEventListener("input",e=>{genState.localWeight=+e.target.value/100;document.getElementById("localWeightVal").textContent=genState.localWeight.toFixed(2);drawGenerationMesh()});
+ document.getElementById("genImprove").addEventListener("click",()=>recursiveImprove(1));
+ document.getElementById("genImprove10").addEventListener("click",()=>recursiveImprove(10));
+ document.getElementById("genWeight").addEventListener("input",e=>{genState.interWeight=+e.target.value/100;updateIterationPanel();document.getElementById("genWeightVal").textContent=genState.interWeight.toFixed(2);drawGenerationMesh()});
+ document.getElementById("localWeight").addEventListener("input",e=>{genState.localWeight=+e.target.value/100;updateIterationPanel();document.getElementById("localWeightVal").textContent=genState.localWeight.toFixed(2);drawGenerationMesh()});
  document.getElementById("genAll").addEventListener("click",()=>{genState.showAll=true;drawGenerationMesh()});
  document.getElementById("genReset").addEventListener("click",()=>{genState.generation=0;genState.pulse=0;genState.step=0;genState.activations.fill(0);genState.showAll=true;drawGenerationMesh()});
- drawGenerationMesh();
+ updateIterationPanel();drawGenerationMesh();
 }
 </script></html>
