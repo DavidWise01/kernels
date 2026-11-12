@@ -1,4 +1,4 @@
-# ECK-038 — Ordered-Address Witness and Four-Carrier Ablation
+# ECK-040 — Neural Boomerang Reversal on 729 Ordered Cubed Inputs
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -668,3 +668,43 @@ All measurements use **validation pairs only**; no final-test triples were expos
 ### ECK-039 — Next natural bound
 
 Define an actual **order-dependent transformation target** whose expected output is *not* the positional input itself—for example, a requested comparison or reversible permutation operator on the triple. Evaluate before/after success on separate permutation families, test carrier ablations at matched accepted checkpoints, and preserve failure witnesses and exact ancestral weights before claiming transferable order learning.
+
+## ECK-040 — Explicit reverse-target neural training
+
+Prior ECK-039 evidence established that the existing 9→9→9 network could distinguish ordered triples but was being trained to reconstruct the input—not to perform the `(a,b,c)→(c,b,a)` transformation. ECK-040 closes that discrepancy by adding an independently initialized neural boomerang trainer, without altering the original reconstruction experiment or symbolic mod-nine transport.
+
+**ASCII connectivity summary** (each plane is a 3×3 array of neurons; its planar strokes indicate coordinate adjacency, not actual within-plane neural edges):
+
+```text
+   [[ 3×3×3 :: {[(3×3)3]} :: {{3×3}}³ ]]
+
+  GEN 0 / INPUT         GEN 1 / HIDDEN       GEN 2 / OUTPUT
+    00--01--02            09--10--11           18--19--20
+    |   |   |             |   |   |            |   |   |
+    03--04--05   =====>   12--13--14   =====>  21--22--23
+    |   |   |             |   |   |            |   |   |
+    06--07--08            15--16--17           24--25--26
+
+  Each =====> layer boundary contains 33 directed
+  synapses (identity + orthogonal-neighbor inputs).
+  2 boundaries × 33 = 66 connections.
+  4 separately trainable carrier matrices:
+     WEAK   MEDIUM   STRONG   FUSION
+  66 × 4 = 264 synaptic parameters.
+
+  INPUT (a,b,c)      NEURAL (27)      TARGET (c,b,a)
+        \\_____________ ⟳ ________________/
+                     (0=-.) fixed
+```
+
+For each ordered triple, the 9-value positional encoding uses weights `1/7,2/7,4/7` for its first, second and third positions. The **target** is the same code applied to its reversed triple. All 729 inputs are unique and map to unique target codes.
+
+The boomerang trainer evaluates 438 training cases and 146 distinct-family validation cases. It performs true sparse neural forward and backward computations, with each spinor slot selecting one of the four carrier weight matrices for an update. It accepts an update only when training mean-squared reversal error strictly decreases and validation error does not increase; it archives frozen 264-weight ancestral checkpoints for every accepted update. Its 145 withheld final-test cases are exposed only by **SEAL + TEST**, which prevents subsequent training in that run. The fixed singlet is not a neuron or a trainable parameter.
+
+**Direct source-level result:** all 24 stage updates were accepted. Training reversal MSE decreased `0.0319648118→0.0319503558`; validation reversal MSE decreased `0.0319978121→0.0319836908`. The improvement is small and the remaining loss is substantial: this is an implemented neural reversal **training objective**, not a demonstrated mastery of the reversal. Final-test cases were not evaluated. Browser end-to-end behavior and live Pages deployment are unverified.
+
+The regression implementation is committed at `eck/test_eck040.py`; it has not been executed separately.
+
+### ECK-041 — Next natural bound
+
+Test order reversal under repeated, shuffled train/validation families and a stronger model representation, then evaluate checkpoint-matched carrier ablations and transformation accuracy. Track per-permutation error witnesses instead of relying only on averaged MSE. Require a genuine independent external task before making generalization claims.
