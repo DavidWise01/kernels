@@ -84,7 +84,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 </div></section>
 <section class="panel" id="structuralIteration" style="margin-top:18px">
 <h2>00 / RECURSIVE STRUCTURAL ITERATION · 54 LINKS / 27 NODES</h2>
-<p class="note">The exact 3×3×3 addresses and fixed singlet are preserved. This experiment proposes one connection removal at a time, scores training plus a link-count penalty, and refuses candidates that reduce a separate validation score. The five final-test locations are withheld until you explicitly seal the search and test. Accepted masks form versioned ancestry in browser memory.</p>
+<p class="note">The exact 3×3×3 addresses and fixed singlet are preserved. This experiment proposes one connection removal at a time, scores training plus a link-count penalty, and refuses candidates that reduce validation or break any of the nine independent two-hop generational address routes. The five final-test locations are withheld until you explicitly seal the search and test. Accepted masks form versioned ancestry in browser memory.</p>
 <canvas id="structureCanvas" width="1000" height="470" style="display:block;width:100%;height:auto;background:#07131f;border:1px solid #587782;border-radius:15px"></canvas>
 <div class="rowlike"><button id="structStart" type="button">FREEZE BASELINE</button><button id="structIter" type="button">ITERATE TOPOLOGY +1</button><button id="structFull" type="button">RECURSE ×54</button><button id="structFinal" type="button">SEAL + RUN FINAL TEST</button><button id="structReset" type="button">NEW EXPERIMENT</button></div>
 <pre id="structStatus">[TOPOLOGY] Click FREEZE BASELINE to begin a versioned recursive experiment.</pre>
@@ -1228,6 +1228,16 @@ function structuralEval(mask,interWeight,localWeight,cases){
  }
  return score/cases.length;
 }
+function structuralCoverage(mask){
+ // Structural reachability rule derived from the 9-address mesh, not from split labels.
+ // Each original address must retain its direct two-hop G0 → G1 → G2 path.
+ for(let r=0;r<3;r++)for(let c=0;c<3;c++){
+  const a=genIndex(0,r,c),b=genIndex(1,r,c),d=genIndex(2,r,c);
+  if(!structureEdges.some((e,i)=>mask[i]&&e.a===a&&e.b===b&&e.generationLink))return false;
+  if(!structureEdges.some((e,i)=>mask[i]&&e.a===b&&e.b===d&&e.generationLink))return false;
+ }
+ return true;
+}
 function structuralPerformance(mask,weights){
  const train=structuralEval(mask,weights.inter,weights.local,structuralSplit.train);
  const val=structuralEval(mask,weights.inter,weights.local,structuralSplit.validation);
@@ -1241,6 +1251,7 @@ function structuralVersion(run,mask,reason,metrics){
 function beginStructuralRun(){
  const weights=Object.freeze({inter:genState.interWeight,local:genState.localWeight}),mask=Array(54).fill(true);
  structuralRun={weights,mask,attempts:[],versions:[],sealed:false,final:null};
+ if(!structuralCoverage(mask))throw Error("baseline missing address reachability");
  const baseline=structuralPerformance(mask,weights);
  structuralRun.versions.push(structuralVersion(structuralRun,mask,"frozen baseline",baseline));
  renderStructural();
@@ -1253,6 +1264,7 @@ function structuralIteration(){
  for(let i=0;i<run.mask.length;i++){
   if(!run.mask[i])continue;
   const candidate=run.mask.slice();candidate[i]=false;
+  if(!structuralCoverage(candidate))continue;
   const p=structuralPerformance(candidate,run.weights);inspected++;
   if(p.fitness>base.fitness+1e-10&&p.val+1e-10>=base.val&&(!best||p.fitness>best.metrics.fitness+1e-10)){
    best={index:i,mask:candidate,metrics:p};
@@ -1311,7 +1323,7 @@ function renderStructural(){
   "\n[TRAIN / VALIDATION] "+current.train.toFixed(5)+" / "+current.val.toFixed(5)+" / penalized fitness "+current.fitness.toFixed(5)+
   "\n[LAST] "+(last?(last.accepted?"ACCEPT edge "+last.removed:"REJECT")+" / "+last.proposals+" proposals":"frozen baseline")+
   "\n[FINAL TEST] "+(t?"baseline "+t.baseline.toFixed(5)+" → evolved "+t.evolved.toFixed(5)+" / gap "+(t.evolved-t.baseline).toFixed(5):"WITHHELD — only seal after searching")+
-  "\n[INVARIANTS] unchanged 27 identities, unchanged singlet, append-only accepted masks, no test-set selection";
+  "\n[INVARIANTS] nine direct G0→G1→G2 paths, fixed singlet, append-only ancestry, no test-set selection";
 }
 function initStructural(){
  document.getElementById("structStart").addEventListener("click",beginStructuralRun);
