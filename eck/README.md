@@ -1,4 +1,4 @@
-# ECK-037 — Ordered Cubed Inputs in the Four-Carrier Neural Network
+# ECK-038 — Ordered-Address Witness and Four-Carrier Ablation
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -633,3 +633,38 @@ The independent Python reference suite is committed as `eck/test_eck037.py`, but
 ### ECK-038 — Next natural bound
 
 Evaluate whether positional reconstruction actually uses **ordering information**, not merely address occupancy, through controlled permutation-pair tests and distinct output-target tasks. Compare all four carrier ablations on an entirely new task family, with per-carrier grad norms, accepted version ancestry, and explicit failure preservation. Only then distinguish structurally helpful channels from redundant parameterizations.
+
+## ECK-038 — Order is observed, not assumed
+
+On the 27-neuron `3×3×3` network, the 729 ordered input configurations remain encoded by their positional code `(1,2,4)/7` and processed through the four trainable symbolic carrier matrices (WEAK, MEDIUM, STRONG, FUSION).
+
+This boundary adds a **controlled permutation-pair witness** from the **validation subset only**. For each unique pair `(a,b,c)` and `(c,b,a)` with `a<c`, it measures the Euclidean distance between their input vectors and between their nine-neuron output vectors. The ratio
+
+```text
+retention = sum(||network(x)-network(reverse(x))||₂)
+            / sum(||x-reverse(x)||₂)
+```
+
+quantifies the extent to which the model preserves the *observable separation* under reversal. It is not a classifier score, a mutual-information estimate, or proof of a correct representation of ordered semantics. A collapse count records cases where output distance is smaller than `1e-8`. The pair-generator refuses any crossed permutation-family split.
+
+**Carrier ablation** disables one of the four neural weight matrices at a time, with the other three held unchanged. This measures the causal effect of the selected channel on the current network's reconstruction loss and order separation. It does not prove that the channels represent corresponding physical forces or that their contributions are statistically identifiable (the four channels share a linearly summed synaptic form).
+
+### Direct execution of the committed JavaScript
+
+The new Order Witness Canvas2D panel includes **MEASURE VALIDATION PAIRS**, **COMPARE 4 CARRIERS**, and **CLEAR WITNESS** controls. The direct reference harness executed the committed models and obtained **65 reversed-order validation pairs**, with **zero output collapses**.
+
+| Current model | Separation retention | Pair MSE |
+|---|---:|---:|
+| All four enabled (initial weights) | 0.440434 | 0.015398 |
+| WEAK disabled | 0.285782 | 0.025787 |
+| MEDIUM disabled | 0.249455 | 0.028670 |
+| STRONG disabled | 0.214541 | 0.031603 |
+| FUSION disabled | 0.243786 | 0.029205 |
+
+After 24 carrier-specific iterations from ECK-037, measured all-carrier separation retention was **0.441504** and pair MSE **0.015334**. The before/after changes are small. The initial-weight ablation values above must not be mislabeled as ablations of the trained model.
+
+All measurements use **validation pairs only**; no final-test triples were exposed or used in optimization here. The completed committed HTML JavaScript passed syntax validation. Reference suite `eck/test_eck038.py` is committed; it has not been separately executed in the Python runtime. Live Pages publication and browser integration remain unverified.
+
+### ECK-039 — Next natural bound
+
+Define an actual **order-dependent transformation target** whose expected output is *not* the positional input itself—for example, a requested comparison or reversible permutation operator on the triple. Evaluate before/after success on separate permutation families, test carrier ablations at matched accepted checkpoints, and preserve failure witnesses and exact ancestral weights before claiming transferable order learning.
