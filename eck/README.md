@@ -1,4 +1,4 @@
-# ECK-042 — Time-Unrolled Four-Carrier Bit-Plane Neural Reversal
+# ECK-043 — Cross-Task Neural Transfer, Carrier Ablation, and Non-identifiability
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -770,3 +770,40 @@ The exact bit extraction is **supplied as an engineered feature transform**, not
 ### ECK-043 — Next natural boundary
 
 Measure out-of-distribution generalization to a fresh transformation family that does **not** reuse the engineered bit-plane reversal feature assumption. Audit carrier redundancy by ablating individually learned matrices after convergence, and test whether the four channels remain individually meaningful under the shared linear sum. Do not interpret exact reversal on a hand-designed bit representation as spontaneous general intelligence or quantum force physics.
+
+## ECK-043 — Reversal checkpoint vs fresh model on cyclic rotation
+
+Extend the 27-node three-generation neural cube `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]` and 729 distinct ordered-address examples to a **different transformation objective**. The fixed 3-bit feature extraction and time-unrolled four-carrier matrix representation are retained from ECK-042.
+
+- Reversal `R(a,b,c)=(c,b,a)` is order two: `R²=identity`.
+- Cyclic rotation `C(a,b,c)=(b,c,a)` is order three: `C³=identity`.
+- These are distinct **tasks on the same address distribution**, so this is *cross-task transfer*, not an independently unseen data distribution.
+- Freeze a revision of the learned reversal routing matrices; train the rotation task twice from **warm reversal weights** and **fresh initial weights**, always using the same 438 training and 146 validation cases and withholding the 145 final-test cases until sealing.
+- Candidate updates require decreasing training MSE without increasing validation MSE. Each accepted update archives a parent-linked immutable 4×9 carrier-weight snapshot; the fixed singlet `(0=-.)` is external to learned weights. The source reversal checkpoint is not overwritten.
+
+The Canvas2D panel **CROSS-TASK NEURAL TRANSFER** provides **FREEZE REVERSAL CHECKPOINT**, **TRAIN BOTH ×100**, **ABLATE CARRIERS**, **TEST CARRIER EQUIVALENCE**, **SEAL + TEST**, and **NEW TRANSFER**. The user must first train the reversal route on the prior panel to obtain a learned checkpoint; otherwise the “warm” source may be an untrained initial version, which is reported by its version number.
+
+### Direct source-model results
+
+Using the committed JavaScript: (1) train the ECK-042 reversal model until saturation (63 accepted updates); (2) freeze version 63; (3) compare the two rotation initializations; (4) execute 63 paired rotation rounds (both runs stop when no further improvements are accepted). No final-test examples were evaluated in this run.
+
+| Rotation validation | Warm reversal checkpoint | Fresh initialization |
+|---|---:|---:|
+| Initial exact decoded targets | 16/146 | 2/146 |
+| Initial MSE | 0.0040381423 | 0.0282670146 |
+| Final exact decoded targets | 146/146 | 146/146 |
+| Final MSE | 2.14412e−15 | 2.13698e−15 |
+| Accepted checkpoints | 58 | 62 |
+| Total attempts | 63 | 63 |
+
+The warm initialization starts substantially closer to the target and requires fewer **accepted revisions**, but both solve this engineered family. This is not evidence of unique carrier roles, generalized transfer to unrepresented tasks, or faster wall-clock training.
+
+**Carrier ablation after training:** disabling any of the four weighted channels increases rotation validation MSE (positive loss delta). For the warm model, the deltas in WEAK/MEDIUM/STRONG/FUSION order were `0.00199181, 0.00337711, 0.00544011, 0.00337711`.
+
+**Critical equivalence witness:** the four carrier outputs are summed linearly using gains `(0.20,0.25,0.30,0.25)`. Increasing the WEAK weight at one phase-matrix entry by `+0.10` and decreasing MEDIUM at that same entry by `−0.08` gives an *identical effective routing matrix* for all inputs. The direct JS validation check saw **zero maximum output difference** despite changed channel parameters. Hence the four carriers are **not separately identifiable** from output behavior in this architecture. Channel ablation establishes dependence on the chosen parameterization, not irreducible causal specialization.
+
+The exact task algebra and carrier-equivalence checks have an accompanying Python suite `eck/test_eck043.py` (committed, not independently run). JavaScript syntax, actual training, ablation and equivalence were executed in an extracted source-level harness. Browser integration and live GitHub Pages deployment remain unverified.
+
+### ECK-044 — Next natural bound
+
+Remove the redundant linear-carrier factorization by giving carrier channels **non-interchangeable computations or constraints**: e.g. gated input selection, distinct temporal memory, sparse local routing, and fusion as a learned nonlinear interaction. Evaluate against a fresh order-dependent transformation, report exact accuracy and ablation *after retraining*, and require fresh held-out evidence before claiming genuine carrier specialization.
