@@ -86,7 +86,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <h2>00 / CROSS-TASK NEURAL TRANSFER · REVERSE → ROTATE</h2>
 <p class="note">A new transformation family: (a,b,c) → (b,c,a). Compare the frozen reversal-trained 4-carrier route with a fresh route. Train both on the new target with the SAME train/validation split; report exact decoding, MSE and four leave-one-carrier-out interventions. The 145 final-test cases remain withheld until seal. This tests task transfer, not unseen address distributions.</p>
 <canvas id="transferCanvas" width="1000" height="410" style="display:block;width:100%;height:auto;background:#071723;border:1px solid #4a7584;border-radius:13px"></canvas>
-<div class="rowlike"><button id="transferFreeze">FREEZE REVERSAL CHECKPOINT</button><button id="transferTrain">TRAIN BOTH ×100</button><button id="transferAblate">ABLATE CARRIERS</button><button id="transferSeal">SEAL + TEST</button><button id="transferReset">NEW TRANSFER</button></div>
+<div class="rowlike"><button id="transferFreeze">FREEZE REVERSAL CHECKPOINT</button><button id="transferTrain">TRAIN BOTH ×100</button><button id="transferAblate">ABLATE CARRIERS</button><button id="transferEquiv">TEST CARRIER EQUIVALENCE</button><button id="transferSeal">SEAL + TEST</button><button id="transferReset">NEW TRANSFER</button></div>
 <pre id="transferReadout">[TRANSFER] freeze a reversal model checkpoint first; rotation final-test cases stay withheld</pre>
 </section>
 <section class="panel" id="temporalBoomerang"><h2>00 / NEURAL BOOMERANG · TIME-UNROLLED CUBED MATH</h2><p class="note">Three 3×3 address planes, three extracted positional bit phases, four independently trainable force-carrier routing matrices. Fixed feature extraction is separate from learned phase reversal. Exact success is measured only on validation until SEAL.</p><canvas id="temporalCanvas" width="1000" height="420" style="display:block;width:100%;height:auto;background:#081621;border:1px solid #557585;border-radius:12px"></canvas><div class="rowlike"><button id="temporalTrain">ITERATE 1</button><button id="temporal100">RECURSE ×100</button><button id="temporal400">RECURSE ×400</button><button id="temporalValidate">VALIDATE</button><button id="temporalSeal">SEAL + TEST</button><button id="temporalReset">RESET</button></div><pre id="temporalStatus">[27 NEURONS] 3×3×3 / 729 configurations / 4 carriers</pre></section>
@@ -2211,7 +2211,7 @@ function initTemporal(){
 // Invoke UI setup after all constants and graph structures are defined.
 
 // ECK-043: cross-task transfer from reversal route to cyclic rotation.
-const transferState={runs:null,reference:null,attempts:0,sealed:false,final:null,ablations:null};
+const transferState={runs:null,reference:null,attempts:0,sealed:false,final:null,ablations:null,equivalence:null};
 function rotateTripleId(id){
  const [a,b,c]=cubeTripleDecode(id);
  return cubeTripleEncode(b,c,a);
@@ -2298,6 +2298,23 @@ function transferAblate(){
  }));
  renderTransfer();
 }
+function transferCarrierEquivalence(){
+ if(!transferState.runs)return null;
+ // A compensated change to two carrier matrices leaves their sum unchanged.
+ // This is a constructive non-identifiability witness for these linear channels.
+ const base=transferState.runs[0].weights,modified=base.map(w=>w.slice()),delta=.1;
+ modified[0][0]+=delta;
+ modified[1][0]-=delta*neuralCarrierGains[0]/neuralCarrierGains[1];
+ let maximum=0;
+ for(const c of tripleValid){
+  const a=temporalOutput(c,base),b=temporalOutput(c,modified);
+  for(let i=0;i<9;i++)maximum=Math.max(maximum,Math.abs(a[i]-b[i]));
+ }
+ transferState.equivalence=Object.freeze({maxOutputDelta:maximum,changedCarrierWeights:true,
+  conclusion:"linear carrier mixing is not uniquely identifiable"});
+ renderTransfer();
+ return transferState.equivalence;
+}
 function transferSeal(){
  if(!transferState.runs)return;
  if(!transferState.sealed){
@@ -2339,9 +2356,10 @@ function initTransfer(){
  document.getElementById("transferFreeze").addEventListener("click",freezeTransfer);
  document.getElementById("transferTrain").addEventListener("click",()=>transferTrainBoth(100));
  document.getElementById("transferAblate").addEventListener("click",transferAblate);
+ document.getElementById("transferEquiv").addEventListener("click",transferCarrierEquivalence);
  document.getElementById("transferSeal").addEventListener("click",transferSeal);
  document.getElementById("transferReset").addEventListener("click",()=>{transferState.runs=null;transferState.reference=null;
-  transferState.attempts=0;transferState.sealed=false;transferState.final=null;transferState.ablations=null;renderTransfer()});
+  transferState.attempts=0;transferState.sealed=false;transferState.final=null;transferState.ablations=null;transferState.equivalence=null;renderTransfer()});
  renderTransfer();
 }
 preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();
