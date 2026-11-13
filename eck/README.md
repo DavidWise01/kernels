@@ -1,4 +1,4 @@
-# ECK-047 — Carrier Necessity, Matched-Scale MLP and Fusion Gauge
+# ECK-048 — Fixed-Budget Learning Curves and Zero-Shot Task Shift
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1005,3 +1005,51 @@ Standalone Python regression `eck/test_eck047.py` records 729 algebraic compensa
 ### ECK-048 — Next natural bound
 
 Use a **fair learning-curve comparison** with standardized initializations, train all models until stable or a fixed computational budget, and test fresh shift tasks with different nonlinear interactions. Audit fusion-gauge invariance under parameter bounds and compare feature-matched baselines, not only similar parameter counts.
+
+## ECK-048 — Matched update rounds and changed-target validation
+
+Keep the nested `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]` topology (27 addressed cells), 729 ordered address configurations, symbolic WEAK / MEDIUM / STRONG / FUSION channels, append-only parent-linked neural checkpoint records and external singlet `(0=-.)`.
+
+The new ECK-048 **Learning Curve and Task-Shift Audit** Canvas2D panel compares the existing **87-parameter structured Operator Forge** against the **85-parameter tanh MLP**. Both train on the original, predeclared synthetic spatial-temporal pulse target under the same 438 training examples, 146 validation examples and attempted-update count; the final 145 examples stay unopened. It records validation learning curves at baseline and every 25 rounds, and runs zero-shot evaluation against an **independently specified changed target** on the validation partition. The changed task reverses the address-dependent gradient, adjusts base mixing and replaces/adds coincidence interactions involving medium and strong phases; no changed-target labels are used for gradient updates.
+
+### Deterministic 200-round results from the committed JavaScript
+
+| Validation MSE | Structured 87 | Nonlinear MLP 85 |
+|---|---:|---:|
+| Source target at step 0 | 0.001626881918 | 0.022081270216 |
+| Changed target at step 0 | 0.001606299769 | 0.019935606613 |
+| Source target after 200 rounds | 0.000075132549 | 0.000856326862 |
+| Zero-shot changed target after 200 rounds | 0.001371095990 | 0.001055284244 |
+
+Both models received the same number of update opportunities. The structured Forge was more accurate on the source task; the nonlinear MLP had lower changed-task MSE. They differ in initialization, starting loss, engineered features, and computational cost, so **this is a controlled-budget observation but not a proof of architectural superiority** for either one. The changed target is synthetic and evaluated on the same input families, so this is *target shift*, not unseen-distribution generalization.
+
+The Fusion bilinear compensation symmetry remains: scale each first multiplicative gate by 1.25 and divide both second-factor gate weights by 1.25. The output is invariant up to floating-point rounding. The control **CHECK FUSION GAUGE** evaluates this with validation inputs and retains the maximum discrepancy, without opening final-test cases.
+
+The implementation is in `eck/index.html` with the regression `eck/test_eck048.py`. Source JavaScript syntax and the real 200-iteration source-model calculation were verified. The standalone Python regression, browser Canvas2D integration, and live Pages deployment have not been independently verified.
+
+### ASCII neural mesh
+
+```text
+     [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+       GEN 0           GEN 1           GEN 2
+      00 01 02        09 10 11        18 19 20
+      03 04 05  --->  12 13 14  --->  21 22 23
+      06 07 08        15 16 17        24 25 26
+                         |
+         WEAK / MEDIUM / STRONG / FUSION
+                         |
+                 87-parameter FORGE
+                         |
+                  85-parameter MLP
+                         |
+                same training budget
+                         |
+              source / target-shift
+                         |
+                       (0=-.)
+```
+
+### ECK-049 — Next natural bound
+
+Introduce independent external or generated-but-precommitted task families, training seeds, and a computational-cost audit. Normalize starting conditions where scientifically appropriate, separate *input distribution shift* from *target shift*, and compare full learning curves across multiple seeds rather than selecting a single favorable run. Keep the 145-case final-test seal intact until model choice is frozen.
