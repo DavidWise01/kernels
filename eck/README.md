@@ -1,4 +1,4 @@
-# ECK-044 — Specialized Neural Carriers and Nonlinear Fusion
+# ECK-045 — Adaptive Per-Address Neural Carriers
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -844,3 +844,53 @@ The implementation and regression live in `eck/index.html` and `eck/test_eck044.
 ### ECK-045 — Next natural bound
 
 Train nontrivial **per-address or per-time carrier parameters** rather than four scalar readout coefficients, while maintaining function-specific operators. Introduce task families with unseen interaction rules and compare to a generic nonlinear neural baseline; otherwise an engineered target matching an engineered architecture would exaggerate the evidence. Add gradient checks, retained failure witnesses and verified runtime tests.
+
+## ECK-045 — Train the per-address carrier readouts
+
+ECK-044 introduced distinct engineered operations for WEAK, MEDIUM, STRONG, and FUSION, but trained only one scalar readout coefficient per carrier. ECK-045 retains the 27 indexed 3×3×3 address cells, 729 ordered input triples, the fixed singlet `(0=-.)`, and the original models, while adding a **new 36-parameter address-adaptive carrier learner**. At each of the nine addresses it trains a separate coefficient for each of the four operator signals. This is not a learned convolution kernel or a learned feature extractor: the neighborhood/memory/phase/product features are still supplied by the model designer.
+
+Its synthetic spatial-temporal pulse target is *predeclared*, with a location-dependent weight on the local and final-phase signals plus a fifth nonlinear interaction missing from the four-channel model. The training task is deliberately not an exact linear combination of four *shared* readouts, so the comparison can reveal the usefulness of address-specific parameters without implying unexplained intelligence.
+
+The code compares three independent, trainable readouts:
+- **ADAPTIVE FOUR:** 4 operators × 9 per-address coefficients = 36 trainable parameters.
+- **SHARED FOUR:** the same operators with 4 globally shared coefficients.
+- **NONLINEAR FIVE:** five globally shared coefficients, including the otherwise missing interaction. This is a nonlinear-*feature* reference, not a generic MLP.
+
+Each model uses the same frozen permutation-family partition: 438 training examples and 146 validation examples; 145 final-test examples are excluded from training/validation and are only evaluated when **SEAL + FINAL TEST** is explicitly clicked. Each accepted gradient step strictly decreases training MSE and does not increase validation MSE. The checkpoint archives are immutable, parent linked, and include the singlet marker.
+
+### Actual committed JavaScript checks
+
+After up to **500 training rounds**, the extracted committed JavaScript reported:
+
+| Model | Accepted updates | Validation MSE |
+|---|---:|---:|
+| Adaptive four (36 parameters) | 500 | 0.000127329053 |
+| Shared four (4 parameters) | 407 | 0.000297661746 |
+| Nonlinear five (5 parameters) | 417 | 0.000217746650 |
+
+The adaptive readout fit this known synthetic task better, but it uses much greater parameter capacity. Therefore no parameter-matched superiority, autonomous operator invention, or broad transfer claim follows.
+
+A five-coordinate gradient check directly compared analytic gradients with central finite differences (`eps = 1e-5`) at representative parameters from all four channels; the maximum absolute discrepancy was `4.8461×10^-13`, verifying the implemented gradient calculations to numerical precision at those sample points.
+
+The new Canvas2D panel **ADAPTIVE CARRIER OPERATORS** shows training, validation, model comparisons, checkpoint counts and test sealing. The regression file `eck/test_eck045.py` was committed but has not been independently executed in Python. The HTML JavaScript passed a source syntax check, and the training and gradient tests used actual extracted committed functions. Full browser integration and GitHub Pages deployment have not been independently verified.
+
+### ASCII mesh
+
+```text
+    [[ 3×3×3 :: {[(3×3)3]} :: {{3×3}}³ ]]
+      GEN 0              GEN 1             GEN 2
+     00 01 02           09 10 11          18 19 20
+     03 04 05   ---->   12 13 14   ---->  21 22 23
+     06 07 08           15 16 17          24 25 26
+                         |
+         WEAK / MEDIUM / STRONG / FUSION
+             9 learned coefficients each
+                         |
+              COMPARE 36 / 4 / 5
+                         |
+                    (0=-.)
+```
+
+### ECK-046 — Next natural bound
+
+Learn the **feature operators themselves** (e.g. per-address attention weights over spatial neighbors, temporal decay, directed phase gates, and trainable fusion inputs), not just their readouts. Use matched-capacity nonlinear baselines and a new held-out task to distinguish genuine learned operator adaptation from increased parameter count.
