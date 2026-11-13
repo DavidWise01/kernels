@@ -1,4 +1,4 @@
-# ECK-048 — Fixed-Budget Learning Curves and Zero-Shot Task Shift
+# ECK-049 — Multi-Seed Neural Robustness and Validation Cohort Shift
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1053,3 +1053,59 @@ The implementation is in `eck/index.html` with the regression `eck/test_eck048.p
 ### ECK-049 — Next natural bound
 
 Introduce independent external or generated-but-precommitted task families, training seeds, and a computational-cost audit. Normalize starting conditions where scientifically appropriate, separate *input distribution shift* from *target shift*, and compare full learning curves across multiple seeds rather than selecting a single favorable run. Keep the 145-case final-test seal intact until model choice is frozen.
+
+## ECK-049 — Three reproducible starts; repeated-address vs distinct-address inputs
+
+The cubed neural invariant is preserved: `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`, 27 indexed address/phase cells, 729 ordered triple configurations, four symbolic carrier channels and external fixed singlet `(0=-.)`. The source target, engineered features, and train/validation/final permutation-family split remain unchanged: 438 / 146 / 145.
+
+The **THREE-SEED ROBUSTNESS × ADDRESS-COHORT SHIFT** Canvas2D panel runs **three deterministic starting conditions** (seeds 0, 1, 2) for the 87-parameter structured Operator Forge and the 85-parameter tanh MLP, each under a fixed **100 attempted-update** budget, recording validation learning curves at steps 0,25,50,75,100. The model starts are deterministic sine/cosine offsets rather than random draws from a probabilistic initialization distribution. Separate initializations vary within a narrow predefined range. No seed is selected post hoc as "best".
+
+**Validation-cohort distribution reweighting:** examples whose `(a,b,c)` contain repeated addresses vs those with three distinct addresses. These are two different **subsets of the existing validation partition**, not truly external OOD data. The full final-test partition is not evaluated by this source run. The cohort labels and membership are computed independently of the model's learned weights.
+
+### Source-level executed deterministic results
+
+| Seed | Forge validation MSE | MLP validation MSE | Forge accepted | MLP accepted |
+|---|---:|---:|---:|---:|
+| 0 | 0.000110831086 | 0.001703121232 | 100 | 100 |
+| 1 | 0.000111120332 | 0.001586446267 | 100 | 100 |
+| 2 | 0.000111124907 | 0.001641940138 | 100 | 100 |
+| **Mean** | **0.000111025441** | **0.001643835879** | — | — |
+
+Validation cohorts: **44 repeated-address** examples and **102 distinct-address** examples.
+
+| Seed | Forge repeated | Forge distinct | MLP repeated | MLP distinct |
+|---|---:|---:|---:|---:|
+| 0 | 0.0003063990 | 0.0000264685 | 0.0034937250 | 0.0009307039 |
+| 1 | 0.0003075041 | 0.0000264057 | 0.0032430170 | 0.0008718471 |
+| 2 | 0.0003077533 | 0.0000263048 | 0.0033963646 | 0.0008851296 |
+
+Both models have notably higher mean squared error on repeated-address triples. This is a useful **failure-mode cohort**: the aggregate score obscures the repeated-case difficulty. The Forge had lower validation error than this MLP at all three starts, but their feature priors, architectures, learning rates, and favorable starting conditions are still different. Three deliberately small deterministic perturbations do not establish broad seed robustness or model superiority.
+
+The source-level JS test confirmed exact cohort counts, 100 accepted updates for each model and seed, and reproducible deterministic calculations. A standalone Python regression `eck/test_eck049.py` has been committed for seed generation, cohort partition, family split and parameter checks; it has not been independently run. Live Pages integration remains unverified.
+
+### ASCII mesh
+
+```text
+     [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+       GEN 0           GEN 1           GEN 2
+      00 01 02        09 10 11        18 19 20
+      03 04 05  -->   12 13 14  -->   21 22 23
+      06 07 08        15 16 17        24 25 26
+                          |
+                 WEAK MEDIUM STRONG FUSION
+                          |
+                   87 Forge / 85 MLP
+                          |
+                    seed 0 / 1 / 2
+                          |
+                    100 matched rounds
+                          |
+                  repeated / distinct
+                          |
+                        (0=-.)
+```
+
+### ECK-050 — Next natural bound
+
+Stress truly altered *input distributions* by reserving precommitted new address frequencies or synthetic corruption operators that preserve a clear ground-truth target. Keep repeated-address cohorts separately monitored, and compare improvements against matched compute and new initialization distributions without selecting only favorable runs. Before trying to close the final-test seal, freeze models and evaluation thresholds.
