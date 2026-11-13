@@ -1,4 +1,4 @@
-# ECK-054 — Deterministic Safeguarded Neural Backtracking
+# ECK-055 — Continuous Safeguarded Learning and Compute Accounting
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1454,3 +1454,61 @@ Actual committed source JavaScript was syntax-checked and the three successful c
 ### ECK-055 — Next natural bound
 
 Use adaptive backtracking on **successive learned checkpoints**, rather than fixed independent replays, and compare total accepted progress, rejected trials and computational cost against a fixed-rate baseline. Include a finite stopping certificate for constrained training plateaus; avoid indefinite validation-set reuse and freeze a new independent evaluation protocol before any generalization claim.
+
+## ECK-055 — Continuous neural checkpoints under a candidate-proposal budget
+
+Preserve `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`, 27 addressed temporal cells, 729 ordered triple configurations, four symbolic learned carriers, 96 trainable parameters (87 Forge + 9 collision correction), and immutable singlet `(0=-.)`. The 438/146/145 training/validation/final data separation remains unchanged; the 145 final cases are not evaluated by ECK-055.
+
+Unlike ECK-054's independently replayed checkpoints, this experiment carries **successive accepted learned weights** forward. The fixed comparison receives an update at rate `1.8`. The adaptive learner starts each step at `70` and halves on failure (`70,35,17.5,...`) with at most nine candidate proposals per step and a rate floor of `0.1`. Both begin at the **same 96-weight initialization** and use the same dual-cohort policy: training must strictly improve, and aggregate, repeated and distinct validation losses must not worsen. Each model receives a maximum **40 real gradient proposals** (including rejected proposals); the cost measure is candidate model-update evaluations, not wall-clock time or mathematical FLOPs. Each attempt packet preserves the current checkpoint, rate, candidate metrics and outcome. Each accepted checkpoint has a monotonically increasing version.
+
+A complete zero-feasible-step backtracking search ends in a finite **NO_FEASIBLE_STEP** stop. This means no feasible candidate in that finite geometric rate grid from those weights; it is **not** a proof that no safe step exists at any learning rate or in any direction.
+
+### Directly executed committed JavaScript results
+
+| Measure | Adaptive (70 / geometric backtracking) | Fixed (1.8) |
+|---|---:|---:|
+| Allowed proposal budget | 40 | 40 |
+| Proposals actually used | 22 | 40 |
+| Accepted updates | 7 | 40 |
+| Rejected candidates | 15 | 0 |
+| Stop | NO_FEASIBLE_STEP | BUDGET_EXHAUSTED |
+| Training MSE | 0.000077716414 | 0.000171257032 |
+| Aggregate validation MSE | **0.000080955279** | 0.000173828318 |
+| Repeated-address validation MSE | **0.000232934085** | 0.000428955826 |
+| Distinct-address validation MSE | **0.000015395794** | 0.000063773314 |
+
+**Interpretation:** the adaptive path reached lower loss in this particular experiment using only 22 proposals, but terminated after seven accepted checkpoints. The fixed path completed 40 accepted smaller updates without rejections. Because the adaptive controller stops early, it does not consume exactly the same compute despite the common cap. The controller also uses the same validation cohorts repeatedly for step acceptance. Neither observation proves a general convergence advantage or an unbiased test-set improvement. All 145 final configurations remain sealed.
+
+The new Canvas2D **CONTINUOUS SAFEGUARDED LEARNING** instrument plots validation curves against *candidate proposals evaluated*, rather than epochs or accepted checkpoints, so rejected gradient evaluations are visible in the computational budget. The source is `eck/index.html`; its Node regression is `eck/test_eck055.cjs` and can be invoked by `node eck/test_eck055.cjs`. The committed JavaScript passed parsing and the actual successive model comparison was executed directly from its functions. The standalone Node regression has been committed but not separately executed, and live browser/Pages integration has not been independently verified.
+
+### ASCII cube
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+      GEN 0            GEN 1            GEN 2
+     00 01 02         09 10 11         18 19 20
+     03 04 05   ==>   12 13 14   ==>   21 22 23
+     06 07 08         15 16 17         24 25 26
+                        |
+              FOUR LEARNED CARRIERS
+                 87 + 9 = 96 weights
+                        |
+                IDENTICAL START
+                /             \
+      ADAPTIVE BACKTRACK      FIXED RATE
+          INITIAL LR 70          LR 1.8
+          7 accepted             40 accepted
+          15 rejected             0 rejected
+          22 proposals           40 proposals
+                \             /
+            COUNT REAL CANDIDATES
+                        |
+           DUAL-COHORT VALIDATION
+                        |
+                      (0=-.)
+```
+
+### ECK-056 — Next natural boundary
+
+Address the finite *NO_FEASIBLE_STEP* stall by adding deterministic recovery policies that do not silently change the acceptance constraints: (a) restart at a lower bounded rate, (b) use a verified alternative descent direction, or (c) preserve a plateau certificate and terminate. Compare against the 40-proposal baseline and keep the model-selection and final-test boundaries separate.
