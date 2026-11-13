@@ -1,4 +1,4 @@
-# ECK-052 — Model-Derived Dual-Cohort Rejection Witness
+# ECK-053 — Constrained Neural Step-Size Recovery
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1310,3 +1310,68 @@ The Canvas2D console's ECK-051 Dual Gate section now includes **REPLAY REAL GRAD
 ### ECK-053 — Next natural bound
 
 Compare multiple bounded step-size searches or line-search constraints to see whether the **model-derived conflict can be avoided** without stopping all learning. Search for a candidate that decreases training, aggregate validation and **both** validation cohorts at the same trained checkpoint. Preserve the adverse case as a regression and explicitly report if no feasible step exists within the declared search.
+
+## ECK-053 — Recover a safe model-derived step after an adverse one
+
+This experiment preserves the user-specified `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]` mesh, 27 address/phase cells, 729 ordered triple codes, WEAK/MEDIUM/STRONG/FUSION symbolic operators, 96-parameter collision learner (87 Forge + 9 collision gates), source-vs-final data partition 438 training / 146 validation / 145 withheld final, and immutable singlet `(0=-.)`.
+
+ECK-052 found a **real gradient-derived adverse candidate** at checkpoint 20 with learning rate `70`. It lowered training, aggregate validation and repeated-address errors but worsened distinct-address validation error. The ordinary gate accepted it and the dual-cohort gate rejected it.
+
+ECK-053 now **recovers a safe update from that very same frozen checkpoint** by testing a predeclared *descending grid of 21 rates*:
+
+```text
+[70, 60, 50, 40, 35, 30, 25, 20, 15, 12, 10, 8, 6,
+ 4, 3, 2, 1.8, 1, 0.5, 0.25, 0.1]
+```
+
+For every rate: clone the same version-20 96-weight state, calculate an actual full-batch gradient candidate using the existing model/loss code, measure training and both validation cohorts, and apply the **dual-cohort gate**. Store all candidate packets without mutating the source. Select the *first accepted rate* from the descending list. This is the **largest accepted rate among those 21**, not necessarily the globally optimal or largest real-valued safe step.
+
+### Source-executed neural results
+
+| Loss | Source checkpoint 20 | Candidate at rate 70 | Recovered candidate at rate 60 |
+|---|---:|---:|---:|
+| Training | 0.000340620764691 | 0.000295112352508 | **0.000220830414715** |
+| Aggregate validation | 0.000342605451784 | 0.000296001404587 | **0.000222340099973** |
+| Repeated-address validation (44) | 0.000662069126207 | 0.000439127266406 | **0.000386329590954** |
+| Distinct-address validation (102) | 0.000204797592229 | **0.000234260836743** (worse) | **0.000151599535236** |
+
+The rate-70 candidate passes the **ordinary** gate, but fails the **dual-cohort** gate. The rate-60 candidate passes both; it decreases training, aggregate validation, repeated-address validation and distinct-address validation from the frozen source. Thus **checkpoint 20 → 21** can proceed without taking the original harmful step. There were **20 feasible candidates of the 21 tested**. The rate search uses validation information and must not be reported as an unbiased estimate of held-out generalization.
+
+This recovery is a **single-checkpoint, targeted audit** based on the ECK-052 failure, not a general convergence theorem. The two cohort losses are averages, not per-example guarantees. The learning rate grid was fixed for this replay, and the fact that rate 60 works does not guarantee any future checkpoint will have a safe positive step.
+
+The ECK-051 dual-gate Canvas2D instrument now offers **RECOVER SAFE STEP**. The replay records the parent version, all 21 candidate metrics, the rejected rate-70 packet, the selected rate-60 weights, the singlet, and the unopened final-test status. The standalone Node regression `eck/test_eck053.cjs` runs against the actual HTML source: `node eck/test_eck053.cjs`.
+
+**Verification:** committed JavaScript syntax passed and the new recovery function was directly executed from that source, confirming rate 70 rejection, rate 60 acceptance, 21 trials / 20 feasible, and the exact source and recovered loss values. The Node regression was committed but has not been separately executed. Live Pages/Canvas2D interaction was not independently verified. The final 145 test cases remain unopened.
+
+### ASCII mesh
+
+```text
+    [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+        GEN 0             GEN 1             GEN 2
+       00 01 02          09 10 11          18 19 20
+       03 04 05    ==>   12 13 14    ==>   21 22 23
+       06 07 08          15 16 17          24 25 26
+                            |
+              FOUR LEARNED FORCE CARRIERS
+                 87 operator + 9 gate
+                            |
+                     CHECKPOINT #20
+                            |
+                  DESCENDING LR GRID
+                       70 -> 60
+                       |      |
+                    REJECT   ACCEPT
+                       |      |
+              distinct loss ↑  both losses ↓
+                       |      |
+                  preserve  VERSION #21
+                       \      /
+                     WITNESS LEDGER
+                            |
+                         (0=-.)
+```
+
+### ECK-054 — Next natural bound
+
+Replace the fixed descending search by a **deterministic safeguarded line search** with bounded backtracking, explicit termination, and a feasibility certificate. Demonstrate it can recover from multiple real adverse candidate steps without tuning the rates to one witness, while preserving a distinct independent evaluation surface. Keep final test sealed until selection and stop rules are frozen.
