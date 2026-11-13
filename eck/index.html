@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-042 | Chromatic Evidence Continuity</title>
+<title>ECK-043 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-042: a single central primitive, not four independent panels in a row. */
+/* ECK-043: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-042</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-043</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,6 +82,13 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
+<section class="panel" id="carrierTransfer" style="margin-top:18px">
+<h2>00 / CROSS-TASK NEURAL TRANSFER · REVERSE → ROTATE</h2>
+<p class="note">A new transformation family: (a,b,c) → (b,c,a). Compare the frozen reversal-trained 4-carrier route with a fresh route. Train both on the new target with the SAME train/validation split; report exact decoding, MSE and four leave-one-carrier-out interventions. The 145 final-test cases remain withheld until seal. This tests task transfer, not unseen address distributions.</p>
+<canvas id="transferCanvas" width="1000" height="410" style="display:block;width:100%;height:auto;background:#071723;border:1px solid #4a7584;border-radius:13px"></canvas>
+<div class="rowlike"><button id="transferFreeze">FREEZE REVERSAL CHECKPOINT</button><button id="transferTrain">TRAIN BOTH ×100</button><button id="transferAblate">ABLATE CARRIERS</button><button id="transferSeal">SEAL + TEST</button><button id="transferReset">NEW TRANSFER</button></div>
+<pre id="transferReadout">[TRANSFER] freeze a reversal model checkpoint first; rotation final-test cases stay withheld</pre>
+</section>
 <section class="panel" id="temporalBoomerang"><h2>00 / NEURAL BOOMERANG · TIME-UNROLLED CUBED MATH</h2><p class="note">Three 3×3 address planes, three extracted positional bit phases, four independently trainable force-carrier routing matrices. Fixed feature extraction is separate from learned phase reversal. Exact success is measured only on validation until SEAL.</p><canvas id="temporalCanvas" width="1000" height="420" style="display:block;width:100%;height:auto;background:#081621;border:1px solid #557585;border-radius:12px"></canvas><div class="rowlike"><button id="temporalTrain">ITERATE 1</button><button id="temporal100">RECURSE ×100</button><button id="temporal400">RECURSE ×400</button><button id="temporalValidate">VALIDATE</button><button id="temporalSeal">SEAL + TEST</button><button id="temporalReset">RESET</button></div><pre id="temporalStatus">[27 NEURONS] 3×3×3 / 729 configurations / 4 carriers</pre></section>
 <section class="panel" id="boomerangTeacher" style="margin-top:18px">
 <h2>00 / EXACT TEACHER × NEURAL STUDENT · BOOMERANG</h2>
@@ -220,7 +227,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-042 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-043 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -391,7 +398,7 @@ $("reset").onclick=async()=>{
 };
 // UI initialization deferred until all const models are defined.
 
-// ECK-042 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-043 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -683,7 +690,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-042: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-043: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -883,7 +890,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-042: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-043: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -905,7 +912,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-042: deterministic recursive candidate selection, with bounded tests.
+// ECK-043: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -1230,7 +1237,7 @@ function initSpinor(){
  drawSpinor();
 }
 
-// ECK-042: a separate, frozen-weight structural experiment.
+// ECK-043: a separate, frozen-weight structural experiment.
 // Training, validation and final-test coordinate sets are disjoint.
 const structuralSplit=Object.freeze({
  train:Object.freeze([[1,1],[0,0]].map(p=>Object.freeze(p))),
@@ -1376,7 +1383,7 @@ function initStructural(){
 }
 // UI initialized after every model and constant declaration.
 
-// ECK-042: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
+// ECK-043: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
 // Training uses gradient backpropagation. This is a synthetic model, not physical force physics.
 const neuralCarrierNames=Object.freeze(["WEAK","MEDIUM","STRONG","FUSION"]);
 const neuralCarrierColors=Object.freeze(["#4ee8fa","#ffaf46","#fa548a","#ba9cff"]);
@@ -1454,7 +1461,7 @@ function trainNeuralEpoch(rate=.24,selectedCarrier=null){
  return accepted;
 }
 
-// ECK-042 — cubed-coordinate tensor and carrier-specific spinor iteration.
+// ECK-043 — cubed-coordinate tensor and carrier-specific spinor iteration.
 // Distinguish the physical cube (3×3×3 = 27) from the address-triple cube ((3×3)^3 = 729).
 function cubeTripleEncode(a,b,c){
  if(![a,b,c].every(v=>Number.isInteger(v)&&v>=0&&v<9))throw Error("invalid 9×9×9 address triple");
@@ -1590,7 +1597,7 @@ function initNeuralCarriers(){
 }
 // Full initialization deferred after all neural and triple configuration constants.
 
-// ECK-042: 729 actual three-address inputs; shared-permutation leakage is prevented.
+// ECK-043: 729 actual three-address inputs; shared-permutation leakage is prevented.
 const tripleCases=Object.freeze(Array.from({length:729},(_,id)=>{
  const triple=cubeTripleDecode(id),sorted=triple.slice().sort((a,b)=>a-b);
  const family=sorted[0]*100+sorted[1]*10+sorted[2];
@@ -1729,7 +1736,7 @@ function initTripleNet(){
 }
 // Initialize after constant and learner declarations.
 
-// ECK-042 — controlled permutation witnesses, restricted to the validation partition.
+// ECK-043 — controlled permutation witnesses, restricted to the validation partition.
 const orderWitness={measure:null,ablation:null};
 function orderDistance(a,b){
  if(a.length!==b.length)throw Error("distance dimension mismatch");
@@ -1823,7 +1830,7 @@ function initOrderWitness(){
 }
 // Initialization occurs after all models, masks, and datasets are declared.
 
-// ECK-042: separate 729-case order reversal neural learner, with 4 carrier matrices.
+// ECK-043: separate 729-case order reversal neural learner, with 4 carrier matrices.
 const reverseNet={weights:null,versions:[],attempts:[],epoch:0,viewId:0,sealed:false,final:null,
  baseline:null,validationCeiling:null};
 function reverseTarget(example){
@@ -1946,7 +1953,7 @@ function initReverse(){
 }
 // Initialize after every constant and neural model declaration.
 
-// ECK-042: exact symbolic teacher + *separate* dense four-carrier neural student.
+// ECK-043: exact symbolic teacher + *separate* dense four-carrier neural student.
 // The exact teacher is used only to produce labels and verify involution, not as a neural output shortcut.
 function boomerangExact(id){
  const t=cubeTripleDecode(id);
@@ -2201,5 +2208,141 @@ function initTemporal(){
  document.getElementById("temporalReset").addEventListener("click",()=>{temporalReset();renderTemporal()});
  renderTemporal();
 }
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();
+// Invoke UI setup after all constants and graph structures are defined.
+
+// ECK-043: cross-task transfer from reversal route to cyclic rotation.
+const transferState={runs:null,reference:null,attempts:0,sealed:false,final:null,ablations:null};
+function rotateTripleId(id){
+ const [a,b,c]=cubeTripleDecode(id);
+ return cubeTripleEncode(b,c,a);
+}
+function transferTarget(caseRef){return tripleCases[rotateTripleId(caseRef.id)].input}
+function transferLoss(cases,weights,mask=[true,true,true,true]){
+ let total=0;
+ for(const c of cases){
+  const pred=temporalOutput(c,weights,mask),target=transferTarget(c);
+  for(let i=0;i<9;i++)total+=(pred[i]-target[i])**2;
+ }
+ return total/(cases.length*9);
+}
+function transferExact(cases,weights){
+ let hits=0;const failures=[];
+ for(const c of cases){
+  const pred=temporalOutput(c,weights),target=transferTarget(c);
+  const ok=pred.every((v,i)=>Math.round(Math.max(0,Math.min(7,v*7)))===Math.round(target[i]*7));
+  if(ok)hits++;else if(failures.length<3)failures.push(Object.freeze({id:c.id,expected:rotateTripleId(c.id)}));
+ }
+ return Object.freeze({correct:hits,total:cases.length,failures:Object.freeze(failures)});
+}
+function transferFrozenWeights(weights){
+ return Object.freeze(weights.map(row=>Object.freeze(row.slice())));
+}
+function freezeTransfer(){
+ if(transferState.runs)return false;
+ const warm=temporalState.weights.map(row=>row.slice());
+ const fresh=Array.from({length:4},()=>Array.from({length:9},(_,i)=>i%4===0?1:0));
+ transferState.reference=Object.freeze({sourceVersions:temporalState.versions.length-1,
+  reversalValidation:temporalLoss(tripleValid),warm:transferFrozenWeights(warm),
+  fresh:transferFrozenWeights(fresh),singlet:"(0=-.)"});
+ transferState.runs=[
+  {label:"WARM REVERSE",weights:warm,history:[],versions:[]},
+  {label:"FRESH INITIAL",weights:fresh,history:[],versions:[]}
+ ];
+ for(const run of transferState.runs)run.versions.push(Object.freeze({
+  version:0,parent:null,train:transferLoss(tripleTrain,run.weights),
+  validation:transferLoss(tripleValid,run.weights),singlet:"(0=-.)",
+  weights:transferFrozenWeights(run.weights)}));
+ renderTransfer();
+ return true;
+}
+function transferStep(run,rate=10){
+ const before=transferLoss(tripleTrain,run.weights),validBefore=transferLoss(tripleValid,run.weights);
+ const gradients=Array.from({length:4},()=>Array(9).fill(0));
+ for(const c of tripleTrain){
+  const bits=temporalPlanes(c),prediction=temporalOutput(c,run.weights),target=transferTarget(c);
+  for(let addr=0;addr<9;addr++)for(let j=0;j<3;j++)for(let i=0;i<3;i++){
+   const d=2*(prediction[addr]-target[addr])/(9*tripleTrain.length)*(2**j/7)*bits[i][addr];
+   for(let k=0;k<4;k++)gradients[k][j*3+i]+=d*neuralCarrierGains[k];
+  }
+ }
+ const proposed=run.weights.map((row,k)=>row.map((v,i)=>Math.max(-3,Math.min(3,v-rate*gradients[k][i]))));
+ const after=transferLoss(tripleTrain,proposed),validation=transferLoss(tripleValid,proposed);
+ const accept=after<before-1e-15&&validation<=validBefore+1e-15;
+ if(accept){
+  run.weights=proposed;
+  run.versions.push(Object.freeze({version:run.versions.length,parent:run.versions.length-1,
+   train:after,validation,singlet:"(0=-.)",weights:transferFrozenWeights(proposed)}));
+ }
+ run.history.push(Object.freeze({attempt:run.history.length+1,accepted:accept}));
+ return accept;
+}
+function transferTrainBoth(count=100){
+ if(!transferState.runs||transferState.sealed)return;
+ for(let i=0;i<count;i++){
+  const outcomes=transferState.runs.map(r=>transferStep(r));
+  transferState.attempts++;
+  if(outcomes.every(v=>!v))break;
+ }
+ renderTransfer();
+}
+function transferAblate(){
+ if(!transferState.runs)return;
+ transferState.ablations=Object.freeze(transferState.runs.map(run=>{
+  const baseline=transferLoss(tripleValid,run.weights);
+  const rows=neuralCarrierNames.map((carrier,index)=>{
+   const mask=[true,true,true,true];mask[index]=false;
+   const observed=transferLoss(tripleValid,run.weights,mask);
+   return Object.freeze({carrier,delta:observed-baseline,loss:observed});
+  });
+  return Object.freeze({label:run.label,baseline,rows:Object.freeze(rows)});
+ }));
+ renderTransfer();
+}
+function transferSeal(){
+ if(!transferState.runs)return;
+ if(!transferState.sealed){
+  transferState.sealed=true;
+  transferState.final=Object.freeze(transferState.runs.map(run=>
+   Object.freeze({label:run.label,mse:transferLoss(tripleTest,run.weights),...transferExact(tripleTest,run.weights)})));
+ }
+ renderTransfer();
+}
+function renderTransfer(){
+ const canvas=document.getElementById("transferCanvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
+ ctx.fillStyle="#071723";ctx.fillRect(0,0,W,H);ctx.textAlign="left";ctx.fillStyle="#d9edf5";ctx.font="15px monospace";
+ ctx.fillText("CROSS-TASK TRANSFER / REVERSE ⇢ CYCLIC ROTATION / 27-CELL CUBE",22,29);
+ const names=["WEAK","MEDIUM","STRONG","FUSION"],cols=["#4ee8fa","#ffaf46","#fa548a","#ba9cff"];
+ for(let i=0;i<4;i++){ctx.fillStyle=cols[i];ctx.font="13px monospace";ctx.fillText(names[i],26+i*238,77)}
+ const runs=transferState.runs;
+ if(runs)runs.forEach((run,r)=>{
+  const y=140+r*133,color=r===0?"#ffb35d":"#57dbe5";
+  ctx.fillStyle=color;ctx.font="bold 14px monospace";ctx.fillText(run.label,25,y);
+  const initial=run.versions[0].validation,now=transferLoss(tripleValid,run.weights),ratio=initial?Math.min(1,now/initial):0;
+  ctx.fillStyle="#173744";ctx.fillRect(230,y-15,520,24);
+  ctx.fillStyle=color;ctx.fillRect(230,y-15,520*ratio,24);
+  ctx.fillStyle="#d4e8ef";ctx.font="12px monospace";ctx.fillText("VALID MSE "+now.toFixed(7),765,y+2);
+  const acc=transferExact(tripleValid,run.weights);
+  ctx.fillText("EXACT "+acc.correct+"/"+acc.total+"  ·  accepted versions "+(run.versions.length-1),25,y+39);
+ });
+ ctx.fillStyle="#adcbd8";ctx.font="12px monospace";ctx.fillText("(0=-.) FIXED  •  729 ORDERED CASES  •  4 CARRIER MATRICES  •  TEST SEALED",22,391);
+ document.getElementById("transferReadout").textContent=
+  "[TRANSFER] "+(runs?"frozen source reversal version "+transferState.reference.sourceVersions+" / "+transferState.attempts+" paired iteration rounds":"not initialized")+
+  "\n[VALIDATION] "+(runs?runs.map(r=>r.label+" "+transferLoss(tripleValid,r.weights).toFixed(8)+
+   " exact "+transferExact(tripleValid,r.weights).correct+"/"+tripleValid.length).join(" | "):"not measured")+
+  "\n[CARRIER ABLATION ΔMSE] "+(transferState.ablations?transferState.ablations.map(a=>a.label+
+   " {"+a.rows.map(x=>x.carrier+":"+x.delta.toFixed(6)).join(" " )+"}").join(" | "):"not measured")+
+  "\n[FINAL TEST] "+(transferState.final?"SEALED "+transferState.final.map(f=>f.label+" "+f.correct+"/"+f.total+
+   " MSE "+f.mse.toFixed(8)).join(" | "):"WITHHELD")+
+  "\n[INVARIANT] source frozen; train/validation families disjoint from final; (0=-.) external";
+}
+function initTransfer(){
+ document.getElementById("transferFreeze").addEventListener("click",freezeTransfer);
+ document.getElementById("transferTrain").addEventListener("click",()=>transferTrainBoth(100));
+ document.getElementById("transferAblate").addEventListener("click",transferAblate);
+ document.getElementById("transferSeal").addEventListener("click",transferSeal);
+ document.getElementById("transferReset").addEventListener("click",()=>{transferState.runs=null;transferState.reference=null;
+  transferState.attempts=0;transferState.sealed=false;transferState.final=null;transferState.ablations=null;renderTransfer()});
+ renderTransfer();
+}
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();
 </script></html>
