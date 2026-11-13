@@ -1,4 +1,4 @@
-# ECK-050 — Learned Repeated-Address Collision Correction
+# ECK-051 — Dual-Cohort Validation Gate for Neural Collision Repair
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1159,3 +1159,87 @@ The implementation is `eck/index.html`; a Python structural regression `eck/test
 ### ECK-051 — Next natural bound
 
 Introduce a **per-cohort acceptance gate** that refuses collision-repair updates when distinct-address validation worsens, and separately evaluate whether loss reweighting improves repeated-address performance under that constraint. Avoid optimizing on one fixed validation partition indefinitely; preserve a new independent evaluation split before making a generalization claim.
+
+## ECK-051 — Dual-cohort acceptance policy
+
+Preserve 27 indexed cube nodes, 729 ordered address configurations, the four computational channels WEAK/MEDIUM/STRONG/FUSION, the external fixed singlet `(0=-.)`, and the 438/146/145 training/validation/final partition by unordered permutation family.
+
+The previous ECK-050 repair (96 weights: 87 operator parameters plus nine address collision coefficients) improved repeated-address validation late in training but worsened distinct-address validation. ECK-051 creates **two independent, identical-initialized 96-weight collision learners** with a matched learning rate and iteration budget. The standard learner accepts an iteration when train MSE decreases and *aggregate* validation MSE does not rise. The **dual-cohort learner** applies the same condition and additionally requires non-increasing validation MSE independently in the **44 repeated-address** and **102 all-distinct-address** validation cohorts. All accepted revisions freeze their entire model coefficients with parent-linked ancestry; rejected attempt packets preserve before/candidate training, validation and cohort losses.
+
+The actual acceptance predicate is:
+
+```text
+accept =
+  (new_train < old_train - 1e-13)
+  AND (new_validation <= old_validation + 1e-12)
+  AND (
+       NOT dual_gate
+       OR (
+            new_repeated <= old_repeated + 1e-12
+            AND new_distinct <= old_distinct + 1e-12
+          )
+      )
+```
+
+### Executed source-level tests
+
+A 600-iteration extracted-JavaScript trial (without consulting the final partition) gave **600/600 accepted updates to both learners**, ending in **identical** metrics:
+
+| MSE | Aggregate-gated 96 | Dual-cohort-gated 96 |
+|---|---:|---:|
+| Training | 0.00001504926939 | 0.00001504926939 |
+| Aggregate validation | 0.00001602128085 | 0.00001602128085 |
+| Repeated-address validation | 0.00004500129879 | 0.00004500129879 |
+| Distinct-address validation | 0.00000352009664 | 0.00000352009664 |
+
+The **strict gate did not trigger** on the ordinary 600-round path. This is not a demonstrated learning improvement or proof that the strict model can outperform the aggregate model. The stricter gate cannot reduce the validation losses of accepted checkpoints, relative to *its own* immediately previous checkpoint, but it may stagnate and does not guarantee beating the ordinary learner.
+
+A separately specified, **mathematically consistent loss-vector counterexample** directly exercised the exact committed gate policy:
+
+```text
+                       BEFORE      PROPOSED
+  training loss         0.020       0.019     improves
+  repeated loss         0.010       0.005     improves
+  distinct loss         0.010       0.011     WORSENS
+  aggregate validation  0.010       0.0091917808 improves
+
+  ordinary policy = ACCEPT
+  dual cohort     = REJECT
+```
+
+The aggregate proposed value is weighted exactly by the validation membership `(44×0.005+102×0.011)/146`. These numerical values are a **synthetic policy unit test**, not a candidate produced by the trained neural model. No behavior is fabricated. This proves that the strict gate would reject a cohort-harming update even if aggregate validation and training improve.
+
+**Mesh sketch**
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+  GEN 0             GEN 1              GEN 2
+  00 01 02          09 10 11           18 19 20
+  03 04 05   ===>   12 13 14    ===>   21 22 23
+  06 07 08          15 16 17           24 25 26
+                       |
+                FOUR CARRIERS
+           WEAK MEDIUM STRONG FUSION
+                       |
+               87 operator weights
+                 +9 collision gates
+                       |
+              96-weight candidate
+                       |
+            TRAIN 438 → VALIDATE 146
+                        /      \
+                repeated 44   distinct 102
+                        \      /
+                  BOTH NONWORSENING?
+                   YES /     \ NO
+                FREEZE        REJECT
+                       |
+                     (0=-.)
+```
+
+Implementation: `eck/index.html`, executable standalone regression `eck/test_eck051.py`. The committed JavaScript was syntax-checked, directly executed over 600 optimization rounds, and its explicit adverse policy counterexample was verified. The Python regression has been committed but not separately executed. Final-test 145 remains withheld. Live browser/GitHub Pages deployment has not been independently verified.
+
+### ECK-052 — Next natural bound
+
+Challenge the dual gate with a real gradient candidate on a precommitted altered training objective or cohort-reweighted rate, and preserve a **model-derived** disagreement witness. Compare gating with constrained multi-objective optimization, freezing the untouched test partition throughout. Do not claim improvement until it appears on a task not used to design the gate.
