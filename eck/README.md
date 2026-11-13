@@ -1,4 +1,4 @@
-# ECK-046 — Learned Neural Carrier Operators
+# ECK-047 — Carrier Necessity, Matched-Scale MLP and Fusion Gauge
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -955,3 +955,53 @@ The source is at `eck/index.html`; the standalone Python regression `eck/test_ec
 ### ECK-047 — Next natural boundary
 
 Test against **matched-capacity nonlinear baselines** and new tasks with different operator structure. Audit feature/gate identifiability with constructive parameter-compensation counterexamples, probe whether learned parameters survive input transformations, and test a fresh, explicitly sealed final partition only after committing the new evaluation rules.
+
+## ECK-047 — Necessity versus identifiability
+
+The cubed invariant is unchanged: `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`, 27 indexed phase/address cells, 729 ordered configurations, four symbolic carrier operators and the fixed singlet `(0=-.)`.
+
+ECK-047 adds a distinct **NECESSITY LAB** to the existing Canvas2D GitHub Pages console. It compares the existing ECK-046 **87-parameter structured operator Forge** (24 weak local edges, 18 medium temporal coefficients, 18 strong phase-route coefficients, 27 fusion bilinear gate factors) against a **generic 85-parameter tanh MLP** (5 derived input features × 12 hidden, 12 hidden biases, 12 output weights, 1 output bias = 85). The MLP sees a spatial-neighbor feature and three positional bits plus an additional near-neighbor final-bit feature, but does not receive a fixed Fusion coincidence product feature. Both models use the same predeclared ECK-045 spatial-temporal pulse target and identical 438 training / 146 validation / 145 sealed test configurations. This is a **matched-scale but not fully matched-compute or matched-features** comparison; neither model automatically discovers a raw sensory representation.
+
+Both models learn real parameters from training-only gradients. Each step is accepted only when training MSE strictly decreases and validation MSE does not increase. MLP updates are archived in frozen, parent-linked snapshots; the Forge comparison weights are held in separate run state and its accepted/rejected per-step results are logged. Each run is sealed before evaluating its 145 final-test configurations.
+
+**Executed directly from committed JavaScript:** after 100 paired optimization rounds (100 accepted for each), validation Forge MSE **0.001626881918 → 0.000109544400** and MLP MSE **0.022081270216 → 0.001331370863**. The Forge starts from a more favorable informed initialization, and the MLP is not shown to have converged after 100 epochs; this does **not establish an ultimate model advantage**. A five-coordinate central-difference gradient check of the MLP produced maximum absolute discrepancy **2.91646×10^-11**, checking two hidden weights, hidden bias, output weight and final bias.
+
+### Constructive Fusion gate non-identifiability
+
+Per address, the Fusion term is
+
+```text
+F = (w0 * bit0) * (w1 * bit1 + w2 * bit2)
+```
+
+Thus the compensated transformation `(w0,w1,w2) → (1.25w0, w1/1.25, w2/1.25)` gives exactly the same **effective computation** for any input, despite changed trainable gate values. The ECK-047 source-level validation check measured maximum prediction delta **5.551115123125783×10^-17** across its 146 validation configurations. This proves an internal scaling gauge ambiguity: the learned gate factors are not individually identifiable from outputs. The existence of non-identifiability must not be confused with lack of predictive usefulness.
+
+**ASCII mesh:**
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+      GEN 0             GEN 1             GEN 2
+     00 01 02          09 10 11          18 19 20
+     03 04 05    ==>   12 13 14    ==>   21 22 23
+     06 07 08          15 16 17          24 25 26
+
+   WEAK:   24 directed local neighbors
+   MEDIUM: 18 temporal mix parameters
+   STRONG: 18 phase route parameters
+   FUSION: 27 bilinear gate factors
+                  |
+        87-OPERATOR vs 85-MLP
+                  |
+        gradient / validation
+                  |
+          FUSION GAUGE AUDIT
+                  |
+                (0=-.)
+```
+
+Standalone Python regression `eck/test_eck047.py` records 729 algebraic compensation checks and parameter inventory (committed, not separately executed). Actual committed JavaScript passed syntax, training, gradient and gauge checks via direct extraction. The final-test cases remained unopened. Live Pages deployment and browser rendering have not been independently verified.
+
+### ECK-048 — Next natural bound
+
+Use a **fair learning-curve comparison** with standardized initializations, train all models until stable or a fixed computational budget, and test fresh shift tasks with different nonlinear interactions. Audit fusion-gauge invariance under parameter bounds and compare feature-matched baselines, not only similar parameter counts.
