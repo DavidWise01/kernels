@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-048 | Chromatic Evidence Continuity</title>
+<title>ECK-049 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-048: a single central primitive, not four independent panels in a row. */
+/* ECK-049: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-048</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-049</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,21 +82,22 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
-<section class="panel" id="shiftLab"><h2>00 / ECK-048 · LEARNING CURVE AND TASK-SHIFT AUDIT</h2><p class="note">Use the same number of accepted-or-rejected update opportunities for the 87-parameter Forge and 85-parameter MLP, then test zero-shot performance on a shifted nonlinear target (middle×final coincidence and altered address gradients). Shift evaluation uses validation examples only. The two models have different initialization and inductive bias; this test does not equate their optimization difficulty.</p><canvas id="shiftCanvas" width="1000" height="390" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="shift200">RUN 200 MATCHED ROUNDS</button><button id="shiftGauge">CHECK FUSION GAUGE</button><button id="shiftAudit">AUDIT TASK SHIFT</button><button id="shiftReset">RESET EXPERIMENT</button></div><pre id="shiftStatus">[ECK-048] 87-vs-85 / equal attempted update budget / final test sealed</pre></section>
-<section class="panel" id="necessityLab" style="margin-top:18px"><h2>00 / ECK-048 · 87 vs 85 PARAMETER NECESSITY LAB</h2><p class="note">Actual 87-weight Operator Forge versus a generic 85-weight tanh MLP. Fusion-gate compensation audit tests whether different parameters produce identical outputs. Validation uses 146 examples; 145 final-test configurations remain withheld.</p><canvas id="necessityCanvas" width="1000" height="350" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="nTrain">TRAIN BOTH ×100</button><button id="nTrain500">RECURSE ×500</button><button id="nGauge">FUSION GAUGE TEST</button><button id="nSeal">SEAL + TEST</button><button id="nReset">RESET</button></div><pre id="nReadout"></pre></section>
+<section class="panel" id="multiSeedLab" style="margin-top:18px"><h2>00 / ECK-049 · THREE-SEED ROBUSTNESS × ADDRESS-COHORT SHIFT</h2><p class="note">Three deterministic starts for each model, equal 100-round update budgets. Validate on disjoint permutation families; separately report same-address repetitions versus three-distinct-address cases. This is a validation-cohort distribution reweighting, not an independently gathered out-of-distribution dataset. Final test stays sealed.</p><canvas id="seedCanvas" width="1000" height="390" style="display:block;width:100%;height:auto;background:#071823;border:1px solid #577985;border-radius:13px"></canvas><div class="rowlike"><button id="seedRun">RUN THREE SEEDS</button><button id="seedReset">RESET ROBUSTNESS</button></div><pre id="seedStatus">[ECK-049] three deterministic seeds, 100 rounds, two validation cohorts</pre></section>
+<section class="panel" id="shiftLab"><h2>00 / ECK-049 · LEARNING CURVE AND TASK-SHIFT AUDIT</h2><p class="note">Use the same number of accepted-or-rejected update opportunities for the 87-parameter Forge and 85-parameter MLP, then test zero-shot performance on a shifted nonlinear target (middle×final coincidence and altered address gradients). Shift evaluation uses validation examples only. The two models have different initialization and inductive bias; this test does not equate their optimization difficulty.</p><canvas id="shiftCanvas" width="1000" height="390" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="shift200">RUN 200 MATCHED ROUNDS</button><button id="shiftGauge">CHECK FUSION GAUGE</button><button id="shiftAudit">AUDIT TASK SHIFT</button><button id="shiftReset">RESET EXPERIMENT</button></div><pre id="shiftStatus">[ECK-049] 87-vs-85 / equal attempted update budget / final test sealed</pre></section>
+<section class="panel" id="necessityLab" style="margin-top:18px"><h2>00 / ECK-049 · 87 vs 85 PARAMETER NECESSITY LAB</h2><p class="note">Actual 87-weight Operator Forge versus a generic 85-weight tanh MLP. Fusion-gate compensation audit tests whether different parameters produce identical outputs. Validation uses 146 examples; 145 final-test configurations remain withheld.</p><canvas id="necessityCanvas" width="1000" height="350" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="nTrain">TRAIN BOTH ×100</button><button id="nTrain500">RECURSE ×500</button><button id="nGauge">FUSION GAUGE TEST</button><button id="nSeal">SEAL + TEST</button><button id="nReset">RESET</button></div><pre id="nReadout"></pre></section>
 <section class="panel" id="operatorForge" style="margin-top:18px">
-<h2>00 / ECK-048 OPERATOR FORGE · TRAIN INTERNAL ROUTING</h2>
+<h2>00 / ECK-049 OPERATOR FORGE · TRAIN INTERNAL ROUTING</h2>
 <p class="note">Actual trainable operator internals: WEAK uses 24 directed 3×3 neighbor weights; MEDIUM has 18 temporal-mixing weights; STRONG has 18 phase/routing weights; FUSION has 27 bilinear gate weights. The total is 87 trainable parameters over the existing 27-cell cubed tensor. The synthetic task is still engineered; a separate 36-parameter readout remains available for comparison.</p>
 <canvas id="forgeCanvas" width="1000" height="435" style="display:block;width:100%;height:auto;background:#081720;border:1px solid #48768e;border-radius:14px"></canvas>
 <div class="rowlike"><button id="forge100">ITERATE ×100</button><button id="forge500">RECURSE ×500</button><button id="forgeGrad">GRADIENT CHECK</button><button id="forgeAudit">VALIDATE OPERATORS</button><button id="forgeSeal">SEAL + FINAL TEST</button><button id="forgeReset">RESET FORGE</button></div>
-<pre id="forgeStatus">[ECK-048] four operator kernels; 87 trainable weights; no final test performed</pre>
+<pre id="forgeStatus">[ECK-049] four operator kernels; 87 trainable weights; no final test performed</pre>
 </section>
 <section class="panel" id="adaptiveCarrier" style="margin-top:18px">
 <h2>00 / ADAPTIVE CARRIER OPERATORS · 3×3×3 NEURAL CUBE</h2>
 <p class="note">New independent spatial-temporal pulse task. Four distinct carrier features now have 9 trainable address coefficients each (36 parameters), compared against a shared four-coefficient model and a five-feature nonlinear reference. An unmodeled interaction is deliberately included in the target so results cannot be described as automatic mastery.</p>
 <canvas id="adaptiveCanvas" width="1000" height="415" style="display:block;width:100%;height:auto;background:#091822;border:1px solid #497486;border-radius:14px"></canvas>
 <div class="rowlike"><button id="adaptive100">RECURSE ×100</button><button id="adaptive500">RECURSE ×500</button><button id="adaptiveAudit">AUDIT VALIDATION</button><button id="adaptiveSeal">SEAL + FINAL TEST</button><button id="adaptiveReset">RESET MODELS</button></div>
-<pre id="adaptiveStatus">[ECK-048] 27 cells / 729 input triples / adaptive WEAK MEDIUM STRONG FUSION operators</pre>
+<pre id="adaptiveStatus">[ECK-049] 27 cells / 729 input triples / adaptive WEAK MEDIUM STRONG FUSION operators</pre>
 </section>
 <section class="panel" id="functionalCarriers" style="margin-top:18px">
 <h2>00 / NEURAL FORCE CARRIER SPECIALIZATION · FOUR DISTINCT OPERATORS</h2>
@@ -250,7 +251,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-048 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-049 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -421,7 +422,7 @@ $("reset").onclick=async()=>{
 };
 // UI initialization deferred until all const models are defined.
 
-// ECK-048 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-049 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -713,7 +714,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-048: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-049: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -913,7 +914,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-048: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-049: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -935,7 +936,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-048: deterministic recursive candidate selection, with bounded tests.
+// ECK-049: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -1260,7 +1261,7 @@ function initSpinor(){
  drawSpinor();
 }
 
-// ECK-048: a separate, frozen-weight structural experiment.
+// ECK-049: a separate, frozen-weight structural experiment.
 // Training, validation and final-test coordinate sets are disjoint.
 const structuralSplit=Object.freeze({
  train:Object.freeze([[1,1],[0,0]].map(p=>Object.freeze(p))),
@@ -1406,7 +1407,7 @@ function initStructural(){
 }
 // UI initialized after every model and constant declaration.
 
-// ECK-048: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
+// ECK-049: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
 // Training uses gradient backpropagation. This is a synthetic model, not physical force physics.
 const neuralCarrierNames=Object.freeze(["WEAK","MEDIUM","STRONG","FUSION"]);
 const neuralCarrierColors=Object.freeze(["#4ee8fa","#ffaf46","#fa548a","#ba9cff"]);
@@ -1484,7 +1485,7 @@ function trainNeuralEpoch(rate=.24,selectedCarrier=null){
  return accepted;
 }
 
-// ECK-048 — cubed-coordinate tensor and carrier-specific spinor iteration.
+// ECK-049 — cubed-coordinate tensor and carrier-specific spinor iteration.
 // Distinguish the physical cube (3×3×3 = 27) from the address-triple cube ((3×3)^3 = 729).
 function cubeTripleEncode(a,b,c){
  if(![a,b,c].every(v=>Number.isInteger(v)&&v>=0&&v<9))throw Error("invalid 9×9×9 address triple");
@@ -1620,7 +1621,7 @@ function initNeuralCarriers(){
 }
 // Full initialization deferred after all neural and triple configuration constants.
 
-// ECK-048: 729 actual three-address inputs; shared-permutation leakage is prevented.
+// ECK-049: 729 actual three-address inputs; shared-permutation leakage is prevented.
 const tripleCases=Object.freeze(Array.from({length:729},(_,id)=>{
  const triple=cubeTripleDecode(id),sorted=triple.slice().sort((a,b)=>a-b);
  const family=sorted[0]*100+sorted[1]*10+sorted[2];
@@ -1759,7 +1760,7 @@ function initTripleNet(){
 }
 // Initialize after constant and learner declarations.
 
-// ECK-048 — controlled permutation witnesses, restricted to the validation partition.
+// ECK-049 — controlled permutation witnesses, restricted to the validation partition.
 const orderWitness={measure:null,ablation:null};
 function orderDistance(a,b){
  if(a.length!==b.length)throw Error("distance dimension mismatch");
@@ -1853,7 +1854,7 @@ function initOrderWitness(){
 }
 // Initialization occurs after all models, masks, and datasets are declared.
 
-// ECK-048: separate 729-case order reversal neural learner, with 4 carrier matrices.
+// ECK-049: separate 729-case order reversal neural learner, with 4 carrier matrices.
 const reverseNet={weights:null,versions:[],attempts:[],epoch:0,viewId:0,sealed:false,final:null,
  baseline:null,validationCeiling:null};
 function reverseTarget(example){
@@ -1976,7 +1977,7 @@ function initReverse(){
 }
 // Initialize after every constant and neural model declaration.
 
-// ECK-048: exact symbolic teacher + *separate* dense four-carrier neural student.
+// ECK-049: exact symbolic teacher + *separate* dense four-carrier neural student.
 // The exact teacher is used only to produce labels and verify involution, not as a neural output shortcut.
 function boomerangExact(id){
  const t=cubeTripleDecode(id);
@@ -2233,7 +2234,7 @@ function initTemporal(){
 }
 // Invoke UI setup after all constants and graph structures are defined.
 
-// ECK-048: cross-task transfer from reversal route to cyclic rotation.
+// ECK-049: cross-task transfer from reversal route to cyclic rotation.
 const transferState={runs:null,reference:null,attempts:0,sealed:false,final:null,ablations:null,equivalence:null};
 function rotateTripleId(id){
  const [a,b,c]=cubeTripleDecode(id);
@@ -2387,7 +2388,7 @@ function initTransfer(){
 }
 // Initialize after all 3x3x3 neural modules are declared.
 
-// ECK-048: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
+// ECK-049: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
 const functionalNames=Object.freeze(["WEAK / LOCAL","MEDIUM / MEMORY","STRONG / ROUTE","FUSION / NONLINEAR"]);
 const functionalTruth=Object.freeze([.2,.2,.2,.4]);
 const functionalState={runs:[],history:[],validation:null,ablation:null,sealed:false,final:null};
@@ -2522,7 +2523,7 @@ function initFunctional(){
 }
 // Initialize UI after all 3x3x3 neural experiments are defined.
 
-// ECK-048 — Per-address adaptive parameters plus shared and nonlinear reference comparators.
+// ECK-049 — Per-address adaptive parameters plus shared and nonlinear reference comparators.
 // The task is predeclared, synthetic, and partly outside the four-channel feature basis.
 const adaptState={models:[],attempts:0,validation:null,final:null,sealed:false};
 function adaptSignals(c){
@@ -2625,7 +2626,7 @@ function adaptRender(){
  ctx.fillStyle="#a6ccda";ctx.font="12px monospace";
  ctx.fillText("SINGLET (0=-.) OUTSIDE MODEL · TRAIN 438 / VALIDATE 146 / FINAL 145 SEALED",21,388);
  document.getElementById("adaptiveStatus").textContent=
-  "[ECK-048] "+adaptState.attempts+" rounds; per-address carrier weights trained on 729-configuration cube"+
+  "[ECK-049] "+adaptState.attempts+" rounds; per-address carrier weights trained on 729-configuration cube"+
   "\n[VALIDATION] "+adaptState.models.map(m=>m.label+" "+adaptLoss(tripleValid,m).toFixed(9)).join(" | ")+
   "\n[CHECKPOINTS] "+adaptState.models.map(m=>m.label+" "+m.accepted).join(" | ")+
   "\n[FINAL] "+(adaptState.final?adaptState.final.map(f=>f.name+" "+f.test.toFixed(9)).join(" | "):"WITHHELD")+
@@ -2643,7 +2644,7 @@ function initAdaptive(){
 }
 // Initialize after all neural model and 3x3x3 state definitions.
 
-// ECK-048 — learn local/temporal/phase/bilinear-operator internals, not just a final readout.
+// ECK-049 — learn local/temporal/phase/bilinear-operator internals, not just a final readout.
 // Synthetic target is the fixed ECK-045 pulse; this is a representational test.
 const forgeEdges=Object.freeze(Array.from({length:9},(_,a)=>{
  const r=Math.floor(a/3),c=a%3;
@@ -2911,9 +2912,9 @@ function initNecessity(){
  document.getElementById("nReset").addEventListener("click",()=>{nReset();nRender()});
  nRender();
 }
-// Model and UI initializers moved after all ECK-048 definitions.
+// Model and UI initializers moved after all ECK-049 definitions.
 
-// ECK-048: shared iteration budget, matched source task, distinct held-out validation shift.
+// ECK-049: shared iteration budget, matched source task, distinct held-out validation shift.
 // Inference on shifted task is zero-shot; this is not retraining on shifted labels.
 const shiftState={curves:[],audit:null,gauge:null,steps:0};
 function shiftTarget(c){
@@ -3000,5 +3001,104 @@ function initShift(){
  document.getElementById("shiftAudit").addEventListener("click",()=>{shiftState.audit=shiftTakeSnapshot();shiftRender()});
  document.getElementById("shiftReset").addEventListener("click",shiftReset);
 }
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();initAdaptive();initForge();initNecessity();initShift();
+// UI initializers follow the ECK-049 model definitions.
+
+// ECK-049: reproducible seed perturbations, equal update counts, cohort shift on validation.
+const seedLab={runs:[],completed:false};
+function seedCohorts(){
+ const repeated=tripleValid.filter(c=>new Set(c.triple).size<3);
+ const distinct=tripleValid.filter(c=>new Set(c.triple).size===3);
+ return Object.freeze({repeated:Object.freeze(repeated),distinct:Object.freeze(distinct)});
+}
+const seedGroups=seedCohorts();
+function seedForgeStart(seed){
+ const w=forgeInitWeights();let counter=0;
+ for(const key of ["weak","medium","strong","fusion"])
+  w[key]=w[key].map(v=>v+.018*Math.sin((seed+1)*37+(++counter)*17));
+ return w;
+}
+function seedMLPStart(seed){
+ const w=nClone(nInit());let counter=0;
+ for(const row of w.w)for(let j=0;j<row.length;j++)row[j]+=.018*Math.sin((seed+1)*31+(++counter)*19);
+ for(let j=0;j<w.out.length;j++)w.out[j]+=.018*Math.cos((seed+1)*23+(++counter)*13);
+ return w;
+}
+function seedMLPStep(m,rate=.5){
+ const old=nLoss(tripleTrain,m),valid=nLoss(tripleValid,m),g=nGradient(tripleTrain,m),p=nClone(m);
+ for(let h=0;h<12;h++){
+  for(let i=0;i<5;i++)p.w[h][i]=Math.max(-2,Math.min(2,p.w[h][i]-rate*g.w[h][i]));
+  p.hb[h]=Math.max(-2,Math.min(2,p.hb[h]-rate*g.hb[h]));
+  p.out[h]=Math.max(-2,Math.min(2,p.out[h]-rate*g.out[h]));
+ }
+ p.bias=Math.max(-2,Math.min(2,p.bias-rate*g.bias));
+ return nLoss(tripleTrain,p)<old-1e-13&&nLoss(tripleValid,p)<=valid+1e-12?p:m;
+}
+function seedForgeStep(w,rate=1.8){
+ const old=forgeLoss(tripleTrain,w),valid=forgeLoss(tripleValid,w),g=forgeGradient(tripleTrain,w),p=forgeCopy(w);
+ for(const key of ["weak","medium","strong","fusion"])
+  p[key]=p[key].map((v,j)=>Math.max(-2,Math.min(2,v-rate*g[key][j])));
+ return forgeLoss(tripleTrain,p)<old-1e-13&&forgeLoss(tripleValid,p)<=valid+1e-12?p:w;
+}
+function seedRun(){
+ if(seedLab.completed)return;
+ seedLab.runs=[];
+ for(const seed of [0,1,2]){
+  let forge=seedForgeStart(seed),mlp=seedMLPStart(seed);
+  const history=[Object.freeze({epoch:0,forge:forgeLoss(tripleValid,forge),mlp:nLoss(tripleValid,mlp)})];
+  let forgeAccepted=0,mlpAccepted=0;
+  for(let epoch=1;epoch<=100;epoch++){
+   const nextForge=seedForgeStep(forge),nextMLP=seedMLPStep(mlp);
+   if(nextForge!==forge)forgeAccepted++;
+   if(nextMLP!==mlp)mlpAccepted++;
+   forge=nextForge;mlp=nextMLP;
+   if(epoch%25===0)history.push(Object.freeze({epoch,forge:forgeLoss(tripleValid,forge),
+    mlp:nLoss(tripleValid,mlp)}));
+  }
+  seedLab.runs.push(Object.freeze({seed,forgeAccepted,mlpAccepted,history:Object.freeze(history),
+   forge:forgeLoss(tripleValid,forge),mlp:nLoss(tripleValid,mlp),
+   repeatedForge:forgeLoss(seedGroups.repeated,forge),repeatedMLP:nLoss(seedGroups.repeated,mlp),
+   distinctForge:forgeLoss(seedGroups.distinct,forge),distinctMLP:nLoss(seedGroups.distinct,mlp)}));
+ }
+ seedLab.completed=true;renderSeedLab();
+}
+function seedStats(key){
+ if(!seedLab.runs.length)return null;
+ const vals=seedLab.runs.map(run=>run[key]),mean=vals.reduce((a,b)=>a+b,0)/vals.length;
+ return {mean,min:Math.min(...vals),max:Math.max(...vals)};
+}
+function renderSeedLab(){
+ const cv=document.getElementById("seedCanvas"),ctx=cv.getContext("2d");
+ ctx.fillStyle="#071823";ctx.fillRect(0,0,cv.width,cv.height);
+ ctx.fillStyle="#d9f0f7";ctx.font="15px monospace";ctx.textAlign="left";
+ ctx.fillText("ECK-049 / THREE SEEDS × 100 ROUNDS / 87 FORGE vs 85 MLP",20,30);
+ const colors=["#ffb55e","#5be2e1"];
+ ctx.strokeStyle="#537282";ctx.beginPath();ctx.moveTo(60,311);ctx.lineTo(965,311);ctx.stroke();
+ for(const run of seedLab.runs){
+  for(const [k,key] of ["forge","mlp"].entries()){
+   ctx.beginPath();ctx.strokeStyle=colors[k];ctx.globalAlpha=.42+run.seed*.24;ctx.lineWidth=2;
+   run.history.forEach((p,i)=>{
+    const x=60+p.epoch*8.8,y=308-210*Math.min(1,Math.sqrt(p[key]/.025));
+    if(!i)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+   });ctx.stroke();ctx.globalAlpha=1;
+  }
+ }
+ ctx.fillStyle=colors[0];ctx.fillText("87 FORGE (ORANGE)",32,360);
+ ctx.fillStyle=colors[1];ctx.fillText("85 MLP (CYAN)",320,360);
+ const fs=seedStats("forge"),ms=seedStats("mlp");
+ document.getElementById("seedStatus").textContent=
+  "[COHORTS] validation repeated-address "+seedGroups.repeated.length+
+  " / three-distinct-address "+seedGroups.distinct.length+
+  "\n[SOURCE VALIDATION] "+(fs?"87 Forge mean "+fs.mean.toFixed(9)+" range "+fs.min.toFixed(9)+".."+fs.max.toFixed(9):"not run")+
+  "\n[GENERIC MLP] "+(ms?"85 MLP mean "+ms.mean.toFixed(9)+" range "+ms.min.toFixed(9)+".."+ms.max.toFixed(9):"not run")+
+  "\n[COHORT SHIFT] "+(seedLab.completed?seedLab.runs.map(r=>"seed "+r.seed+
+   " repeated 87/85 "+r.repeatedForge.toFixed(6)+"/"+r.repeatedMLP.toFixed(6)+
+   " distinct 87/85 "+r.distinctForge.toFixed(6)+"/"+r.distinctMLP.toFixed(6)).join(" | "):"not run")+
+  "\n[FINAL] WITHHELD / [SINGLET] (0=-.) fixed / seeds deterministic, no post-hoc selection";
+}
+function initSeedLab(){
+ document.getElementById("seedRun").addEventListener("click",seedRun);
+ document.getElementById("seedReset").addEventListener("click",()=>{seedLab.runs=[];seedLab.completed=false;renderSeedLab()});
+ renderSeedLab();
+}
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();initAdaptive();initForge();initNecessity();initShift();initSeedLab();
 </script></html>
