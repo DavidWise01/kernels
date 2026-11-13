@@ -1,4 +1,4 @@
-# ECK-049 — Multi-Seed Neural Robustness and Validation Cohort Shift
+# ECK-050 — Learned Repeated-Address Collision Correction
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1109,3 +1109,53 @@ The source-level JS test confirmed exact cohort counts, 100 accepted updates for
 ### ECK-050 — Next natural bound
 
 Stress truly altered *input distributions* by reserving precommitted new address frequencies or synthetic corruption operators that preserve a clear ground-truth target. Keep repeated-address cohorts separately monitored, and compare improvements against matched compute and new initialization distributions without selecting only favorable runs. Before trying to close the final-test seal, freeze models and evaluation thresholds.
+
+## ECK-050 — Repeated-address collision correction
+
+The address/phase cube remains `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`: 27 indexed nodes, 729 ordered triples, WEAK/MEDIUM/STRONG/FUSION computational carrier operators, and external fixed singlet `(0=-.)`.
+
+ECK-049 found higher validation error on repeated-address inputs (44 examples) than on all-distinct triples (102 examples). This new experiment makes that error case an explicit test. Two models begin with **identical ECK-046 Operator Forge parameters**: (a) a baseline with 87 learned weights and (b) a collision-repair candidate with 87 Forge weights plus **nine additional trainable, address-specific coincidence weights** (96 total). These new coefficients multiply the engineered `bit0×bit1` phase-collision feature at each address. Both run with the same 438 train / 146 validation partition and identical per-epoch budget. This is a deliberately designed correction: the known synthetic task already contains a `bit0×bit1` term, so no claim is made that the network spontaneously invented the feature.
+
+The accepted-update gate requires decreasing full-training MSE and non-increasing **aggregate** validation MSE. It does **not** prevent a regression within the distinct-address validation cohort; that regression is explicitly measured. Versions are frozen parent-linked records, and the 145 final-test cases are held out until `SEAL + FINAL TEST`.
+
+### Executed committed-JavaScript results
+
+| After rounds | Model | Aggregate validation MSE | Repeated-address MSE | Distinct-address MSE |
+|---|---|---:|---:|---:|
+| 100 | 87 baseline | 0.000109544400 | 0.000303623593 | 0.000025823963 |
+| 100 | 96 repaired | 0.000110469322 | 0.000306577446 | 0.000025873661 |
+| 600 | 87 baseline | 0.000016611960 | 0.000047577468 | 0.000003254289 |
+| 600 | 96 repaired | 0.000016021281 | 0.000045001299 | 0.000003520097 |
+
+**Important:** after 100 rounds the repair is *worse on all three metrics*. After 600 rounds it modestly improves aggregate validation and repeated-address error, but **makes distinct-address validation slightly worse**. Thus the objective of improving the harder cohort *without sacrificing the easier cohort* is **not achieved**. This is an open counterexample, not a success claim. The new model has nine extra parameters and still does not dominate the simpler model across cohorts.
+
+An analytic-vs-central finite-difference gradient audit of three collision coefficients after 20 training updates produced maximum difference `1.50×10^-15`, confirming the appended coincidence gradient at those coordinates. It is not a comprehensive gradient audit of all 96 parameters.
+
+### Mesh sketch
+
+```text
+   [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+      GEN 0          GEN 1          GEN 2
+     00 01 02       09 10 11       18 19 20
+     03 04 05  -->  12 13 14  -->  21 22 23
+     06 07 08       15 16 17       24 25 26
+                    |
+       87 OPERATOR FORGE WEIGHTS
+                    |
+          BIT0 & BIT1 COINCIDENCE
+                    |
+       +9 TRAINABLE ADDRESS WEIGHTS
+                    |
+            87 BASELINE vs 96 REPAIR
+                    |
+           44 REPEATED / 102 DISTINCT
+                    |
+                  (0=-.)
+```
+
+The implementation is `eck/index.html`; a Python structural regression `eck/test_eck050.py` was committed but has not been independently run. Direct extraction of the actual committed JavaScript passed syntax, both 100- and 600-iteration numerical comparisons, and the three sampled gradient checks. Browser end-to-end behavior and GitHub Pages deployment remain unverified.
+
+### ECK-051 — Next natural bound
+
+Introduce a **per-cohort acceptance gate** that refuses collision-repair updates when distinct-address validation worsens, and separately evaluate whether loss reweighting improves repeated-address performance under that constraint. Avoid optimizing on one fixed validation partition indefinitely; preserve a new independent evaluation split before making a generalization claim.
