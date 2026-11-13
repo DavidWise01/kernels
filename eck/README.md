@@ -1,4 +1,4 @@
-# ECK-043 — Cross-Task Neural Transfer, Carrier Ablation, and Non-identifiability
+# ECK-044 — Specialized Neural Carriers and Nonlinear Fusion
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -807,3 +807,40 @@ The exact task algebra and carrier-equivalence checks have an accompanying Pytho
 ### ECK-044 — Next natural bound
 
 Remove the redundant linear-carrier factorization by giving carrier channels **non-interchangeable computations or constraints**: e.g. gated input selection, distinct temporal memory, sparse local routing, and fusion as a learned nonlinear interaction. Evaluate against a fresh order-dependent transformation, report exact accuracy and ablation *after retraining*, and require fresh held-out evidence before claiming genuine carrier specialization.
+
+## ECK-044 — Four computationally different force-carrier channels
+
+The previous ECK-043 established an identifiability problem: the four additive carrier matrices could trade weight contributions and leave all outputs unchanged. ECK-044 implements a **new diagnostic learner** that gives each named carrier a different operator over the 3×3×3 cubed-address structure.
+
+For each of the 729 ordered address triples, exact 1:2:4 positional code extraction supplies three 3×3 Boolean planes, corresponding to the 27 indexed address/phase cells. The singlet `(0=-.)` remains external.
+
+- **WEAK / LOCAL** computes a mean over orthogonally adjacent positions in the first bit plane (spatial neighborhood; boundaries have fewer neighbors).
+- **MEDIUM / MEMORY** reads the middle positional bit plane (the carried intermediate temporal phase).
+- **STRONG / ROUTE** reads the final positional bit plane at the current address (directed final-phase signal).
+- **FUSION / NONLINEAR** computes the product of the first and final positional bits at an address (coincidence; not generally expressible as a single linear combination of the other three features).
+
+A supervised diagnostic output is explicitly defined by `target = 0.20·WEAK + 0.20·MEDIUM + 0.20·STRONG + 0.40·FUSION`. The target is **engineered from these features on purpose**; it is not a naturally occurring external task or new science. Four scalar coefficients are trainable by full-batch gradient descent and accepted only when train MSE strictly decreases and validation MSE does not increase. The comparison learner has **Fusion disabled from the start, but retrains the other three coefficients** under the same train-validation gates. This is a real nonlinear-feature necessity experiment, not an ordinary frozen-weight ablation.
+
+The user-facing **NEURAL FORCE CARRIER SPECIALIZATION** Canvas2D panel shows the four coefficients, train and validation losses for both trained models, a per-carrier intervention test, and an explicit seal before evaluating the existing 145 final-test examples. The split remains 438 train / 146 validation / 145 final test, with the 165 permutation families kept together. The run stores immutable coefficient snapshots with ancestry and preserves the external fixed singlet.
+
+### Direct committed JavaScript results
+
+The new diagnostic learner ran up to 600 iteration attempts from zero-initialized coefficients. The direct source harness obtained:
+
+| Model | Accepted parameter revisions | Validation MSE |
+|---|---:|---:|
+| All four specialized carriers | 552 | 2.77764209×10⁻¹² |
+| Fusion disabled, other carriers retrained | 144 | 0.00172769084 |
+
+The learned all-carrier coefficients were approximately `(0.1999992, 0.2000001, 0.2000020, 0.3999840)`, converging to the deliberately constructed target. Fusion-off coefficients were approximately `(0.1868559, 0.2020002, 0.2450771, 0)`. Thus a retrained linear comparator did not fit this nonlinear diagnostic target. The final-test set remained unopened.
+
+Individual frozen-model ablation deltas in validation MSE were approximately:
+`WEAK 0.00176918`, `MEDIUM 0.00444445`, `STRONG 0.00444453`, `FUSION 0.00194823`. These interventions measure dependence on this learned representation; they are *not* independent identification of physical carrier forces.
+
+**Crucial qualification:** this new ECK-044 four-feature diagnostic is **not the entire older 9→9→9 trained network**, nor does it establish that each operator has learned its features from raw sensory input. The 27 address cells and phase tensors are retained, but engineered feature transforms do much of the work. The coefficients are trained. A useful next stage would make the local, memory and nonlinear operators themselves adaptable and compare them against expressive nonlinear baselines on fresh tasks.
+
+The implementation and regression live in `eck/index.html` and `eck/test_eck044.py`. Actual committed JavaScript syntax and direct model execution were checked. The standalone Python regression and browser deployment were not independently verified.
+
+### ECK-045 — Next natural bound
+
+Train nontrivial **per-address or per-time carrier parameters** rather than four scalar readout coefficients, while maintaining function-specific operators. Introduce task families with unseen interaction rules and compare to a generic nonlinear neural baseline; otherwise an engineered target matching an engineered architecture would exaggerate the evidence. Add gradient checks, retained failure witnesses and verified runtime tests.
