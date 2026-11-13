@@ -1,4 +1,4 @@
-# ECK-051 — Dual-Cohort Validation Gate for Neural Collision Repair
+# ECK-052 — Model-Derived Dual-Cohort Rejection Witness
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1243,3 +1243,70 @@ Implementation: `eck/index.html`, executable standalone regression `eck/test_eck
 ### ECK-052 — Next natural bound
 
 Challenge the dual gate with a real gradient candidate on a precommitted altered training objective or cohort-reweighted rate, and preserve a **model-derived** disagreement witness. Compare gating with constrained multi-objective optimization, freezing the untouched test partition throughout. Do not claim improvement until it appears on a task not used to design the gate.
+
+## ECK-052 — Actual gradient conflict, ordinary acceptance vs strict rejection
+
+The 27-address/phase-node 3×3×3 cube, 729 ordered inputs, 96-parameter collision learner, four computational carriers, immutable checkpoints, and fixed singlet `(0=-.)` remain unchanged. The training/validation/test split remains **438 / 146 / 145**, by permutation family. The final 145-case test partition was **not evaluated**.
+
+ECK-051 established a **synthetic loss-vector** example of the dual-cohort gate's semantics but the ordinary 600-epoch model path produced zero disagreements. ECK-052 goes farther: it replays an **actual model-derived full-batch gradient candidate** from its existing weights.
+
+### Reproducible real neural witness
+
+1. Reset the 96-parameter collision-repair model to its canonical ECK-050 initialization.
+2. Accept **20 ordinary updates** at the original learning rate `1.8`, reaching frozen source checkpoint version 20.
+3. Make two independent copies of *exactly* those trained 96 weights (Forge 87 + collision 9).
+4. Calculate the 21st update using the **same real gradient and loss functions**, with a deliberately aggressive challenge learning rate of `70` (an audit stress rate, not a recommended routine learning rate).
+5. Present the same candidate to the aggregate-only and dual-cohort acceptance policies.
+
+| Loss | Frozen checkpoint 20 | Real gradient candidate |
+|---|---:|---:|
+| Training | 0.000340620764690859 | 0.000295112352507506 |
+| Aggregate validation | 0.000342605451784201 | 0.000296001404586946 |
+| Repeated-address validation (44 examples) | 0.000662069126206552 | 0.000439127266405867 |
+| Distinct-address validation (102 examples) | 0.000204797592229461 | **0.000234260836743489** |
+
+Training, aggregate validation, and repeated-address error **improve**, while distinct-address error **gets worse**. The normal gate returns **ACCEPT** and advances to version 21. The dual-cohort gate returns **REJECT** and retains version 20.
+
+This is **not** a synthetic hand-chosen loss table: the candidate comes from the trained model's actual gradient update and the listed losses from model prediction on the pre-existing train/validation sets. The stress-test learning rate was discovered through a bounded search over candidate rates and intermediate ordinary checkpoints; it is a targeted *counterexample*, not a representative outcome of the default optimizer. The learning rate and checkpoint were frozen into the reproducible test. Model versions remain independent between the two policies, and the source checkpoint is not mutated.
+
+### UI and regression
+
+The Canvas2D console's ECK-051 Dual Gate section now includes **REPLAY REAL GRADIENT CONFLICT** alongside the earlier symbolic policy counterexample. It records before/candidate losses, outcome of both gates, retained/accepted version numbers, the singlet provenance, and keeps the final-test partition unopened. The executable Node regression is `eck/test_eck052.cjs`, runnable with `node eck/test_eck052.cjs`, which reads the actual repository HTML source and extracts the mathematical functions without browser DOM access. It verifies the model-derived adverse step, policy disagreement, checkpoint ancestry, and split sizes.
+
+**Verification completed:** the final committed JavaScript passed syntax parsing; the direct extraction harness replayed the exact candidate and confirmed the expected outputs, including `ordinary=true`, `strict=false`, and checkpoint versions `20→21` vs `20→20`. The new standalone Node regression was committed but not independently run; live Pages/browser integration was not independently verified.
+
+### ASCII mesh
+
+```text
+ [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+       GEN 0           GEN 1           GEN 2
+      00 01 02        09 10 11        18 19 20
+      03 04 05  --->  12 13 14  --->  21 22 23
+      06 07 08        15 16 17        24 25 26
+                         |
+                FOUR FORCE CARRIERS
+                 87 ROUTING WEIGHTS
+                 +9 COLLISION GATES
+                         |
+                 TRAIN 20 × LR 1.8
+                         |
+                CHECKPOINT #20 FROZEN
+                         |
+             21ST CANDIDATE @ LR 70
+                         |
+              TRAIN ↓  AGGREGATE ↓
+             REPEATED ↓  DISTINCT ↑
+                         |
+                 /---------------\
+        ORDINARY ACCEPT       DUAL REJECT
+              VERSION 21       VERSION 20
+                 \---------------/
+                         |
+                PRESERVE WITNESS
+                         |
+                       (0=-.)
+```
+
+### ECK-053 — Next natural bound
+
+Compare multiple bounded step-size searches or line-search constraints to see whether the **model-derived conflict can be avoided** without stopping all learning. Search for a candidate that decreases training, aggregate validation and **both** validation cohorts at the same trained checkpoint. Preserve the adverse case as a regression and explicitly report if no feasible step exists within the declared search.
