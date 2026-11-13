@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-046 | Chromatic Evidence Continuity</title>
+<title>ECK-047 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-046: a single central primitive, not four independent panels in a row. */
+/* ECK-047: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-046</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-047</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,19 +82,20 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
+<section class="panel" id="necessityLab" style="margin-top:18px"><h2>00 / ECK-047 · 87 vs 85 PARAMETER NECESSITY LAB</h2><p class="note">Actual 87-weight Operator Forge versus a generic 85-weight tanh MLP. Fusion-gate compensation audit tests whether different parameters produce identical outputs. Validation uses 146 examples; 145 final-test configurations remain withheld.</p><canvas id="necessityCanvas" width="1000" height="350" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="nTrain">TRAIN BOTH ×100</button><button id="nTrain500">RECURSE ×500</button><button id="nGauge">FUSION GAUGE TEST</button><button id="nSeal">SEAL + TEST</button><button id="nReset">RESET</button></div><pre id="nReadout"></pre></section>
 <section class="panel" id="operatorForge" style="margin-top:18px">
-<h2>00 / ECK-046 OPERATOR FORGE · TRAIN INTERNAL ROUTING</h2>
+<h2>00 / ECK-047 OPERATOR FORGE · TRAIN INTERNAL ROUTING</h2>
 <p class="note">Actual trainable operator internals: WEAK uses 24 directed 3×3 neighbor weights; MEDIUM has 18 temporal-mixing weights; STRONG has 18 phase/routing weights; FUSION has 27 bilinear gate weights. The total is 87 trainable parameters over the existing 27-cell cubed tensor. The synthetic task is still engineered; a separate 36-parameter readout remains available for comparison.</p>
 <canvas id="forgeCanvas" width="1000" height="435" style="display:block;width:100%;height:auto;background:#081720;border:1px solid #48768e;border-radius:14px"></canvas>
 <div class="rowlike"><button id="forge100">ITERATE ×100</button><button id="forge500">RECURSE ×500</button><button id="forgeGrad">GRADIENT CHECK</button><button id="forgeAudit">VALIDATE OPERATORS</button><button id="forgeSeal">SEAL + FINAL TEST</button><button id="forgeReset">RESET FORGE</button></div>
-<pre id="forgeStatus">[ECK-046] four operator kernels; 87 trainable weights; no final test performed</pre>
+<pre id="forgeStatus">[ECK-047] four operator kernels; 87 trainable weights; no final test performed</pre>
 </section>
 <section class="panel" id="adaptiveCarrier" style="margin-top:18px">
 <h2>00 / ADAPTIVE CARRIER OPERATORS · 3×3×3 NEURAL CUBE</h2>
 <p class="note">New independent spatial-temporal pulse task. Four distinct carrier features now have 9 trainable address coefficients each (36 parameters), compared against a shared four-coefficient model and a five-feature nonlinear reference. An unmodeled interaction is deliberately included in the target so results cannot be described as automatic mastery.</p>
 <canvas id="adaptiveCanvas" width="1000" height="415" style="display:block;width:100%;height:auto;background:#091822;border:1px solid #497486;border-radius:14px"></canvas>
 <div class="rowlike"><button id="adaptive100">RECURSE ×100</button><button id="adaptive500">RECURSE ×500</button><button id="adaptiveAudit">AUDIT VALIDATION</button><button id="adaptiveSeal">SEAL + FINAL TEST</button><button id="adaptiveReset">RESET MODELS</button></div>
-<pre id="adaptiveStatus">[ECK-046] 27 cells / 729 input triples / adaptive WEAK MEDIUM STRONG FUSION operators</pre>
+<pre id="adaptiveStatus">[ECK-047] 27 cells / 729 input triples / adaptive WEAK MEDIUM STRONG FUSION operators</pre>
 </section>
 <section class="panel" id="functionalCarriers" style="margin-top:18px">
 <h2>00 / NEURAL FORCE CARRIER SPECIALIZATION · FOUR DISTINCT OPERATORS</h2>
@@ -248,7 +249,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-046 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-047 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -419,7 +420,7 @@ $("reset").onclick=async()=>{
 };
 // UI initialization deferred until all const models are defined.
 
-// ECK-046 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-047 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -711,7 +712,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-046: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-047: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -911,7 +912,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-046: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-047: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -933,7 +934,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-046: deterministic recursive candidate selection, with bounded tests.
+// ECK-047: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -1258,7 +1259,7 @@ function initSpinor(){
  drawSpinor();
 }
 
-// ECK-046: a separate, frozen-weight structural experiment.
+// ECK-047: a separate, frozen-weight structural experiment.
 // Training, validation and final-test coordinate sets are disjoint.
 const structuralSplit=Object.freeze({
  train:Object.freeze([[1,1],[0,0]].map(p=>Object.freeze(p))),
@@ -1404,7 +1405,7 @@ function initStructural(){
 }
 // UI initialized after every model and constant declaration.
 
-// ECK-046: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
+// ECK-047: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
 // Training uses gradient backpropagation. This is a synthetic model, not physical force physics.
 const neuralCarrierNames=Object.freeze(["WEAK","MEDIUM","STRONG","FUSION"]);
 const neuralCarrierColors=Object.freeze(["#4ee8fa","#ffaf46","#fa548a","#ba9cff"]);
@@ -1482,7 +1483,7 @@ function trainNeuralEpoch(rate=.24,selectedCarrier=null){
  return accepted;
 }
 
-// ECK-046 — cubed-coordinate tensor and carrier-specific spinor iteration.
+// ECK-047 — cubed-coordinate tensor and carrier-specific spinor iteration.
 // Distinguish the physical cube (3×3×3 = 27) from the address-triple cube ((3×3)^3 = 729).
 function cubeTripleEncode(a,b,c){
  if(![a,b,c].every(v=>Number.isInteger(v)&&v>=0&&v<9))throw Error("invalid 9×9×9 address triple");
@@ -1618,7 +1619,7 @@ function initNeuralCarriers(){
 }
 // Full initialization deferred after all neural and triple configuration constants.
 
-// ECK-046: 729 actual three-address inputs; shared-permutation leakage is prevented.
+// ECK-047: 729 actual three-address inputs; shared-permutation leakage is prevented.
 const tripleCases=Object.freeze(Array.from({length:729},(_,id)=>{
  const triple=cubeTripleDecode(id),sorted=triple.slice().sort((a,b)=>a-b);
  const family=sorted[0]*100+sorted[1]*10+sorted[2];
@@ -1757,7 +1758,7 @@ function initTripleNet(){
 }
 // Initialize after constant and learner declarations.
 
-// ECK-046 — controlled permutation witnesses, restricted to the validation partition.
+// ECK-047 — controlled permutation witnesses, restricted to the validation partition.
 const orderWitness={measure:null,ablation:null};
 function orderDistance(a,b){
  if(a.length!==b.length)throw Error("distance dimension mismatch");
@@ -1851,7 +1852,7 @@ function initOrderWitness(){
 }
 // Initialization occurs after all models, masks, and datasets are declared.
 
-// ECK-046: separate 729-case order reversal neural learner, with 4 carrier matrices.
+// ECK-047: separate 729-case order reversal neural learner, with 4 carrier matrices.
 const reverseNet={weights:null,versions:[],attempts:[],epoch:0,viewId:0,sealed:false,final:null,
  baseline:null,validationCeiling:null};
 function reverseTarget(example){
@@ -1974,7 +1975,7 @@ function initReverse(){
 }
 // Initialize after every constant and neural model declaration.
 
-// ECK-046: exact symbolic teacher + *separate* dense four-carrier neural student.
+// ECK-047: exact symbolic teacher + *separate* dense four-carrier neural student.
 // The exact teacher is used only to produce labels and verify involution, not as a neural output shortcut.
 function boomerangExact(id){
  const t=cubeTripleDecode(id);
@@ -2231,7 +2232,7 @@ function initTemporal(){
 }
 // Invoke UI setup after all constants and graph structures are defined.
 
-// ECK-046: cross-task transfer from reversal route to cyclic rotation.
+// ECK-047: cross-task transfer from reversal route to cyclic rotation.
 const transferState={runs:null,reference:null,attempts:0,sealed:false,final:null,ablations:null,equivalence:null};
 function rotateTripleId(id){
  const [a,b,c]=cubeTripleDecode(id);
@@ -2385,7 +2386,7 @@ function initTransfer(){
 }
 // Initialize after all 3x3x3 neural modules are declared.
 
-// ECK-046: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
+// ECK-047: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
 const functionalNames=Object.freeze(["WEAK / LOCAL","MEDIUM / MEMORY","STRONG / ROUTE","FUSION / NONLINEAR"]);
 const functionalTruth=Object.freeze([.2,.2,.2,.4]);
 const functionalState={runs:[],history:[],validation:null,ablation:null,sealed:false,final:null};
@@ -2520,7 +2521,7 @@ function initFunctional(){
 }
 // Initialize UI after all 3x3x3 neural experiments are defined.
 
-// ECK-046 — Per-address adaptive parameters plus shared and nonlinear reference comparators.
+// ECK-047 — Per-address adaptive parameters plus shared and nonlinear reference comparators.
 // The task is predeclared, synthetic, and partly outside the four-channel feature basis.
 const adaptState={models:[],attempts:0,validation:null,final:null,sealed:false};
 function adaptSignals(c){
@@ -2623,7 +2624,7 @@ function adaptRender(){
  ctx.fillStyle="#a6ccda";ctx.font="12px monospace";
  ctx.fillText("SINGLET (0=-.) OUTSIDE MODEL · TRAIN 438 / VALIDATE 146 / FINAL 145 SEALED",21,388);
  document.getElementById("adaptiveStatus").textContent=
-  "[ECK-046] "+adaptState.attempts+" rounds; per-address carrier weights trained on 729-configuration cube"+
+  "[ECK-047] "+adaptState.attempts+" rounds; per-address carrier weights trained on 729-configuration cube"+
   "\n[VALIDATION] "+adaptState.models.map(m=>m.label+" "+adaptLoss(tripleValid,m).toFixed(9)).join(" | ")+
   "\n[CHECKPOINTS] "+adaptState.models.map(m=>m.label+" "+m.accepted).join(" | ")+
   "\n[FINAL] "+(adaptState.final?adaptState.final.map(f=>f.name+" "+f.test.toFixed(9)).join(" | "):"WITHHELD")+
@@ -2641,7 +2642,7 @@ function initAdaptive(){
 }
 // Initialize after all neural model and 3x3x3 state definitions.
 
-// ECK-046 — learn local/temporal/phase/bilinear-operator internals, not just a final readout.
+// ECK-047 — learn local/temporal/phase/bilinear-operator internals, not just a final readout.
 // Synthetic target is the fixed ECK-045 pulse; this is a representational test.
 const forgeEdges=Object.freeze(Array.from({length:9},(_,a)=>{
  const r=Math.floor(a/3),c=a%3;
@@ -2799,5 +2800,115 @@ function initForge(){
  document.getElementById("forgeReset").addEventListener("click",()=>{forgeReset();renderForge()});
  renderForge();
 }
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();initAdaptive();initForge();
+// All model declarations precede initialization.
+
+const nState={mlp:null,forge:null,history:[],sealed:false,final:null,gauge:null,versions:[]};
+function nInputs(c){
+ const F=adaptSignals(c),b=temporalPlanes(c);
+ return Array.from({length:9},(_,a)=>[F[0][a],b[0][a],b[1][a],b[2][a],
+  forgeEdgeByDest[a].reduce((sum,j)=>sum+b[2][forgeEdges[j].from],0)/forgeEdgeByDest[a].length]);
+}
+function nInit(){
+ return {w:Array.from({length:12},(_,h)=>Array.from({length:5},(_,i)=>.035*Math.sin((h+1)*17+(i+2)*11))),
+ hb:Array.from({length:12},(_,h)=>.01*Math.cos(3*h+1)),
+ out:Array.from({length:12},(_,h)=>.04*Math.sin(7*h+3)),bias:0};
+}
+function nClone(m){return {w:m.w.map(row=>row.slice()),hb:m.hb.slice(),out:m.out.slice(),bias:m.bias}}
+function nFreeze(m){return Object.freeze({w:Object.freeze(m.w.map(r=>Object.freeze(r.slice()))),hb:Object.freeze(m.hb.slice()),out:Object.freeze(m.out.slice()),bias:m.bias})}
+function nForward(x,m){
+ const z=m.w.map((row,h)=>Math.tanh(m.hb[h]+row.reduce((s,w,i)=>s+w*x[i],0)));
+ return {z,y:m.bias+m.out.reduce((s,w,i)=>s+w*z[i],0)};
+}
+function nLoss(cases,m){
+ let sum=0;for(const c of cases){const xs=nInputs(c),t=adaptTarget(adaptSignals(c));
+  for(let a=0;a<9;a++)sum+=(nForward(xs[a],m).y-t[a])**2;}
+ return sum/(cases.length*9);
+}
+function nGradient(cases,m){
+ const g={w:Array.from({length:12},()=>Array(5).fill(0)),hb:Array(12).fill(0),out:Array(12).fill(0),bias:0};
+ for(const c of cases){const xs=nInputs(c),t=adaptTarget(adaptSignals(c));
+  for(let a=0;a<9;a++){
+   const {z,y}=nForward(xs[a],m),d=2*(y-t[a])/(cases.length*9);g.bias+=d;
+   for(let h=0;h<12;h++){
+    g.out[h]+=d*z[h];const dh=d*m.out[h]*(1-z[h]**2);
+    g.hb[h]+=dh;for(let i=0;i<5;i++)g.w[h][i]+=dh*xs[a][i];
+   }
+  }
+ }return g;
+}
+function nReset(){
+ nState.mlp=nInit();nState.forge=forgeInitWeights();nState.history=[];nState.sealed=false;nState.final=null;nState.gauge=null;
+ nState.versions=[Object.freeze({version:0,parent:null,weights:nFreeze(nState.mlp),
+  train:nLoss(tripleTrain,nState.mlp),validation:nLoss(tripleValid,nState.mlp),singlet:"(0=-.)"})];
+}
+function nEpoch(){
+ const before=nLoss(tripleTrain,nState.mlp),valBefore=nLoss(tripleValid,nState.mlp),g=nGradient(tripleTrain,nState.mlp),
+  proposed=nClone(nState.mlp),rate=.5;
+ for(let h=0;h<12;h++){
+  for(let i=0;i<5;i++)proposed.w[h][i]=Math.max(-2,Math.min(2,proposed.w[h][i]-rate*g.w[h][i]));
+  proposed.hb[h]=Math.max(-2,Math.min(2,proposed.hb[h]-rate*g.hb[h]));
+  proposed.out[h]=Math.max(-2,Math.min(2,proposed.out[h]-rate*g.out[h]));
+ }
+ proposed.bias=Math.max(-2,Math.min(2,proposed.bias-rate*g.bias));
+ const next=nLoss(tripleTrain,proposed),hold=nLoss(tripleValid,proposed);
+ const a=next<before-1e-13&&hold<=valBefore+1e-12;
+ if(a){nState.mlp=proposed;nState.versions.push(Object.freeze({version:nState.versions.length,
+  parent:nState.versions.length-1,weights:nFreeze(proposed),train:next,validation:hold,singlet:"(0=-.)"}))}
+ return a;
+}
+function nForgeEpoch(){
+ const w=nState.forge,g=forgeGradient(tripleTrain,w),proposed=forgeCopy(w),
+  before=forgeLoss(tripleTrain,w),valBefore=forgeLoss(tripleValid,w);
+ for(const key of ["weak","medium","strong","fusion"])
+  proposed[key]=proposed[key].map((v,j)=>Math.max(-2,Math.min(2,v-1.8*g[key][j])));
+ const a=forgeLoss(tripleTrain,proposed)<before-1e-13&&forgeLoss(tripleValid,proposed)<=valBefore+1e-12;
+ if(a)nState.forge=proposed;return a;
+}
+function nTrain(count){
+ if(nState.sealed)return;
+ for(let k=0;k<count;k++){
+  const results=[nForgeEpoch(),nEpoch()];nState.history.push(Object.freeze({iteration:nState.history.length+1,results:Object.freeze(results)}));
+  if(!results.some(Boolean))break;
+ }nRender();
+}
+function nGauge(){
+ const m=forgeCopy(nState.forge),base=nState.forge;
+ for(let a=0;a<9;a++){const j=3*a;m.fusion[j]*=1.25;m.fusion[j+1]/=1.25;m.fusion[j+2]/=1.25}
+ let max=0;for(const c of tripleValid){
+  const x=forgePredict(c,base),y=forgePredict(c,m);
+  for(let a=0;a<9;a++)max=Math.max(max,Math.abs(x[a]-y[a]));
+ }
+ nState.gauge=Object.freeze({max,pass:max<1e-11});nRender();return nState.gauge;
+}
+function nSeal(){
+ if(!nState.sealed){nState.sealed=true;nState.final=Object.freeze({forge:forgeLoss(tripleTest,nState.forge),
+  mlp:nLoss(tripleTest,nState.mlp)})}nRender();
+}
+function nRender(){
+ const cv=document.getElementById("necessityCanvas"),ctx=cv.getContext("2d");
+ ctx.fillStyle="#081822";ctx.fillRect(0,0,cv.width,cv.height);ctx.textAlign="left";
+ ctx.fillStyle="#ddf2fa";ctx.font="16px monospace";ctx.fillText("87-OPERATOR FORGE  vs  85-WEIGHT NONLINEAR MLP",20,32);
+ const names=["STRUCTURED 87","#NONLINEAR MLP 85"],values=[forgeLoss(tripleValid,nState.forge),nLoss(tripleValid,nState.mlp)],colors=["#ffad54","#67e3e3"];
+ for(let i=0;i<2;i++){
+  const y=98+i*115;ctx.fillStyle=colors[i];ctx.font="14px monospace";ctx.fillText(names[i],25,y);
+  ctx.fillStyle="#254253";ctx.fillRect(285,y-18,410,28);
+  ctx.fillStyle=colors[i];ctx.fillRect(285,y-18,410*Math.min(1,values[i]/.002),28);
+  ctx.fillStyle="#e0f0f7";ctx.fillText("VALID MSE "+values[i].toFixed(8),710,y);
+ }
+ ctx.fillStyle="#b9d5e2";ctx.font="12px monospace";ctx.fillText("27 CELLS · 729 ORDER CODES · FOUR CARRIERS · (0=-.)",24,327);
+ document.getElementById("nReadout").textContent="[VALIDATION] Forge 87: "+values[0].toFixed(9)+" / MLP 85: "+values[1].toFixed(9)+
+ "\n[ITERATIONS] "+nState.history.length+" / frozen MLP versions "+nState.versions.length+
+ "\n[FUSION GAUGE] "+(nState.gauge?(nState.gauge.pass?"PASS":"FAIL")+" maximum prediction Δ "+nState.gauge.max.toExponential(3):"not tested")+
+ "\n[FINAL TEST] "+(nState.final?"SEALED Forge "+nState.final.forge.toFixed(9)+" MLP "+nState.final.mlp.toFixed(9):"WITHHELD");
+}
+function initNecessity(){
+ nReset();
+ document.getElementById("nTrain").addEventListener("click",()=>nTrain(100));
+ document.getElementById("nTrain500").addEventListener("click",()=>nTrain(500));
+ document.getElementById("nGauge").addEventListener("click",nGauge);
+ document.getElementById("nSeal").addEventListener("click",nSeal);
+ document.getElementById("nReset").addEventListener("click",()=>{nReset();nRender()});
+ nRender();
+}
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();initAdaptive();initForge();initNecessity();
 </script></html>
