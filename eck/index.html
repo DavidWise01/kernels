@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-044 | Chromatic Evidence Continuity</title>
+<title>ECK-045 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-044: a single central primitive, not four independent panels in a row. */
+/* ECK-045: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-044</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-045</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,6 +82,13 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
+<section class="panel" id="adaptiveCarrier" style="margin-top:18px">
+<h2>00 / ADAPTIVE CARRIER OPERATORS · 3×3×3 NEURAL CUBE</h2>
+<p class="note">New independent spatial-temporal pulse task. Four distinct carrier features now have 9 trainable address coefficients each (36 parameters), compared against a shared four-coefficient model and a five-feature nonlinear reference. An unmodeled interaction is deliberately included in the target so results cannot be described as automatic mastery.</p>
+<canvas id="adaptiveCanvas" width="1000" height="415" style="display:block;width:100%;height:auto;background:#091822;border:1px solid #497486;border-radius:14px"></canvas>
+<div class="rowlike"><button id="adaptive100">RECURSE ×100</button><button id="adaptive500">RECURSE ×500</button><button id="adaptiveAudit">AUDIT VALIDATION</button><button id="adaptiveSeal">SEAL + FINAL TEST</button><button id="adaptiveReset">RESET MODELS</button></div>
+<pre id="adaptiveStatus">[ECK-045] 27 cells / 729 input triples / adaptive WEAK MEDIUM STRONG FUSION operators</pre>
+</section>
 <section class="panel" id="functionalCarriers" style="margin-top:18px">
 <h2>00 / NEURAL FORCE CARRIER SPECIALIZATION · FOUR DISTINCT OPERATORS</h2>
 <p class="note">Diagnostic 3×3×3 neural task: WEAK samples local neighboring addresses, MEDIUM retains the middle temporal bit, STRONG routes the last temporal bit, and FUSION detects first×last coincident bits through a nonlinear product. Each operator has a trainable coefficient. Compare the full model to a fusion-disabled model retrained from scratch on the same training split. This is a designed feature test, not discovery of physical forces.</p>
@@ -234,7 +241,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-044 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-045 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -405,7 +412,7 @@ $("reset").onclick=async()=>{
 };
 // UI initialization deferred until all const models are defined.
 
-// ECK-044 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-045 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -697,7 +704,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-044: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-045: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -897,7 +904,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-044: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-045: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -919,7 +926,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-044: deterministic recursive candidate selection, with bounded tests.
+// ECK-045: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -1244,7 +1251,7 @@ function initSpinor(){
  drawSpinor();
 }
 
-// ECK-044: a separate, frozen-weight structural experiment.
+// ECK-045: a separate, frozen-weight structural experiment.
 // Training, validation and final-test coordinate sets are disjoint.
 const structuralSplit=Object.freeze({
  train:Object.freeze([[1,1],[0,0]].map(p=>Object.freeze(p))),
@@ -1390,7 +1397,7 @@ function initStructural(){
 }
 // UI initialized after every model and constant declaration.
 
-// ECK-044: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
+// ECK-045: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
 // Training uses gradient backpropagation. This is a synthetic model, not physical force physics.
 const neuralCarrierNames=Object.freeze(["WEAK","MEDIUM","STRONG","FUSION"]);
 const neuralCarrierColors=Object.freeze(["#4ee8fa","#ffaf46","#fa548a","#ba9cff"]);
@@ -1468,7 +1475,7 @@ function trainNeuralEpoch(rate=.24,selectedCarrier=null){
  return accepted;
 }
 
-// ECK-044 — cubed-coordinate tensor and carrier-specific spinor iteration.
+// ECK-045 — cubed-coordinate tensor and carrier-specific spinor iteration.
 // Distinguish the physical cube (3×3×3 = 27) from the address-triple cube ((3×3)^3 = 729).
 function cubeTripleEncode(a,b,c){
  if(![a,b,c].every(v=>Number.isInteger(v)&&v>=0&&v<9))throw Error("invalid 9×9×9 address triple");
@@ -1604,7 +1611,7 @@ function initNeuralCarriers(){
 }
 // Full initialization deferred after all neural and triple configuration constants.
 
-// ECK-044: 729 actual three-address inputs; shared-permutation leakage is prevented.
+// ECK-045: 729 actual three-address inputs; shared-permutation leakage is prevented.
 const tripleCases=Object.freeze(Array.from({length:729},(_,id)=>{
  const triple=cubeTripleDecode(id),sorted=triple.slice().sort((a,b)=>a-b);
  const family=sorted[0]*100+sorted[1]*10+sorted[2];
@@ -1743,7 +1750,7 @@ function initTripleNet(){
 }
 // Initialize after constant and learner declarations.
 
-// ECK-044 — controlled permutation witnesses, restricted to the validation partition.
+// ECK-045 — controlled permutation witnesses, restricted to the validation partition.
 const orderWitness={measure:null,ablation:null};
 function orderDistance(a,b){
  if(a.length!==b.length)throw Error("distance dimension mismatch");
@@ -1837,7 +1844,7 @@ function initOrderWitness(){
 }
 // Initialization occurs after all models, masks, and datasets are declared.
 
-// ECK-044: separate 729-case order reversal neural learner, with 4 carrier matrices.
+// ECK-045: separate 729-case order reversal neural learner, with 4 carrier matrices.
 const reverseNet={weights:null,versions:[],attempts:[],epoch:0,viewId:0,sealed:false,final:null,
  baseline:null,validationCeiling:null};
 function reverseTarget(example){
@@ -1960,7 +1967,7 @@ function initReverse(){
 }
 // Initialize after every constant and neural model declaration.
 
-// ECK-044: exact symbolic teacher + *separate* dense four-carrier neural student.
+// ECK-045: exact symbolic teacher + *separate* dense four-carrier neural student.
 // The exact teacher is used only to produce labels and verify involution, not as a neural output shortcut.
 function boomerangExact(id){
  const t=cubeTripleDecode(id);
@@ -2217,7 +2224,7 @@ function initTemporal(){
 }
 // Invoke UI setup after all constants and graph structures are defined.
 
-// ECK-044: cross-task transfer from reversal route to cyclic rotation.
+// ECK-045: cross-task transfer from reversal route to cyclic rotation.
 const transferState={runs:null,reference:null,attempts:0,sealed:false,final:null,ablations:null,equivalence:null};
 function rotateTripleId(id){
  const [a,b,c]=cubeTripleDecode(id);
@@ -2371,7 +2378,7 @@ function initTransfer(){
 }
 // Initialize after all 3x3x3 neural modules are declared.
 
-// ECK-044: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
+// ECK-045: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
 const functionalNames=Object.freeze(["WEAK / LOCAL","MEDIUM / MEMORY","STRONG / ROUTE","FUSION / NONLINEAR"]);
 const functionalTruth=Object.freeze([.2,.2,.2,.4]);
 const functionalState={runs:[],history:[],validation:null,ablation:null,sealed:false,final:null};
@@ -2504,5 +2511,126 @@ function initFunctional(){
  document.getElementById("functionalReset").addEventListener("click",()=>{resetFunctional();renderFunctional()});
  renderFunctional();
 }
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();
+// Initialize UI after all 3x3x3 neural experiments are defined.
+
+// ECK-045 — Per-address adaptive parameters plus shared and nonlinear reference comparators.
+// The task is predeclared, synthetic, and partly outside the four-channel feature basis.
+const adaptState={models:[],attempts:0,validation:null,final:null,sealed:false};
+function adaptSignals(c){
+ const bits=temporalPlanes(c),F=Array.from({length:5},()=>Array(9).fill(0));
+ for(let a=0;a<9;a++){
+  const r=Math.floor(a/3),col=a%3;
+  const neighbors=[[r-1,col],[r+1,col],[r,col-1],[r,col+1]]
+   .filter(([y,x])=>y>=0&&y<3&&x>=0&&x<3).map(([y,x])=>bits[0][3*y+x]);
+  F[0][a]=neighbors.reduce((sum,v)=>sum+v,0)/neighbors.length; // WEAK spatial readout
+  F[1][a]=bits[1][a];                              // MEDIUM temporal memory
+  F[2][a]=bits[2][a];                              // STRONG directed final phase
+  F[3][a]=bits[0][a]*bits[2][a];                 // FUSION nonlinear coincidence
+  F[4][a]=bits[0][a]*bits[1][a];                 // reference-only missing interaction
+ }
+ return F;
+}
+function adaptTarget(F){
+ return Array.from({length:9},(_,a)=>{
+  const r=Math.floor(a/3),c=a%3;
+  const shift=(r-c)*.035;
+  return (.19+shift)*F[0][a]+.22*F[1][a]+(.27-shift)*F[2][a]+.23*F[3][a]+.09*F[4][a];
+ });
+}
+function adaptPredict(F,model){
+ return Array.from({length:9},(_,a)=>model.weights.reduce((sum,row,k)=>
+  sum+row[model.perAddress?a:0]*F[k][a],0));
+}
+function adaptLoss(cases,model){
+ let sum=0;
+ for(const c of cases){
+  const F=adaptSignals(c),p=adaptPredict(F,model),t=adaptTarget(F);
+  for(let a=0;a<9;a++)sum+=(p[a]-t[a])**2;
+ }
+ return sum/(cases.length*9);
+}
+function adaptFreeze(model){
+ return Object.freeze({version:model.versions.length,parent:model.versions.length?model.versions.length-1:null,
+  weights:Object.freeze(model.weights.map(row=>Object.freeze(row.slice()))),
+  train:adaptLoss(tripleTrain,model),validation:adaptLoss(tripleValid,model),singlet:"(0=-.)"});
+}
+function adaptReset(){
+ const specs=[["ADAPTIVE FOUR",4,true],["SHARED FOUR",4,false],["NONLINEAR FIVE",5,false]];
+ adaptState.models=specs.map(([label,k,perAddress])=>{
+  const model={label,perAddress,weights:Array.from({length:k},()=>Array(perAddress?9:1).fill(0)),
+   attempts:0,versions:[],accepted:0};
+  model.versions.push(adaptFreeze(model));return model;
+ });
+ adaptState.attempts=0;adaptState.validation=null;adaptState.final=null;adaptState.sealed=false;
+}
+function adaptEpoch(model,rate=1.1){
+ const oldTrain=adaptLoss(tripleTrain,model),oldVal=adaptLoss(tripleValid,model);
+ const gradient=model.weights.map(row=>row.map(()=>0));
+ for(const c of tripleTrain){
+  const F=adaptSignals(c),p=adaptPredict(F,model),t=adaptTarget(F);
+  for(let a=0;a<9;a++)for(let k=0;k<model.weights.length;k++){
+   gradient[k][model.perAddress?a:0]+=2*(p[a]-t[a])*F[k][a]/(tripleTrain.length*9);
+  }
+ }
+ const proposal=model.weights.map((row,k)=>row.map((v,i)=>Math.max(-2,Math.min(2,v-rate*gradient[k][i]))));
+ const candidate={...model,weights:proposal};
+ const train=adaptLoss(tripleTrain,candidate),valid=adaptLoss(tripleValid,candidate);
+ const accepted=train<oldTrain-1e-13&&valid<=oldVal+1e-12;
+ if(accepted){model.weights=proposal;model.accepted++;model.versions.push(adaptFreeze(model))}
+ model.attempts++;
+ return accepted;
+}
+function adaptTrain(count){
+ if(adaptState.sealed)return;
+ for(let i=0;i<count;i++){
+  const outcomes=adaptState.models.map(m=>adaptEpoch(m));
+  adaptState.attempts++;
+  if(outcomes.every(v=>!v))break;
+ }
+ adaptState.validation=Object.freeze(adaptState.models.map(m=>Object.freeze({
+  name:m.label,loss:adaptLoss(tripleValid,m),accepted:m.accepted})));
+ adaptRender();
+}
+function adaptSeal(){
+ if(!adaptState.sealed){
+  adaptState.sealed=true;
+  adaptState.final=Object.freeze(adaptState.models.map(m=>Object.freeze({
+   name:m.label,test:adaptLoss(tripleTest,m),version:m.versions.length-1})));
+ }adaptRender();
+}
+function adaptRender(){
+ const c=document.getElementById("adaptiveCanvas"),ctx=c.getContext("2d");
+ ctx.fillStyle="#091822";ctx.fillRect(0,0,c.width,c.height);
+ ctx.fillStyle="#d6edf8";ctx.font="15px monospace";ctx.textAlign="left";
+ ctx.fillText("ADAPTIVE 3×3×3 NEURAL OPERATORS / NEW SYNTHETIC PULSE",22,30);
+ const colors=["#ffb452","#55e2bf","#ac9cff"];
+ adaptState.models.forEach((m,i)=>{
+  const y=98+i*96,loss=adaptLoss(tripleValid,m),initial=m.versions[0].validation,scaled=initial?Math.min(1,loss/initial):0;
+  ctx.fillStyle=colors[i];ctx.font="bold 13px monospace";ctx.fillText(m.label,23,y);
+  ctx.fillStyle="#244153";ctx.fillRect(246,y-15,515,20);
+  ctx.fillStyle=colors[i];ctx.fillRect(246,y-15,515*scaled,20);
+  ctx.fillStyle="#d1e7ed";ctx.font="12px monospace";
+  ctx.fillText("VALID MSE "+loss.toFixed(8),770,y);
+  ctx.fillText("PARAMETERS "+m.weights.reduce((n,row)=>n+row.length,0)+" / REVISIONS "+m.accepted,25,y+31);
+ });
+ ctx.fillStyle="#a6ccda";ctx.font="12px monospace";
+ ctx.fillText("SINGLET (0=-.) OUTSIDE MODEL · TRAIN 438 / VALIDATE 146 / FINAL 145 SEALED",21,388);
+ document.getElementById("adaptiveStatus").textContent=
+  "[ECK-045] "+adaptState.attempts+" rounds; per-address carrier weights trained on 729-configuration cube"+
+  "\n[VALIDATION] "+adaptState.models.map(m=>m.label+" "+adaptLoss(tripleValid,m).toFixed(9)).join(" | ")+
+  "\n[CHECKPOINTS] "+adaptState.models.map(m=>m.label+" "+m.accepted).join(" | ")+
+  "\n[FINAL] "+(adaptState.final?adaptState.final.map(f=>f.name+" "+f.test.toFixed(9)).join(" | "):"WITHHELD")+
+  "\n[BOUND] WEAK local / MEDIUM memory / STRONG phase / FUSION product; fifth nonlinear feature only in reference"+
+  "\n[INVARIANT] 27 addressed cells / 729 order codes / frozen ancestry / (0=-.) fixed";
+}
+function initAdaptive(){
+ adaptReset();
+ document.getElementById("adaptive100").addEventListener("click",()=>adaptTrain(100));
+ document.getElementById("adaptive500").addEventListener("click",()=>adaptTrain(500));
+ document.getElementById("adaptiveAudit").addEventListener("click",adaptRender);
+ document.getElementById("adaptiveSeal").addEventListener("click",adaptSeal);
+ document.getElementById("adaptiveReset").addEventListener("click",()=>{adaptReset();adaptRender()});
+ adaptRender();
+}
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();initAdaptive();
 </script></html>
