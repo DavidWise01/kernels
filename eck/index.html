@@ -86,7 +86,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <h2>00 / ECK-051 · DUAL-COHORT NEURAL ACCEPTANCE GATE</h2>
 <p class="note">Two separately reset 96-weight collision learners follow the same gradient and learning rate. The ordinary learner checks aggregate validation only; the dual-gated learner must also avoid regression in each of the 44 repeated-address and 102 distinct-address validation cases (cohort averages). Rejected attempts preserve their candidate losses. No final-test case is evaluated until sealing.</p>
 <canvas id="dualGateCanvas" width="1000" height="400" style="display:block;width:100%;background:#081821;border:1px solid #547889;border-radius:12px"></canvas>
-<div class="rowlike"><button id="dg100">ITERATE 100</button><button id="dg500">RECURSE 500</button><button id="dgAudit">AUDIT BOTH COHORTS</button><button id="dgSeal">SEAL + FINAL TEST</button><button id="dgReset">RESET EXPERIMENT</button></div>
+<div class="rowlike"><button id="dg100">ITERATE 100</button><button id="dg500">RECURSE 500</button><button id="dgAudit">AUDIT BOTH COHORTS</button><button id="dgCounter">TEST ADVERSE CANDIDATE</button><button id="dgSeal">SEAL + FINAL TEST</button><button id="dgReset">RESET EXPERIMENT</button></div>
 <pre id="dgStatus">[DUAL GATE] aggregate-versus-cohort-gated learning, 96 weights each</pre></section>
 <section class="panel" id="collisionLab" style="margin-top:18px"><h2>00 / ECK-051 · COLLISION REPAIR ON THE CUBED MESH</h2><p class="note">Compare two identical 87-weight Forge starts under the same training budget. The repair route adds nine learnable local coincidence weights for bit0×bit1 at each address; the baseline retains only 87 weights. Track validation separately for 44 repeated-address and 102 distinct-address configurations. The collision feature overlaps a known component of the synthetic target; it is not discovered autonomously.</p><canvas id="collisionCanvas" width="1000" height="400" style="width:100%;height:auto;background:#081822;border:1px solid #587888;border-radius:12px"></canvas><div class="rowlike"><button id="collisionTrain">TRAIN BOTH ×100</button><button id="collisionTrain500">RECURSE ×500</button><button id="collisionAudit">AUDIT COHORTS</button><button id="collisionSeal">SEAL + FINAL TEST</button><button id="collisionReset">RESET</button></div><pre id="collisionStatus">[COLLISION REPAIR] 87 vs 96 trainable parameters / final test withheld</pre></section>
 <section class="panel" id="multiSeedLab" style="margin-top:18px"><h2>00 / ECK-051 · THREE-SEED ROBUSTNESS × ADDRESS-COHORT SHIFT</h2><p class="note">Three deterministic starts for each model, equal 100-round update budgets. Validate on disjoint permutation families; separately report same-address repetitions versus three-distinct-address cases. This is a validation-cohort distribution reweighting, not an independently gathered out-of-distribution dataset. Final test stays sealed.</p><canvas id="seedCanvas" width="1000" height="390" style="display:block;width:100%;height:auto;background:#071823;border:1px solid #577985;border-radius:13px"></canvas><div class="rowlike"><button id="seedRun">RUN THREE SEEDS</button><button id="seedReset">RESET ROBUSTNESS</button></div><pre id="seedStatus">[ECK-051] three deterministic seeds, 100 rounds, two validation cohorts</pre></section>
@@ -3144,6 +3144,21 @@ function collisionReset(){
    validation:collisionLoss(tripleValid,run),singlet:"(0=-.)"})];
  }
 }
+function dgAcceptPolicy(before,after,dualGate=false){
+ const primary=after.train<before.train-1e-13&&after.validation<=before.validation+1e-12;
+ return primary&&(!dualGate||(after.repeated<=before.repeated+1e-12&&
+  after.distinct<=before.distinct+1e-12));
+}
+function dgCounterexample(){
+ // Predeclared synthetic loss vector with mathematically consistent aggregate
+ // under the observed 44/102 validation weights.
+ const before=Object.freeze({train:.02,repeated:.010,distinct:.010,validation:.010});
+ const after=Object.freeze({train:.019,repeated:.005,distinct:.011,
+  validation:(44*.005+102*.011)/146});
+ return Object.freeze({before,after,ordinary:dgAcceptPolicy(before,after,false),
+  protected:dgAcceptPolicy(before,after,true),
+  passes:dgAcceptPolicy(before,after,false)===true&&dgAcceptPolicy(before,after,true)===false});
+}
 function collisionEpoch(run,rate=1.8,dualGate=false){
  const oldTrain=collisionLoss(tripleTrain,run),oldValid=collisionLoss(tripleValid,run);
  const grad=forgeGradient(tripleTrain,run.forge),repairGradient=run.repair?Array(9).fill(0):null;
@@ -3177,8 +3192,8 @@ function collisionEpoch(run,rate=1.8,dualGate=false){
   oldDistinct=dualGate?collisionLoss(collisionGroups.distinct,run):null,
   newRepeated=dualGate?collisionLoss(collisionGroups.repeated,candidate):null,
   newDistinct=dualGate?collisionLoss(collisionGroups.distinct,candidate):null,
-  accepted=train<oldTrain-1e-13&&validation<=oldValid+1e-12&&
-   (!dualGate||(newRepeated<=oldRepeated+1e-12&&newDistinct<=oldDistinct+1e-12));
+  accepted=dgAcceptPolicy({train:oldTrain,validation:oldValid,repeated:oldRepeated,distinct:oldDistinct},
+    {train,validation,repeated:newRepeated,distinct:newDistinct},dualGate);
  if(accepted){
   run.forge=candidate.forge;run.repair=candidate.repair;
   run.versions.push(Object.freeze({version:run.versions.length,parent:run.versions.length-1,
@@ -3248,7 +3263,7 @@ function initCollision(){
 // ECK-051 initializers follow model definitions.
 
 // ECK-051 — independent paired 96-parameter experiments with a strict cohort gate.
-const dgState={plain:null,gated:null,rounds:0,history:[],sealed:false,final:null};
+const dgState={plain:null,gated:null,rounds:0,history:[],sealed:false,final:null,counter:null};
 function dgMakeRun(){
  const forge=forgeInitWeights(),repair=Array(9).fill(0),r={forge,repair,versions:[],attempts:[]};
  r.versions=[Object.freeze({version:0,parent:null,forge:forgeFrozen(forge),
@@ -3259,7 +3274,7 @@ function dgMakeRun(){
 }
 function dgReset(){
  dgState.plain=dgMakeRun();dgState.gated=dgMakeRun();dgState.rounds=0;
- dgState.history=[];dgState.final=null;dgState.sealed=false;dgRender();
+ dgState.history=[];dgState.final=null;dgState.sealed=false;dgState.counter=null;dgRender();
 }
 function dgMetrics(r){
  return Object.freeze({train:collisionLoss(tripleTrain,r),validation:collisionLoss(tripleValid,r),
@@ -3314,6 +3329,7 @@ function dgRender(){
   "\n[AGGREGATE GATE] repeated "+m.repeated.toFixed(9)+" / distinct "+m.distinct.toFixed(9)+
   "\n[DUAL COHORT GATE] repeated "+g.repeated.toFixed(9)+" / distinct "+g.distinct.toFixed(9)+
   "\n[LATEST REJECTION] "+(rejected.length?JSON.stringify(rejected.at(-1).candidate):"none")+
+  "\n[POLICY COUNTEREXAMPLE] "+(dgState.counter?(dgState.counter.passes?"PASS: ordinary accepts, dual gate rejects":"FAIL"):"not tested")+
   "\n[FINAL TEST] "+(dgState.final?"SEALED 145 examples / aggregate "+dgState.final.plain.toFixed(9)+
    " dual "+dgState.final.gated.toFixed(9):"WITHHELD")+
   "\n[INVARIANT] no held-out test peek / parent-linked accepted model snapshots / fixed singlet";
@@ -3322,6 +3338,7 @@ function initDualGate(){
  document.getElementById("dg100").addEventListener("click",()=>dgIterate(100));
  document.getElementById("dg500").addEventListener("click",()=>dgIterate(500));
  document.getElementById("dgAudit").addEventListener("click",dgRender);
+ document.getElementById("dgCounter").addEventListener("click",()=>{dgState.counter=dgCounterexample();dgRender()});
  document.getElementById("dgSeal").addEventListener("click",dgSeal);
  document.getElementById("dgReset").addEventListener("click",dgReset);
  dgReset();
