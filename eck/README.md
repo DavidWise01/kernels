@@ -1,4 +1,4 @@
-# ECK-053 — Constrained Neural Step-Size Recovery
+# ECK-054 — Deterministic Safeguarded Neural Backtracking
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1375,3 +1375,82 @@ The ECK-051 dual-gate Canvas2D instrument now offers **RECOVER SAFE STEP**. The 
 ### ECK-054 — Next natural bound
 
 Replace the fixed descending search by a **deterministic safeguarded line search** with bounded backtracking, explicit termination, and a feasibility certificate. Demonstrate it can recover from multiple real adverse candidate steps without tuning the rates to one witness, while preserving a distinct independent evaluation surface. Keep final test sealed until selection and stop rules are frozen.
+
+## ECK-054 — Automatic geometric step-size recovery and bounded termination
+
+The 27-address `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]` neural cube, 729 ordered configuration codes, 96-weight collision-repair network (87 operator weights + 9 collision gates), four named computational carriers, and the external nonlearned singlet `(0=-.)` are preserved. The model's 438 training / 146 validation / 145 final-test split remains unchanged, and **no final-test predictions are evaluated in the backtracking controller**.
+
+ECK-053 used a manually declared 21-rate descending search from trained checkpoint 20. ECK-054 adds a **reusable, deterministic bounded geometric line-search** controller. It clones a frozen checkpoint, computes an *actual full-batch neural gradient candidate*, tests the **train + aggregate validation + repeated validation + distinct validation** acceptance rule, and halves the learning rate on failure. A source checkpoint is never overwritten; each attempted step stores its candidate loss metrics and accepted/rejected result.
+
+The run configuration is:
+- Initial trial rate `70`
+- Geometric shrink factor `0.5`
+- Maximum `9` candidate trials
+- Minimum rate `0.1`
+- Independently replayed source checkpoints `0`, `20`, `100`
+
+The controller terminates with **SAFE_ACCEPT**, **RATE_FLOOR**, or **BOUNDED_EXHAUSTION**. This search chooses the *first acceptable rate* on a declared geometric sequence. It makes no claim to find a global line-search optimum or the largest feasible continuous rate. The search uses validation loss for update acceptance and must not be conflated with unseen-test generalization.
+
+### Executed source-level checkpoint results
+
+| Source checkpoint | First rate trial | Second rate trial | Result | Number of attempts |
+|---|---|---|---|---:|
+| 0 | 70 rejected | **35 accepted** | SAFE_ACCEPT | 2 |
+| 20 | 70 rejected (cohort conflict) | **35 accepted** | SAFE_ACCEPT | 2 |
+| 100 | **70 accepted** | — | SAFE_ACCEPT | 1 |
+
+Checkpoint 20: before → accepted rate-35 candidate:
+
+| Error metric | Frozen checkpoint 20 | Accepted candidate |
+|---|---:|---:|
+| Training MSE | 0.000340620764691 | 0.000152940652950 |
+| Aggregate validation MSE | 0.000342605451784 | 0.000155324670140 |
+| Repeated-address validation MSE | 0.000662069126207 | 0.000377797874489 |
+| Distinct-address validation MSE | 0.000204797592229 | 0.000059355836891 |
+
+The ECK-053 rate-60 candidate is also safe at checkpoint 20; this geometric search **does not try 60** and accordingly selects 35. The checkpoint-0 and checkpoint-100 recoveries demonstrate that the identical bounded procedure works at multiple learned stages, but are not a mathematical convergence guarantee.
+
+**Failure-path test:** set maxTrials=1 at checkpoint 20 with rate 70. The controller terminates with `BOUNDED_EXHAUSTION`, no accepted candidate, one rejected trial, and the frozen checkpoint remains version 20. This is a real model-derived failed search, not a synthetic loss vector.
+
+### Implementation and evidence
+
+The ECK-051 dual-cohort Canvas2D panel now includes **RUN BOUNDED BACKTRACKING**, which shows per-checkpoint termination states and accepted step sizes while preserving all attempted rate packets. Its functions are `dgBacktrackAtCheckpoint()`, `dgBacktrackingAudit()`, and the frozen `dgBacktrackSpec` configuration. The independent executable Node regression `eck/test_eck054.cjs` reads `eck/index.html`, executes the neural model functions and asserts the three successes, cohort constraints, and bounded exhaustion while keeping the 145-case final partition unopened.
+
+Actual committed source JavaScript was syntax-checked and the three successful checkpoint runs plus the real bounded failure were executed directly. The new standalone Node regression has been committed but not independently run. Live Pages and browser interaction remain unverified.
+
+### ASCII diagram
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+    GEN 0            GEN 1            GEN 2
+   00 01 02         09 10 11         18 19 20
+   03 04 05   ==>   12 13 14   ==>   21 22 23
+   06 07 08         15 16 17         24 25 26
+                       |
+            87 OPERATOR + 9 COLLISION
+                       |
+                 FROZEN STATE
+                       |
+                TRY LEARNING RATE
+                       |
+             VALIDATE TRAIN/COHORTS
+                    /      \
+                 PASS      FAIL
+                  |          |
+                ACCEPT     RATE /= 2
+                  |          |
+                FREEZE     TRIES LEFT?
+                  |          |
+                ADVANCE    YES → RETRY
+                  |          |
+                  |         NO → TERMINATE
+                  \          /
+                    EVIDENCE LEDGER
+                         |
+                       (0=-.)
+```
+
+### ECK-055 — Next natural bound
+
+Use adaptive backtracking on **successive learned checkpoints**, rather than fixed independent replays, and compare total accepted progress, rejected trials and computational cost against a fixed-rate baseline. Include a finite stopping certificate for constrained training plateaus; avoid indefinite validation-set reuse and freeze a new independent evaluation protocol before any generalization claim.
