@@ -1,4 +1,4 @@
-# ECK-045 — Adaptive Per-Address Neural Carriers
+# ECK-046 — Learned Neural Carrier Operators
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -894,3 +894,64 @@ The new Canvas2D panel **ADAPTIVE CARRIER OPERATORS** shows training, validation
 ### ECK-046 — Next natural bound
 
 Learn the **feature operators themselves** (e.g. per-address attention weights over spatial neighbors, temporal decay, directed phase gates, and trainable fusion inputs), not just their readouts. Use matched-capacity nonlinear baselines and a new held-out task to distinguish genuine learned operator adaptation from increased parameter count.
+
+## ECK-046 — Train the internal operators, not only their outputs
+
+The user-specified cubed geometry remains `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`: 27 indexed spatial/temporal cells and 729 ordered address configurations, with the fixed, non-trainable singlet `(0=-.)`. The four names WEAK, MEDIUM, STRONG and FUSION remain symbolic computational channels—not Standard Model force assignments.
+
+ECK-046 adds an **Operator Forge** instrument and a new trainable four-channel model over three 3×3 bit phases. Prior fixed inputs/labels and the 438 training / 146 validation / 145 final-test family-preserving split are unchanged.
+
+### Actual trainable channel internals
+
+- **WEAK:** 24 separate weights on directed valid orthogonal-neighbor links within one 3×3 address plane. Each edge's own coefficient learns the local readout.
+- **MEDIUM:** 18 trainable temporal mixing coefficients, two per address, combining the first and intermediate positional bits.
+- **STRONG:** 18 trainable route coefficients, two per address, combining the final positional bit with the local average of neighbors' final bits.
+- **FUSION:** 27 trainable bilinear gate parameters, three per address. The nonlinear product of a learned first-bit gate with a learned mixture of second and third bits is differentiable and has manually implemented gradients.
+
+Together: **24 + 18 + 18 + 27 = 87 learnable scalar parameters**. This new model is separate from the ECK-045 36-scalar adaptive readout and the earlier 648-weight dense neural student. The address/phase features and task are still **engineered inputs**. These parameters change each operator's internal computation, but this is not a demonstrated autonomous discovery of an entirely new architecture.
+
+A bounded full-batch gradient update (learning rate 1.8; weights clamped to [-2,+2]) is accepted only if it strictly decreases 438-case training MSE and does not increase 146-case validation MSE. Immutable parent-linked snapshots preserve all 87 weights and record losses and singlet provenance; rejected attempts are tracked. A separate **SEAL + FINAL TEST** action locks the training run before exposing the 145 final cases.
+
+### Direct source execution
+
+The actual committed HTML JS was syntax-checked and its model/gradient code was executed directly in the JS harness. Results after 500 accepted updates:
+
+| Measure | Before | After |
+|---|---:|---:|
+| Training MSE | 0.001630685966 | 0.000023518669 |
+| Validation MSE | 0.001626881918 | 0.000024432244 |
+
+- 24 valid directed-neighbor links.
+- All 87 parameters accounted for: 24 / 18 / 18 / 27.
+- The seven central finite-difference derivative checks (eps=1e-5) each passed; maximal absolute error **1.75673×10^-13**.
+- 501 frozen ancestry versions (baseline plus 500 accepted changes); all carry `(0=-.)`.
+- Final-test partition remained unopened.
+
+This is a meaningful implementation improvement on a **known synthetic task**. It does not show a parameter-matched comparison against generic nonlinear networks, and the nonlinear fusion gates have their own non-identifiability issues (paired product factors can compensate for one another). Gradient accuracy and a lower MSE do not establish unique causal specializations or discovery of new physics.
+
+The source is at `eck/index.html`; the standalone Python regression `eck/test_eck046.py` is committed but has not been independently executed. GitHub Pages deployment and browser Canvas2D interaction have not been independently verified.
+
+### ASCII mesh
+
+```text
+       [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+        GEN 0           GEN 1           GEN 2
+       00 01 02        09 10 11        18 19 20
+       03 04 05  --->  12 13 14  --->  21 22 23
+       06 07 08        15 16 17        24 25 26
+                         |
+          WEAK  24 learned neighbor routes
+          MEDIUM 18 learned temporal mixtures
+          STRONG 18 learned phase routes
+          FUSION 27 learned bilinear gates
+                         |
+                 87 parameters
+                         |
+            gradient → witness → freeze
+                         |
+                      (0=-.)
+```
+
+### ECK-047 — Next natural boundary
+
+Test against **matched-capacity nonlinear baselines** and new tasks with different operator structure. Audit feature/gate identifiability with constructive parameter-compensation counterexamples, probe whether learned parameters survive input transformations, and test a fresh, explicitly sealed final partition only after committing the new evaluation rules.
