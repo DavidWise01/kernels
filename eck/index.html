@@ -3831,15 +3831,30 @@ function robustStart(seed){
  return r;
 }
 function robustGradientScores(run){
- const g=forgeGradient(tripleTrain,run.forge),blocks={};
+ // Full training gradient for all 96 parameters, including collision residual.
+ // forgeGradient already provides the 87-weight base gradient; correction is
+ // from the fitted collision term, exactly as in collisionEpoch.
+ const g=forgeGradient(tripleTrain,run.forge),repair=Array(9).fill(0);
+ for(const c of tripleTrain){
+  const b=temporalPlanes(c),signal=collisionSignal(c),
+   pred=collisionPredict(c,run),target=adaptTarget(adaptSignals(c));
+  for(let a=0;a<9;a++){
+   const residual=2*(pred[a]-target[a])/(9*tripleTrain.length),
+    correction=2*run.repair[a]*signal[a]/(9*tripleTrain.length);
+   repair[a]+=residual*signal[a];
+   for(const j of forgeEdgeByDest[a])g.weak[j]+=correction*b[0][forgeEdges[j].from];
+   const near2=forgeEdgeByDest[a].reduce((sum,j)=>sum+b[2][forgeEdges[j].from],0)/forgeEdgeByDest[a].length;
+   const m=2*a,q=3*a;
+   g.medium[m]+=correction*b[0][a];g.medium[m+1]+=correction*b[1][a];
+   g.strong[m]+=correction*b[2][a];g.strong[m+1]+=correction*near2;
+   g.fusion[q]+=correction*b[0][a]*(run.forge.fusion[q+1]*b[1][a]+run.forge.fusion[q+2]*b[2][a]);
+   g.fusion[q+1]+=correction*run.forge.fusion[q]*b[0][a]*b[1][a];
+   g.fusion[q+2]+=correction*run.forge.fusion[q]*b[0][a]*b[2][a];
+  }
+ }
+ const blocks={};
  for(const key of ["weak","medium","strong","fusion"])
   blocks[key]=g[key].reduce((sum,v)=>sum+v*v,0);
- // Repair gradient is obtained from actual source-training residuals, not validation.
- const repair=Array(9).fill(0);
- for(const c of tripleTrain){
-  const pred=collisionPredict(c,run),target=adaptTarget(adaptSignals(c)),signal=collisionSignal(c);
-  for(let a=0;a<9;a++)repair[a]+=2*(pred[a]-target[a])*signal[a]/(9*tripleTrain.length);
- }
  blocks.repair=repair.reduce((sum,v)=>sum+v*v,0);
  return Object.freeze(blocks);
 }
