@@ -1,4 +1,4 @@
-# ECK-060 — Replicated Post-Freeze Transfer Evidence
+# ECK-061 — Cross-Family Frozen-Model Transfer Audit
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1905,3 +1905,79 @@ Pairwise *task-level* MSE differences between ranked and fixed (ranked minus fix
 ### ECK-061 — Next natural boundary
 
 Pre-register a **distinct transfer-generator family** with different nonlinear interactions and occupancy geometry, rather than tweaking this five-task benchmark after seeing results. Lock model policies and measure sensitivity to generator-family choice. Provide separate train-evaluation compute accounting and stop after the declared evaluation count. Do not use transfer-score feedback to tune the already frozen model policies.
+
+## ECK-061 — Separate generator geometry and task nonlinearities
+
+The cubed neural structure remains `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`: 27 phase-address cells, 729 ordered discrete configurations, WEAK/MEDIUM/STRONG/FUSION computational carrier names, 96 learned weights (87 operator + nine collision correction), and external fixed singlet `(0=-.)`. The original source split stays **438 train / 146 validation / 145 sealed final**.
+
+ECK-060 reported post-freeze scores on five synthetic sinusoidal occupancy-and-interaction transfer tasks (family A). ECK-061 registers a different, immutable synthetic evaluation protocol: `ECK061_MOVING_BLOBS_CONTRAST_V1`, five task seeds `101, 211, 307, 401, 503`, each with 81 probes comprising three continuous 3×3 spatial maps. Instead of independent sinusoidal cell occupancies, phase occupancy is generated from **two moving Gaussian spatial blobs**. The new target contains nonlinear neighbor contrast `tanh(2.3*(local - neighbor_mean))`, squared occupancy, middle×final interactions, and a checkerboard offset, rather than Family A's primary mixture of linear spatial-temporal features. All target equations and task seeds are defined in source code before evaluating the frozen models.
+
+The existing **nine ECK-058 models** (three deterministic starts × fixed-order, validation-ranked, and training-gradient selectors) are trained and frozen exactly as before, without reading Family A or Family B scores during training. The ECK-060 family A evaluator is reused, not altered. Family B scores are computed only after frozen weights exist, and no trained parameters or policy rules are updated in response. All original 145 final-case configurations remain unopened.
+
+### Cross-family results (MSE, lower is better)
+
+| Policy | Family A mean over 5 tasks × 3 starts | Family B mean over 5 tasks × 3 starts |
+|---|---:|---:|
+| Fixed order | 0.001733162112 | 0.005279765938 |
+| Validation ranked | **0.001679366839** | 0.005276060001 |
+| Training gradient | 0.001703198976 | **0.005272647717** |
+
+Family B per-task means (each averaged across the same three frozen model starts):
+
+| B seed | Fixed MSE | Ranked MSE | Gradient MSE |
+|---|---:|---:|---:|
+| 101 | 0.005434817947 | 0.005431163168 | **0.005429911831** |
+| 211 | 0.005060690608 | 0.005056703867 | **0.005055982781** |
+| 307 | 0.005523308135 | 0.005518918709 | **0.005516783563** |
+| 401 | 0.005026437286 | 0.005022884563 | **0.005016497422** |
+| 503 | 0.005353575712 | 0.005350629698 | **0.005344062988** |
+
+The **ranking reverses**: ranked selection has the lowest aggregate mean on family A; the gradient heuristic has the lowest mean on family B and every one of its five task averages. However, the B-policy differences are *very small* and should not be interpreted as reliable evidence of broader superiority. The new-family absolute MSEs are higher, but the targets and input distributions have changed, making unnormalized MSE values across families not a controlled measure of task difficulty. This is a predeclared synthetic contrast test, not independent empirical evidence from physical systems.
+
+### Audit invariants
+
+- **Training**: 438 existing source training configurations, original target, unchanged learned policies
+- **Acceptance**: 146 original validation examples split into 44 repeated and 102 distinct addresses; no family-transfer scores used
+- **Model freeze**: all nine candidate model coefficients fixed before either family evaluation
+- **Historical evaluation A**: five existing deterministic sinusoidal transfer seeds `11,23,37,53,71`
+- **New evaluation B**: five new moving-Gaussian synthetic transfer seeds `101,211,307,401,503`, 81 probes per seed
+- **Final**: original 145-case discrete test subset remains **WITHHELD**
+- **Compute**: 40 proposed gradient candidates per trained model, with additional gradient-scoring operation for the heuristic; A and B scoring occurs only after freeze and does not alter training compute
+
+The new Canvas2D **CROSS-FAMILY TRANSFER AUDIT** instrument presents family-A versus family-B means, all five family-B task winners and evidence provenance. Source: `eck/index.html`; standalone Node regression: `eck/test_eck061.cjs` (`node eck/test_eck061.cjs`). The committed JavaScript was parsed and the full 45-row Family B evaluator run against all nine frozen models. The Node regression is committed but not independently executed, and live browser/Pages deployment remains unverified.
+
+### ASCII cube
+
+```text
+   [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+       GEN 0          GEN 1          GEN 2
+      00 01 02       09 10 11       18 19 20
+      03 04 05  ==>  12 13 14  ==>  21 22 23
+      06 07 08       15 16 17       24 25 26
+                         |
+                FOUR CARRIERS
+             87 ROUTES + 9 COLLISIONS
+                         |
+               NINE FROZEN MODELS
+                         |
+            +------------+------------+
+            |                         |
+        FAMILY A                  FAMILY B
+       SINUSOIDAL              GAUSSIAN BLOBS
+     LINEAR / CROSS           TANH / SQUARE
+         TASKS                    TASKS
+            |                         |
+       RANKED BEST                GRADIENT BEST
+            +------------+------------+
+                         |
+               FAMILY DEPENDENCE
+                         |
+                145 FINAL SEALED
+                         |
+                       (0=-.)
+```
+
+### ECK-062 — Next natural bound
+
+Preserve both family evaluation records and compare the **normalized** task outcomes with carefully declared target-scale baselines, rather than raw MSE alone. Audit whether the selected carrier policy remains stable under comparable target variance, and report within-family paired model differences and score sensitivity without training on the two evaluation families. Keep the final 145-case partition sealed.
