@@ -1,4 +1,4 @@
-# ECK-059 — Independent Continuous-Phase Evaluation Surface
+# ECK-060 — Replicated Post-Freeze Transfer Evidence
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1822,3 +1822,86 @@ The source `eck/index.html` includes a Canvas2D **INDEPENDENT EVIDENCE SURFACE**
 ### ECK-060 — Next natural bound
 
 With all policies frozen, define independent *replicate transfer generators* by a predeclared task-seed sequence before computing their labels. Compare performance across several transfer tasks and account for uncertainty from both starting seeds and target-generator seeds. Preserve this ECK-059 result as an immutable audit record; do not tune the carrier policies to one transfer generator.
+
+## ECK-060 — Five predeclared synthetic transfer tasks and separated model evidence
+
+The foundational kernel remains `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`: 27 addressed phase cells, 729 original ordered triple inputs, WEAK/MEDIUM/STRONG/FUSION symbolic computational carriers, 87 Forge parameters plus nine collision gates (96 trainable parameters), and fixed external singlet `(0=-.)`. The original split is still **438 training / 146 validation / 145 never-opened final test**.
+
+ECK-059 registered one synthetic post-freeze evaluator with 81 continuous-phase inputs. ECK-060 locks a new independent *family of synthetic transfer tasks* with generator ID `ECK060_REPLICATED_CONTINUOUS_TRANSFER_V1`, **task seeds 11, 23, 37, 53, 71**, 81 generated continuous-valued **3×9 phase arrays per task**, and task-dependent spatial, temporal and nonlinear interaction coefficients. The full generator and target equations are committed in `eck/index.html` before numerical results were computed. They are deterministic designed benchmarks; they do not claim independent observations of nature or an external real-world population.
+
+The nine models (fixed order, validation-ranked, training-gradient heuristic × start perturbations 0, 1, 2) train and freeze under the unchanged ECK-058 source objective. Each uses up to 40 actual proposed gradient updates and the original dual-cohort acceptance gate. Only after training finishes does `replicateAudit()` read those frozen model weights and score the new tasks. No transfer evaluator output is read during training, carrier selection or model acceptance. The prior ECK-059 evaluator remains unchanged.
+
+### Source-executed post-freeze results
+
+| Task seed | Fixed-order mean MSE | Validation-ranked mean MSE | Gradient-heuristic mean MSE |
+|---|---:|---:|---:|
+| 11 | 0.000452882202 | **0.000437150370** | 0.000446497793 |
+| 23 | 0.003572581045 | **0.003482640397** | 0.003522060547 |
+| 37 | 0.001872881434 | **0.001807266871** | 0.001837777515 |
+| 53 | 0.001065316274 | **0.001021686035** | 0.001046359422 |
+| 71 | 0.001702149605 | **0.001648090522** | 0.001663299601 |
+| **All-task mean** | 0.001733162112 | **0.001679366839** | 0.001703198976 |
+
+Means per task average over three deterministic model-start perturbations. The ranked selection policy obtains the lowest *task-average* MSE on all five tasks. This is not an independent statistical test: the five task generators were designed in one benchmark family, are deterministic rather than random draws from a specified external distribution, and share general functional structure with the original target. A different family of inputs or target equations could reverse the ranking.
+
+### Variation decomposition (descriptive, population SDs)
+
+| Policy | SD of five task means | SD of three model-start means |
+|---|---:|---:|
+| Fixed | 0.001047767148 | 0.000077155010 |
+| Ranked | 0.001024185330 | 0.000000437050 |
+| Gradient | 0.001033314746 | 0.000000973445 |
+
+The task-to-task variation exceeds the difference among the three model-start means for all three policies. These descriptive SDs should not be treated as sampling uncertainty or confidence intervals without a defined stochastic sampling model.
+
+Pairwise *task-level* MSE differences between ranked and fixed (ranked minus fixed) across task seeds 11, 23, 37, 53, 71 were approximately `[-0.000015732, -0.000089941, -0.000065615, -0.000043630, -0.000054059]`. All five are below zero in this constructed benchmark. These are scores on **new synthetic data**, not a generalization certificate.
+
+### Enforcement and costs
+
+- Training uses only the original 438 source examples. Gate protection checks 44 repeated-address and 102 distinct-address examples within the original 146 validation examples.
+- Each of nine model training runs uses exactly 40 candidate-gradient evaluations. The gradient heuristic additionally performs one extra training-gradient scoring operation, involving two passes through training cases in this implementation.
+- Post-freeze evaluation consists of 45 task-model MSE scores, each averaged over **81 generated 3×9 phase arrays**. These scoring calculations are distinct from training costs and do not modify the trained models.
+- The original 145-case final-test partition stays **WITHHELD**. The newly generated transfer tasks are now visible and should be treated as spent for future model-selection decisions.
+- The ECK-060 interface provides **REPLICATED TRANSFER TASKS**, a Canvas2D comparison of mean transfer errors by task, and a provenance-friendly readout of task and model-start standard deviations.
+
+**Direct verification:** the committed HTML JavaScript parsed; extracting and executing its neural modules produced the complete 45-row audit, all five task winners, all policy statistics and the post-freeze evidence check. A standalone executable Node regression `eck/test_eck060.cjs` has been committed (`node eck/test_eck060.cjs`) but was not independently run. GitHub Pages deployment and browser event interaction have not been independently verified.
+
+### ASCII witness cube
+
+```text
+    [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+        GEN 0          GEN 1          GEN 2
+       00 01 02       09 10 11       18 19 20
+       03 04 05  ==>  12 13 14  ==>  21 22 23
+       06 07 08       15 16 17       24 25 26
+                         |
+                 FOUR CARRIER OPERATORS
+                     87 + 9 = 96
+                         |
+              TRAIN 438 / GATE VALID 146
+                         |
+                THREE FROZEN POLICIES
+                  × THREE MODEL SEEDS
+                         |
+                  NINE FROZEN MODELS
+                         |
+            +------------+------------+
+            |            |            |
+          TASK 11      TASK 23     TASK 37
+          TASK 53      TASK 71
+            |            |            |
+            +------------+------------+
+                         |
+             45 POST-FREEZE TASK SCORES
+                         |
+                PAIRED POLICY AUDIT
+                         |
+                145 ORIGINAL TEST SEALED
+                         |
+                       (0=-.)
+```
+
+### ECK-061 — Next natural boundary
+
+Pre-register a **distinct transfer-generator family** with different nonlinear interactions and occupancy geometry, rather than tweaking this five-task benchmark after seeing results. Lock model policies and measure sensitivity to generator-family choice. Provide separate train-evaluation compute accounting and stop after the declared evaluation count. Do not use transfer-score feedback to tune the already frozen model policies.
