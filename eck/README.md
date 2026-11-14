@@ -1,4 +1,4 @@
-# ECK-055 — Continuous Safeguarded Learning and Compute Accounting
+# ECK-056 — Carrier-Block Gradient Plateau Recovery
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1512,3 +1512,84 @@ The new Canvas2D **CONTINUOUS SAFEGUARDED LEARNING** instrument plots validation
 ### ECK-056 — Next natural boundary
 
 Address the finite *NO_FEASIBLE_STEP* stall by adding deterministic recovery policies that do not silently change the acceptance constraints: (a) restart at a lower bounded rate, (b) use a verified alternative descent direction, or (c) preserve a plateau certificate and terminate. Compare against the 40-proposal baseline and keep the model-selection and final-test boundaries separate.
+
+## ECK-056 — Recover after a dual-cohort full-gradient plateau
+
+Preserve the user-specified `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]` neural cube, 27 addressed phase cells, 729 ordered triple codes, the symbolic WEAK / MEDIUM / STRONG / FUSION carrier operators, 96 trainable coefficients (87 Forge + 9 collision repair), fixed singlet `(0=-.)`, and training/validation/final split 438 / 146 / **145 final withheld**.
+
+ECK-055 demonstrated a 40-proposal continuous dual-cohort backtracking controller that accepted seven updates then stopped after 22 proposals: no feasible **full-gradient** step in its finite nine-rate geometric grid. ECK-056 asks whether that is a limitation of the *full-gradient direction*, rather than a generalized impossibility of improvement.
+
+The baseline training operation `collisionEpoch(run,rate,dualGate,activeBlock)` now accepts an optional trainable parameter block. When `activeBlock=null`, its existing full 96-parameter gradient behavior is preserved. When one of `weak, medium, strong, fusion, repair` is chosen, **only that block's parameters move**, but the gradients, predictions and dual-cohort acceptance gate still come from the full real model. This is block-coordinate descent on the same task, not a new label feature. A proposed block-specific update must improve training and not worsen aggregate, repeated or distinct validation losses.
+
+ECK-056 runs a deterministic continuous experiment with a **maximum of 40 real candidate-gradient proposals**:
+
+1. Start at the canonical 96-weight initialization.
+2. Attempt full-gradient updates with halved learning rates, beginning at 70, nine trials maximum.
+3. On exhaustive rejection, freeze the stalled checkpoint and test the five carrier blocks in the declared order `weak, medium, strong, fusion, repair`, each with rate 70 and the same strict gate.
+4. If a block update is accepted, append the new version and resume ordinary full-gradient backtracking.
+5. If all blocks fail or the 40-proposal budget is exhausted, terminate with the complete failure ledger. Do **not** inspect the final-test partition.
+
+### Verified committed-JavaScript run
+
+The actual source-extracted model produced **40 proposals = 13 accepted + 27 rejected**, ending with:
+
+| Measure | ECK-055 full-gradient only | ECK-056 full-gradient + block recovery |
+|---|---:|---:|
+| Proposals consumed | 22 | 40 |
+| Accepted checkpoints | 7 | 13 |
+| Rejected proposals | 15 | 27 |
+| Training MSE | 0.000077716414 | **0.000035767288** |
+| Aggregate validation MSE | 0.000080955279 | **0.000037771772** |
+| Repeated-address validation MSE | 0.000232934085 | **0.000106243275** |
+| Distinct-address validation MSE | 0.000015395794 | **0.000008235046** |
+
+Two separate real full-gradient stalls and two real block-specific recoveries were preserved:
+
+- **Stall 1:** after 22 proposals at checkpoint 7, all nine allowed full-gradient rates rejected. The **WEAK-only** gradient at rate 70 was accepted and advanced checkpoint **7 → 8**, with validation MSE `0.000080955279 → 0.000080707999`.
+- **Stall 2:** after 32 proposals at checkpoint 8, all nine allowed full-gradient rates rejected. WEAK, MEDIUM, STRONG block candidates were rejected, and **FUSION-only** gradient at rate 70 was accepted. It advanced checkpoint **8 → 9**, with validation MSE `0.000080707999 → 0.000069510072`.
+- Subsequent full-gradient updates resumed, reaching checkpoint 13 on the 40th total proposal.
+
+The source includes an append-only `stalls` record for **both** distinct stalled checkpoints, an immutable `recoveries` record, all candidate before/proposed loss metrics, and a parent-indexed sequence of accepted checkpoint metrics.
+
+**Interpretation:** this is an actual improvement at two previously blocked model states. A lack of a feasible **full** gradient step did not mean a lack of a feasible **coordinate-block** step. ECK-056 consumes the full 40-proposal budget and therefore has more computation than the ECK-055 stopped path; it is not a parameter-matched or compute-normalized architecture superiority claim. Its validation data still participate in every acceptance decision. The 145 final cases are not evaluated.
+
+The Canvas2D **CARRIER-BLOCK PLATEAU RECOVERY** panel displays the training path and both recovery witnesses. The executable Node regression `eck/test_eck056.cjs` extracts the actual neural functions directly from `eck/index.html`, checks both stall/recovery sequences, counts and loss invariants, and avoids final-test prediction. The committed HTML JavaScript parsed and its numerical model was executed; the standalone Node file was committed but has not been separately run, and the deployed GitHub Pages page and browser interaction have not been independently verified.
+
+### ASCII: recovered neural cube
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+       GEN 0            GEN 1            GEN 2
+      00 01 02         09 10 11         18 19 20
+      03 04 05   ==>   12 13 14   ==>   21 22 23
+      06 07 08         15 16 17         24 25 26
+                         |
+            WEAK MEDIUM STRONG FUSION
+                         |
+             87 routes + 9 collision gates
+                         |
+               FULL GRADIENT / 9 RATES
+                         |
+               FAIL at CHECKPOINT 7
+                         |
+           WEAK-only SAFE: 7 --> 8
+                         |
+               FULL GRADIENT / 9 RATES
+                         |
+               FAIL at CHECKPOINT 8
+                         |
+      WEAK FAIL / MEDIUM FAIL / STRONG FAIL
+                         |
+           FUSION-only SAFE: 8 --> 9
+                         |
+                   FULL GRADIENT
+                         |
+                    VERSION 13
+                         |
+                        (0=-.)
+```
+
+### ECK-057 — Next natural bound
+
+Audit the real gradient behavior at the two rescued checkpoints and derive a **general deterministic block-selection rule** based on measured expected improvement per candidate evaluation. Compare automatic block choice with fixed order, count its extra screening cost and preserve all rejected packets. Keep final-test evaluation and performance claims separated from validation-selected updates.
