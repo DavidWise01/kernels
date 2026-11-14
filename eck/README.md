@@ -1,4 +1,4 @@
-# ECK-058 — Seeded Carrier Selection and Screening-Cost Audit
+# ECK-059 — Independent Continuous-Phase Evaluation Surface
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1755,3 +1755,70 @@ The committed JavaScript was syntax-checked and all nine comparisons were execut
 ### ECK-059 — Next natural bound
 
 Freeze a **precommitted evaluation protocol** distinguishing cohort-protection data from model-selection data. Create a new *task-generator seed / transfer task* that is locked before comparing selectors. Prefer a reproducible compute-cost estimate including the extra heuristic gradient-scoring pass. Treat the existing 145 final-test examples as sealed until model choice, checkpoints and acceptance/stop rules are fixed.
+
+## ECK-059 — Separate training governance from post-freeze evidence
+
+The persistent tensor `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]` remains 27 addressed phase cells, 729 ordered discrete input triples, WEAK/MEDIUM/STRONG/FUSION symbolic carriers, 87 operator parameters + nine collision weights, and fixed external singlet `(0=-.)`. The previous 438 training / 146 validation / **145 never-opened final** split remains untouched.
+
+### Precommitted synthetic evaluation specification
+
+Protocol identifier: `ECK059_CONTINUOUS_PHASE_TRANSFER_V1`. A deterministic generator creates **81 synthetic probes**, each containing **3×9 continuous occupancy values** within (0,1), rather than the discrete one-hot binary phases used by the original 729-address neural training domain. Values come from a declared sine/modulo expression indexed only by `probe, phase, address`, not model weights. There is no new gradient learning or checkpoint selection based on these probes. The declared synthetic transfer target uses a new spatial-gradient, phase-weight and phase-interaction mixture on these same continuous inputs.
+
+Each of the nine fixed/ranked/gradient × seed 0/1/2 models is trained exactly as in ECK-058, then its final 96 weights are included in a frozen source-model packet. The new evaluator is permitted to read those frozen weights and its 81 probes **only after policy training is finished**. No optimizer, validation acceptance gate or carrier ranking function calls this evaluator. This is a genuinely new **synthetic continuous input domain** and new **synthetic target**, but not an independent real-world dataset or scientific proof. Its generator and target were defined in the committed code before source execution returned new-task scores. They remain one designed benchmark and should not be iteratively tuned against these measured results.
+
+### Executed model results
+
+| Seed | Fixed-order new-task MSE | Validation-ranked new-task MSE | Gradient-heuristic new-task MSE |
+|---|---:|---:|---:|
+| 0 | **0.000376064048** | 0.000379239499 | 0.000386293493 |
+| 1 | 0.000389782310 | **0.000380111165** | 0.000386736059 |
+| 2 | 0.000389501719 | **0.000380117963** | 0.000386395231 |
+| **Mean** | 0.000385116025 | **0.000379822876** | 0.000386474927 |
+
+The ranked policy has the lowest mean new-task error across these three deterministic starts, but **fixed order wins seed 0**, so none uniformly dominates. The new-task differences are small and the benchmark is constructed from the same families of spatial and temporal features as the source task. No out-of-family performance claim is justified.
+
+### Enforcement boundary
+
+- **Train**: the previously defined 438 training configurations; deterministic starting perturbations; source-task target only
+- **Accept/reject training candidates**: the existing 146 source validation configurations, split into 44 repeated-address and 102 all-distinct-address groups
+- **Select carriers**: each frozen policy uses its existing rule; only ranked policy inspects validation error across all five candidate blocks; the gradient heuristic uses training gradient norms to choose an order
+- **Audit after freeze**: 81 novel continuous-phase arrays and their newly defined synthetic transfer labels; scoring only, no resulting model modification
+- **Final**: the 145-case original held-out test split remains **WITHHELD**
+
+The source `eck/index.html` includes a Canvas2D **INDEPENDENT EVIDENCE SURFACE** panel and code functions `evidencePredict`, `evidenceTarget`, `evidenceMSE`, `evidenceAudit`. The separate standalone regression `eck/test_eck059.cjs` (`node eck/test_eck059.cjs`) verifies the nine frozen outputs, 81 strictly continuous probes, source/validation/final counts and the reproducible new-task MSE figures. Direct extraction of the GitHub JavaScript passed syntax and produced all nine measured scores. The standalone Node regression has been committed but not independently executed; live browser and GitHub Pages behavior remain unverified.
+
+### ASCII mesh
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+      GEN 0              GEN 1              GEN 2
+     00 01 02           09 10 11           18 19 20
+     03 04 05    ==>    12 13 14    ==>    21 22 23
+     06 07 08           15 16 17           24 25 26
+                         |
+               WEAK / MEDIUM / STRONG / FUSION
+                         |
+                  87 + 9 = 96 WEIGHTS
+                         |
+              TRAIN 438 / VALIDATE 146
+                         |
+              3 SEEDS × 3 FROZEN POLICIES
+                         |
+                  FREEZE CHECKPOINT
+                         |
+            +------------+-------------+
+            |                          |
+      81 CONTINUOUS PROBES       145 FINAL TRIPLES
+      NEW SYNTHETIC TARGET           SEALED
+            |
+       POST-FREEZE SCORE
+            |
+        APPEND EVIDENCE
+            |
+          (0=-.)
+```
+
+### ECK-060 — Next natural bound
+
+With all policies frozen, define independent *replicate transfer generators* by a predeclared task-seed sequence before computing their labels. Compare performance across several transfer tasks and account for uncertainty from both starting seeds and target-generator seeds. Preserve this ECK-059 result as an immutable audit record; do not tune the carrier policies to one transfer generator.
