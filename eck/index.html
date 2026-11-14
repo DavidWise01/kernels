@@ -3904,7 +3904,7 @@ function robustRunOne(policy,seed){
    scoreCalls,order:Object.freeze(order.slice())}));
   checkpoints.push(Object.freeze({version:run.versions.length-1,cost:records.length,metrics:dgMetrics(run)}));
  }
- const metrics=dgMetrics(run),shift=shiftForgeLoss(tripleValid,run.forge);
+ const metrics=dgMetrics(run);
  // Shifted target requires including learned collision correction in the prediction:
  let shifted=0;
  for(const c of tripleValid){
