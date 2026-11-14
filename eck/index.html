@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECK-058 | Chromatic Evidence Continuity</title>
+<title>ECK-059 | Chromatic Evidence Continuity</title>
 <style>
 :root{color-scheme:dark;--orange:#ff8519;--cyan:#55edee;--silver:#b8cad8;--bg:#080d13}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -5%,#1b3340,transparent 48%),var(--bg);color:#e8f1f5;font:14px ui-monospace,Consolas,monospace}
@@ -19,7 +19,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .note{color:#8ca6b2;font-size:12px;line-height:1.6}.warn{color:#ffb26e}.ok{color:#8bffc8}
 @media(max-width:1000px){.wheels{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wheels,.lower{grid-template-columns:1fr}}
 
-/* ECK-058: a single central primitive, not four independent panels in a row. */
+/* ECK-059: a single central primitive, not four independent panels in a row. */
 .wheels{max-width:920px;margin:26px auto 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". north ." "west core east" ". south .";gap:10px;align-items:center;justify-items:stretch;position:relative}
 .wheels>.singlet{grid-area:core;min-height:220px;aspect-ratio:1;position:relative;display:grid;place-items:center}
 .wheels>.panel:nth-child(2){grid-area:north}
@@ -38,7 +38,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 .singlet-foot{position:absolute;bottom:-7px;color:#7fa2b1;font-size:9px;text-align:center;letter-spacing:.07em}
 @media(max-width:680px){.wheels{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"north east" "core core" "west south";max-width:490px}.wheels>.singlet{width:65%;margin:auto;min-height:170px}.wheels>.panel{min-width:0}.singlet-foot{bottom:0}}
 .force-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.force-controls label{font-size:12px}.force-legend{display:flex;gap:22px;flex-wrap:wrap;letter-spacing:.1em;margin:12px 0}.force-controls output{display:block;text-align:center;color:#fff;margin-top:5px}.wheels>.panel{transition:box-shadow .2s,border-color .2s}.wheels>.panel .wheel{transition:filter .2s}@media(max-width:680px){.force-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}.quantum-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}.quantum-map{position:relative;min-height:400px;background:radial-gradient(circle at 50% 50%,#193340,#09121a 67%);border-radius:16px;border:1px solid #3b626f;overflow:hidden}.q-slot{position:absolute;transform:translate(-50%,-50%);width:24%;min-height:63px;padding:8px 5px;border:1px solid #5d9dba;color:#dceaf2;background:#132a36;border-radius:12px;font-size:10px;cursor:pointer;box-shadow:0 0 10px #45c8f424;line-height:1.4;word-break:break-word;text-align:center}.q-slot:hover,.q-slot.active{border-color:#ff9d2e;color:#fff;background:#3c2d23;box-shadow:0 0 22px #ff9d2e55}.q-singlet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:57px;height:57px;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle,#d5fbff,#1c4860 40%,#101820 85%);color:#fff;font-size:32px;display:grid;place-items:center;box-shadow:0 0 25px #51e1ff88}.q-singlet:after{content:"SINGLET · 10";position:absolute;white-space:nowrap;top:60px;font:10px ui-monospace,monospace;color:#c4d5dc}.quantum-side pre{font-size:12px}.quantum-panel .big{word-break:break-word}@media(max-width:650px){.quantum-layout{grid-template-columns:1fr}.quantum-map{min-height:360px}.q-slot{font-size:9px;min-height:58px}}.pyramid-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:center}#pyramidSvg{background:radial-gradient(ellipse at center,#1c3340,#08131b 72%);border:1px solid #3b626f;border-radius:16px;max-height:480px}#pyramidNumbers{color:#f1b96f}.pyramid-layout .big{margin:12px 0}.pyramid-layout input{margin:12px 0}@media(max-width:700px){.pyramid-layout{grid-template-columns:1fr}}.life-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:center}#lifeSvg{background:radial-gradient(circle at center,#182c3c,#09131d 70%);border:1px solid #42616a;border-radius:16px}.life-grid button{font-size:11px}.life-grid pre{font-size:11px}@media(max-width:720px){.life-grid{grid-template-columns:1fr}}.phase-replay{margin-top:16px;padding:13px;border:1px solid #3b6c7c;border-radius:12px;background:#091a22}.replay-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px}.replay-selects select{width:100%;padding:9px;margin-top:5px;border:1px solid #68a1b0;background:#172936;color:#e9f5fc;border-radius:8px}.phase-replay button{font-size:11px}@media(max-width:600px){.replay-selects{grid-template-columns:1fr}}.transport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.transport-channel{background:#101f2a;border:1px solid #52788a;padding:12px;border-radius:12px;min-height:155px}.transport-channel strong{font-size:12px;color:#f4f8ff}.transport-channel pre{font-size:11px;max-height:180px}.transport-panel button{font-size:12px}@media(max-width:720px){.transport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.nest-trace{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;margin:12px 0}.nest-level{text-align:center;background:#132333;border:1px solid #436272;border-radius:7px;padding:12px 2px;color:#cadde4;font-size:11px}.nest-level.active{background:#4d2e19;border-color:#ffa440;color:#fff;box-shadow:0 0 12px #ff9a3349}.nest-level.done{border-color:#48e4c3;color:#8bffdf}.rowlike{display:flex;flex-wrap:wrap;gap:4px}@media(max-width:750px){.nest-trace{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
-<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-058</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
+<main><header><div><div class="sub">ROOT 0 / EVIDENCE-CARRYING KERNEL / ECK-059</div><h1>CHROME // FOUR AROUND ONE</h1><p class="sub">QUANTUM CHROME / MITO → EMERGENCE → HAMILTON → }{ → RENEWAL</p></div><div class="status" id="state">UNSEALED · OBSERVATION MODE</div></header>
 <section class="panel" id="lifeCycle" style="margin-top:18px">
 <h2>00 / LIVING PYRAMID · HAMILTON RETURN</h2>
 <p class="note">Two distinct unit cells form the mitochondrial seed. Nine subsequent numeric vertices mature toward 27, with singlet 0 as the origin and return. The route is Hamiltonian on this <em>defined cycle graph</em>, not yet a Hamiltonian proof on the full Quantum Chrome lattice.</p>
@@ -82,38 +82,39 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
  <pre id="pyramidTrace">[M-11] 11 levels / 9 body + 2 unit cap / 1 singlet</pre>
  </div>
 </div></section>
-<section class="panel" id="robustSelectorLab" style="margin-top:18px"><h2>00 / ECK-058 · CARRIER SELECTION ROBUSTNESS</h2><p class="note">Three deterministic perturbation seeds, three selection policies and a declared 40-candidate budget for each run. Fixed order tests first feasible; validation-ranked tests all five blocks; gradient-norm heuristic ranks blocks before testing without five-candidate validation screening. A shifted target is scored zero-shot on the same validation inputs, not used for training. Heuristic's extra gradient-score calculation is reported separately.</p><canvas id="robustSelectorCanvas" width="1000" height="435" style="display:block;width:100%;height:auto;background:#071925;border:1px solid #557b8a;border-radius:13px"></canvas><div class="rowlike"><button id="robustRun">RUN NINE MODEL COMPARISONS</button><button id="robustReset">RESET AUDIT</button></div><pre id="robustStatus">[ECK-058] three seeds × fixed/ranked/heuristic · 40 proposals each · 145 final sealed</pre></section>
+<section class="panel" id="independentEvidenceLab" style="margin-top:18px"><h2>00 / ECK-059 · INDEPENDENT EVIDENCE SURFACE</h2><p class="note">Freeze all nine ECK-058 policies and checkpoints, then score a separate synthetic continuous-phase generator (81 novel three-plane probes). This evaluator is isolated from all gradient, cohort acceptance and selection operations. Scores describe a newly defined synthetic transfer target, not physical measurements or proven generalization. The original 145 withheld cases remain unopened.</p><canvas id="evidenceCanvas" width="1000" height="415" style="display:block;width:100%;height:auto;background:#081923;border:1px solid #547788;border-radius:12px"></canvas><div class="rowlike"><button id="evidenceRun">FREEZE + EVALUATE NINE POLICIES</button><button id="evidenceReset">CLEAR EVALUATION</button></div><pre id="evidenceStatus">[ECK-059] evaluation protocol v1 / 81 novel continuous-phase probes / sealed final</pre></section>
+<section class="panel" id="robustSelectorLab" style="margin-top:18px"><h2>00 / ECK-059 · CARRIER SELECTION ROBUSTNESS</h2><p class="note">Three deterministic perturbation seeds, three selection policies and a declared 40-candidate budget for each run. Fixed order tests first feasible; validation-ranked tests all five blocks; gradient-norm heuristic ranks blocks before testing without five-candidate validation screening. A shifted target is scored zero-shot on the same validation inputs, not used for training. Heuristic's extra gradient-score calculation is reported separately.</p><canvas id="robustSelectorCanvas" width="1000" height="435" style="display:block;width:100%;height:auto;background:#071925;border:1px solid #557b8a;border-radius:13px"></canvas><div class="rowlike"><button id="robustRun">RUN NINE MODEL COMPARISONS</button><button id="robustReset">RESET AUDIT</button></div><pre id="robustStatus">[ECK-059] three seeds × fixed/ranked/heuristic · 40 proposals each · 145 final sealed</pre></section>
 <section class="panel" id="rankLab" style="margin-top:18px">
-<h2>00 / ECK-058 · EVIDENCE-RANKED CARRIER SELECTION</h2>
+<h2>00 / ECK-059 · EVIDENCE-RANKED CARRIER SELECTION</h2>
 <p class="note">At a full-gradient stall, compare fixed-order block selection with an evidence-ranked selector. The ranked policy probes all five block-specific candidates from one frozen checkpoint, counts every probe, then selects the safe candidate with greatest aggregate validation MSE reduction per probe. Identical 40-proposal budgets and cohort gates. Ranking is not free: screening costs five candidates.</p>
 <canvas id="rankCanvas" width="1000" height="400" style="width:100%;background:#081923;border:1px solid #527a88;border-radius:12px"></canvas>
 <div class="rowlike"><button id="rankRun">COMPARE BOTH SELECTORS</button><button id="rankReset">RESET COMPARISON</button></div>
-<pre id="rankStatus">[ECK-058] evaluate carrier selection / candidate costs counted / final withheld</pre></section>
-<section class="panel" id="plateauLab" style="margin-top:18px"><h2>00 / ECK-058 · CARRIER-BLOCK PLATEAU RECOVERY</h2><p class="note">Replay the same seven-update full-gradient stall (22 proposals), then attempt one carrier-block gradient at a time without weakening the dual-cohort gate. WEAK, MEDIUM, STRONG, FUSION and collision repair are tested in declared order. Each attempted block still counts against a 40-proposal budget; checkpoints and failed candidates remain recorded. Final test stays sealed.</p><canvas id="plateauCanvas" width="1000" height="390" style="width:100%;height:auto;background:#071923;border:1px solid #557a88;border-radius:13px"></canvas><div class="rowlike"><button id="plateauRun">REPLAY AND RECOVER</button><button id="plateauReset">RESET</button></div><pre id="plateauStatus">[ECK-058] full-gradient stall → safeguarded single-block recovery</pre></section>
-<section class="panel" id="continuityLab" style="margin-top:18px"><h2>00 / ECK-058 · CONTINUOUS SAFEGUARDED LEARNING</h2><p class="note">Carry accepted checkpoints forward, not independent replays. Compare adaptive backtracking (initial rate 70, halving, at most 9 trials per step) to fixed learning rate 1.8, with the same maximum 40 proposed gradient candidates. Report actual proposals, accepted steps, rejections and cohort validation losses. No final-test access.</p><canvas id="continuityCanvas" width="1000" height="390" style="width:100%;height:auto;background:#081923;border:1px solid #577c89;border-radius:12px"></canvas><div class="rowlike"><button id="continuityRun">RUN EQUAL CANDIDATE BUDGET</button><button id="continuityReset">RESET RUN</button></div><pre id="continuityStatus">[ECK-058] 40 proposal budget / adaptive vs fixed / final test withheld</pre></section>
+<pre id="rankStatus">[ECK-059] evaluate carrier selection / candidate costs counted / final withheld</pre></section>
+<section class="panel" id="plateauLab" style="margin-top:18px"><h2>00 / ECK-059 · CARRIER-BLOCK PLATEAU RECOVERY</h2><p class="note">Replay the same seven-update full-gradient stall (22 proposals), then attempt one carrier-block gradient at a time without weakening the dual-cohort gate. WEAK, MEDIUM, STRONG, FUSION and collision repair are tested in declared order. Each attempted block still counts against a 40-proposal budget; checkpoints and failed candidates remain recorded. Final test stays sealed.</p><canvas id="plateauCanvas" width="1000" height="390" style="width:100%;height:auto;background:#071923;border:1px solid #557a88;border-radius:13px"></canvas><div class="rowlike"><button id="plateauRun">REPLAY AND RECOVER</button><button id="plateauReset">RESET</button></div><pre id="plateauStatus">[ECK-059] full-gradient stall → safeguarded single-block recovery</pre></section>
+<section class="panel" id="continuityLab" style="margin-top:18px"><h2>00 / ECK-059 · CONTINUOUS SAFEGUARDED LEARNING</h2><p class="note">Carry accepted checkpoints forward, not independent replays. Compare adaptive backtracking (initial rate 70, halving, at most 9 trials per step) to fixed learning rate 1.8, with the same maximum 40 proposed gradient candidates. Report actual proposals, accepted steps, rejections and cohort validation losses. No final-test access.</p><canvas id="continuityCanvas" width="1000" height="390" style="width:100%;height:auto;background:#081923;border:1px solid #577c89;border-radius:12px"></canvas><div class="rowlike"><button id="continuityRun">RUN EQUAL CANDIDATE BUDGET</button><button id="continuityReset">RESET RUN</button></div><pre id="continuityStatus">[ECK-059] 40 proposal budget / adaptive vs fixed / final test withheld</pre></section>
 <section class="panel" id="dualGateLab" style="margin-top:18px">
-<h2>00 / ECK-058 · DUAL-COHORT NEURAL ACCEPTANCE GATE</h2>
+<h2>00 / ECK-059 · DUAL-COHORT NEURAL ACCEPTANCE GATE</h2>
 <p class="note">Two separately reset 96-weight collision learners follow the same gradient and learning rate. The ordinary learner checks aggregate validation only; the dual-gated learner must also avoid regression in each of the 44 repeated-address and 102 distinct-address validation cases (cohort averages). Rejected attempts preserve their candidate losses. No final-test case is evaluated until sealing.</p>
 <canvas id="dualGateCanvas" width="1000" height="400" style="display:block;width:100%;background:#081821;border:1px solid #547889;border-radius:12px"></canvas>
 <div class="rowlike"><button id="dg100">ITERATE 100</button><button id="dg500">RECURSE 500</button><button id="dgAudit">AUDIT BOTH COHORTS</button><button id="dgCounter">TEST ADVERSE CANDIDATE</button><button id="dgReal">REPLAY REAL GRADIENT CONFLICT</button><button id="dgRecover">RECOVER SAFE STEP</button><button id="dgBacktrack">RUN BOUNDED BACKTRACKING</button><button id="dgSeal">SEAL + FINAL TEST</button><button id="dgReset">RESET EXPERIMENT</button></div>
 <pre id="dgStatus">[DUAL GATE] aggregate-versus-cohort-gated learning, 96 weights each</pre></section>
-<section class="panel" id="collisionLab" style="margin-top:18px"><h2>00 / ECK-058 · COLLISION REPAIR ON THE CUBED MESH</h2><p class="note">Compare two identical 87-weight Forge starts under the same training budget. The repair route adds nine learnable local coincidence weights for bit0×bit1 at each address; the baseline retains only 87 weights. Track validation separately for 44 repeated-address and 102 distinct-address configurations. The collision feature overlaps a known component of the synthetic target; it is not discovered autonomously.</p><canvas id="collisionCanvas" width="1000" height="400" style="width:100%;height:auto;background:#081822;border:1px solid #587888;border-radius:12px"></canvas><div class="rowlike"><button id="collisionTrain">TRAIN BOTH ×100</button><button id="collisionTrain500">RECURSE ×500</button><button id="collisionAudit">AUDIT COHORTS</button><button id="collisionSeal">SEAL + FINAL TEST</button><button id="collisionReset">RESET</button></div><pre id="collisionStatus">[COLLISION REPAIR] 87 vs 96 trainable parameters / final test withheld</pre></section>
-<section class="panel" id="multiSeedLab" style="margin-top:18px"><h2>00 / ECK-058 · THREE-SEED ROBUSTNESS × ADDRESS-COHORT SHIFT</h2><p class="note">Three deterministic starts for each model, equal 100-round update budgets. Validate on disjoint permutation families; separately report same-address repetitions versus three-distinct-address cases. This is a validation-cohort distribution reweighting, not an independently gathered out-of-distribution dataset. Final test stays sealed.</p><canvas id="seedCanvas" width="1000" height="390" style="display:block;width:100%;height:auto;background:#071823;border:1px solid #577985;border-radius:13px"></canvas><div class="rowlike"><button id="seedRun">RUN THREE SEEDS</button><button id="seedReset">RESET ROBUSTNESS</button></div><pre id="seedStatus">[ECK-058] three deterministic seeds, 100 rounds, two validation cohorts</pre></section>
-<section class="panel" id="shiftLab"><h2>00 / ECK-058 · LEARNING CURVE AND TASK-SHIFT AUDIT</h2><p class="note">Use the same number of accepted-or-rejected update opportunities for the 87-parameter Forge and 85-parameter MLP, then test zero-shot performance on a shifted nonlinear target (middle×final coincidence and altered address gradients). Shift evaluation uses validation examples only. The two models have different initialization and inductive bias; this test does not equate their optimization difficulty.</p><canvas id="shiftCanvas" width="1000" height="390" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="shift200">RUN 200 MATCHED ROUNDS</button><button id="shiftGauge">CHECK FUSION GAUGE</button><button id="shiftAudit">AUDIT TASK SHIFT</button><button id="shiftReset">RESET EXPERIMENT</button></div><pre id="shiftStatus">[ECK-058] 87-vs-85 / equal attempted update budget / final test sealed</pre></section>
-<section class="panel" id="necessityLab" style="margin-top:18px"><h2>00 / ECK-058 · 87 vs 85 PARAMETER NECESSITY LAB</h2><p class="note">Actual 87-weight Operator Forge versus a generic 85-weight tanh MLP. Fusion-gate compensation audit tests whether different parameters produce identical outputs. Validation uses 146 examples; 145 final-test configurations remain withheld.</p><canvas id="necessityCanvas" width="1000" height="350" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="nTrain">TRAIN BOTH ×100</button><button id="nTrain500">RECURSE ×500</button><button id="nGauge">FUSION GAUGE TEST</button><button id="nSeal">SEAL + TEST</button><button id="nReset">RESET</button></div><pre id="nReadout"></pre></section>
+<section class="panel" id="collisionLab" style="margin-top:18px"><h2>00 / ECK-059 · COLLISION REPAIR ON THE CUBED MESH</h2><p class="note">Compare two identical 87-weight Forge starts under the same training budget. The repair route adds nine learnable local coincidence weights for bit0×bit1 at each address; the baseline retains only 87 weights. Track validation separately for 44 repeated-address and 102 distinct-address configurations. The collision feature overlaps a known component of the synthetic target; it is not discovered autonomously.</p><canvas id="collisionCanvas" width="1000" height="400" style="width:100%;height:auto;background:#081822;border:1px solid #587888;border-radius:12px"></canvas><div class="rowlike"><button id="collisionTrain">TRAIN BOTH ×100</button><button id="collisionTrain500">RECURSE ×500</button><button id="collisionAudit">AUDIT COHORTS</button><button id="collisionSeal">SEAL + FINAL TEST</button><button id="collisionReset">RESET</button></div><pre id="collisionStatus">[COLLISION REPAIR] 87 vs 96 trainable parameters / final test withheld</pre></section>
+<section class="panel" id="multiSeedLab" style="margin-top:18px"><h2>00 / ECK-059 · THREE-SEED ROBUSTNESS × ADDRESS-COHORT SHIFT</h2><p class="note">Three deterministic starts for each model, equal 100-round update budgets. Validate on disjoint permutation families; separately report same-address repetitions versus three-distinct-address cases. This is a validation-cohort distribution reweighting, not an independently gathered out-of-distribution dataset. Final test stays sealed.</p><canvas id="seedCanvas" width="1000" height="390" style="display:block;width:100%;height:auto;background:#071823;border:1px solid #577985;border-radius:13px"></canvas><div class="rowlike"><button id="seedRun">RUN THREE SEEDS</button><button id="seedReset">RESET ROBUSTNESS</button></div><pre id="seedStatus">[ECK-059] three deterministic seeds, 100 rounds, two validation cohorts</pre></section>
+<section class="panel" id="shiftLab"><h2>00 / ECK-059 · LEARNING CURVE AND TASK-SHIFT AUDIT</h2><p class="note">Use the same number of accepted-or-rejected update opportunities for the 87-parameter Forge and 85-parameter MLP, then test zero-shot performance on a shifted nonlinear target (middle×final coincidence and altered address gradients). Shift evaluation uses validation examples only. The two models have different initialization and inductive bias; this test does not equate their optimization difficulty.</p><canvas id="shiftCanvas" width="1000" height="390" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="shift200">RUN 200 MATCHED ROUNDS</button><button id="shiftGauge">CHECK FUSION GAUGE</button><button id="shiftAudit">AUDIT TASK SHIFT</button><button id="shiftReset">RESET EXPERIMENT</button></div><pre id="shiftStatus">[ECK-059] 87-vs-85 / equal attempted update budget / final test sealed</pre></section>
+<section class="panel" id="necessityLab" style="margin-top:18px"><h2>00 / ECK-059 · 87 vs 85 PARAMETER NECESSITY LAB</h2><p class="note">Actual 87-weight Operator Forge versus a generic 85-weight tanh MLP. Fusion-gate compensation audit tests whether different parameters produce identical outputs. Validation uses 146 examples; 145 final-test configurations remain withheld.</p><canvas id="necessityCanvas" width="1000" height="350" style="width:100%;background:#081822;border:1px solid #527b89;border-radius:12px"></canvas><div class="rowlike"><button id="nTrain">TRAIN BOTH ×100</button><button id="nTrain500">RECURSE ×500</button><button id="nGauge">FUSION GAUGE TEST</button><button id="nSeal">SEAL + TEST</button><button id="nReset">RESET</button></div><pre id="nReadout"></pre></section>
 <section class="panel" id="operatorForge" style="margin-top:18px">
-<h2>00 / ECK-058 OPERATOR FORGE · TRAIN INTERNAL ROUTING</h2>
+<h2>00 / ECK-059 OPERATOR FORGE · TRAIN INTERNAL ROUTING</h2>
 <p class="note">Actual trainable operator internals: WEAK uses 24 directed 3×3 neighbor weights; MEDIUM has 18 temporal-mixing weights; STRONG has 18 phase/routing weights; FUSION has 27 bilinear gate weights. The total is 87 trainable parameters over the existing 27-cell cubed tensor. The synthetic task is still engineered; a separate 36-parameter readout remains available for comparison.</p>
 <canvas id="forgeCanvas" width="1000" height="435" style="display:block;width:100%;height:auto;background:#081720;border:1px solid #48768e;border-radius:14px"></canvas>
 <div class="rowlike"><button id="forge100">ITERATE ×100</button><button id="forge500">RECURSE ×500</button><button id="forgeGrad">GRADIENT CHECK</button><button id="forgeAudit">VALIDATE OPERATORS</button><button id="forgeSeal">SEAL + FINAL TEST</button><button id="forgeReset">RESET FORGE</button></div>
-<pre id="forgeStatus">[ECK-058] four operator kernels; 87 trainable weights; no final test performed</pre>
+<pre id="forgeStatus">[ECK-059] four operator kernels; 87 trainable weights; no final test performed</pre>
 </section>
 <section class="panel" id="adaptiveCarrier" style="margin-top:18px">
 <h2>00 / ADAPTIVE CARRIER OPERATORS · 3×3×3 NEURAL CUBE</h2>
 <p class="note">New independent spatial-temporal pulse task. Four distinct carrier features now have 9 trainable address coefficients each (36 parameters), compared against a shared four-coefficient model and a five-feature nonlinear reference. An unmodeled interaction is deliberately included in the target so results cannot be described as automatic mastery.</p>
 <canvas id="adaptiveCanvas" width="1000" height="415" style="display:block;width:100%;height:auto;background:#091822;border:1px solid #497486;border-radius:14px"></canvas>
 <div class="rowlike"><button id="adaptive100">RECURSE ×100</button><button id="adaptive500">RECURSE ×500</button><button id="adaptiveAudit">AUDIT VALIDATION</button><button id="adaptiveSeal">SEAL + FINAL TEST</button><button id="adaptiveReset">RESET MODELS</button></div>
-<pre id="adaptiveStatus">[ECK-058] 27 cells / 729 input triples / adaptive WEAK MEDIUM STRONG FUSION operators</pre>
+<pre id="adaptiveStatus">[ECK-059] 27 cells / 729 input triples / adaptive WEAK MEDIUM STRONG FUSION operators</pre>
 </section>
 <section class="panel" id="functionalCarriers" style="margin-top:18px">
 <h2>00 / NEURAL FORCE CARRIER SPECIALIZATION · FOUR DISTINCT OPERATORS</h2>
@@ -267,7 +268,7 @@ pre{white-space:pre-wrap;word-break:break-all;line-height:1.65;color:#9dc3cb;max
 <p class="note warn">Witness slots are visualization labels, not independent signed custodians. Demo uses SHA-256 integrity checks, not live Ed25519 signatures or externally anchored consensus.</p>
 <pre id="ledger">[READY] Awaiting first seal.</pre></div>
 <div class="panel"><h2>02 / TEMPORAL VERIFICATION</h2><div class="big" id="head">NO ROOT</div>
-<p class="note">ECK-058 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
+<p class="note">ECK-059 adds offset-based derivations linked to immutable raw sample hashes. A unified event tree commits BOTH observations and their calibration events. The trusted in-memory checkpoint binds the previous event prefix; it is not independently anchored or compact. The tree uses domain-separated SHA-256 leaves (0x00) and nodes (0x01), with RFC 6962-style split at the largest power of two less than the subtree size.</p>
 <pre id="trace">  ROOT 0
      |
   OBSERVE
@@ -438,7 +439,7 @@ $("reset").onclick=async()=>{
 };
 // UI initialization deferred until all const models are defined.
 
-// ECK-058 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
+// ECK-059 Quantum Chrome: nine named addresses, with singlet as the tenth distinct entity.
 const chromeAddresses=[
  {name:"upperleftback",x:17,y:14,depth:"BACK"},
  {name:"lowerleftback",x:17,y:81,depth:"BACK"},
@@ -730,7 +731,7 @@ function initTransport(){
  showTransport();
 }
 
-// ECK-058: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
+// ECK-059: indexed nested stage transport. The two unit-cap layers remain distinct by level index.
 let nestedSession=null;
 const nestedArchive=[];
 const PHASE_MOD=9;
@@ -930,7 +931,7 @@ function initNeuralMesh(){
  drawNeuralMesh();
 }
 
-// ECK-058: a 3×3 address plane carried by three explicitly indexed generations.
+// ECK-059: a 3×3 address plane carried by three explicitly indexed generations.
 const generationCells=Array.from({length:27},(_,i)=>{const g=Math.floor(i/9),r=Math.floor((i%9)/3),c=i%3;return Object.freeze({g,r,c,id:g+":"+r+":"+c,address:chromeAddresses[3*r+c].name,channel:(3*r+c)%4})});
 const genColors=["#ff9b38","#44dfb6","#6abfff"];
 const genState={generation:0,showAll:true,pulse:0,step:0,interWeight:.72,localWeight:.12,activations:Array(27).fill(0)};
@@ -952,7 +953,7 @@ function activationTick(activations,interWeight,localWeight){
 }
 function seedGeneration(){genState.activations.fill(0);genState.activations[genIndex(0,1,1)]=1;genState.step=0;genState.showAll=true;drawGenerationMesh()}
 
-// ECK-058: deterministic recursive candidate selection, with bounded tests.
+// ECK-059: deterministic recursive candidate selection, with bounded tests.
 // An iteration uses the previous accepted parameters to propose the next version.
 const learner={version:0,history:[],baseline:null,origin:"(0=-.)"};
 function evaluateIteration(interWeight,localWeight){
@@ -1277,7 +1278,7 @@ function initSpinor(){
  drawSpinor();
 }
 
-// ECK-058: a separate, frozen-weight structural experiment.
+// ECK-059: a separate, frozen-weight structural experiment.
 // Training, validation and final-test coordinate sets are disjoint.
 const structuralSplit=Object.freeze({
  train:Object.freeze([[1,1],[0,0]].map(p=>Object.freeze(p))),
@@ -1423,7 +1424,7 @@ function initStructural(){
 }
 // UI initialized after every model and constant declaration.
 
-// ECK-058: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
+// ECK-059: real feed-forward sparse 9→9→9 neural net with four separately trained carriers.
 // Training uses gradient backpropagation. This is a synthetic model, not physical force physics.
 const neuralCarrierNames=Object.freeze(["WEAK","MEDIUM","STRONG","FUSION"]);
 const neuralCarrierColors=Object.freeze(["#4ee8fa","#ffaf46","#fa548a","#ba9cff"]);
@@ -1501,7 +1502,7 @@ function trainNeuralEpoch(rate=.24,selectedCarrier=null){
  return accepted;
 }
 
-// ECK-058 — cubed-coordinate tensor and carrier-specific spinor iteration.
+// ECK-059 — cubed-coordinate tensor and carrier-specific spinor iteration.
 // Distinguish the physical cube (3×3×3 = 27) from the address-triple cube ((3×3)^3 = 729).
 function cubeTripleEncode(a,b,c){
  if(![a,b,c].every(v=>Number.isInteger(v)&&v>=0&&v<9))throw Error("invalid 9×9×9 address triple");
@@ -1637,7 +1638,7 @@ function initNeuralCarriers(){
 }
 // Full initialization deferred after all neural and triple configuration constants.
 
-// ECK-058: 729 actual three-address inputs; shared-permutation leakage is prevented.
+// ECK-059: 729 actual three-address inputs; shared-permutation leakage is prevented.
 const tripleCases=Object.freeze(Array.from({length:729},(_,id)=>{
  const triple=cubeTripleDecode(id),sorted=triple.slice().sort((a,b)=>a-b);
  const family=sorted[0]*100+sorted[1]*10+sorted[2];
@@ -1776,7 +1777,7 @@ function initTripleNet(){
 }
 // Initialize after constant and learner declarations.
 
-// ECK-058 — controlled permutation witnesses, restricted to the validation partition.
+// ECK-059 — controlled permutation witnesses, restricted to the validation partition.
 const orderWitness={measure:null,ablation:null};
 function orderDistance(a,b){
  if(a.length!==b.length)throw Error("distance dimension mismatch");
@@ -1870,7 +1871,7 @@ function initOrderWitness(){
 }
 // Initialization occurs after all models, masks, and datasets are declared.
 
-// ECK-058: separate 729-case order reversal neural learner, with 4 carrier matrices.
+// ECK-059: separate 729-case order reversal neural learner, with 4 carrier matrices.
 const reverseNet={weights:null,versions:[],attempts:[],epoch:0,viewId:0,sealed:false,final:null,
  baseline:null,validationCeiling:null};
 function reverseTarget(example){
@@ -1993,7 +1994,7 @@ function initReverse(){
 }
 // Initialize after every constant and neural model declaration.
 
-// ECK-058: exact symbolic teacher + *separate* dense four-carrier neural student.
+// ECK-059: exact symbolic teacher + *separate* dense four-carrier neural student.
 // The exact teacher is used only to produce labels and verify involution, not as a neural output shortcut.
 function boomerangExact(id){
  const t=cubeTripleDecode(id);
@@ -2250,7 +2251,7 @@ function initTemporal(){
 }
 // Invoke UI setup after all constants and graph structures are defined.
 
-// ECK-058: cross-task transfer from reversal route to cyclic rotation.
+// ECK-059: cross-task transfer from reversal route to cyclic rotation.
 const transferState={runs:null,reference:null,attempts:0,sealed:false,final:null,ablations:null,equivalence:null};
 function rotateTripleId(id){
  const [a,b,c]=cubeTripleDecode(id);
@@ -2404,7 +2405,7 @@ function initTransfer(){
 }
 // Initialize after all 3x3x3 neural modules are declared.
 
-// ECK-058: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
+// ECK-059: distinct operators over a 3x3x3 bit cube. Synthetic diagnostics only.
 const functionalNames=Object.freeze(["WEAK / LOCAL","MEDIUM / MEMORY","STRONG / ROUTE","FUSION / NONLINEAR"]);
 const functionalTruth=Object.freeze([.2,.2,.2,.4]);
 const functionalState={runs:[],history:[],validation:null,ablation:null,sealed:false,final:null};
@@ -2539,7 +2540,7 @@ function initFunctional(){
 }
 // Initialize UI after all 3x3x3 neural experiments are defined.
 
-// ECK-058 — Per-address adaptive parameters plus shared and nonlinear reference comparators.
+// ECK-059 — Per-address adaptive parameters plus shared and nonlinear reference comparators.
 // The task is predeclared, synthetic, and partly outside the four-channel feature basis.
 const adaptState={models:[],attempts:0,validation:null,final:null,sealed:false};
 function adaptSignals(c){
@@ -2642,7 +2643,7 @@ function adaptRender(){
  ctx.fillStyle="#a6ccda";ctx.font="12px monospace";
  ctx.fillText("SINGLET (0=-.) OUTSIDE MODEL · TRAIN 438 / VALIDATE 146 / FINAL 145 SEALED",21,388);
  document.getElementById("adaptiveStatus").textContent=
-  "[ECK-058] "+adaptState.attempts+" rounds; per-address carrier weights trained on 729-configuration cube"+
+  "[ECK-059] "+adaptState.attempts+" rounds; per-address carrier weights trained on 729-configuration cube"+
   "\n[VALIDATION] "+adaptState.models.map(m=>m.label+" "+adaptLoss(tripleValid,m).toFixed(9)).join(" | ")+
   "\n[CHECKPOINTS] "+adaptState.models.map(m=>m.label+" "+m.accepted).join(" | ")+
   "\n[FINAL] "+(adaptState.final?adaptState.final.map(f=>f.name+" "+f.test.toFixed(9)).join(" | "):"WITHHELD")+
@@ -2660,7 +2661,7 @@ function initAdaptive(){
 }
 // Initialize after all neural model and 3x3x3 state definitions.
 
-// ECK-058 — learn local/temporal/phase/bilinear-operator internals, not just a final readout.
+// ECK-059 — learn local/temporal/phase/bilinear-operator internals, not just a final readout.
 // Synthetic target is the fixed ECK-045 pulse; this is a representational test.
 const forgeEdges=Object.freeze(Array.from({length:9},(_,a)=>{
  const r=Math.floor(a/3),c=a%3;
@@ -2928,9 +2929,9 @@ function initNecessity(){
  document.getElementById("nReset").addEventListener("click",()=>{nReset();nRender()});
  nRender();
 }
-// Model and UI initializers moved after all ECK-058 definitions.
+// Model and UI initializers moved after all ECK-059 definitions.
 
-// ECK-058: shared iteration budget, matched source task, distinct held-out validation shift.
+// ECK-059: shared iteration budget, matched source task, distinct held-out validation shift.
 // Inference on shifted task is zero-shot; this is not retraining on shifted labels.
 const shiftState={curves:[],audit:null,gauge:null,steps:0};
 function shiftTarget(c){
@@ -3017,9 +3018,9 @@ function initShift(){
  document.getElementById("shiftAudit").addEventListener("click",()=>{shiftState.audit=shiftTakeSnapshot();shiftRender()});
  document.getElementById("shiftReset").addEventListener("click",shiftReset);
 }
-// UI initializers follow the ECK-058 model definitions.
+// UI initializers follow the ECK-059 model definitions.
 
-// ECK-058: reproducible seed perturbations, equal update counts, cohort shift on validation.
+// ECK-059: reproducible seed perturbations, equal update counts, cohort shift on validation.
 const seedLab={runs:[],completed:false};
 function seedCohorts(){
  const repeated=tripleValid.filter(c=>new Set(c.triple).size<3);
@@ -3086,7 +3087,7 @@ function renderSeedLab(){
  const cv=document.getElementById("seedCanvas"),ctx=cv.getContext("2d");
  ctx.fillStyle="#071823";ctx.fillRect(0,0,cv.width,cv.height);
  ctx.fillStyle="#d9f0f7";ctx.font="15px monospace";ctx.textAlign="left";
- ctx.fillText("ECK-058 / THREE SEEDS × 100 ROUNDS / 87 FORGE vs 85 MLP",20,30);
+ ctx.fillText("ECK-059 / THREE SEEDS × 100 ROUNDS / 87 FORGE vs 85 MLP",20,30);
  const colors=["#ffb55e","#5be2e1"];
  ctx.strokeStyle="#537282";ctx.beginPath();ctx.moveTo(60,311);ctx.lineTo(965,311);ctx.stroke();
  for(const run of seedLab.runs){
@@ -3116,9 +3117,9 @@ function initSeedLab(){
  document.getElementById("seedReset").addEventListener("click",()=>{seedLab.runs=[];seedLab.completed=false;renderSeedLab()});
  renderSeedLab();
 }
-// Initialize after ECK-058 neural modules.
+// Initialize after ECK-059 neural modules.
 
-// ECK-058: distinguish repeated-phase collisions while preserving original held-out split.
+// ECK-059: distinguish repeated-phase collisions while preserving original held-out split.
 const collisionState={plain:null,repaired:null,history:[],final:null,sealed:false};
 function collisionSignal(c){
  const b=temporalPlanes(c);return Array.from({length:9},(_,a)=>b[0][a]*b[1][a]);
@@ -3269,9 +3270,9 @@ function initCollision(){
  document.getElementById("collisionReset").addEventListener("click",()=>{collisionReset();collisionRender()});
  collisionRender();
 }
-// ECK-058 initializers follow model definitions.
+// ECK-059 initializers follow model definitions.
 
-// ECK-058 — independent paired 96-parameter experiments with a strict cohort gate.
+// ECK-059 — independent paired 96-parameter experiments with a strict cohort gate.
 const dgState={plain:null,gated:null,rounds:0,history:[],sealed:false,final:null,counter:null,realWitness:null,recovery:null,backtracking:null};
 function dgMakeRun(){
  const forge=forgeInitWeights(),repair=Array(9).fill(0),r={forge,repair,versions:[],attempts:[]};
@@ -3304,7 +3305,7 @@ function dgIterate(count){
  dgRender();
 }
 
-// ECK-058: replay actual learning from initial checkpoint through step 20.
+// ECK-059: replay actual learning from initial checkpoint through step 20.
 // At that checkpoint a high-rate candidate is calculated by the real gradient
 // function; compare aggregate and strict cohort policies on identical weights.
 function dgRealGradientWitness(){
@@ -3336,7 +3337,7 @@ function dgRealGradientWitness(){
  dgRender();return dgState.realWitness;
 }
 
-// ECK-058 — finite descending-grid line search on the real checkpoint-20 gradient.
+// ECK-059 — finite descending-grid line search on the real checkpoint-20 gradient.
 // This search tests validation-cohort objectives, not the held-out final cases.
 const dgRecoveryRates=Object.freeze([70,60,50,40,35,30,25,20,15,12,10,8,6,4,3,2,1.8,1,.5,.25,.1]);
 function dgRecoverSafeStep(){
@@ -3375,7 +3376,7 @@ function dgRecoverSafeStep(){
  dgRender();return dgState.recovery;
 }
 
-// ECK-058 — deterministic safeguarded geometric line search.
+// ECK-059 — deterministic safeguarded geometric line search.
 // Replays *actual* model gradients from immutable versioned checkpoints.
 // Never evaluates final-test examples in this function.
 const dgBacktrackSpec=Object.freeze({initialRate:70,shrink:.5,maxTrials:9,minRate:.1,
@@ -3498,9 +3499,9 @@ function initDualGate(){
  document.getElementById("dgReset").addEventListener("click",dgReset);
  dgReset();
 }
-// All neural modules defined before ECK-058 initialization.
+// All neural modules defined before ECK-059 initialization.
 
-// ECK-058: successive accepted checkpoints under equal proposed-step compute budget.
+// ECK-059: successive accepted checkpoints under equal proposed-step compute budget.
 // Fixed learner receives one gradient proposal per attempt, adaptive may backtrack.
 // Both start at identical 96-weight collision state and use identical cohort policy.
 const continuitySpec=Object.freeze({candidateBudget:40,adaptiveRate:70,fixedRate:1.8,
@@ -3583,16 +3584,16 @@ function continuityRender(){
    " / train "+result.fixed.final.train.toFixed(9)+
    " / repeated "+result.fixed.final.repeated.toFixed(9)+
    " / distinct "+result.fixed.final.distinct.toFixed(9)+
-  "\n[FINAL TEST] WITHHELD":"[ECK-058] no experiments run; final-test remains withheld";
+  "\n[FINAL TEST] WITHHELD":"[ECK-059] no experiments run; final-test remains withheld";
 }
 function initContinuity(){
  document.getElementById("continuityRun").addEventListener("click",continuityExecute);
  document.getElementById("continuityReset").addEventListener("click",()=>{continuityState.result=null;continuityRender()});
  continuityRender();
 }
-// ECK-058 initializes all neural modules after their definitions.
+// ECK-059 initializes all neural modules after their definitions.
 
-// ECK-058 — once bounded full gradient stalls, try a carrier-block gradient.
+// ECK-059 — once bounded full gradient stalls, try a carrier-block gradient.
 // No new target labels or loosened cohort constraints; 40 proposals total.
 const plateauSpec=Object.freeze({budget:40,initialRate:70,shrink:.5,
  fullMaxTrials:9,blockRate:70,blocks:Object.freeze(["weak","medium","strong","fusion","repair"])});
@@ -3692,16 +3693,16 @@ function plateauRender(){
   "\n[RECOVERY LEDGER] "+r.recoveries.map(w=>w.block+" "+w.fromVersion+"→"+w.toVersion).join(" | ")+
   "\n[FINAL VALIDATION] aggregate "+r.final.validation.toFixed(9)+
    " / repeated "+r.final.repeated.toFixed(9)+" / distinct "+r.final.distinct.toFixed(9)+
-  "\n[FINAL TEST] WITHHELD":"[ECK-058] model not yet replayed; test cases sealed";
+  "\n[FINAL TEST] WITHHELD":"[ECK-059] model not yet replayed; test cases sealed";
 }
 function initPlateau(){
  document.getElementById("plateauRun").addEventListener("click",plateauRun);
  document.getElementById("plateauReset").addEventListener("click",()=>{plateauState.result=null;plateauRender()});
  plateauRender();
 }
-// Initialize after ECK-058 model definitions.
+// Initialize after ECK-059 model definitions.
 
-// ECK-058: evidence-ranked block selector, with explicit five-probe cost.
+// ECK-059: evidence-ranked block selector, with explicit five-probe cost.
 // Candidate proposals all come from actual full neural gradients.
 // Blocks are evaluated from the same frozen state and may never access final tests.
 const rankSpec=Object.freeze({budget:40,initialRate:70,shrink:.5,
@@ -3806,16 +3807,16 @@ function rankRender(){
   "\n[BLOCK WITNESSES] "+r.ranked.selections.map(s=>s.from+"→"+s.to+" "+s.block+
    " / "+s.probes+" evaluated").join(" | ")+
   "\n[FINAL] 145 cases WITHHELD / fixed singlet (0=-.)":
-  "[ECK-058] not yet trained / final partition sealed";
+  "[ECK-059] not yet trained / final partition sealed";
 }
 function initRank(){
  document.getElementById("rankRun").addEventListener("click",rankCompare);
  document.getElementById("rankReset").addEventListener("click",()=>{rankState.result=null;rankRender()});
  rankRender();
 }
-// Initialize after ECK-058 definitions.
+// Initialize after ECK-059 definitions.
 
-// ECK-058: three deterministic initializations, three carrier selection policies.
+// ECK-059: three deterministic initializations, three carrier selection policies.
 // Ranking metric is validation improvement for feasible candidates.
 // Gradient heuristic uses only source-training gradient norms; extra scoring pass counted.
 const robustSpec=Object.freeze({seeds:Object.freeze([0,1,2]),policies:Object.freeze(["fixed","ranked","gradient"]),
@@ -3922,6 +3923,7 @@ function robustRunOne(policy,seed){
   checkpoints:Object.freeze(checkpoints),selections:Object.freeze(selections),stalls:Object.freeze(stalls),
   gradientScoreCalls:scoreCalls,proposals:records.length,accepted:checkpoints.length-1,
   rejected:records.filter(p=>!p.accepted).length,metrics,shifted,passes,
+  frozenModel:Object.freeze({forge:forgeFrozen(run.forge),repair:Object.freeze(run.repair.slice()),version:checkpoints.length-1}),
   test:"WITHHELD",singlet:"(0=-.)"});
 }
 function robustCompare(){
@@ -3941,7 +3943,7 @@ function robustRender(){
  const el=document.getElementById("robustSelectorCanvas"),ctx=el.getContext("2d");
  ctx.fillStyle="#071925";ctx.fillRect(0,0,el.width,el.height);
  ctx.textAlign="left";ctx.fillStyle="#e0f2f9";ctx.font="15px monospace";
- ctx.fillText("ECK-058 / THREE SEEDS × THREE EVIDENCE POLICIES",22,31);
+ ctx.fillText("ECK-059 / THREE SEEDS × THREE EVIDENCE POLICIES",22,31);
  const colors=["#ffaf55","#63e0d0","#bc9aff"],labels=["FIRST FEASIBLE","VALIDATION RANK","TRAIN-GRADIENT HEURISTIC"];
  if(robustState.result)robustSpec.policies.forEach((p,i)=>{
   const rows=robustState.result.runs.filter(r=>r.policy===p),
@@ -3962,12 +3964,117 @@ function robustRender(){
    " / accepted "+robustState.result.runs.filter(r=>r.policy===p).map(r=>r.accepted).join(",")).join("\n")+
   "\n[GRADIENT SCORING CALLS] "+robustState.result.runs.filter(r=>r.policy==="gradient").map(r=>r.gradientScoreCalls).join(",")+
   "\n[FINAL] WITHHELD / repeated+distinct cohort non-regression preserved":
-  "[ECK-058] no experiments run; 145 final-test cases withheld";
+  "[ECK-059] no experiments run; 145 final-test cases withheld";
 }
 function initRobust(){
  document.getElementById("robustRun").addEventListener("click",robustCompare);
  document.getElementById("robustReset").addEventListener("click",()=>{robustState.result=null;robustRender()});
  robustRender();
 }
-preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();initAdaptive();initForge();initNecessity();initShift();initSeedLab();initCollision();initDualGate();initContinuity();initPlateau();initRank();initRobust();
+// ECK-059 initialization occurs after all definitions.
+
+// ECK-059 independent synthetic evidence protocol v1: NO optimizer read-access.
+// New continuous occupancy patterns (neither binary phase triples nor members
+// of the closed 729-point discrete domain); no final-test evaluation.
+const evidenceProtocol=Object.freeze({
+ id:"ECK059_CONTINUOUS_PHASE_TRANSFER_V1",count:81,phaseCount:3,
+ domain:"synthetic-continuous-three-plane",target:"declared-continuous-transfer-v1",
+ purpose:"post-freeze reporting only",existingFinal:"WITHHELD"});
+const evidenceState={result:null};
+const evidenceProbes=Object.freeze(Array.from({length:evidenceProtocol.count},(_,j)=>{
+ const planes=Array.from({length:3},(_,phase)=>Object.freeze(Array.from({length:9},(_,a)=>{
+  const carrier=((j*7+a*11+phase*13)%29)/28;
+  return .08+.82*(.5+.5*Math.sin((j+1)*(phase+2)*.37+(a+1)*.91))*(.35+.65*carrier);
+ })));
+ return Object.freeze({probe:j,planes:Object.freeze(planes.map(p=>Object.freeze(p.slice()))),
+  origin:evidenceProtocol.id});
+}));
+function evidencePredict(probe,model){
+ const bits=probe.planes,weights=model.forge,y=Array(9).fill(0),neighbors=Array(9).fill(0);
+ forgeEdges.forEach((e,j)=>{neighbors[e.to]+=weights.weak[j]*bits[0][e.from]});
+ for(let a=0;a<9;a++){
+  const m=2*a,q=3*a,near=forgeEdgeByDest[a].reduce((sum,j)=>
+   sum+bits[2][forgeEdges[j].from],0)/forgeEdgeByDest[a].length;
+  const gate=weights.fusion[q]*bits[0][a]*
+   (weights.fusion[q+1]*bits[1][a]+weights.fusion[q+2]*bits[2][a]);
+  y[a]=neighbors[a]+weights.medium[m]*bits[0][a]+weights.medium[m+1]*bits[1][a]+
+   weights.strong[m]*bits[2][a]+weights.strong[m+1]*near+gate+
+   model.repair[a]*bits[0][a]*bits[1][a];
+ }
+ return y;
+}
+function evidenceTarget(probe){
+ const bits=probe.planes;
+ return Array.from({length:9},(_,a)=>{
+  const row=Math.floor(a/3),col=a%3,gradient=.025*(col-row),
+   neighbours=forgeEdgeByDest[a].reduce((sum,j)=>sum+bits[0][forgeEdges[j].from],0)/
+    forgeEdgeByDest[a].length;
+  // New coefficients and continuous cross-phase interaction, registered
+  // before any new scores are presented. Labels are synthetic by construction.
+  return (.20+gradient)*neighbours+.20*bits[1][a]+(.24-gradient)*bits[2][a]+
+   .13*bits[0][a]*bits[2][a]+.17*bits[0][a]*bits[1][a]+
+   .11*bits[1][a]*bits[2][a];
+ });
+}
+function evidenceMSE(model){
+ let sum=0;
+ for(const probe of evidenceProbes){
+  const guess=evidencePredict(probe,model),answer=evidenceTarget(probe);
+  for(let a=0;a<9;a++)sum+=(guess[a]-answer[a])**2;
+ }
+ return sum/(evidenceProbes.length*9);
+}
+function evidenceAudit(){
+ if(evidenceState.result)return evidenceState.result;
+ // The ECK-058 runs complete first, and supply frozen weights to the independent
+ // evaluation. No evaluator is referenced by any optimizer or acceptance gate.
+ const selection=robustCompare(),rows=selection.runs.map(r=>Object.freeze({
+   seed:r.seed,policy:r.policy,checkpoint:r.frozenModel.version,
+   originalValidation:r.metrics.validation,shiftedExisting:r.shifted,
+   newEvaluation:evidenceMSE(r.frozenModel),candidateEvaluations:r.proposals,
+   modelFrozen:true,finalPartition:"WITHHELD"}));
+ const nonbinary=evidenceProbes.every(p=>p.planes.every(plane=>plane.every(v=>v>0&&v<1)));
+ const protocolSafe=evidenceProbes.length===81&&nonbinary&&
+  rows.length===9&&rows.every(r=>r.modelFrozen&&Number.isFinite(r.newEvaluation)&&
+   r.finalPartition==="WITHHELD");
+ evidenceState.result=Object.freeze({protocol:evidenceProtocol,
+  models:Object.freeze(rows),passed:protocolSafe,independentFromTraining:true});
+ evidenceRender();return evidenceState.result;
+}
+function evidenceRender(){
+ const canvas=document.getElementById("evidenceCanvas"),ctx=canvas.getContext("2d");
+ ctx.fillStyle="#081923";ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.textAlign="left";ctx.fillStyle="#e0eef6";ctx.font="15px monospace";
+ ctx.fillText("ECK-059 / POST-FREEZE CONTINUOUS-PHASE TRANSFER AUDIT",23,30);
+ const colors=["#ffac58","#63ddcd","#bf9cff"],names=["FIXED","VALIDATION-RANK","TRAIN-GRADIENT"];
+ const result=evidenceState.result;
+ if(result)["fixed","ranked","gradient"].forEach((policy,i)=>{
+  const rows=result.models.filter(r=>r.policy===policy),
+   mse=rows.reduce((sum,r)=>sum+r.newEvaluation,0)/rows.length,y=94+i*98;
+  ctx.fillStyle=colors[i];ctx.font="bold 13px monospace";ctx.fillText(names[i],24,y);
+  ctx.fillStyle="#254251";ctx.fillRect(300,y-19,465,25);
+  ctx.fillStyle=colors[i];ctx.fillRect(300,y-19,465*Math.min(1,mse/.04),25);
+  ctx.fillStyle="#e0eff8";ctx.font="12px monospace";ctx.fillText("MSE "+mse.toFixed(8),779,y);
+  ctx.fillText("seed 0/1/2: "+rows.map(r=>r.newEvaluation.toFixed(7)).join(" / "),24,y+33);
+ });
+ ctx.fillStyle="#bdd7e3";ctx.font="12px monospace";
+ ctx.fillText("81 NONBINARY PHASE PROBES / ALL MODELS FROZEN / 145 FINAL WITHHELD",22,392);
+ document.getElementById("evidenceStatus").textContent=result?
+  "[PROTOCOL] "+result.protocol.id+" / "+(result.passed?"PASS":"FAIL")+
+  "\n[NEW DOMAIN] "+result.protocol.count+" generated continuous 3×9 phase arrays, no binary triples"+
+  "\n"+["fixed","ranked","gradient"].map(policy=>{
+   const runs=result.models.filter(r=>r.policy===policy),
+    mean=runs.reduce((sum,r)=>sum+r.newEvaluation,0)/runs.length;
+   return policy+" new-task mean "+mean.toFixed(9)+" seeds "+runs.map(r=>r.newEvaluation.toFixed(9)).join(", ");
+  }).join("\n")+
+  "\n[GUARD] evaluator does not enter training, candidate selection or cohort gates"+
+  "\n[FINAL 145] WITHHELD / fixed singlet (0=-.)":
+  "[ECK-059] new evidence surface registered; no post-freeze score yet";
+}
+function initEvidence(){
+ document.getElementById("evidenceRun").addEventListener("click",evidenceAudit);
+ document.getElementById("evidenceReset").addEventListener("click",()=>{evidenceState.result=null;evidenceRender()});
+ evidenceRender();
+}
+preview();refresh();initForceControls();initQuantumChrome();initPyramid();initLife();initReplay();initTransport();initNestedTransport();initNeuralMesh();initGenerationMesh();initSpinBoomerang();initSpinor();initStructural();initNeuralCarriers();initTripleNet();initOrderWitness();initReverse();initTeacher();initTemporal();initTransfer();initFunctional();initAdaptive();initForge();initNecessity();initShift();initSeedLab();initCollision();initDualGate();initContinuity();initPlateau();initRank();initRobust();initEvidence();
 </script></html>
