@@ -1,4 +1,4 @@
-# ECK-057 — Evidence-Ranked Carrier-Block Selection
+# ECK-058 — Seeded Carrier Selection and Screening-Cost Audit
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1667,3 +1667,91 @@ Implementation: `eck/index.html`, additional Canvas2D **EVIDENCE-RANKED CARRIER 
 ### ECK-058 — Next natural bound
 
 Audit selection robustness using multiple deterministic initializations and a genuinely changed task while explicitly accounting for *screening cost* and *validation reuse*. Compare ranking, first-feasible order, and a carrier-gradient heuristic that does not examine validation results for every candidate. Preserve the 145-case final-test seal until the selection policy is frozen.
+
+## ECK-058 — Test ranking versus fixed order and a cheaper training-gradient heuristic
+
+Preserve `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]`, 27 addressed cells, 729 ordered address triples, four named carrier operations (WEAK/MEDIUM/STRONG/FUSION), 87 operator weights and nine trainable collision corrections (96 total), fixed singlet `(0=-.)`, and the 438 training / 146 validation / 145 withheld final partition.
+
+ECK-057 demonstrated evidence-ranked Fusion selection over fixed-order Weak selection from one canonical initialization. ECK-058 compares **three distinct block selectors across three deterministic starting perturbations** `0,1,2`, with each run receiving at most **40 actual candidate-gradient evaluations**:
+
+- **FIXED**: at each full-gradient plateau, try WEAK, MEDIUM, STRONG, FUSION, REPAIR in that order, stopping at the first safely accepted candidate.
+- **RANKED**: at each full-gradient plateau, test all five block candidates from the same frozen checkpoint, count all probes, and choose the safe candidate with the highest measured reduction in aggregate **validation** MSE. Screening costs five candidate evaluations if budget allows.
+- **GRADIENT HEURISTIC**: calculate an additional source-training-gradient-norm score for each carrier block, sort candidates by decreasing squared gradient norm and try them in that order until one passes the exact same dual-cohort gate. The gradient-score calculation is an additional, separately counted **scoring pass**, not a candidate trial; therefore candidate-count parity does **not** imply equal computation in FLOPs or wall time. Its final chosen model is still validated by the protected acceptance rule.
+
+All policies use the same predeclared source target, learning rates, source-train gradients, immutable checkpoints, and dual-cohort acceptance conditions. The deterministic perturbations change the 87 Forge operator initialization; the nine collision correction weights begin at zero in all runs. This is a small seeded stress test, not a representative random-seed uncertainty estimate.
+
+### Executed committed-source results
+
+Each run consumed exactly 40 gradient candidate proposals.
+
+| Seed | Fixed validation MSE | Ranked validation MSE | Gradient heuristic validation MSE |
+|---|---:|---:|---:|
+| 0 | 0.000042223153 | 0.000033465441 | **0.000024541055** |
+| 1 | **0.000020293618** | 0.000033672445 | 0.000024713931 |
+| 2 | **0.000020456121** | 0.000033901469 | 0.000024889880 |
+
+The per-seed accepted checkpoint counts were:
+
+| Seed | Fixed | Ranked | Gradient |
+|---|---:|---:|---:|
+| 0 | 13 | 15 | 17 |
+| 1 | 19 | 15 | 17 |
+| 2 | 19 | 15 | 17 |
+
+At the first stalled checkpoint in **each** seeded comparison, fixed order selected WEAK after one safe probe; ranked evaluated all five blocks and selected FUSION, while the training-gradient heuristic selected FUSION with one candidate probe **plus one extra gradient-scoring pass**. Ranking is **not consistently better**: fixed order has lower validation error on seeds 1 and 2, whereas the gradient heuristic is best on seed 0. No selector dominates the nine runs.
+
+### Zero-shot target shift, same validation input configurations
+
+The models train only on the unchanged original synthetic target. Each is also scored on a predeclared changed nonlinear target with different location gradient and middle×final coincidence weights. This target shift uses the **same 146 validation inputs**, not independently collected new input distributions. Shift scores are descriptive and must not be interpreted as sealed-test generalization.
+
+| Seed | Fixed shifted MSE | Ranked shifted MSE | Gradient shifted MSE |
+|---|---:|---:|---:|
+| 0 | 0.001346649166 | 0.001349337154 | 0.001345986525 |
+| 1 | 0.001353228487 | 0.001349153181 | 0.001345559265 |
+| 2 | 0.001353795101 | 0.001349513083 | 0.001345645226 |
+
+These shifted-target errors are much larger than source-task errors and differ only modestly among the methods; they provide no strong support for robust transfer. The 145 withheld final examples remain unopened, and the accepted source checkpoints are still selected using validation.
+
+### ASCII kernel
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+      GEN 0             GEN 1             GEN 2
+     00 01 02          09 10 11          18 19 20
+     03 04 05    ==>   12 13 14   ==>   21 22 23
+     06 07 08          15 16 17          24 25 26
+                         |
+             WEAK MEDIUM STRONG FUSION
+                  87 + 9 = 96
+                         |
+          +--------------+----------------+
+          |              |                |
+      FIRST SAFE     RANK FIVE         GRADIENT NORM
+      fixed order   validation MSE     train-only scores
+          |              |                |
+      1+ probes      5 probes        1+ probes + score
+          |              |                |
+          +--------------+----------------+
+                         |
+              SEEDS 0 / 1 / 2
+                 40 candidates
+                         |
+             SOURCE + TASK SHIFT
+                         |
+                RETAIN EVIDENCE
+                         |
+                       (0=-.)
+```
+
+### Implementation / limitations
+
+Source: `eck/index.html` with the new Canvas2D **CARRIER SELECTION ROBUSTNESS** panel and helper methods `robustRunOne`, `robustGradientScores`, `robustCompare`. The executable standalone regression is `eck/test_eck058.cjs` (`node eck/test_eck058.cjs`), which extracts committed neural source blocks, reruns the nine comparisons and verifies model selection, candidate cost, validation constraints and the closed final-test partition.
+
+The committed JavaScript was syntax-checked and all nine comparisons were executed directly from source, with the reported results. The separate standalone Node test was committed but not independently executed, and live GitHub Pages/browser interactions remain unverified.
+
+**Methodological limitation:** this experiment evaluates on validation cases used repeatedly for cohort gates, so selection is susceptible to validation overfitting. The heuristic's extra gradient scoring passes and different block count mean the shared 40-candidate cap is not a strict equality of training computation.
+
+### ECK-059 — Next natural bound
+
+Freeze a **precommitted evaluation protocol** distinguishing cohort-protection data from model-selection data. Create a new *task-generator seed / transfer task* that is locked before comparing selectors. Prefer a reproducible compute-cost estimate including the extra heuristic gradient-scoring pass. Treat the existing 145 final-test examples as sealed until model choice, checkpoints and acceptance/stop rules are fixed.
