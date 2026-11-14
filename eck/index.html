@@ -3591,7 +3591,7 @@ const plateauSpec=Object.freeze({budget:40,initialRate:70,shrink:.5,
  fullMaxTrials:9,blockRate:70,blocks:Object.freeze(["weak","medium","strong","fusion","repair"])});
 const plateauState={result:null};
 function plateauCompute(){
- const run=dgMakeRun(),attempts=[],checkpoints=[];
+ const run=dgMakeRun(),attempts=[],checkpoints=[],stalls=[],recoveries=[];
  let recovered=null,fullStall=null,mode="full",sourceAtStall=null;
  checkpoints.push(Object.freeze({version:0,proposals:0,metrics:dgMetrics(run)}));
  while(attempts.length<plateauSpec.budget){
@@ -3608,6 +3608,7 @@ function plateauCompute(){
    if(!accepted){
     fullStall=Object.freeze({version:parent,afterProposals:attempts.length,
      failedFullTrials:attempts.length-begin,metrics:dgMetrics(run)});
+    stalls.push(fullStall);
     sourceAtStall=Object.freeze({version:parent,forge:forgeFrozen(run.forge),
      repair:Object.freeze(run.repair.slice()),singlet:"(0=-.)"});
     mode="block";
@@ -3622,8 +3623,10 @@ function plateauCompute(){
      before:Object.freeze({...packet.previous}),proposed:Object.freeze({...packet.candidate})}));
     if(ok){
      accepted=true;
-     if(!recovered)recovered=Object.freeze({block,rate,fromVersion:parent,
+     const recovery=Object.freeze({block,rate,fromVersion:parent,
       toVersion:run.versions.length-1,metrics:dgMetrics(run)});
+     recoveries.push(recovery);
+     if(!recovered)recovered=recovery;
      mode="full";
      break;
     }
@@ -3642,7 +3645,8 @@ function plateauCompute(){
    c.metrics.distinct<=checkpoints[i-1].metrics.distinct+1e-12))&&
   (!recovered||recovered.toVersion===recovered.fromVersion+1);
  return Object.freeze({attempts:Object.freeze(attempts),checkpoints:Object.freeze(checkpoints),
-  fullStall,sourceAtStall,recovered,final,accepted:checkpoints.length-1,
+  stalls:Object.freeze(stalls),recoveries:Object.freeze(recoveries),
+  fullStall:stalls[0]||null,sourceAtStall,recovered,final,accepted:checkpoints.length-1,
   rejected:attempts.filter(p=>!p.accepted).length,spent:attempts.length,
   termination:attempts.length>=plateauSpec.budget?"BUDGET_EXHAUSTED":"NO_FEASIBLE_BLOCK",
   passed,test:"WITHHELD",singlet:"(0=-.)"});
@@ -3675,9 +3679,10 @@ function plateauRender(){
   "[PROPOSAL BUDGET] "+r.spent+"/"+plateauSpec.budget+" / accepted "+r.accepted+
   " / rejected "+r.rejected+" / "+r.termination+
   "\n[FULL-GRADIENT STALL] "+(r.fullStall?"checkpoint "+r.fullStall.version+
-   " after "+r.fullStall.afterProposals+" proposed candidates":"none")+
+   " after "+r.fullStall.afterProposals+" proposed candidates / total stalls "+r.stalls.length:"none")+
   "\n[BLOCK RECOVERY] "+(r.recovered?r.recovered.block+" @ "+r.recovered.rate+
    " version "+r.recovered.fromVersion+" → "+r.recovered.toVersion:"no safe block")+
+  "\n[RECOVERY LEDGER] "+r.recoveries.map(w=>w.block+" "+w.fromVersion+"→"+w.toVersion).join(" | ")+
   "\n[FINAL VALIDATION] aggregate "+r.final.validation.toFixed(9)+
    " / repeated "+r.final.repeated.toFixed(9)+" / distinct "+r.final.distinct.toFixed(9)+
   "\n[FINAL TEST] WITHHELD":"[ECK-056] model not yet replayed; test cases sealed";
