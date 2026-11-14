@@ -1,4 +1,4 @@
-# ECK-056 — Carrier-Block Gradient Plateau Recovery
+# ECK-057 — Evidence-Ranked Carrier-Block Selection
 
 One primitive; position, chroma, wavelength, chronos; three witness **display slots**. The UI is a testbed, not a live independent witness quorum.
 
@@ -1593,3 +1593,77 @@ The Canvas2D **CARRIER-BLOCK PLATEAU RECOVERY** panel displays the training path
 ### ECK-057 — Next natural bound
 
 Audit the real gradient behavior at the two rescued checkpoints and derive a **general deterministic block-selection rule** based on measured expected improvement per candidate evaluation. Compare automatic block choice with fixed order, count its extra screening cost and preserve all rejected packets. Keep final-test evaluation and performance claims separated from validation-selected updates.
+
+## ECK-057 — Spend candidate evaluations to choose the better safe carrier
+
+This boundary retains the user-defined `[[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]` neural mesh, 27 indexed address/phase cells, 729 ordered input configurations, four symbolic carrier operators (WEAK, MEDIUM, STRONG, FUSION), nine collision correction coefficients (96 total trainable scalars), external fixed singlet `(0=-.)`, and the unchanged 438 train / 146 validation / 145 sealed final split.
+
+ECK-056 established that a full-gradient plateau can be escaped using carrier-block updates. Its **fixed-order** rule tested `WEAK, MEDIUM, STRONG, FUSION, repair` and accepted the first feasible candidate. ECK-057 tests an **evidence-ranked** policy, which, at each plateau, evaluates each of those five candidate blocks against the **same frozen learned checkpoint** with the same rate 70 and model-derived gradients. Every probe consumes one candidate-evaluation unit, whether accepted or not. The policy chooses the *feasible* block with the greatest reduction in **aggregate validation MSE per single probe** (each probe has equal cost in this experiment); ties are resolved by the declared block order. Neither policy changes the acceptance constraints: training must improve, and both repeated-address and distinct-address validation cohorts must not worsen.
+
+The ranking policy uses validation outcomes to make its selection, and accordingly cannot be interpreted as an unbiased estimate of unseen generalization. All rejected packets, candidate metrics and selection decisions remain in the audit ledger. A candidate is *feasible* only if the existing dual-cohort gate accepts it; the MSE ranking is applied after feasibility filtering. Both policies receive a maximum of **40 actual candidate gradient evaluations**, including every full-gradient backtracking attempt and every screened block. No zero-cost lookahead.
+
+### Direct execution from committed HTML JavaScript
+
+| Metric | Fixed first-feasible order | Evidence-ranked safe candidate |
+|---|---:|---:|
+| Candidate evaluations | 40 | 40 |
+| Accepted checkpoints | 13 | **17** |
+| Full-gradient stalls | 2 | 1 |
+| Training MSE | 0.000035767288 | **0.000021258318** |
+| Aggregate validation MSE | 0.000037771772 | **0.000022604191** |
+| Repeated-address MSE | 0.000106243275 | **0.000064156113** |
+| Distinct-address MSE | 0.000008235046 | **0.000004679832** |
+
+At the shared first full-gradient stall, checkpoint 7, the screened blocks yielded:
+
+| Carrier block | Safe according to dual cohort gate? | Immediate aggregate validation MSE improvement |
+|---|---|---:|
+| WEAK | YES | 0.000000247280 |
+| MEDIUM | NO | 0.000000251431 |
+| STRONG | NO | 0.000000256059 |
+| FUSION | **YES** | **0.000011197927** |
+| REPAIR | NO | -0.000000046374 |
+
+Only WEAK and FUSION passed the *complete* gate. The fixed-order policy spends one probe and chooses WEAK, whereas the ranked policy spends five probes and chooses FUSION because its measured safe improvement is much larger. The ranked trajectory then continues without another full-gradient stall within the 40-proposal budget and reaches checkpoint 17. The fixed-order trajectory encounters a second stall, needs another recovery sequence, and reaches checkpoint 13.
+
+**Scientific boundary:** this demonstrates a useful payoff from evidence-based *carrier selection* on the known engineered validation task. It does not establish a new neural architecture, general intelligence, generalization to other tasks, or a physics-force interpretation. The ranking has higher screening cost at the first stall but lower downstream cost in this particular deterministic path. Its score is selected on validation and the sealed 145-case final test remains unopened. Candidate-count parity does not imply equal wall-clock time or computational FLOPs.
+
+### ASCII witness mesh
+
+```text
+  [[3×3×3 :: {[(3×3)3]} :: {{3×3}}³]]
+
+      GEN 0             GEN 1             GEN 2
+     00 01 02          09 10 11          18 19 20
+     03 04 05   ===>   12 13 14   ===>   21 22 23
+     06 07 08          15 16 17          24 25 26
+                         |
+                87 ROUTES + 9 COLLISIONS
+                         |
+                 FULL-GRADIENT STALL
+                      VERSION 7
+                         |
+          +--------------+--------------+
+          |                             |
+     FIXED PRIORITY                EVIDENCE RANK
+     WEAK = first safe             probe all 5 blocks
+          |                             |
+     WEAK ACCEPTED                FUSION ACCEPTED
+          |                             |
+     another stall                no second stall
+          |                             |
+     VERSION 13                   VERSION 17
+          +--------------+--------------+
+                         |
+               40 CANDIDATES EACH
+                         |
+                WITNESS / FREEZE
+                         |
+                       (0=-.)
+```
+
+Implementation: `eck/index.html`, additional Canvas2D **EVIDENCE-RANKED CARRIER SELECTION** panel, and runnable Node regression `eck/test_eck057.cjs` (`node eck/test_eck057.cjs`). The committed JavaScript parsed and the actual dual-policy model functions were executed from source; the separate Node regression was committed but has not been independently executed. Live Pages/browser behavior has not been independently verified.
+
+### ECK-058 — Next natural bound
+
+Audit selection robustness using multiple deterministic initializations and a genuinely changed task while explicitly accounting for *screening cost* and *validation reuse*. Compare ranking, first-feasible order, and a carrier-gradient heuristic that does not examine validation results for every candidate. Preserve the 145-case final-test seal until the selection policy is frozen.
